@@ -773,10 +773,10 @@ async function endSession(auto=false){
   const fr=S.lang==='fr';document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
   const lang=fr?'French':'English';
   const transcript=S.messages.map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
-  const prompt=fr?`Coach expert en négociation. Analyse cette session. UNIQUEMENT du JSON valide en français, langage accessible :
+  const prompt=fr?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Coach expert en négociation. Analyse cette session. UNIQUEMENT du JSON valide en français, langage accessible :
 {"score":0-100,"verdict":"1 phrase percutante","strengths":["f1","f2"],"mistakes":["e1","e2"],"keyMoments":[{"type":"good|bad","description":"ce qui s'est passé"}],"improvement":"2-3 phrases concrètes","techniquesSummary":"ce qui a été utilisé et manquait"}
 Transcript:\n${transcript}`:
-  `Expert negotiation coach. Analyze this session. ONLY valid JSON in English, plain language:
+  `You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after. Analyze this session. ONLY valid JSON in English, plain language:
 {"score":0-100,"verdict":"1 punchy sentence","strengths":["s1","s2"],"mistakes":["m1","m2"],"keyMoments":[{"type":"good|bad","description":"what happened"}],"improvement":"2-3 concrete sentences","techniquesSummary":"used + missing"}
 Transcript:\n${transcript}`;
   try{const raw=await ai([{role:'user',content:prompt}],'',950);renderDebrief(JSON.parse(raw.replace(/```json|```/g,'').trim()),fr);}
@@ -812,7 +812,6 @@ function submitBug(){
 }
 
 // Init
-document.getElementById('quotaModal').classList.remove('active');
 goTo('langscreen');
 </script>
 </body>
