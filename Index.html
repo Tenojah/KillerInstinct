@@ -204,19 +204,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
   <div class="loading-sub" id="overlaySub">C'est l'heure du du du du duel !</div>
 </div>
 
-<!-- QUOTA MODAL -->
-<div class="modal-overlay" id="quotaModal">
-  <div class="modal-box">
-    <div class="modal-icon">🚧</div>
-    <div class="modal-title" id="modalTitle">Jeu temporairement indisponible</div>
-    <p class="modal-body" id="modalBody">Les ressources IA sont épuisées pour aujourd'hui. Si tu veux que Killer Instinct reste gratuit et disponible en continu, tu peux soutenir le projet.<br><br>Tout se remet à zéro à minuit.</p>
-    <div class="modal-actions">
-      <a href="PLACEHOLDER_URL" target="_blank" class="modal-btn-primary">❤️ Soutenir le projet</a>
-      <button class="modal-btn-ghost" onclick="closeQuotaModal()" id="modalDismiss">Revenir demain</button>
-    </div>
-  </div>
-</div>
-
 <!-- FOOTER -->
 <div class="ki-footer" id="globalFooter" style="display:none;">
   <a onclick="goTo('about')">ℹ️ À propos</a>
@@ -591,20 +578,8 @@ function applyEN(){
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
-function showQuotaModal(){
-  // Only show during an active game session
-  if(!S.sitcomChar || S.sessionEnded) return;
-  const fr=S.lang==='fr';
-  document.getElementById('modalTitle').textContent=fr?'Jeu temporairement indisponible':'Temporarily unavailable';
-  document.getElementById('modalBody').innerHTML=fr
-    ?'Les ressources IA sont épuisées pour aujourd\'hui. Si tu veux que Killer Instinct reste gratuit et disponible en continu, tu peux soutenir le projet.<br><br>Tout se remet à zéro à minuit.'
-    :'AI resources are exhausted for today. If you want Killer Instinct to stay free and always available, you can support the project.<br><br>Everything resets at midnight.';
-  document.getElementById('modalDismiss').textContent=fr?'Revenir demain':'Come back tomorrow';
-  document.getElementById('quotaModal').classList.add('active');
-}
-function closeQuotaModal(){
-  document.getElementById('quotaModal').classList.remove('active');
-}
+function showQuotaModal(){} // disabled
+function closeQuotaModal(){}
 
 // ── AI ────────────────────────────────────────────────────────────
 async function ai(msgs,sys,max=600){
