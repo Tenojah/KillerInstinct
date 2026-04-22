@@ -20,7 +20,7 @@ exports.handler = async function(event) {
   messages.forEach(m => groqMessages.push({ role: m.role === 'assistant' ? 'assistant' : 'user', content: m.content }));
 
   const groqBody = {
-    model: 'llama-3.1-8b-instant',
+    model: 'llama-3.3-70b-versatile',
     messages: groqMessages,
     max_tokens: max_tokens || 600,
     temperature: 0.9,
