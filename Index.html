@@ -1024,108 +1024,22 @@ async function endSession(auto=false){
 
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
 
-  const techDefs=fr?`
-TECHNIQUES DE NÉGOCIATION (avec définitions) :
-Cadrage : Bracketing (fourchette pour ancrer), Première offre extrême (position haute/basse pour avoir de la marge), Appel à l'équité (invoquer ce qui est juste/standard)
-Pression : Autorité supérieure (invoquer un décisionnaire tiers), Bonne/mauvaise poire (évoquer un tiers intransigeant), Le retrait (menacer de partir), Fragmentation (décomposer en petites concessions)
-Influence : Preuve sociale (normaliser via les autres), Réciprocité (concéder d'abord pour obtenir en retour), Engagement progressif (petits oui successifs)
-Base : Effet miroir, Nommer l'émotion, Question ouverte, Ancrage, Plan B visible, Silence tactique, Flinch, Fausse urgence, Empathie, Recadrage, Peur de perdre`:
-`NEGOTIATION TECHNIQUES (with definitions):
-Framing: Bracketing (range to anchor without committing), Extreme first offer (high/low opening to create room), Appeal to fairness (invoke what's just or standard)
-Pressure: Higher authority (invoke a decision-maker), Good cop/bad cop (evoke a harder third party), The walkout (threaten to leave), Fragmentation (break big ask into small steps)
-Influence: Social proof (normalize via others), Reciprocity (concede first to create obligation), Progressive commitment (small yeses before the big ask)
-Base: Mirroring, Labeling, Calibrated question, Anchoring, Show BATNA, Tactical silence, Flinch, False deadline, Empathy, Reframing, Loss aversion`;
-
-  const signals=fr?`
-SIGNAUX POSITIFS (augmentent le score) :
-- Ancrage fort : le joueur pose un chiffre/position en premier
-- Résistance aux concessions : l'adversaire pousse mais le joueur ne cède pas immédiatement
-- Concession conditionnelle : "si vous faites X, je peux faire Y"
-- Récupération : le joueur reprend le contrôle après avoir été en position de faiblesse
-- Clôture active : le joueur propose lui-même une conclusion
-- Qualification des contraintes : le joueur demande "pourquoi" aux objections
-- Validation avant négo : le joueur confirme l'intérêt mutuel avant les détails
-- Gestion du silence : le joueur laisse l'adversaire parler après une offre
-- Contre-offre systématique : le joueur ne dit jamais "non" sans proposer une alternative
-- Résumé de position : le joueur reformule sa position pour recadrer
-- Test de flexibilité : le joueur sonde les vraies limites avant de concéder
-
-SIGNAUX NÉGATIFS (baissent le score) :
-- Concession unilatérale : cède sans rien demander en retour
-- Escalade de concessions : cède plusieurs fois de suite
-- Abandon de position : accepte la position initiale de l'adversaire sans résistance
-- Silence passif : ne répond pas aux provocations ou deadlines
-- Justification excessive : sur-explique sa position (signe de faiblesse)
-- ZOPA ignorée : ne cherche jamais à identifier la zone d'accord possible
-- Réponse émotionnelle : réagit avec émotion aux provocations
-- Position unique : n'a qu'une seule offre, aucune flexibilité
-- Manque de préparation : improvise ses arguments, se contredit
-- Capitulation finale : tient bien puis cède tout à la fin sous pression`:
-`POSITIVE SIGNALS (increase score):
-- Strong anchor: player sets a number/position first
-- Resistance to concessions: opponent pushes but player holds
-- Conditional concession: "if you do X, I can do Y"
-- Recovery: player regains control after being in a weak position
-- Active close: player proposes a conclusion themselves
-- Constraint qualification: player asks "why" to objections
-- Pre-negotiation validation: confirms mutual interest before details
-- Silence management: lets opponent speak after an offer
-- Systematic counter-offer: never says "no" without proposing an alternative
-- Position summary: restates position to reframe
-- Flexibility test: probes real limits before conceding
-
-NEGATIVE SIGNALS (decrease score):
-- Unilateral concession: gives without asking anything back
-- Concession escalation: gives multiple times in a row
-- Position abandonment: accepts opponent's initial position without resistance
-- Passive silence: doesn't respond to provocations or deadlines
-- Over-justification: over-explains position (sign of weakness)
-- Ignored ZOPA: never tries to identify zone of possible agreement
-- Emotional response: reacts emotionally to provocations
-- Single position: only one offer, no displayed flexibility
-- Lack of preparation: improvises arguments, contradicts themselves
-- Final capitulation: holds well then gives everything at the end`;
-
-  const scoringCriteria=fr?`
-CRITÈRES DE NOTATION STRICTS (basés sur les signaux ci-dessus) :
-- 0-30 : aucune technique, concessions sans contrepartie, position non tenue
-- 31-50 : bonnes intentions mais pas de structure, facilement déstabilisé
-- 51-70 : tient sa position, quelques techniques de base, progrès visible
-- 71-85 : maîtrise des techniques clés, gère la pression, obtient des concessions
-- 86-100 : négociation maîtrisée, adversaire mis en difficulté, résultat obtenu
-Le score doit refléter UNIQUEMENT les signaux concrets observés dans le transcript.`:
-`STRICT SCORING CRITERIA (based on signals above):
-- 0-30: no technique, concessions without counterpart, position not held
-- 31-50: good intentions but no structure, easily destabilized
-- 51-70: holds position, some basic techniques, visible progress
-- 71-85: masters key techniques, handles pressure, gets concessions
-- 86-100: negotiation mastered, opponent challenged, result achieved
-Score must reflect ONLY concrete signals observed in the transcript.`;
-
   const prompt=fr
-    ?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après.
-${techDefs}
-${signals}
-${scoringCriteria}
-Techniques déjà détectées automatiquement pendant la session : ${detectedList}
-
-Analyse ce transcript et produis un débrief complet. Pour chaque technique utilisée, explique POURQUOI elle a fonctionné ou pas dans ce contexte précis. Agis comme un vrai coach — sois direct, constructif, sans complaisance.
-
-{"score":0-100,"verdict":"1 phrase percutante qui résume la négo","strengths":["point fort 1 avec explication concrète","point fort 2"],"mistakes":["erreur 1 avec explication concrète","erreur 2"],"keyMoments":[{"type":"good|bad","description":"ce qui s'est passé et pourquoi ça a compté"}],"improvement":"2-3 phrases de conseils concrets et actionnables pour progresser","techniquesSummary":"analyse détaillée des techniques utilisées et manquées, avec explication du contexte"}
+    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide, sans markdown.
+Règles : cite des moments précis de la conversation, langage simple et direct, pas de jargon, 1 seul conseil actionnable.
+Score strict : 0-30 aucune technique, concessions sans rien obtenir / 31-50 pas de structure, facilement déstabilisé / 51-70 tient sa position, quelques bons réflexes / 71-85 techniques maîtrisées, obtient des concessions / 86-100 adversaire mis en difficulté, résultat obtenu.
+Techniques détectées pendant la session : ${detectedList}
+{"score":0-100,"verdict":"1 phrase qui résume cette négo précise","strengths":["ce qui a bien marché dans CETTE négo, avec exemple concret","2ème point si pertinent"],"mistakes":["ce qui a raté dans CETTE négo, avec exemple concret","2ème point si pertinent"],"keyMoment":"le tournant décisif de cette négo — ce moment précis où tout a basculé","advice":"1 seul conseil concret à appliquer dès la prochaine négo"}
 Transcript:\n${sessionTranscript}`
-    :`You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after.
-${techDefs}
-${signals}
-${scoringCriteria}
-Techniques already auto-detected during session: ${detectedList}
-
-Analyze this transcript and produce a full debrief. For each technique used, explain WHY it worked or didn't in this specific context. Act as a real coach — be direct, constructive, no flattery.
-
-{"score":0-100,"verdict":"1 punchy sentence summarizing the negotiation","strengths":["strength 1 with concrete explanation","strength 2"],"mistakes":["mistake 1 with concrete explanation","mistake 2"],"keyMoments":[{"type":"good|bad","description":"what happened and why it mattered"}],"improvement":"2-3 sentences of concrete actionable advice","techniquesSummary":"detailed analysis of techniques used and missed, with context explanation"}
+    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY in valid JSON, no markdown.
+Rules: cite specific moments from the conversation, plain language, no jargon, 1 single actionable tip.
+Strict score: 0-30 no technique, concessions without getting anything back / 31-50 no structure, easily destabilized / 51-70 holds position, some good instincts / 71-85 techniques used, gets concessions / 86-100 opponent challenged, result achieved.
+Techniques detected during session: ${detectedList}
+{"score":0-100,"verdict":"1 sentence summarizing THIS specific negotiation","strengths":["what worked in THIS negotiation, with concrete example","2nd point if relevant"],"mistakes":["what failed in THIS negotiation, with concrete example","2nd point if relevant"],"keyMoment":"the decisive turning point of this negotiation — the exact moment everything shifted","advice":"1 single concrete tip to apply in the next negotiation"}
 Transcript:\n${sessionTranscript}`;
 
   try{
-    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',1200);
+    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',500);
     renderDebrief(JSON.parse(raw.replace(/```json|```/g,'').trim()),fr);
   }catch(e){
     document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;
