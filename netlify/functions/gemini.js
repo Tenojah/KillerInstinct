@@ -4,6 +4,7 @@ exports.handler = async function(event) {
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
+  console.log('API Key present:', !!apiKey, 'Length:', apiKey ? apiKey.length : 0);
   if(!apiKey) {
     return { statusCode: 500, body: JSON.stringify({ error: 'API key not configured' }) };
   }
@@ -40,6 +41,7 @@ exports.handler = async function(event) {
     );
 
     const data = await response.json();
+    console.log('Gemini status:', response.status, 'Response:', JSON.stringify(data).slice(0, 200));
 
     if(!response.ok) {
       const msg = data?.error?.message || 'Gemini API error';
