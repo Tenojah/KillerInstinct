@@ -675,7 +675,16 @@ Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Goal:${S.c
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     S.messages.push({role:'assistant',content:p.openingLine});
     addMsg('ai',p.openingLine);
-  }catch(e){hideLoading();alert('Erreur : '+e.message);console.error(e);return;}
+  }catch(e){
+    hideLoading();
+    if(e.message!=='QUOTA'){
+      alert('Erreur lors du chargement. Réessaie.');
+    } else {
+      const fr=S.lang==='fr';
+      alert(fr?'Service temporairement indisponible. Réessaie dans quelques instants.':'Service temporarily unavailable. Please try again in a moment.');
+    }
+    return;
+  }
   document.getElementById('userInput').focus();
 }
 
