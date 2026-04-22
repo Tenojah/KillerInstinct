@@ -803,12 +803,33 @@ function restartSession(){
   startSession();
 }
 
-function submitBug(){
-  const type=document.getElementById('bugType').value;const desc=document.getElementById('bugDesc').value.trim();const when=document.getElementById('bugWhen').value.trim();
+async function submitBug(){
+  const type=document.getElementById('bugType').value;
+  const desc=document.getElementById('bugDesc').value.trim();
+  const when=document.getElementById('bugWhen').value.trim();
   if(!desc){alert('Merci de décrire le problème rencontré.');return;}
-  const subject=encodeURIComponent('[Killer Instinct] Bug : '+(type||'Autre'));
-  const body=encodeURIComponent('Type : '+(type||'Non précisé')+'\n\nDescription :\n'+desc+(when?'\n\nQuand : '+when:'')+'\n\n---\nEnvoyé depuis Killer Instinct');
-  window.location.href=`mailto:cerf.jonathan@gmail.com?subject=${subject}&body=${body}`;
+  const btn=document.querySelector('#bugreport .btn-start');
+  btn.textContent='Envoi en cours…';btn.disabled=true;
+  try{
+    const r=await fetch('https://formspree.io/f/mbdqznaz',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
+    });
+    const d=await r.json();
+    if(d.ok){
+      document.getElementById('bugDesc').value='';
+      document.getElementById('bugWhen').value='';
+      document.getElementById('bugType').value='';
+      btn.textContent='✅ Rapport envoyé !';
+      setTimeout(()=>{btn.textContent='Envoyer le rapport →';btn.disabled=false;},3000);
+    } else {
+      throw new Error('Erreur Formspree');
+    }
+  }catch(e){
+    btn.textContent='Envoyer le rapport →';btn.disabled=false;
+    alert('Erreur lors de l\'envoi. Réessaie.');
+  }
 }
 
 // Init
