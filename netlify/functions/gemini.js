@@ -24,6 +24,7 @@ exports.handler = async function(event) {
     messages: groqMessages,
     max_tokens: max_tokens || 600,
     temperature: 0.9,
+    response_format: system && system.includes('JSON') ? { type: 'json_object' } : undefined,
   };
 
   try {
