@@ -210,14 +210,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <div class="flag">🇬🇧</div>
           <div class="lang-name">English</div>
         </div>
-        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here. </div>
+        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here. Killer Instinct plays the person across the table. It won't go easy on you. Neither should you.</div>
       </div>
       <div class="lang-card" onclick="chooseLang('fr')">
         <div class="lang-card-top">
           <div class="flag">🇫🇷</div>
           <div class="lang-name">Français</div>
         </div>
-        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici.</div>
+        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici. Killer Instinct joue le rôle du type en face. Il ne te fera pas de cadeaux. Toi non plus, on espère.</div>
       </div>
     </div>
   </div>
@@ -825,12 +825,14 @@ function buildSys(p,lang){
   const gLine=fr?`Tu es désigné(e) par le pronom "${S.gender}".`:`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
   return `You are ${S.sitcomChar}. Your role: ${S.opponent}.
 CRITICAL: You ARE the ${S.opponent}. Behave EXACTLY as a real ${S.opponent} would. Do NOT play the player's role.
+IMPORTANT: The PLAYER GOAL is what your opponent wants — fight against it. The OBSTACLES are a starting base — feel free to add your own resistance, constraints and arguments on top.
 ARCHETYPE: ${p.class} — ${p.lore}. HIDDEN: ${p.secret}.
-DIFFICULTY: ${S.difficulty}. PLAYER GOAL: ${S.context}. OBSTACLES: ${S.obstacles}. ${gLine}
+DIFFICULTY: ${S.difficulty}. PLAYER GOAL: ${S.context}. OBSTACLES TO USE AGAINST THEM: ${S.obstacles}. ${gLine}
 Respond in ${lang}. Stay in character. Vary tactics each turn. If player concedes → push harder. If strong anchor → resist.
 Use: anchoring, flinching, false deadlines, higher authority, silence, reframing. Never repeat same objection twice.
 ${S.difficulty==='Junior'?'Be cooperative, persuadable.':S.difficulty==='Senior'?'Be resistant, require real persuasion, occasional concessions.':'Be aggressive, introduce surprise constraints, rarely concede.'}
-2–5 sentences. Realistic. If total deadlock or deal reached: add [FIN_NEGO] at end.`;
+2–5 sentences. Realistic.
+If total deadlock or deal reached: write a natural closing line as your character explaining why you're ending the negotiation, then add [FIN_NEGO] at the very end of your message.`;
 }
 
 function addMsg(type,text,extra=''){
@@ -870,10 +872,30 @@ function updateTurnDisplay(){
 }
 
 function endNaturally(aiCut){
-  S.sessionEnded=true;document.getElementById('sendBtn').disabled=true;document.getElementById('userInput').disabled=true;
+  S.sessionEnded=true;
+  document.getElementById('sendBtn').disabled=true;
+  document.getElementById('userInput').disabled=true;
   const fr=S.lang==='fr';
-  addMsg('end-msg',aiCut?(fr?'La négociation est terminée.':'Negotiation ended.'):(fr?'15 tours atteints. Fin de la session.':'15 turns reached. Session over.'));
-  setTimeout(()=>endSession(true),1800);
+  if(aiCut){
+    // Show debrief button instead of auto-redirecting
+    const m=document.getElementById('messages');
+    const d=document.createElement('div');
+    d.className='msg end-msg';
+    d.innerHTML=`<div class="msg-label">${fr?'FIN DE NÉGOCIATION':'END OF NEGOTIATION'}</div>
+    <div style="margin-bottom:.8rem">${fr?'L\'adversaire a mis fin à la négociation.':'The opponent ended the negotiation.'}</div>
+    <button onclick="endSession(true)" style="padding:.6rem 1.4rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">${fr?'Voir le débrief →':'See debrief →'}</button>`;
+    m.appendChild(d);m.scrollTop=m.scrollHeight;
+  } else {
+    // Max turns reached
+    const fr2=S.lang==='fr';
+    const m=document.getElementById('messages');
+    const d=document.createElement('div');
+    d.className='msg end-msg';
+    d.innerHTML=`<div class="msg-label">${fr2?'FIN DE SESSION':'SESSION OVER'}</div>
+    <div style="margin-bottom:.8rem">${fr2?'15 tours atteints. La session se termine.':'15 turns reached. Session over.'}</div>
+    <button onclick="endSession(true)" style="padding:.6rem 1.4rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);">${fr2?'Voir le débrief →':'See debrief →'}</button>`;
+    m.appendChild(d);m.scrollTop=m.scrollHeight;
+  }
 }
 
 function detectTechs(msg){
@@ -960,10 +982,20 @@ function renderDebrief(d,fr){
 }
 
 function restartSession(){
-  S.messages=[];S.detectedTechs=new Set();S.tension=30;S.progress=10;S.resist=60;S.turn=0;S.sessionEnded=false;
-  document.getElementById('messages').innerHTML='';document.getElementById('userInput').disabled=false;document.getElementById('sendBtn').disabled=false;
+  S.messages=[];S.detectedTechs=new Set();
+  S.tension=30;S.progress=10;S.resist=60;
+  S.turn=0;S.sessionEnded=false;
+  S.sitcomChar=null;S.persona=null;
+  document.getElementById('messages').innerHTML='';
+  document.getElementById('userInput').disabled=false;
+  document.getElementById('sendBtn').disabled=false;
   const fr=S.lang==='fr';
   document.getElementById('techList').innerHTML=`<div class="tech-empty" id="techEmpty">${fr?'Aucune technique détectée…':'No technique detected yet…'}</div>`;
+  // Reset meters
+  ['tension','progress','resist'].forEach(k=>{
+    document.getElementById(k+'Bar').style.width=k==='tension'?'30%':k==='progress'?'10%':'60%';
+    document.getElementById(k+'Val').textContent=k==='tension'?'30%':k==='progress'?'10%':'60%';
+  });
   startSession();
 }
 
