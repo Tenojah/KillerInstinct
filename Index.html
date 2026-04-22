@@ -592,8 +592,8 @@ function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classLi
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
 function showQuotaModal(){
-  // Only show after at least one exchange has started
-  if(S.turn===0&&S.messages.length===0) return;
+  // Only show during an active game session
+  if(!S.sitcomChar || S.sessionEnded) return;
   const fr=S.lang==='fr';
   document.getElementById('modalTitle').textContent=fr?'Jeu temporairement indisponible':'Temporarily unavailable';
   document.getElementById('modalBody').innerHTML=fr
