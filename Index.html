@@ -486,6 +486,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       <div class="info-title">🐛 Signaler un bug</div>
       <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.65;">Quelque chose ne fonctionne pas ? Décris-le ci-dessous — ça aide vraiment à améliorer le jeu.</p>
       <div class="bug-form-group">
+        <label>Ton email <span style="color:var(--danger)">*</span></label>
+        <input type="email" id="bugEmail" placeholder="ton@email.com" required/>
+      </div>
+      <div class="bug-form-group">
         <label>Type de problème</label>
         <select id="bugType">
           <option value="">— Sélectionner —</option>
@@ -804,9 +808,11 @@ function restartSession(){
 }
 
 async function submitBug(){
+  const email=document.getElementById('bugEmail').value.trim();
   const type=document.getElementById('bugType').value;
   const desc=document.getElementById('bugDesc').value.trim();
   const when=document.getElementById('bugWhen').value.trim();
+  if(!email){alert('Merci d\'entrer ton email.');return;}
   if(!desc){alert('Merci de décrire le problème rencontré.');return;}
   const btn=document.querySelector('#bugreport .btn-start');
   btn.textContent='Envoi en cours…';btn.disabled=true;
@@ -814,7 +820,7 @@ async function submitBug(){
     const r=await fetch('https://formspree.io/f/mbdqznaz',{
       method:'POST',
       headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
+      body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
     });
     const d=await r.json();
     if(d.ok){
