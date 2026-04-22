@@ -210,14 +210,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <div class="flag">🇬🇧</div>
           <div class="lang-name">English</div>
         </div>
-        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here.</div>
+        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here. Killer Instinct plays the person across the table. It won't go easy on you. Neither should you.</div>
       </div>
       <div class="lang-card" onclick="chooseLang('fr')">
         <div class="lang-card-top">
           <div class="flag">🇫🇷</div>
           <div class="lang-name">Français</div>
         </div>
-        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici.</div>
+        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici. Killer Instinct joue le rôle du type en face. Il ne te fera pas de cadeaux. Toi non plus, on espère.</div>
       </div>
     </div>
   </div>
@@ -919,11 +919,26 @@ async function endSession(auto=false){
   const fr=S.lang==='fr';document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
   const lang=fr?'French':'English';
   const transcript=S.messages.map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
+  const scoringCriteria=fr
+    ?`Critères de notation STRICTS :
+- 0-30 : aucune technique, concessions sans contrepartie, position non tenue
+- 31-50 : bonnes intentions mais pas de structure, facilement déstabilisé
+- 51-70 : tient sa position, quelques techniques de base, progrès visible
+- 71-85 : maîtrise des techniques clés, gère la pression, obtient des concessions
+- 86-100 : négociation maîtrisée, adversaire mis en difficulté, résultat obtenu`
+    :`STRICT scoring criteria:
+- 0-30: no technique used, concessions without counterpart, position not held
+- 31-50: good intentions but no structure, easily destabilized
+- 51-70: holds position, uses some basic techniques, visible progress
+- 71-85: masters key techniques, handles pressure well, gets concessions
+- 86-100: negotiation mastered, opponent clearly challenged, result achieved`;
   const prompt=fr
-    ?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Analyse cette session en français, langage accessible :
+    ?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Analyse cette session en français, langage accessible.
+${scoringCriteria}
 {"score":0-100,"verdict":"1 phrase percutante","strengths":["f1","f2"],"mistakes":["e1","e2"],"keyMoments":[{"type":"good|bad","description":"ce qui s'est passé"}],"improvement":"2-3 phrases concrètes","techniquesSummary":"ce qui a été utilisé et manquait"}
 Transcript:\n${transcript}`
-    :`You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after. Analyze this session in English, plain language:
+    :`You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after. Analyze this session in English, plain language.
+${scoringCriteria}
 {"score":0-100,"verdict":"1 punchy sentence","strengths":["s1","s2"],"mistakes":["m1","m2"],"keyMoments":[{"type":"good|bad","description":"what happened"}],"improvement":"2-3 concrete sentences","techniquesSummary":"used + missing"}
 Transcript:\n${transcript}`;
   try{
