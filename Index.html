@@ -12,33 +12,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .screen{display:none;min-height:100vh;}
 .screen.active{display:flex;flex-direction:column;}
 .landing-bg{background:radial-gradient(ellipse at 50% 0%,#2A2010 0%,#0F0F14 60%);}
-
-/* HERO */
 .ki-logo{font-family:var(--font-hero);font-size:clamp(3.5rem,12vw,7rem);font-weight:900;letter-spacing:-.01em;line-height:.95;text-transform:uppercase;}
 .ki-logo span{color:var(--accent);}
 .ki-sub{font-size:clamp(.75rem,1.8vw,.9rem);color:var(--text-dim);margin-top:.9rem;letter-spacing:.2em;text-transform:uppercase;}
 .btn-hero{padding:.9rem 2.8rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s;}
 .btn-hero:hover{background:#E8BC6A;transform:translateY(-2px);}
-
 /* FOOTER */
 .ki-footer{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:2rem;padding:.75rem;z-index:50;}
 .ki-footer a{font-size:.75rem;color:var(--text-dim);text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:color .18s;letter-spacing:.04em;cursor:pointer;}
 .ki-footer a:hover{color:var(--accent);}
-
-/* LANG */
-#langscreen{align-items:center;justify-content:center;text-align:center;padding:2rem;}
-.lang-prompt{font-size:.82rem;color:var(--text-dim);letter-spacing:.16em;text-transform:uppercase;margin:2rem 0 1.6rem;}
-.lang-cards{display:flex;gap:1.4rem;justify-content:center;}
-.lang-card{width:160px;padding:1.4rem 1rem;border:2px solid var(--border);background:transparent;cursor:pointer;transition:all .22s;display:flex;flex-direction:column;align-items:center;gap:.6rem;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);}
-.lang-card:hover{border-color:var(--accent);transform:translateY(-3px);}
-.lang-card .flag{font-size:2.2rem;}
-.lang-card .lang-name{font-family:var(--font-hero);font-size:1.15rem;font-weight:700;letter-spacing:.1em;color:var(--text);text-transform:uppercase;}
-.lang-card .lang-hint{font-size:.72rem;color:var(--text-dim);}
-
+/* LANG CARDS */
+.lang-cards{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;max-width:640px;}
+.lang-card{width:290px;padding:1.4rem 1.6rem;border:1.5px solid var(--border);background:rgba(255,255,255,.03);cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:.7rem;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);text-align:left;position:relative;}
+.lang-card:hover{border-color:var(--accent);background:rgba(212,168,83,.06);transform:translateY(-4px);box-shadow:0 12px 32px rgba(212,168,83,.12);}
+.lang-card-top{display:flex;align-items:center;gap:.6rem;}
+.lang-card .flag{font-size:1.6rem;flex-shrink:0;}
+.lang-card .lang-name{font-family:var(--font-hero);font-size:1.1rem;font-weight:700;letter-spacing:.1em;color:var(--text);text-transform:uppercase;}
+.lang-card .lang-pitch{font-size:.74rem;color:var(--text-dim);line-height:1.65;border-top:1px solid var(--border);padding-top:.7rem;}
 /* LANDING */
 #landing{align-items:center;justify-content:center;text-align:center;padding:2rem;}
 .ki-tagline{font-size:clamp(.95rem,2.2vw,1.15rem);color:var(--text-soft);margin-top:2rem;max-width:480px;line-height:1.65;}
-
 /* SETUP */
 #setup{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;background:radial-gradient(ellipse at 50% 0%,#1A1508 0%,#0F0F14 55%);}
 .setup-wrap{max-width:660px;width:100%;padding-bottom:2rem;margin:auto;}
@@ -50,7 +43,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .section-label{font-family:var(--font-hero);font-size:.82rem;font-weight:700;letter-spacing:.16em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
 .form-group{margin-bottom:1rem;}
 .form-group label{display:block;font-size:.78rem;font-weight:800;color:var(--text-soft);margin-bottom:.38rem;letter-spacing:.03em;}
-.form-group select,.form-group textarea,.form-group input[type=text]{width:100%;padding:.78rem 1rem;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;border-radius:6px;transition:all .18s;appearance:none;-webkit-appearance:none;}
+.form-group select,.form-group textarea,.form-group input[type=text],.form-group input[type=email]{width:100%;padding:.78rem 1rem;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;border-radius:6px;transition:all .18s;appearance:none;-webkit-appearance:none;}
 .form-group select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%238A8A9A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .9rem center;padding-right:2.2rem;cursor:pointer;}
 .form-group select option{background:var(--surface2);}
 .form-group select:focus,.form-group textarea:focus,.form-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
@@ -62,7 +55,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .gchip:hover:not(.active){border-color:var(--text-dim);color:var(--text);}
 .btn-start{width:100%;margin-top:.8rem;padding:1rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s;}
 .btn-start:hover{background:#E8BC6A;transform:translateY(-2px);}
-
 /* GAME */
 #game{flex-direction:row;height:100vh;overflow:hidden;}
 .game-sidebar{width:300px;min-width:300px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
@@ -140,7 +132,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .input-area textarea:disabled{opacity:.4;cursor:not-allowed;}
 .btn-send{padding:.72rem 1.2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.9rem;letter-spacing:.08em;border:none;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;white-space:nowrap;}
 .btn-send:hover{background:#E8BC6A;}.btn-send:disabled{opacity:.4;cursor:not-allowed;}
-
 /* DEBRIEF */
 #debrief{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;}
 .debrief-card{background:var(--surface);border:1px solid var(--border);padding:2.5rem;max-width:680px;width:100%;border-radius:10px;margin:auto;}
@@ -160,21 +151,18 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .btn-primary:hover{background:#E8BC6A;transform:translateY(-2px);}
 .btn-ghost{padding:.82rem 1.8rem;background:none;border:1.5px solid var(--border);color:var(--text-dim);font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer;border-radius:5px;transition:all .2s;}
 .btn-ghost:hover{border-color:var(--text-dim);color:var(--text);}
-
-/* ABOUT & BUG SCREENS */
-#about,#bugreport{align-items:center;justify-content:flex-start;padding:3rem 2rem;overflow-y:auto;background:radial-gradient(ellipse at 50% 0%,#2A2010 0%,#0F0F14 60%);}
+/* INFO PAGES */
+#about,#bugreport,#soutien{align-items:center;justify-content:flex-start;padding:3rem 2rem;overflow-y:auto;background:radial-gradient(ellipse at 50% 0%,#2A2010 0%,#0F0F14 60%);}
 .info-wrap{max-width:520px;width:100%;margin:auto;}
-.info-logo{font-family:var(--font-hero);font-size:1.3rem;font-weight:900;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.8rem;}
+.info-logo{font-family:var(--font-hero);font-size:1.3rem;font-weight:900;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem;}
 .info-logo span{color:var(--accent);}
-.info-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-dim);cursor:pointer;margin-bottom:1.5rem;transition:color .18s;}
+.info-back{display:inline-flex;align-items:center;gap:.4rem;font-size:.78rem;color:var(--text-dim);cursor:pointer;margin-bottom:1.5rem;transition:color .18s;font-weight:700;}
 .info-back:hover{color:var(--accent);}
 .info-card{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:2.2rem;}
 .info-title{font-family:var(--font-hero);font-size:1.5rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:1.5rem;}
 .info-section{margin-bottom:1.8rem;}
 .info-section h2{font-family:var(--font-hero);font-size:.8rem;letter-spacing:.14em;color:var(--accent-dim);text-transform:uppercase;margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:1px solid var(--border);}
 .info-section p{font-size:.9rem;color:var(--text-soft);line-height:1.75;}
-.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem;}
-.pill{font-size:.75rem;padding:.3rem .8rem;border:1px solid var(--border);border-radius:12px;color:var(--text-dim);background:var(--surface2);}
 .contact-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.8rem;color:var(--accent);font-size:.88rem;text-decoration:none;font-weight:700;transition:opacity .18s;}
 .contact-link:hover{opacity:.75;}
 .bug-form-group{margin-bottom:1.1rem;}
@@ -184,14 +172,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .bug-form-group select option{background:var(--surface2);}
 .bug-form-group select:focus,.bug-form-group input:focus,.bug-form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .bug-form-group textarea{resize:vertical;min-height:110px;line-height:1.6;}
-
 /* LOADING */
 #loadingOverlay{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:.9rem;}
 #loadingOverlay.active{display:flex;}
 .loading-spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
 .loading-text{color:var(--accent);font-size:1.1rem;font-weight:900;font-family:var(--font-hero);letter-spacing:.12em;text-transform:uppercase;text-align:center;}
 .loading-sub{color:var(--text-dim);font-size:.78rem;font-style:italic;text-align:center;}
-
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 @media(max-width:700px){#game{flex-direction:column;}.game-sidebar{width:100%;min-width:unset;max-height:230px;}.row2{grid-template-columns:1fr;}}
 </style>
@@ -206,21 +192,33 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 
 <!-- FOOTER -->
 <div class="ki-footer" id="globalFooter" style="display:none;">
-  <a onclick="goTo('about')">ℹ️ À propos</a>
-  <a href="mailto:cerf.jonathan@gmail.com">✉️ Contact</a>
-  <a onclick="goTo('soutien')">❤️ Soutenir</a>
-  <a onclick="goTo('bugreport')">🐛 Bug</a>
+  <a onclick="goTo('about')" id="footer_about">ℹ️ À propos</a>
+  <a href="mailto:cerf.jonathan@gmail.com" id="footer_contact">✉️ Contact</a>
+  <a onclick="goTo('soutien')" id="footer_soutien">❤️ Soutenir</a>
+  <a onclick="goTo('bugreport')" id="footer_bug">🐛 Bug</a>
 </div>
 
 <!-- ═══ LANG ═══ -->
 <div id="langscreen" class="screen active landing-bg">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;gap:0;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
     <div class="ki-sub">Negotiation Simulator</div>
-    <div class="lang-prompt">Choose your language / Choisissez votre langue</div>
+    <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);margin:1.8rem auto;"></div>
     <div class="lang-cards">
-      <div class="lang-card" onclick="chooseLang('en')"><div class="flag">🇬🇧</div><div class="lang-name">English</div><div class="lang-hint">Play in English</div></div>
-      <div class="lang-card" onclick="chooseLang('fr')"><div class="flag">🇫🇷</div><div class="lang-name">Français</div><div class="lang-hint">Jouer en français</div></div>
+      <div class="lang-card" onclick="chooseLang('en')">
+        <div class="lang-card-top">
+          <div class="flag">🇬🇧</div>
+          <div class="lang-name">English</div>
+        </div>
+        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here. </div>
+      </div>
+      <div class="lang-card" onclick="chooseLang('fr')">
+        <div class="lang-card-top">
+          <div class="flag">🇫🇷</div>
+          <div class="lang-name">Français</div>
+        </div>
+        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici.</div>
+      </div>
     </div>
   </div>
 </div>
@@ -307,13 +305,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       </div>
       <div class="form-group" id="customWrap" style="display:none">
         <label id="lbl_custom">Décris ton adversaire</label>
-        <input type="text" id="customOpponent" placeholder="ex. propriétaire agressif, investisseur sceptique…"/>
+        <input type="text" id="customOpponent" placeholder="ex. propriétaire agressif…"/>
       </div>
     </div>
     <div class="form-section">
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
-      <div class="form-group"><label id="lbl_context">Ton objectif</label><textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ? Quel est le résultat idéal ?"></textarea></div>
-      <div class="form-group"><label id="lbl_obstacles">Obstacles & objections attendus</label><textarea id="obstaclesText" placeholder="Budget, timing, autorité, offres concurrentes…" style="min-height:60px"></textarea></div>
+      <div class="form-group"><label id="lbl_context">Ton objectif</label><textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?"></textarea></div>
+      <div class="form-group"><label id="lbl_obstacles">Obstacles & objections attendus</label><textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px"></textarea></div>
     </div>
     <div class="form-section">
       <div class="section-label" id="sec_set">Paramètres</div>
@@ -413,65 +411,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="about" class="screen">
   <div class="info-wrap">
     <div class="info-logo">KILLER<span>.</span>INSTINCT</div>
-    <div class="info-back" onclick="goTo(_prevScreen||'langscreen')">← Retour</div>
+    <div class="info-back" id="aboutBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title">ℹ️ À propos</div>
       <div class="info-section">
-        <h2>Le projet</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Killer Instinct est un simulateur de négociation propulsé par l'intelligence artificielle. Il a été conçu pour aider n'importe qui — commercial, candidat en entretien, manager, particulier — à s'entraîner face à un adversaire imprévisible avant d'entrer dans une vraie négociation.</p>
+        <h2 id="about_h1">Le projet</h2>
+        <p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p>
       </div>
       <div class="info-section">
-        <h2>Comment ça marche</h2>
-        <p>Tu décris ton contexte, tu choisis ton adversaire et ta difficulté. L'IA génère un personnage unique avec ses propres forces, faiblesses et contraintes cachées. La négociation commence. À la fin, un coach analyse ta session et te dit ce qui a fonctionné, ce qui a raté, et comment progresser.</p>
+        <h2 id="about_h2">À qui c'est destiné ?</h2>
+        <p id="about_p2">À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l'ordre ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p>
       </div>
       <div class="info-section">
-        <h2>Inspiré de</h2>
-        <div class="pill-row">
-          <span class="pill">Never Split the Difference</span>
-          <span class="pill">SPIN Selling</span>
-          <span class="pill">Getting to Yes</span>
-          <span class="pill">Influence — Cialdini</span>
-          <span class="pill">The Art of Negotiation</span>
-        </div>
+        <h2 id="about_h3">Comment ça marche</h2>
+        <p><strong style="color:var(--accent)" id="about_step1_title">1. Tu prépares ton terrain</strong><br><span id="about_step1">Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner. Plus tu es précis, plus l'adversaire sera coriace.</span></p>
+        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step2_title">2. Tu entres dans l'arène</strong><br><span id="about_step2">L'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes. Il ne lâchera rien facilement. À toi de jouer.</span></p>
+        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br><span id="about_step3">À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux la prochaine fois. Sans te ménager.</span></p>
       </div>
       <div class="info-section">
-        <h2>Fait par</h2>
-        <p>Lorem ipsum — ce projet a été conçu et développé par [nom / description placeholder]. Curieux, passionné par la négociation et les outils qui aident les gens à mieux communiquer.</p>
-        <a class="contact-link" href="mailto:cerf.jonathan@gmail.com">✉️ cerf.jonathan@gmail.com</a>
-      </div>
-      <div class="info-section">
-        <h2>Version</h2>
-        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.1 · Projet gratuit · Propulsé par Claude (Anthropic)</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══ SOUTIEN ═══ -->
-<div id="soutien" class="screen">
-  <div class="info-wrap">
-    <div class="info-logo">KILLER<span>.</span>INSTINCT</div>
-    <div class="info-back" onclick="goTo(_prevScreen||'langscreen')">← Retour</div>
-    <div class="info-card">
-      <div class="info-title">❤️ Soutenir le projet</div>
-      <div class="info-section">
-        <h2>Pourquoi soutenir ?</h2>
-        <p>Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie et de continuer à l'améliorer.</p>
-      </div>
-      <div class="info-section">
-        <h2>Ce que ça finance</h2>
-        <p>Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités — nouveaux profils, nouveaux modes, nouvelles langues.</p>
-      </div>
-      <div class="info-section">
-        <h2>Comment contribuer</h2>
-        <p>Clique sur le bouton ci-dessous pour accéder à la cagnotte. Chaque contribution, même petite, fait vraiment la différence.</p>
-        <a href="PLACEHOLDER_URL" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">
-          ❤️ Je soutiens Killer Instinct
-        </a>
+        <h2 id="about_h4">Fait par</h2>
+        <p id="about_p4">Créé par moi-même pour vous autres.</p>
+        <a class="contact-link" href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank">💼 <span id="about_linkedin">Me retrouver sur LinkedIn</span></a>
       </div>
       <div class="info-section" style="margin-bottom:0">
-        <h2>Merci</h2>
-        <p style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p>
+        <h2 id="about_h5">Version</h2>
+        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.1 · <span id="about_free">Projet gratuit</span> · <span id="about_powered">Propulsé par</span> <a href="https://groq.com" target="_blank" style="color:var(--accent-dim)">Groq</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
       </div>
     </div>
   </div>
@@ -481,43 +445,73 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="bugreport" class="screen">
   <div class="info-wrap">
     <div class="info-logo">KILLER<span>.</span>INSTINCT</div>
-    <div class="info-back" onclick="goTo(_prevScreen||'langscreen')">← Retour</div>
+    <div class="info-back" id="bugBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
-      <div class="info-title">🐛 Signaler un bug</div>
-      <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.65;">Quelque chose ne fonctionne pas ? Décris-le ci-dessous — ça aide vraiment à améliorer le jeu.</p>
+      <div class="info-title" id="bug_title">🐛 Signaler un bug</div>
+      <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.65;" id="bug_intro">Quelque chose ne fonctionne pas ? Décris-le ci-dessous — ça aide vraiment à améliorer le jeu.</p>
       <div class="bug-form-group">
-        <label>Ton email <span style="color:var(--danger)">*</span></label>
-        <input type="email" id="bugEmail" placeholder="ton@email.com" required/>
+        <label id="bug_email_lbl">Ton email <span style="color:var(--danger)">*</span></label>
+        <input type="email" id="bugEmail" placeholder="ton@email.com"/>
       </div>
       <div class="bug-form-group">
-        <label>Type de problème</label>
+        <label id="bug_type_lbl">Type de problème</label>
         <select id="bugType">
-          <option value="">— Sélectionner —</option>
-          <option value="Erreur technique (crash / message d'erreur)">Erreur technique (crash / message d'erreur)</option>
-          <option value="L'adversaire IA ne joue pas son rôle">L'adversaire IA ne joue pas son rôle</option>
-          <option value="Problème d'affichage / interface">Problème d'affichage / interface</option>
-          <option value="Langue incorrecte">Langue incorrecte</option>
-          <option value="Débrief incomplet ou incohérent">Débrief incomplet ou incohérent</option>
-          <option value="Autre">Autre</option>
+          <option value="" id="bug_opt_sel">— Sélectionner —</option>
+          <option value="Erreur technique" id="bug_opt1">Erreur technique (crash / message d'erreur)</option>
+          <option value="IA hors rôle" id="bug_opt2">L'adversaire IA ne joue pas son rôle</option>
+          <option value="Affichage" id="bug_opt3">Problème d'affichage / interface</option>
+          <option value="Langue" id="bug_opt4">Langue incorrecte</option>
+          <option value="Débrief" id="bug_opt5">Débrief incomplet ou incohérent</option>
+          <option value="Autre" id="bug_opt6">Autre</option>
         </select>
       </div>
       <div class="bug-form-group">
-        <label>Décris ce qui s'est passé</label>
+        <label id="bug_desc_lbl">Décris ce qui s'est passé</label>
         <textarea id="bugDesc" placeholder="Ex : j'ai sélectionné Douanier mais l'IA se comportait comme si elle était le joueur…"></textarea>
       </div>
       <div class="bug-form-group">
-        <label>À quel moment ? (optionnel)</label>
+        <label id="bug_when_lbl">À quel moment ? (optionnel)</label>
         <input type="text" id="bugWhen" placeholder="Ex : pendant la négociation, au tour 3…"/>
       </div>
-      <button class="btn-start" onclick="submitBug()">Envoyer le rapport →</button>
+      <button class="btn-start" onclick="submitBug()" id="bug_submit">Envoyer le rapport →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ SOUTIEN ═══ -->
+<div id="soutien" class="screen">
+  <div class="info-wrap">
+    <div class="info-logo">KILLER<span>.</span>INSTINCT</div>
+    <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
+    <div class="info-card">
+      <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
+      <div class="info-section">
+        <h2 id="soutien_h1">Pourquoi soutenir ?</h2>
+        <p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie et de continuer à l'améliorer.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="soutien_h2">Ce que ça finance</h2>
+        <p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités — nouveaux profils, nouveaux modes, nouvelles langues.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="soutien_h3">Comment contribuer</h2>
+        <p id="soutien_p3">Clique sur le bouton ci-dessous pour accéder à la cagnotte. Chaque contribution, même petite, fait vraiment la différence.</p>
+        <a href="PLACEHOLDER_URL" target="_blank" id="soutien_btn" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">
+          ❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span>
+        </a>
+      </div>
+      <div class="info-section" style="margin-bottom:0">
+        <h2 id="soutien_h4">Merci</h2>
+        <p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
 // ── CHARS ─────────────────────────────────────────────────────────
-const CHARS_M=["Ross Geller","Chandler Bing","Joey Tribbiani","Michael Scott","Dwight Schrute","Jim Halpert","George Costanza","Cosmo Kramer","Newman","Ron Swanson","Ben Wyatt","Andy Dwyer","Tom Haverford","Ted Mosby","Marshall Eriksen","Barney Stinson","Jake Peralta","Raymond Holt","Terry Jeffords","Charles Boyle","Michael Bluth","Buster Bluth","Gob Bluth","Tobias Fünke","J.D.","Turk","Perry Cox","Bob Kelso","Malcolm Wilkerson","Hal Wilkerson","Jay Pritchett","Mitchell Pritchett","Cameron Tucker","Phil Dunphy","Charlie Kelly","Dennis Reynolds","Mac McDonald","Frank Reynolds","Jack Donaghy","Tracy Jordan","Kenneth Parcell","Jeff Winger","Abed Nadir","Troy Barnes","Pierce Hawthorne","Ben Chang","Larry David","Jeff Greene","Sheldon Cooper","Leonard Hofstadter","Howard Wolowitz","Raj Koothrappali","Frasier Crane","Niles Crane","Martin Crane","Eric Forman","Hyde Stevens","Kelso","Fez","Red Forman","Sam Malone","Cliff Clavin","Norm Peterson","Woody Boyd","Ray Barone","Frank Barone","Robert Barone","Charlie Harper","Alan Harper","Walden Schmidt","Will Smith","Carlton Banks","Philip Banks","Geoffrey","Al Bundy","Bud Bundy","Homer Simpson","Bart Simpson","Ned Flanders","Moe Szyslak","Mr. Burns","Principal Skinner","Fry","Bender","Professor Farnsworth","Zoidberg","Zapp Brannigan","Peter Griffin","Stewie Griffin","Brian Griffin","Glenn Quagmire","Bob Belcher","Gene Belcher","Hank Hill","Dale Gribble","Bill Dauterive","Boomhauer","Winston Bishop","Roland Schitt","Patrick Brewer","Nandor","Laszlo Cravensworth","Colin Robinson","Gregory Eddie","Jacob Hill","Ted Lasso","Roy Kent","Nate Shelley","Coach Beard","Jamie Tartt","Gary Walsh","Dan Egan","Jonah Ryan","Richard Splett","Richard Hendricks","Erlich Bachman","Gilfoyle","Dinesh Chugtai","Jared Dunn","Gavin Belson","Logan Roy","Kendall Roy","Roman Roy","Tom Wambsgans","Greg Hirsch","Chidi Anagonye","Jason Mendoza","Michael","The Priest","James Maguire","Mark Corrigan","Jeremy Usborne","Moss","Roy Trenneman","Douglas Reynholm","Bernard Black","Manny Bianco","Edmund Blackadder","Baldrick","Del Boy Trotter","Rodney Trotter","Trigger","Boycie","Brad Williams","Max Blum"];
-const CHARS_F=["Rachel Green","Monica Geller","Phoebe Buffay","Pam Beesly","Angela Martin","Kelly Kapoor","Elaine Benes","Leslie Knope","April Ludgate","Ann Perkins","Donna Meagle","Robin Scherbatsky","Lily Aldrin","Amy Santiago","Rosa Diaz","Gina Linetti","Lucille Bluth","Lindsay Bluth","Maeby Fünke","Elliot Reid","Carla Espinosa","Jordan Sullivan","Lois Wilkerson","Gloria Pritchett","Claire Dunphy","Haley Dunphy","Alex Dunphy","Dee Reynolds","Liz Lemon","Jenna Maroney","Britta Perry","Annie Edison","Shirley Bennett","Bernadette Rostenkowski","Amy Farrah Fowler","Roz Doyle","Daphne Moon","Donna Pinciotti","Jackie Burkhart","Kitty Forman","Carla Tortelli","Rebecca Howe","Debra Barone","Marie Barone","Evelyn Harper","Berta","Peg Bundy","Kelly Bundy","Marcy Rhoades","Marge Simpson","Lisa Simpson","Turanga Leela","Amy Wong","Lois Griffin","Meg Griffin","Linda Belcher","Tina Belcher","Louise Belcher","Luanne Platter","Peggy Hill","Jess Day","Cece Parekh","Alexis Rose","Moira Rose","Stevie Budd","Jocelyn Schitt","Nadja","Janine Teagues","Melissa Schemmenti","Barbara Howard","Ava Coleman","Rebecca Welton","Keeley Jones","Selina Meyer","Amy Brookheimer","Monica Hall","Siobhan Roy","Gerri Kellman","Eleanor Shellstrop","Tahani Al-Jamil","Janet","Fleabag","Claire","Erin Quinn","Clare Devlin","Michelle Mallon","Orla McCool","Sister Michael","Sophie Chapman","Dobby","Jen Barber","Fran Katzenjammer","Edina Monsoon","Patsy Stone","Saffron Monsoon","Alex Kerkovich","Jane Kerkovich","Penny Hartz"];
+const CHARS_M=["Ross Geller","Chandler Bing","Joey Tribbiani","Michael Scott","Dwight Schrute","Jim Halpert","George Costanza","Cosmo Kramer","Newman","Ron Swanson","Ben Wyatt","Andy Dwyer","Tom Haverford","Ted Mosby","Marshall Eriksen","Barney Stinson","Jake Peralta","Raymond Holt","Terry Jeffords","Charles Boyle","Michael Bluth","Buster Bluth","Gob Bluth","Tobias Fünke","J.D.","Turk","Perry Cox","Bob Kelso","Malcolm Wilkerson","Hal Wilkerson","Jay Pritchett","Mitchell Pritchett","Cameron Tucker","Phil Dunphy","Charlie Kelly","Dennis Reynolds","Mac McDonald","Frank Reynolds","Jack Donaghy","Tracy Jordan","Kenneth Parcell","Jeff Winger","Abed Nadir","Troy Barnes","Pierce Hawthorne","Ben Chang","Larry David","Jeff Greene","Sheldon Cooper","Leonard Hofstadter","Howard Wolowitz","Raj Koothrappali","Frasier Crane","Niles Crane","Martin Crane","Eric Forman","Hyde Stevens","Kelso","Fez","Red Forman","Sam Malone","Cliff Clavin","Norm Peterson","Woody Boyd","Ray Barone","Frank Barone","Robert Barone","Charlie Harper","Alan Harper","Walden Schmidt","Will Smith","Carlton Banks","Philip Banks","Geoffrey","Al Bundy","Bud Bundy","Homer Simpson","Bart Simpson","Ned Flanders","Moe Szyslak","Mr. Burns","Fry","Bender","Professor Farnsworth","Zoidberg","Zapp Brannigan","Peter Griffin","Stewie Griffin","Brian Griffin","Glenn Quagmire","Bob Belcher","Gene Belcher","Hank Hill","Dale Gribble","Bill Dauterive","Winston Bishop","Roland Schitt","Patrick Brewer","Nandor","Laszlo Cravensworth","Colin Robinson","Gregory Eddie","Ted Lasso","Roy Kent","Nate Shelley","Coach Beard","Jamie Tartt","Gary Walsh","Dan Egan","Jonah Ryan","Richard Hendricks","Erlich Bachman","Gilfoyle","Dinesh Chugtai","Jared Dunn","Gavin Belson","Logan Roy","Kendall Roy","Roman Roy","Tom Wambsgans","Greg Hirsch","Chidi Anagonye","Jason Mendoza","Michael","The Priest","James Maguire","Mark Corrigan","Jeremy Usborne","Moss","Roy Trenneman","Douglas Reynholm","Bernard Black","Manny Bianco","Edmund Blackadder","Baldrick","Del Boy Trotter","Rodney Trotter","Trigger","Brad Williams","Max Blum"];
+const CHARS_F=["Rachel Green","Monica Geller","Phoebe Buffay","Pam Beesly","Angela Martin","Kelly Kapoor","Elaine Benes","Leslie Knope","April Ludgate","Ann Perkins","Donna Meagle","Robin Scherbatsky","Lily Aldrin","Amy Santiago","Rosa Diaz","Gina Linetti","Lucille Bluth","Lindsay Bluth","Maeby Fünke","Elliot Reid","Carla Espinosa","Jordan Sullivan","Lois Wilkerson","Gloria Pritchett","Claire Dunphy","Haley Dunphy","Alex Dunphy","Dee Reynolds","Liz Lemon","Jenna Maroney","Britta Perry","Annie Edison","Shirley Bennett","Bernadette Rostenkowski","Amy Farrah Fowler","Roz Doyle","Daphne Moon","Donna Pinciotti","Jackie Burkhart","Kitty Forman","Carla Tortelli","Rebecca Howe","Debra Barone","Marie Barone","Evelyn Harper","Peg Bundy","Kelly Bundy","Marcy Rhoades","Marge Simpson","Lisa Simpson","Turanga Leela","Amy Wong","Lois Griffin","Meg Griffin","Linda Belcher","Tina Belcher","Louise Belcher","Luanne Platter","Peggy Hill","Jess Day","Cece Parekh","Alexis Rose","Moira Rose","Stevie Budd","Jocelyn Schitt","Nadja","Janine Teagues","Melissa Schemmenti","Barbara Howard","Ava Coleman","Rebecca Welton","Keeley Jones","Selina Meyer","Amy Brookheimer","Monica Hall","Siobhan Roy","Gerri Kellman","Eleanor Shellstrop","Tahani Al-Jamil","Janet","Fleabag","Claire","Erin Quinn","Clare Devlin","Michelle Mallon","Orla McCool","Sister Michael","Sophie Chapman","Dobby","Jen Barber","Fran Katzenjammer","Edina Monsoon","Patsy Stone","Saffron Monsoon","Alex Kerkovich","Jane Kerkovich","Penny Hartz"];
 const CHARS_N=["Abed Nadir","Guillermo de la Cruz","River Chen","Sam Reyes","Alex Dubois","Jordan Blake","Robin Zhao","Casey Moreau","Drew Nakamura","Quinn Levesque","Sage Okonkwo","Remy Fontaine","Noel Adeyemi","Sasha Beaumont"];
 
 // ── TECHNIQUES ────────────────────────────────────────────────────
@@ -537,18 +531,15 @@ const TECHS={
 
 // ── STATE ─────────────────────────────────────────────────────────
 const S={lang:'fr',gender:'il',opponent:'',context:'',obstacles:'',difficulty:'Senior',feedbackMode:'training',persona:null,sitcomChar:null,messages:[],systemPrompt:'',detectedTechs:new Set(),tension:30,progress:10,resist:60,turn:0,maxTurns:15,sessionEnded:false};
-let _prevScreen='langscreen';
 
 // ── NAV ───────────────────────────────────────────────────────────
 function goTo(id){
-  const cur=document.querySelector('.screen.active');
-  if(cur&&!['about','bugreport'].includes(id)) _prevScreen=cur.id;
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const footer=document.getElementById('globalFooter');
-  if(footer) footer.style.display=['langscreen','landing'].includes(id)?'flex':'none';
+  const showFooter=['landing','setup','about','bugreport','soutien'];
+  if(footer)footer.style.display=showFooter.includes(id)?'flex':'none';
 }
-
 function showLoading(){
   const fr=S.lang==='fr';
   document.getElementById('overlayText').textContent=fr?'La négo va commencer…':'Negotiation is about to begin…';
@@ -563,46 +554,203 @@ function chooseLang(l){
   const fr=l==='fr';
   document.getElementById('landingTagline').textContent=fr?'Maîtrise toutes les négociations. Ventes, salaire, conflits, contrats — entraîne-toi face à un adversaire IA imprévisible.':'Master any negotiation. Sales, salary, conflict, contracts — train against an unpredictable AI opponent.';
   document.getElementById('landingBtn').textContent=fr?'Entrer dans la salle →':'Enter the Room →';
-  if(!fr) applyEN();
+  if(!fr)applyEN();
+  else applyFR();
   goTo('landing');
 }
 
+function applyFR(){
+  // Footer
+  document.getElementById('footer_about').textContent='ℹ️ À propos';
+  document.getElementById('footer_contact').textContent='✉️ Contact';
+  document.getElementById('footer_soutien').textContent='❤️ Soutenir';
+  document.getElementById('footer_bug').textContent='🐛 Bug';
+  // Back buttons
+  document.getElementById('aboutBack').textContent='← Retour';
+  document.getElementById('bugBack').textContent='← Retour';
+  document.getElementById('soutienBack').textContent='← Retour';
+  // Setup
+  document.getElementById('btn_back').textContent='← Langue';
+  document.getElementById('sec_who').textContent='À qui tu fais face ?';
+  document.getElementById('sec_ctx').textContent='Contexte & Enjeux';
+  document.getElementById('sec_set').textContent='Paramètres';
+  document.getElementById('lbl_opponent').textContent='Profil adversaire';
+  document.getElementById('lbl_gender').textContent='Genre de l\'adversaire';
+  document.getElementById('lbl_diff').textContent='Difficulté';
+  document.getElementById('lbl_mode').textContent='Mode';
+  document.getElementById('btn_start').textContent='⚔️ Entrer en négociation';
+  document.getElementById('btn_end').textContent='🏁 Terminer & Débrief';
+  document.getElementById('sendBtn').textContent='Envoyer ↵';
+  document.getElementById('userInput').placeholder='Ton coup…';
+  document.getElementById('techEmpty').textContent='Aucune technique détectée…';
+  document.getElementById('lbl_tension').textContent='Tension';
+  document.getElementById('lbl_progress').textContent='Progression';
+  document.getElementById('lbl_resist').textContent='Résistance';
+  document.getElementById('lbl_techniques').textContent='Techniques détectées';
+  document.getElementById('lbl_session').textContent='Session';
+  // Gender chips
+  document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'Il',elle:'Elle',iel:'Iel'}[c.dataset.g]||c.dataset.g;});
+  // Bug page
+  document.getElementById('bug_title').textContent='🐛 Signaler un bug';
+  document.getElementById('bug_intro').textContent='Quelque chose ne fonctionne pas ? Décris-le ci-dessous — ça aide vraiment à améliorer le jeu.';
+  document.getElementById('bug_email_lbl').innerHTML='Ton email <span style="color:var(--danger)">*</span>';
+  document.getElementById('bugEmail').placeholder='ton@email.com';
+  document.getElementById('bug_type_lbl').textContent='Type de problème';
+  document.getElementById('bug_opt_sel').textContent='— Sélectionner —';
+  document.getElementById('bug_opt1').textContent='Erreur technique (crash / message d\'erreur)';
+  document.getElementById('bug_opt2').textContent='L\'adversaire IA ne joue pas son rôle';
+  document.getElementById('bug_opt3').textContent='Problème d\'affichage / interface';
+  document.getElementById('bug_opt4').textContent='Langue incorrecte';
+  document.getElementById('bug_opt5').textContent='Débrief incomplet ou incohérent';
+  document.getElementById('bug_opt6').textContent='Autre';
+  document.getElementById('bug_desc_lbl').textContent='Décris ce qui s\'est passé';
+  document.getElementById('bugDesc').placeholder='Ex : j\'ai sélectionné Douanier mais l\'IA se comportait comme si elle était le joueur…';
+  document.getElementById('bug_when_lbl').textContent='À quel moment ? (optionnel)';
+  document.getElementById('bugWhen').placeholder='Ex : pendant la négociation, au tour 3…';
+  document.getElementById('bug_submit').textContent='Envoyer le rapport →';
+  // About
+  document.getElementById('about_h1').textContent='Le projet';
+  document.getElementById('about_p1').textContent='Parce que négocier ça s\'apprend. Et la meilleure façon de s\'entraîner, c\'est de se planter en privé avant de se planter en public.';
+  document.getElementById('about_h2').textContent='À qui c\'est destiné ?';
+  document.getElementById('about_p2').textContent='À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l\'ordre ou convaincre ton conjoint d\'appeler votre enfant SonGoku.';
+  document.getElementById('about_h3').textContent='Comment ça marche';
+  document.getElementById('about_step1_title').textContent='1. Tu prépares ton terrain';
+  document.getElementById('about_step1').textContent='Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner. Plus tu es précis, plus l\'adversaire sera coriace.';
+  document.getElementById('about_step2_title').textContent='2. Tu entres dans l\'arène';
+  document.getElementById('about_step2').textContent='L\'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes. Il ne lâchera rien facilement. À toi de jouer.';
+  document.getElementById('about_step3_title').textContent='3. Tu prends ta claque (ou pas)';
+  document.getElementById('about_step3').textContent='À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux la prochaine fois. Sans te ménager.';
+  document.getElementById('about_h4').textContent='Fait par';
+  document.getElementById('about_p4').textContent='Créé par moi-même pour vous autres.';
+  document.getElementById('about_linkedin').textContent='Me retrouver sur LinkedIn';
+  document.getElementById('about_h5').textContent='Version';
+  document.getElementById('about_free').textContent='Projet gratuit';
+  document.getElementById('about_powered').textContent='Propulsé par';
+  document.getElementById('about_deployed').textContent='Déployé sur';
+  // Soutien
+  document.getElementById('soutien_title').textContent='❤️ Soutenir le projet';
+  document.getElementById('soutien_h1').textContent='Pourquoi soutenir ?';
+  document.getElementById('soutien_p1').textContent='Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t\'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie.';
+  document.getElementById('soutien_h2').textContent='Ce que ça finance';
+  document.getElementById('soutien_p2').textContent='Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.';
+  document.getElementById('soutien_h3').textContent='Comment contribuer';
+  document.getElementById('soutien_p3').textContent='Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.';
+  document.getElementById('soutien_btn_txt').textContent='Je soutiens Killer Instinct';
+  document.getElementById('soutien_h4').textContent='Merci';
+  document.getElementById('soutien_p4').textContent='Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C\'est déjà énorme.';
+}
+
 function applyEN(){
-  const map={sec_who:'Who are you facing?',sec_ctx:'Context & Stakes',sec_set:'Session Settings',lbl_opponent:'Opponent profile',lbl_custom:'Describe your opponent',lbl_context:'Your goal',lbl_obstacles:'Obstacles & objections expected',lbl_gender:'Opponent gender',lbl_diff:'Difficulty',lbl_mode:'Mode',btn_start:'⚔️ Enter the Negotiation',btn_back:'← Language',lbl_tension:'Tension',lbl_progress:'Progress',lbl_resist:'Resistance',lbl_techniques:'Techniques detected',lbl_session:'Session',btn_end:'🏁 End & Debrief',opt_sel:'— Select a profile —',opt_custom:'✏️ Other — I\'ll describe',opt_jr:'🟢 Junior — Cooperative',opt_sr:'🟡 Senior — Resistant',opt_ex:'🔴 Expert — Ruthless',opt_tr:'🎓 Training — Live hints',opt_im:'🎭 Immersive — Debrief only'};
-  Object.entries(map).forEach(([id,txt])=>{const el=document.getElementById(id);if(el)el.textContent=txt;});
-  document.getElementById('og_pro').label='💼 Professional';document.getElementById('og_sales').label='🤝 Sales & Commercial';document.getElementById('og_perso').label='🏠 Personal';document.getElementById('og_stakes').label='⚖️ High Stakes';document.getElementById('og_mgmt').label='👥 Management';
-  document.getElementById('userInput').placeholder='Your move…';
+  // Footer
+  document.getElementById('footer_about').textContent='ℹ️ About';
+  document.getElementById('footer_contact').textContent='✉️ Contact';
+  document.getElementById('footer_soutien').textContent='❤️ Support';
+  document.getElementById('footer_bug').textContent='🐛 Report a bug';
+  // Back buttons
+  document.getElementById('aboutBack').textContent='← Back';
+  document.getElementById('bugBack').textContent='← Back';
+  document.getElementById('soutienBack').textContent='← Back';
+  // Setup
+  document.getElementById('btn_back').textContent='← Language';
+  document.getElementById('sec_who').textContent='Who are you facing?';
+  document.getElementById('sec_ctx').textContent='Context & Stakes';
+  document.getElementById('sec_set').textContent='Session Settings';
+  document.getElementById('lbl_opponent').textContent='Opponent profile';
+  document.getElementById('lbl_gender').textContent='Opponent gender';
+  document.getElementById('lbl_diff').textContent='Difficulty';
+  document.getElementById('lbl_mode').textContent='Mode';
+  document.getElementById('btn_start').textContent='⚔️ Enter the Negotiation';
+  document.getElementById('btn_end').textContent='🏁 End & Debrief';
   document.getElementById('sendBtn').textContent='Send ↵';
+  document.getElementById('userInput').placeholder='Your move…';
   document.getElementById('techEmpty').textContent='No technique detected yet…';
+  document.getElementById('lbl_tension').textContent='Tension';
+  document.getElementById('lbl_progress').textContent='Progress';
+  document.getElementById('lbl_resist').textContent='Resistance';
+  document.getElementById('lbl_techniques').textContent='Techniques detected';
+  document.getElementById('lbl_session').textContent='Session';
+  // Gender chips
   document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'He',elle:'She',iel:'They'}[c.dataset.g]||c.dataset.g;});
-  const EN_PROFILES=[['Acheteur B2B — Responsable achats','B2B Buyer — Procurement Manager'],['Acheteur B2B — DAF / Directeur financier','B2B Buyer — CFO / Finance Director'],['Acheteur B2B — Décideur technique','B2B Buyer — Technical Decision Maker'],["Comité d'achats (multi-décideurs)",'Purchasing Committee (multi-stakeholder)'],['Responsable RH / Recruteur','HR Manager / Recruiter'],['Head of Talent / Talent Partner','Head of Talent / Talent Partner'],['Fondateur de startup (recrutement)','Startup Founder (hiring)'],['Manager direct — augmentation / promotion','Direct Manager — raise / promotion'],['Dirigeant / Manager N+2','Executive / Skip-level Manager'],['Membre du conseil / Investisseur','Board Member / Investor'],['Fournisseur / Prestataire (vous achetez)','Vendor / Supplier (you are buying)'],['Freelance / Sous-traitant (vous recrutez)','Freelancer / Contractor (you are hiring)'],['Co-fondateur / Associé','Co-founder / Associate'],['Conseil juridique / Avocat adverse','Legal Counsel / Opposing Lawyer'],['Banquier / Chargé de crédit','Banker / Credit Officer'],['Client mécontent — Demande de remboursement','Unhappy Client — Refund Request'],['Client churné — Négociation de rétention','Churning Client — Retention Negotiation'],['Client — Objection prix / Demande de remise','Client — Price Objection / Discount Request'],['Client — Renouvellement de contrat','Client — Contract Renewal'],['Partenaire stratégique — Accord commun','Strategic Partner — Joint Deal'],['Distributeur / Revendeur','Distributor / Reseller'],['Concurrent — M&A / Partenariat','Competitor — M&A / Partnership'],['Client agressif — Plainte publique','Angry Customer — Public Complaint'],['Conjoint(e) / Partenaire — Décision majeure','Spouse / Partner — Major Decision'],['Propriétaire — Négociation de loyer','Landlord — Rent Negotiation'],['Agent immobilier — Achat immobilier','Real Estate Agent — Property Purchase'],['Concessionnaire automobile','Car Dealer'],["Prestataire — Entrepreneur / Artisan",'Service Provider — Contractor / Artisan'],["Compagnie d'assurance",'Insurance Company'],['Conseiller bancaire — Finances personnelles','Bank Advisor — Personal Finance'],['Parent / Membre de la famille','Parent / Family Member'],['Voisin — Litige / Accord','Neighbor — Dispute / Agreement'],['Ami — Argent ou service','Friend — Money or Favor'],['Douanes / Administration','Customs / Administration'],['Administration fiscale','Tax Authority'],['Délégué syndical','Union Representative'],['Médiateur / Arbitre','Mediator / Arbitrator'],['Négociation de crise (otage / conflit)','Crisis Negotiation (hostage / conflict)'],['Fonctionnaire / Officiel gouvernemental','Government Official'],['Collaborateur direct — Problème de performance','Direct Report — Performance Issue'],["Collaborateur direct — Demande d'augmentation",'Direct Report — Raise Request'],["Membre de l'équipe — Résolution de conflit",'Team Member — Conflict Resolution'],['Collègue — Conflit de ressources / projet','Colleague — Resource / Project Conflict'],['Partie prenante transverse','Cross-functional Stakeholder'],['Consultant externe — Litige de périmètre','External Consultant — Scope Dispute']];
+  // Optgroups
+  document.getElementById('og_pro').label='💼 Professional';
+  document.getElementById('og_sales').label='🤝 Sales & Commercial';
+  document.getElementById('og_perso').label='🏠 Personal';
+  document.getElementById('og_stakes').label='⚖️ High Stakes';
+  document.getElementById('og_mgmt').label='👥 Management';
+  // Options
+  const EN_PROFILES=[['Acheteur B2B — Responsable achats','B2B Buyer — Procurement Manager'],['Acheteur B2B — DAF / Directeur financier','B2B Buyer — CFO / Finance Director'],['Acheteur B2B — Décideur technique','B2B Buyer — Technical Decision Maker'],["Comité d'achats (multi-décideurs)",'Purchasing Committee'],['Responsable RH / Recruteur','HR Manager / Recruiter'],['Head of Talent / Talent Partner','Head of Talent / Talent Partner'],['Fondateur de startup (recrutement)','Startup Founder (hiring)'],['Manager direct — augmentation / promotion','Direct Manager — raise / promotion'],['Dirigeant / Manager N+2','Executive / Skip-level Manager'],['Membre du conseil / Investisseur','Board Member / Investor'],['Fournisseur / Prestataire (vous achetez)','Vendor / Supplier (you are buying)'],['Freelance / Sous-traitant (vous recrutez)','Freelancer / Contractor (you are hiring)'],['Co-fondateur / Associé','Co-founder / Associate'],['Conseil juridique / Avocat adverse','Legal Counsel / Opposing Lawyer'],['Banquier / Chargé de crédit','Banker / Credit Officer'],['Client mécontent — Demande de remboursement','Unhappy Client — Refund Request'],['Client churné — Négociation de rétention','Churning Client — Retention Negotiation'],['Client — Objection prix / Demande de remise','Client — Price Objection / Discount'],['Client — Renouvellement de contrat','Client — Contract Renewal'],['Partenaire stratégique — Accord commun','Strategic Partner — Joint Deal'],['Distributeur / Revendeur','Distributor / Reseller'],['Concurrent — M&A / Partenariat','Competitor — M&A / Partnership'],['Client agressif — Plainte publique','Angry Customer — Public Complaint'],['Conjoint(e) / Partenaire — Décision majeure','Spouse / Partner — Major Decision'],['Propriétaire — Négociation de loyer','Landlord — Rent Negotiation'],['Agent immobilier — Achat immobilier','Real Estate Agent — Property Purchase'],['Concessionnaire automobile','Car Dealer'],["Prestataire — Entrepreneur / Artisan",'Service Provider — Contractor'],["Compagnie d'assurance",'Insurance Company'],['Conseiller bancaire — Finances personnelles','Bank Advisor — Personal Finance'],['Parent / Membre de la famille','Parent / Family Member'],['Voisin — Litige / Accord','Neighbor — Dispute'],['Ami — Argent ou service','Friend — Money or Favor'],['Douanes / Administration','Customs / Administration'],['Administration fiscale','Tax Authority'],['Délégué syndical','Union Representative'],['Médiateur / Arbitre','Mediator / Arbitrator'],['Négociation de crise (otage / conflit)','Crisis Negotiation'],['Fonctionnaire / Officiel gouvernemental','Government Official'],['Collaborateur direct — Problème de performance','Direct Report — Performance Issue'],["Collaborateur direct — Demande d'augmentation",'Direct Report — Raise Request'],["Membre de l'équipe — Résolution de conflit",'Team Member — Conflict Resolution'],['Collègue — Conflit de ressources / projet','Colleague — Resource Conflict'],['Partie prenante transverse','Cross-functional Stakeholder'],['Consultant externe — Litige de périmètre','External Consultant — Scope Dispute']];
   Array.from(document.getElementById('opponentType').options).forEach(opt=>{const pair=EN_PROFILES.find(p=>p[0]===opt.value);if(pair){opt.text=pair[1];opt.value=pair[1];}});
+  document.getElementById('opt_sel').textContent='— Select a profile —';
+  document.getElementById('opt_custom').textContent='✏️ Other — I\'ll describe';
+  document.getElementById('opt_jr').textContent='🟢 Junior — Cooperative';
+  document.getElementById('opt_sr').textContent='🟡 Senior — Resistant';
+  document.getElementById('opt_ex').textContent='🔴 Expert — Ruthless';
+  document.getElementById('opt_tr').textContent='🎓 Training — Live hints';
+  document.getElementById('opt_im').textContent='🎭 Immersive — Debrief only';
+  // Bug page EN
+  document.getElementById('bug_title').textContent='🐛 Report a bug';
+  document.getElementById('bug_intro').textContent='Something not working? Describe it below — it really helps improve the game.';
+  document.getElementById('bug_email_lbl').innerHTML='Your email <span style="color:var(--danger)">*</span>';
+  document.getElementById('bugEmail').placeholder='your@email.com';
+  document.getElementById('bug_type_lbl').textContent='Type of issue';
+  document.getElementById('bug_opt_sel').textContent='— Select —';
+  document.getElementById('bug_opt1').textContent='Technical error (crash / error message)';
+  document.getElementById('bug_opt2').textContent='AI opponent not playing its role';
+  document.getElementById('bug_opt3').textContent='Display / interface issue';
+  document.getElementById('bug_opt4').textContent='Wrong language';
+  document.getElementById('bug_opt5').textContent='Incomplete or incoherent debrief';
+  document.getElementById('bug_opt6').textContent='Other';
+  document.getElementById('bug_desc_lbl').textContent='Describe what happened';
+  document.getElementById('bugDesc').placeholder='e.g. I selected Customs officer but the AI acted like it was the player…';
+  document.getElementById('bug_when_lbl').textContent='When did it happen? (optional)';
+  document.getElementById('bugWhen').placeholder='e.g. during the negotiation, at turn 3…';
+  document.getElementById('bug_submit').textContent='Send report →';
+  // About EN
+  document.getElementById('about_h1').textContent='The project';
+  document.getElementById('about_p1').textContent='Because negotiation is a skill. And the best way to practice is to fail in private before failing in public.';
+  document.getElementById('about_h2').textContent='Who is it for?';
+  document.getElementById('about_p2').textContent='For you. Whether you want a raise, land a job, negotiate with law enforcement, or convince your partner to name your child SonGoku.';
+  document.getElementById('about_h3').textContent='How it works';
+  document.getElementById('about_step1_title').textContent='1. You prep your ground';
+  document.getElementById('about_step1').textContent='Describe your situation — who you\'re facing, what you want, what could go wrong. The more specific you are, the tougher the opponent.';
+  document.getElementById('about_step2_title').textContent='2. You step into the arena';
+  document.getElementById('about_step2').textContent='The AI generates a unique opponent with their own personality, hidden weaknesses and dirty habits. They won\'t give anything up easily. Your move.';
+  document.getElementById('about_step3_title').textContent='3. You take the hit (or not)';
+  document.getElementById('about_step3').textContent='At the end, a coach breaks it all down — what you did well, what you botched, and how to do better next time. No sugarcoating.';
+  document.getElementById('about_h4').textContent='Made by';
+  document.getElementById('about_p4').textContent='Made by myself, for you all.';
+  document.getElementById('about_linkedin').textContent='Find me on LinkedIn';
+  document.getElementById('about_h5').textContent='Version';
+  document.getElementById('about_free').textContent='Free project';
+  document.getElementById('about_powered').textContent='Powered by';
+  document.getElementById('about_deployed').textContent='Deployed on';
+  // Soutien EN
+  document.getElementById('soutien_title').textContent='❤️ Support the project';
+  document.getElementById('soutien_h1').textContent='Why support?';
+  document.getElementById('soutien_p1').textContent='Killer Instinct is a free project, no ads, no tracking. It runs on AI that has a cost. If the game helped you negotiate better — a raise, a contract, a tough situation — a small contribution keeps it alive.';
+  document.getElementById('soutien_h2').textContent='What it funds';
+  document.getElementById('soutien_p2').textContent='Server and API costs so everyone can play for free. Development of new features.';
+  document.getElementById('soutien_h3').textContent='How to contribute';
+  document.getElementById('soutien_p3').textContent='Click the button below. Every contribution, however small, makes a real difference.';
+  document.getElementById('soutien_btn_txt').textContent='Support Killer Instinct';
+  document.getElementById('soutien_h4').textContent='Thank you';
+  document.getElementById('soutien_p4').textContent='Whether you contribute or not, thank you for playing and sharing the game. That already means a lot.';
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
-function showQuotaModal(){} // disabled
-function closeQuotaModal(){}
-
 // ── AI ────────────────────────────────────────────────────────────
 async function ai(msgs,sys,max=600){
-  const body={system:sys,messages:msgs,max_tokens:max};
-  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})});
   const d=await r.json();
-  if(!r.ok){
-    const msg=(d.error||d.message||'').toLowerCase();
-    if(r.status===429||msg.includes('quota')||msg.includes('rate limit')||msg.includes('resource exhausted')){
-      showQuotaModal();throw new Error('QUOTA');
-    }
-    throw new Error(d.error||d.message||'Erreur API');
-  }
+  if(!r.ok)throw new Error(d.error||d.message||'Erreur API');
   return d.text;
 }
 
 function pickChar(){
-  if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
-  if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
+  if(S.gender==='elle')return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
+  if(S.gender==='il')return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
   return CHARS_N[Math.floor(Math.random()*CHARS_N.length)];
 }
 
@@ -622,11 +770,11 @@ async function startSession(){
   const lang=fr?'French':'English';
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
-  const classEx=fr?'ex: Tacticien de Fer, Courtier de l\'Ombre, Langue d\'Argent':'e.g. Iron Tactician, Shadow Broker, Silver Tongue';
+  const classEx=fr?'ex: Tacticien de Fer, Courtier de l\'Ombre':'e.g. Iron Tactician, Shadow Broker';
   try{
     const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text fields in ${lang}. Keep ALL text fields SHORT (under 15 words each):
 {"emoji":"1 emoji","class":"2-word RPG class (${classEx})","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":0-100,"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"opening line in ${lang}"}
-Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Goal:${S.context}. No TV references.`}],'Return ONLY raw JSON. No markdown. No backticks. No explanation.',600);
+Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Goal:${S.context}. No TV references.`}],'Return ONLY raw JSON. No markdown. No backticks. No explanation.',700);
     let p;
     try{p=JSON.parse(raw.trim());}
     catch(e1){
@@ -656,13 +804,8 @@ Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Goal:${S.c
     addMsg('ai',p.openingLine);
   }catch(e){
     hideLoading();
-    if(e.message!=='QUOTA'){
-      alert('Erreur lors du chargement. Réessaie.');
-    } else {
-      const fr=S.lang==='fr';
-      alert(fr?'Service temporairement indisponible. Réessaie dans quelques instants.':'Service temporarily unavailable. Please try again in a moment.');
-    }
-    return;
+    alert(fr?'Erreur lors du chargement. Réessaie.':'Loading error. Please try again.');
+    console.error(e);return;
   }
   document.getElementById('userInput').focus();
 }
@@ -682,7 +825,7 @@ function buildSys(p,lang){
   const fr=S.lang==='fr';
   const gLine=fr?`Tu es désigné(e) par le pronom "${S.gender}".`:`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
   return `You are ${S.sitcomChar}. Your role: ${S.opponent}.
-CRITICAL: You ARE the ${S.opponent}. Behave, speak and react EXACTLY as a real ${S.opponent} would. Do NOT play the player's role. Stay firmly in your role.
+CRITICAL: You ARE the ${S.opponent}. Behave EXACTLY as a real ${S.opponent} would. Do NOT play the player's role.
 ARCHETYPE: ${p.class} — ${p.lore}. HIDDEN: ${p.secret}.
 DIFFICULTY: ${S.difficulty}. PLAYER GOAL: ${S.context}. OBSTACLES: ${S.obstacles}. ${gLine}
 Respond in ${lang}. Stay in character. Vary tactics each turn. If player concedes → push harder. If strong anchor → resist.
@@ -717,7 +860,7 @@ async function sendMessage(){
     updateMeters(text,clean);detectTechs(text);
     if(S.feedbackMode==='training'&&S.turn%2===0)genFeedback(text);
     if(hasEnd||S.turn>=S.maxTurns){endNaturally(hasEnd);return;}
-  }catch(e){removeTyping();if(e.message!=='QUOTA')addMsg('system','Erreur : '+e.message);}
+  }catch(e){removeTyping();addMsg('system','Erreur : '+e.message);}
   document.getElementById('sendBtn').disabled=false;document.getElementById('userInput').focus();
 }
 
@@ -777,14 +920,17 @@ async function endSession(auto=false){
   const fr=S.lang==='fr';document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
   const lang=fr?'French':'English';
   const transcript=S.messages.map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
-  const prompt=fr?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Coach expert en négociation. Analyse cette session. UNIQUEMENT du JSON valide en français, langage accessible :
+  const prompt=fr
+    ?`Tu es un coach expert en négociation. Réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Analyse cette session en français, langage accessible :
 {"score":0-100,"verdict":"1 phrase percutante","strengths":["f1","f2"],"mistakes":["e1","e2"],"keyMoments":[{"type":"good|bad","description":"ce qui s'est passé"}],"improvement":"2-3 phrases concrètes","techniquesSummary":"ce qui a été utilisé et manquait"}
-Transcript:\n${transcript}`:
-  `You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after. Analyze this session. ONLY valid JSON in English, plain language:
+Transcript:\n${transcript}`
+    :`You are an expert negotiation coach. Respond ONLY with a valid JSON object, no markdown, no text before or after. Analyze this session in English, plain language:
 {"score":0-100,"verdict":"1 punchy sentence","strengths":["s1","s2"],"mistakes":["m1","m2"],"keyMoments":[{"type":"good|bad","description":"what happened"}],"improvement":"2-3 concrete sentences","techniquesSummary":"used + missing"}
 Transcript:\n${transcript}`;
-  try{const raw=await ai([{role:'user',content:prompt}],'',950);renderDebrief(JSON.parse(raw.replace(/```json|```/g,'').trim()),fr);}
-  catch(e){document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;}
+  try{
+    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',950);
+    renderDebrief(JSON.parse(raw.replace(/```json|```/g,'').trim()),fr);
+  }catch(e){document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;}
 }
 
 function renderDebrief(d,fr){
@@ -812,34 +958,25 @@ async function submitBug(){
   const type=document.getElementById('bugType').value;
   const desc=document.getElementById('bugDesc').value.trim();
   const when=document.getElementById('bugWhen').value.trim();
-  if(!email){alert('Merci d\'entrer ton email.');return;}
-  if(!desc){alert('Merci de décrire le problème rencontré.');return;}
-  const btn=document.querySelector('#bugreport .btn-start');
-  btn.textContent='Envoi en cours…';btn.disabled=true;
+  const fr=S.lang==='fr';
+  if(!email){alert(fr?'Merci d\'entrer ton email.':'Please enter your email.');return;}
+  if(!desc){alert(fr?'Merci de décrire le problème.':'Please describe the issue.');return;}
+  const btn=document.getElementById('bug_submit');
+  btn.textContent=fr?'Envoi en cours…':'Sending…';btn.disabled=true;
   try{
-    const r=await fetch('https://formspree.io/f/mbdqznaz',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
-    });
+    const r=await fetch('https://formspree.io/f/mbdqznaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})});
     const d=await r.json();
     if(d.ok){
-      document.getElementById('bugDesc').value='';
-      document.getElementById('bugWhen').value='';
-      document.getElementById('bugType').value='';
-      btn.textContent='✅ Rapport envoyé !';
-      setTimeout(()=>{btn.textContent='Envoyer le rapport →';btn.disabled=false;},3000);
-    } else {
-      throw new Error('Erreur Formspree');
-    }
-  }catch(e){
-    btn.textContent='Envoyer le rapport →';btn.disabled=false;
-    alert('Erreur lors de l\'envoi. Réessaie.');
-  }
+      document.getElementById('bugDesc').value='';document.getElementById('bugWhen').value='';document.getElementById('bugType').value='';document.getElementById('bugEmail').value='';
+      btn.textContent=fr?'✅ Rapport envoyé !':'✅ Report sent!';
+      setTimeout(()=>{btn.textContent=fr?'Envoyer le rapport →':'Send report →';btn.disabled=false;},3000);
+    }else{throw new Error('Formspree error');}
+  }catch(e){btn.textContent=fr?'Envoyer le rapport →':'Send report →';btn.disabled=false;alert(fr?'Erreur lors de l\'envoi. Réessaie.':'Error sending. Please try again.');}
 }
 
 // Init
 goTo('langscreen');
+
 </script>
 </body>
 </html>
