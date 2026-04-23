@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Killer Instinct</title>
+<title>Kissler Instinct</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0F0F14;--surface:#1A1A24;--surface2:#22222F;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8A9A;--text-soft:#C8C4BC;--danger:#C0392B;--success:#27AE60;--border:#2A2A3A;--gold1:#FFD700;--gold2:#D4A853;--gold3:#8B6914;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
@@ -1049,6 +1049,7 @@ Transcript:\n${sessionTranscript}`;
     parsed.mistakes=Array.isArray(parsed.mistakes)?parsed.mistakes:[];
     parsed.keyMoment=parsed.keyMoment||null;
     parsed.advice=parsed.advice||null;
+    console.log('strengths:', parsed.strengths, 'mistakes:', parsed.mistakes);
     renderDebrief(parsed,fr);
   }catch(e){
     document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;
