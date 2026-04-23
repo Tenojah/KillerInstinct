@@ -1040,7 +1040,9 @@ Transcript:\n${sessionTranscript}`;
 
   try{
     const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',500);
-    renderDebrief(JSON.parse(raw.replace(/```json|```/g,'').trim()),fr);
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    console.log('DEBRIEF JSON:', JSON.stringify(parsed));
+    renderDebrief(parsed,fr);
   }catch(e){
     document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;
   }
