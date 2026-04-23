@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kissler Instinct</title>
+<title>Killer Instinct</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0F0F14;--surface:#1A1A24;--surface2:#22222F;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8A9A;--text-soft:#C8C4BC;--danger:#C0392B;--success:#27AE60;--border:#2A2A3A;--gold1:#FFD700;--gold2:#D4A853;--gold3:#8B6914;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
@@ -20,7 +20,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .ki-footer{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:2rem;padding:.75rem;z-index:50;}
 .ki-footer a{font-size:.75rem;color:var(--text-dim);text-decoration:none;display:flex;align-items:center;gap:.35rem;transition:color .18s;letter-spacing:.04em;cursor:pointer;}
 .ki-footer a:hover{color:var(--accent);}
-/* LANG */
 #langscreen{align-items:center;justify-content:center;text-align:center;padding:2rem;}
 .lang-cards{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;max-width:640px;}
 .lang-card{width:290px;padding:1.4rem 1.6rem;border:1.5px solid var(--border);background:rgba(255,255,255,.03);cursor:pointer;transition:all .25s;display:flex;flex-direction:column;gap:.7rem;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);text-align:left;}
@@ -29,10 +28,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .lang-card .flag{font-size:1.6rem;flex-shrink:0;}
 .lang-card .lang-name{font-family:var(--font-hero);font-size:1.1rem;font-weight:700;letter-spacing:.1em;color:var(--text);text-transform:uppercase;}
 .lang-card .lang-pitch{font-size:.74rem;color:var(--text-dim);line-height:1.65;border-top:1px solid var(--border);padding-top:.7rem;}
-/* LANDING */
 #landing{align-items:center;justify-content:center;text-align:center;padding:2rem;}
 .ki-tagline{font-size:clamp(.95rem,2.2vw,1.15rem);color:var(--text-soft);margin-top:2rem;max-width:480px;line-height:1.65;}
-/* SETUP */
 #setup{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;background:radial-gradient(ellipse at 50% 0%,#1A1508 0%,#0F0F14 55%);}
 .setup-wrap{max-width:660px;width:100%;padding-bottom:2rem;margin:auto;}
 .setup-logo{font-family:var(--font-hero);font-size:1.4rem;font-weight:900;letter-spacing:.06em;color:var(--text-dim);text-transform:uppercase;margin-bottom:1.8rem;display:flex;align-items:center;gap:.8rem;}
@@ -55,7 +52,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .gchip:hover:not(.active){border-color:var(--text-dim);color:var(--text);}
 .btn-start{width:100%;margin-top:.8rem;padding:1rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s;}
 .btn-start:hover{background:#E8BC6A;transform:translateY(-2px);}
-/* GAME */
 #game{flex-direction:row;height:100vh;overflow:hidden;}
 .game-sidebar{width:300px;min-width:300px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
 .rpg-card{margin:.85rem;border-radius:8px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1C1408 0%,#0F0A02 55%,#1A1204 100%);border:2px solid var(--gold3);box-shadow:0 0 0 1px #0F0F14,0 4px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,200,50,.08);}
@@ -131,7 +127,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .input-area textarea:disabled{opacity:.4;cursor:not-allowed;}
 .btn-send{padding:.72rem 1.2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.9rem;letter-spacing:.08em;border:none;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;white-space:nowrap;}
 .btn-send:hover{background:#E8BC6A;}.btn-send:disabled{opacity:.4;cursor:not-allowed;}
-/* DEBRIEF */
 #debrief{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;}
 .debrief-card{background:var(--surface);border:1px solid var(--border);padding:2.5rem;max-width:680px;width:100%;border-radius:10px;margin:auto;}
 .score-hero{text-align:center;padding:2rem 0 1.5rem;border-bottom:1px solid var(--border);margin-bottom:2rem;}
@@ -150,7 +145,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .btn-primary:hover{background:#E8BC6A;transform:translateY(-2px);}
 .btn-ghost{padding:.82rem 1.8rem;background:none;border:1.5px solid var(--border);color:var(--text-dim);font-family:var(--font);font-size:.88rem;font-weight:700;cursor:pointer;border-radius:5px;transition:all .2s;}
 .btn-ghost:hover{border-color:var(--text-dim);color:var(--text);}
-/* INFO PAGES */
 #about,#bugreport,#soutien{align-items:center;justify-content:flex-start;padding:3rem 2rem;overflow-y:auto;background:radial-gradient(ellipse at 50% 0%,#2A2010 0%,#0F0F14 60%);}
 .info-wrap{max-width:520px;width:100%;margin:auto;}
 .info-logo{font-family:var(--font-hero);font-size:1.3rem;font-weight:900;color:var(--text-dim);letter-spacing:.06em;text-transform:uppercase;margin-bottom:1.2rem;}
@@ -171,7 +165,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .bug-form-group select option{background:var(--surface2);}
 .bug-form-group select:focus,.bug-form-group input:focus,.bug-form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .bug-form-group textarea{resize:vertical;min-height:110px;line-height:1.6;}
-/* LOADING */
 #loadingOverlay{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:.9rem;}
 #loadingOverlay.active{display:flex;}
 .loading-spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
@@ -406,29 +399,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="aboutBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title">ℹ️ À propos</div>
-      <div class="info-section">
-        <h2 id="about_h1">Le projet</h2>
-        <p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p>
-      </div>
-      <div class="info-section">
-        <h2 id="about_h2">À qui c'est destiné ?</h2>
-        <p id="about_p2">À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l'ordre ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p>
-      </div>
+      <div class="info-section"><h2 id="about_h1">Le projet</h2><p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p></div>
+      <div class="info-section"><h2 id="about_h2">À qui c'est destiné ?</h2><p id="about_p2">À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l'ordre ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p></div>
       <div class="info-section">
         <h2 id="about_h3">Comment ça marche</h2>
-        <p><strong style="color:var(--accent)" id="about_step1_title">1. Tu prépares ton terrain</strong><br><span id="about_step1">Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner. Plus tu es précis, plus l'adversaire sera coriace.</span></p>
-        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step2_title">2. Tu entres dans l'arène</strong><br><span id="about_step2">L'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes. Il ne lâchera rien facilement. À toi de jouer.</span></p>
-        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br><span id="about_step3">À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux la prochaine fois. Sans te ménager.</span></p>
+        <p><strong style="color:var(--accent)" id="about_step1_title">1. Tu prépares ton terrain</strong><br><span id="about_step1">Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner.</span></p>
+        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step2_title">2. Tu entres dans l'arène</strong><br><span id="about_step2">L'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes.</span></p>
+        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br><span id="about_step3">À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux.</span></p>
       </div>
-      <div class="info-section">
-        <h2 id="about_h4">Fait par</h2>
-        <p id="about_p4">Créé par moi-même pour vous autres.</p>
-        <a class="contact-link" href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank">💼 <span id="about_linkedin">Me retrouver sur LinkedIn</span></a>
-      </div>
-      <div class="info-section" style="margin-bottom:0">
-        <h2 id="about_h5">Version</h2>
-        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.1 · <span id="about_free">Projet gratuit</span> · <span id="about_powered">Propulsé par</span> <a href="https://anthropic.com" target="_blank" style="color:var(--accent-dim)">Claude</a> · <a href="https://groq.com" target="_blank" style="color:var(--accent-dim)">Groq</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
-      </div>
+      <div class="info-section"><h2 id="about_h4">Fait par</h2><p id="about_p4">Créé par moi-même pour vous autres.</p><a class="contact-link" href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank">💼 <span id="about_linkedin">Me retrouver sur LinkedIn</span></a></div>
+      <div class="info-section" style="margin-bottom:0"><h2 id="about_h5">Version</h2><p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.2 · <span id="about_free">Projet gratuit</span> · <span id="about_powered">Propulsé par</span> <a href="https://anthropic.com" target="_blank" style="color:var(--accent-dim)">Claude</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p></div>
     </div>
   </div>
 </div>
@@ -441,12 +421,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-card">
       <div class="info-title" id="bug_title">🐛 Signaler un bug</div>
       <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.65;" id="bug_intro">Quelque chose ne fonctionne pas ? Décris-le ci-dessous.</p>
-      <div class="bug-form-group">
-        <label id="bug_email_lbl">Ton email <span style="color:var(--danger)">*</span></label>
-        <input type="email" id="bugEmail" placeholder="ton@email.com"/>
-      </div>
-      <div class="bug-form-group">
-        <label id="bug_type_lbl">Type de problème</label>
+      <div class="bug-form-group"><label id="bug_email_lbl">Ton email <span style="color:var(--danger)">*</span></label><input type="email" id="bugEmail" placeholder="ton@email.com"/></div>
+      <div class="bug-form-group"><label id="bug_type_lbl">Type de problème</label>
         <select id="bugType">
           <option value="" id="bug_opt_sel">— Sélectionner —</option>
           <option value="Erreur technique" id="bug_opt1">Erreur technique (crash / message d'erreur)</option>
@@ -457,14 +433,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <option value="Autre" id="bug_opt6">Autre</option>
         </select>
       </div>
-      <div class="bug-form-group">
-        <label id="bug_desc_lbl">Décris ce qui s'est passé</label>
-        <textarea id="bugDesc" placeholder="Ex : j'ai sélectionné Douanier mais l'IA se comportait comme si elle était le joueur…"></textarea>
-      </div>
-      <div class="bug-form-group">
-        <label id="bug_when_lbl">À quel moment ? (optionnel)</label>
-        <input type="text" id="bugWhen" placeholder="Ex : pendant la négociation, au tour 3…"/>
-      </div>
+      <div class="bug-form-group"><label id="bug_desc_lbl">Décris ce qui s'est passé</label><textarea id="bugDesc" placeholder="Ex : j'ai sélectionné Douanier mais l'IA se comportait comme si elle était le joueur…"></textarea></div>
+      <div class="bug-form-group"><label id="bug_when_lbl">À quel moment ? (optionnel)</label><input type="text" id="bugWhen" placeholder="Ex : pendant la négociation, au tour 3…"/></div>
       <button class="btn-start" onclick="submitBug()" id="bug_submit">Envoyer le rapport →</button>
     </div>
   </div>
@@ -477,25 +447,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
-      <div class="info-section">
-        <h2 id="soutien_h1">Pourquoi soutenir ?</h2>
-        <p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier, un petit coup de pouce permet de le garder en vie.</p>
-      </div>
-      <div class="info-section">
-        <h2 id="soutien_h2">Ce que ça finance</h2>
-        <p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.</p>
-      </div>
+      <div class="info-section"><h2 id="soutien_h1">Pourquoi soutenir ?</h2><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier, un petit coup de pouce permet de le garder en vie.</p></div>
+      <div class="info-section"><h2 id="soutien_h2">Ce que ça finance</h2><p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.</p></div>
       <div class="info-section">
         <h2 id="soutien_h3">Comment contribuer</h2>
         <p id="soutien_p3">Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.</p>
-        <a href="PLACEHOLDER_URL" target="_blank" id="soutien_btn" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">
-          ❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span>
-        </a>
+        <a href="PLACEHOLDER_URL" target="_blank" id="soutien_btn" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
       </div>
-      <div class="info-section" style="margin-bottom:0">
-        <h2 id="soutien_h4">Merci</h2>
-        <p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p>
-      </div>
+      <div class="info-section" style="margin-bottom:0"><h2 id="soutien_h4">Merci</h2><p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p></div>
     </div>
   </div>
 </div>
@@ -508,30 +467,26 @@ const CHARS_N=["Abed Nadir","Guillermo de la Cruz","River Chen","Sam Reyes","Ale
 
 // ── TECHNIQUES ────────────────────────────────────────────────────
 const TECHS={
-  // Techniques de base
-  "Effet miroir":       {icon:"🔁",color:"#3498db",desc:"Répéter les derniers mots de l'adversaire pour qu'il continue à parler",rx:/\.\.\.|so you('re| are) saying|donc (vous|tu) di(tes|s)/i},
-  "Nommer l'émotion":   {icon:"🏷",color:"#9b59b6",desc:"Mettre un mot sur ce que ressent l'adversaire pour calmer la tension",rx:/il semble|on dirait|it seems|it sounds|you seem|vous semblez/i},
-  "Question ouverte":   {icon:"❓",color:"#2ecc71",desc:"Poser une question 'Comment' ou 'Qu'est-ce qui' pour forcer l'adversaire à réfléchir",rx:/^(comment|qu'est-ce|how|what|pourquoi pas)/i},
-  "Ancrage":            {icon:"⚓",color:"#e74c3c",desc:"Poser un chiffre en premier pour forcer l'adversaire à négocier autour de ta référence",rx:/(\$|€|%|\d+\s*(k|K|euros?|dollars?|000))/},
-  "Plan B visible":     {icon:"🚪",color:"#e67e22",desc:"Montrer que tu as une alternative pour ne pas être en position de faiblesse",rx:/autre option|alternative|ailleurs|other option|walk away|autre offre/i},
-  "Silence tactique":   {icon:"🤫",color:"#95a5a6",desc:"Se taire après une proposition pour mettre la pression sans rien dire",rx:/^[.…\s]{0,5}$|^\.\.\.$|^…$/},
-  "Flinch":             {icon:"😲",color:"#f39c12",desc:"Exprimer une surprise visible face à l'offre pour déstabiliser l'adversaire",rx:/wow|really\?|seriously\?|vraiment\?|that much|c'est beaucoup/i},
-  "Fausse urgence":     {icon:"⏰",color:"#c0392b",desc:"Introduire une deadline pour forcer une décision rapide",rx:/avant (vendredi|lundi|demain|la fin)|by (friday|monday|tomorrow|end of)|deadline|délai/i},
-  "Empathie":           {icon:"🤝",color:"#1abc9c",desc:"Reconnaître la situation de l'adversaire avant de défendre sa propre position",rx:/je comprends|i understand|i hear you|j'entends|must be hard|ce doit être/i},
-  "Recadrage":          {icon:"🔄",color:"#8e44ad",desc:"Changer l'angle du problème pour que l'adversaire le voie différemment",rx:/plutôt que|envisageons|look at it|see it as|if we reframe|consider that/i},
-  "Peur de perdre":     {icon:"💸",color:"#d35400",desc:"Souligner ce que l'adversaire risque de perdre s'il refuse",rx:/perdre|manquer|lose|miss out|cost you|risk|ça va vous coûter/i},
-  // Techniques de cadrage
-  "Bracketing":         {icon:"📐",color:"#16a085",desc:"Proposer une fourchette pour ancrer sans s'engager sur un chiffre précis",rx:/(entre|between)\s+\d+.*et\s+\d+|from\s+\d+.*to\s+\d+/i},
-  "Offre extrême":      {icon:"🎯",color:"#c0392b",desc:"Ouvrir avec une position délibérément haute/basse pour avoir de la marge",rx:/(minimum|au moins|at least|pas moins de|no less than|maximum|au plus|at most)\s+\d+/i},
-  "Appel à l'équité":   {icon:"⚖️",color:"#2980b9",desc:"Invoquer ce qui est juste ou standard pour légitimer sa position",rx:/standard|usage|marché|industry|pratique courante|fair|équitable|norm|habituellement|généralement/i},
-  // Techniques de pression
+  "Effet miroir":{icon:"🔁",color:"#3498db",desc:"Répéter les derniers mots de l'adversaire pour qu'il continue à parler",rx:/\.\.\.|so you('re| are) saying|donc (vous|tu) di(tes|s)/i},
+  "Nommer l'émotion":{icon:"🏷",color:"#9b59b6",desc:"Mettre un mot sur ce que ressent l'adversaire pour calmer la tension",rx:/il semble|on dirait|it seems|it sounds|you seem|vous semblez/i},
+  "Question ouverte":{icon:"❓",color:"#2ecc71",desc:"Poser une question 'Comment' ou 'Qu'est-ce qui' pour forcer l'adversaire à réfléchir",rx:/^(comment|qu'est-ce|how|what|pourquoi pas)/i},
+  "Ancrage":{icon:"⚓",color:"#e74c3c",desc:"Poser un chiffre en premier pour forcer l'adversaire à négocier autour de ta référence",rx:/(\$|€|%|\d+\s*(k|K|euros?|dollars?|000))/},
+  "Plan B visible":{icon:"🚪",color:"#e67e22",desc:"Montrer que tu as une alternative pour ne pas être en position de faiblesse",rx:/autre option|alternative|ailleurs|other option|walk away|autre offre/i},
+  "Silence tactique":{icon:"🤫",color:"#95a5a6",desc:"Se taire après une proposition pour mettre la pression sans rien dire",rx:/^[.…\s]{0,5}$|^\.\.\.$|^…$/},
+  "Flinch":{icon:"😲",color:"#f39c12",desc:"Exprimer une surprise visible face à l'offre pour déstabiliser l'adversaire",rx:/wow|really\?|seriously\?|vraiment\?|that much|c'est beaucoup/i},
+  "Fausse urgence":{icon:"⏰",color:"#c0392b",desc:"Introduire une deadline pour forcer une décision rapide",rx:/avant (vendredi|lundi|demain|la fin)|by (friday|monday|tomorrow|end of)|deadline|délai/i},
+  "Empathie":{icon:"🤝",color:"#1abc9c",desc:"Reconnaître la situation de l'adversaire avant de défendre sa propre position",rx:/je comprends|i understand|i hear you|j'entends|must be hard|ce doit être/i},
+  "Recadrage":{icon:"🔄",color:"#8e44ad",desc:"Changer l'angle du problème pour que l'adversaire le voie différemment",rx:/plutôt que|envisageons|look at it|see it as|if we reframe|consider that/i},
+  "Peur de perdre":{icon:"💸",color:"#d35400",desc:"Souligner ce que l'adversaire risque de perdre s'il refuse",rx:/perdre|manquer|lose|miss out|cost you|risk|ça va vous coûter/i},
+  "Bracketing":{icon:"📐",color:"#16a085",desc:"Proposer une fourchette pour ancrer sans s'engager sur un chiffre précis",rx:/(entre|between)\s+\d+.*et\s+\d+|from\s+\d+.*to\s+\d+/i},
+  "Offre extrême":{icon:"🎯",color:"#c0392b",desc:"Ouvrir avec une position délibérément haute/basse pour avoir de la marge",rx:/(minimum|au moins|at least|pas moins de|no less than|maximum|au plus|at most)\s+\d+/i},
+  "Appel à l'équité":{icon:"⚖️",color:"#2980b9",desc:"Invoquer ce qui est juste ou standard pour légitimer sa position",rx:/standard|usage|marché|industry|pratique courante|fair|équitable|norm|habituellement|généralement/i},
   "Autorité supérieure":{icon:"👔",color:"#8e44ad",desc:"Invoquer un tiers décisionnaire pour gagner du temps ou réduire la pression",rx:/manager|directeur|conseil|board|associé|mon patron|my boss|refer to|en référer|valider avec/i},
   "Bonne\/mauvaise poire":{icon:"🎭",color:"#e67e22",desc:"Évoquer un tiers plus intransigeant pour se donner de la flexibilité",rx:/(mon associé|my partner|mon collègue|my colleague|mon manager|l'autre partie|the other side).*(jamais|never|won't|refusera|refuse)/i},
-  "Le retrait":         {icon:"🚶",color:"#c0392b",desc:"Menacer de quitter la négociation pour tester la flexibilité de l'adversaire",rx:/je pars|i('m | am )leaving|walk away|on arrête|let's stop|je laisse tomber|forget it|tant pis/i},
-  "Fragmentation":      {icon:"🧩",color:"#27ae60",desc:"Décomposer une grosse demande en petites concessions successives",rx:/(d'abord|first|pour commencer|to start|étape par étape|step by step|progressivement|gradually)/i},
-  // Techniques d'influence
-  "Preuve sociale":     {icon:"👥",color:"#2980b9",desc:"Normaliser sa position en invoquant ce que font les autres",rx:/(tous nos|all our|la plupart|most|d'autres|others|nos clients|our clients|en général|generally|standard practice)/i},
-  "Réciprocité":        {icon:"🔃",color:"#1abc9c",desc:"Faire une concession visible d'abord pour créer une obligation morale de retour",rx:/(si je|if i|je peux|i can|je suis prêt à|i'm willing to).*(vous|you).*(en échange|in return|de votre côté|on your end)/i},
+  "Le retrait":{icon:"🚶",color:"#c0392b",desc:"Menacer de quitter la négociation pour tester la flexibilité de l'adversaire",rx:/je pars|i('m | am )leaving|walk away|on arrête|let's stop|je laisse tomber|forget it|tant pis/i},
+  "Fragmentation":{icon:"🧩",color:"#27ae60",desc:"Décomposer une grosse demande en petites concessions successives",rx:/(d'abord|first|pour commencer|to start|étape par étape|step by step|progressivement|gradually)/i},
+  "Preuve sociale":{icon:"👥",color:"#2980b9",desc:"Normaliser sa position en invoquant ce que font les autres",rx:/(tous nos|all our|la plupart|most|d'autres|others|nos clients|our clients|en général|generally|standard practice)/i},
+  "Réciprocité":{icon:"🔃",color:"#1abc9c",desc:"Faire une concession visible d'abord pour créer une obligation morale de retour",rx:/(si je|if i|je peux|i can|je suis prêt à|i'm willing to).*(vous|you).*(en échange|in return|de votre côté|on your end)/i},
   "Engagement progressif":{icon:"📈",color:"#f39c12",desc:"Obtenir des petits 'oui' successifs avant la grande demande",rx:/(on est d'accord sur|we agree on|vous confirmez|you confirm|c'est bien ça|that's correct|exact|exactly|tout à fait)/i},
 };
 
@@ -544,7 +499,9 @@ const S={
   messages:[], systemPrompt:'',
   detectedTechs:new Set(),
   tension:30, progress:10, resist:60,
-  turn:0, maxTurns:15, sessionEnded:false
+  turn:0, maxTurns:15, sessionEnded:false,
+  // Transcript saved at debrief time (messages snapshot, excludes hidden primer)
+  savedTranscript:[]
 };
 
 // ── NAV ───────────────────────────────────────────────────────────
@@ -552,12 +509,9 @@ function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const footer=document.getElementById('globalFooter');
-  const showFooter=['landing','setup','about','bugreport','soutien'];
-  if(footer) footer.style.display=showFooter.includes(id)?'flex':'none';
+  if(footer) footer.style.display=['landing','setup','about','bugreport','soutien'].includes(id)?'flex':'none';
 }
-
-function showLoading(){
-  const fr=S.lang==='fr';
+function showLoading(fr){
   document.getElementById('overlayText').textContent=fr?'La négo va commencer…':'Negotiation is about to begin…';
   document.getElementById('overlaySub').textContent=fr?'C\'est l\'heure du du du du duel !':'It\'s time to d-d-d-duel!';
   document.getElementById('loadingOverlay').classList.add('active');
@@ -572,178 +526,58 @@ function chooseLang(l){
     ?'Maîtrise toutes les négociations. Ventes, salaire, conflits, contrats — entraîne-toi face à un adversaire IA imprévisible.'
     :'Master any negotiation. Sales, salary, conflict, contracts — train against an unpredictable AI opponent.';
   document.getElementById('landingBtn').textContent=fr?'Entrer dans la salle →':'Enter the Room →';
-  if(fr) applyFR(); else applyEN();
+  fr?applyFR():applyEN();
   goTo('landing');
 }
 
 function applyFR(){
-  document.getElementById('footer_about').textContent='ℹ️ À propos';
-  document.getElementById('footer_contact').textContent='✉️ Contact';
-  document.getElementById('footer_soutien').textContent='❤️ Soutenir';
-  document.getElementById('footer_bug').textContent='🐛 Bug';
-  document.getElementById('aboutBack').textContent='← Retour';
-  document.getElementById('bugBack').textContent='← Retour';
-  document.getElementById('soutienBack').textContent='← Retour';
-  document.getElementById('btn_back').textContent='← Langue';
-  document.getElementById('sec_who').textContent='À qui tu fais face ?';
-  document.getElementById('sec_ctx').textContent='Contexte & Enjeux';
-  document.getElementById('sec_set').textContent='Paramètres';
-  document.getElementById('lbl_opponent').textContent='Profil adversaire';
-  document.getElementById('lbl_obstacles').textContent='Obstacles & objections de l\'adversaire';
-  document.getElementById('lbl_gender').textContent='Genre de l\'adversaire';
-  document.getElementById('lbl_diff').textContent='Difficulté';
-  document.getElementById('lbl_mode').textContent='Mode';
-  document.getElementById('btn_start').textContent='⚔️ Entrer en négociation';
-  document.getElementById('btn_end').textContent='🏁 Terminer & Débrief';
-  document.getElementById('sendBtn').textContent='Envoyer ↵';
+  const t=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  t('footer_about','ℹ️ À propos');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Soutenir');t('footer_bug','🐛 Bug');
+  t('aboutBack','← Retour');t('bugBack','← Retour');t('soutienBack','← Retour');t('btn_back','← Langue');
+  t('sec_who','À qui tu fais face ?');t('sec_ctx','Contexte & Enjeux');t('sec_set','Paramètres');
+  t('lbl_opponent','Profil adversaire');t('lbl_obstacles','Obstacles & objections de l\'adversaire');
+  t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');
+  t('btn_start','⚔️ Entrer en négociation');t('btn_end','🏁 Terminer & Débrief');t('sendBtn','Envoyer ↵');
   document.getElementById('userInput').placeholder='Ton coup…';
-  document.getElementById('lbl_tension').textContent='Tension';
-  document.getElementById('lbl_progress').textContent='Progression';
-  document.getElementById('lbl_resist').textContent='Résistance';
-  document.getElementById('lbl_techniques').textContent='Techniques détectées';
-  document.getElementById('lbl_session').textContent='Session';
+  t('lbl_tension','Tension');t('lbl_progress','Progression');t('lbl_resist','Résistance');
+  t('lbl_techniques','Techniques détectées');t('lbl_session','Session');
   document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'Il',elle:'Elle',iel:'Iel'}[c.dataset.g]||c.dataset.g;});
-  document.getElementById('bug_title').textContent='🐛 Signaler un bug';
-  document.getElementById('bug_intro').textContent='Quelque chose ne fonctionne pas ? Décris-le ci-dessous.';
-  document.getElementById('bug_email_lbl').innerHTML='Ton email <span style="color:var(--danger)">*</span>';
-  document.getElementById('bugEmail').placeholder='ton@email.com';
-  document.getElementById('bug_type_lbl').textContent='Type de problème';
-  document.getElementById('bug_opt_sel').textContent='— Sélectionner —';
-  document.getElementById('bug_opt1').textContent='Erreur technique (crash / message d\'erreur)';
-  document.getElementById('bug_opt2').textContent='L\'adversaire IA ne joue pas son rôle';
-  document.getElementById('bug_opt3').textContent='Problème d\'affichage / interface';
-  document.getElementById('bug_opt4').textContent='Langue incorrecte';
-  document.getElementById('bug_opt5').textContent='Débrief incomplet ou incohérent';
-  document.getElementById('bug_opt6').textContent='Autre';
-  document.getElementById('bug_desc_lbl').textContent='Décris ce qui s\'est passé';
-  document.getElementById('bugDesc').placeholder='Ex : j\'ai sélectionné Douanier mais l\'IA se comportait comme si elle était le joueur…';
-  document.getElementById('bug_when_lbl').textContent='À quel moment ? (optionnel)';
-  document.getElementById('bugWhen').placeholder='Ex : pendant la négociation, au tour 3…';
-  document.getElementById('bug_submit').textContent='Envoyer le rapport →';
-  document.getElementById('about_h1').textContent='Le projet';
-  document.getElementById('about_p1').textContent='Parce que négocier ça s\'apprend. Et la meilleure façon de s\'entraîner, c\'est de se planter en privé avant de se planter en public.';
-  document.getElementById('about_h2').textContent='À qui c\'est destiné ?';
-  document.getElementById('about_p2').textContent='À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l\'ordre ou convaincre ton conjoint d\'appeler votre enfant SonGoku.';
-  document.getElementById('about_h3').textContent='Comment ça marche';
-  document.getElementById('about_step1_title').textContent='1. Tu prépares ton terrain';
-  document.getElementById('about_step1').textContent='Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner. Plus tu es précis, plus l\'adversaire sera coriace.';
-  document.getElementById('about_step2_title').textContent='2. Tu entres dans l\'arène';
-  document.getElementById('about_step2').textContent='L\'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes. Il ne lâchera rien facilement. À toi de jouer.';
-  document.getElementById('about_step3_title').textContent='3. Tu prends ta claque (ou pas)';
-  document.getElementById('about_step3').textContent='À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux la prochaine fois. Sans te ménager.';
-  document.getElementById('about_h4').textContent='Fait par';
-  document.getElementById('about_p4').textContent='Créé par moi-même pour vous autres.';
-  document.getElementById('about_linkedin').textContent='Me retrouver sur LinkedIn';
-  document.getElementById('about_h5').textContent='Version';
-  document.getElementById('about_free').textContent='Projet gratuit';
-  document.getElementById('about_powered').textContent='Propulsé par';
-  document.getElementById('about_deployed').textContent='Déployé sur';
-  document.getElementById('soutien_title').textContent='❤️ Soutenir le projet';
-  document.getElementById('soutien_h1').textContent='Pourquoi soutenir ?';
-  document.getElementById('soutien_p1').textContent='Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t\'a aidé à mieux négocier, un petit coup de pouce permet de le garder en vie.';
-  document.getElementById('soutien_h2').textContent='Ce que ça finance';
-  document.getElementById('soutien_p2').textContent='Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.';
-  document.getElementById('soutien_h3').textContent='Comment contribuer';
-  document.getElementById('soutien_p3').textContent='Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.';
-  document.getElementById('soutien_btn_txt').textContent='Je soutiens Killer Instinct';
-  document.getElementById('soutien_h4').textContent='Merci';
-  document.getElementById('soutien_p4').textContent='Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C\'est déjà énorme.';
+  t('opt_jr','🟢 Junior — Coopératif');t('opt_sr','🟡 Senior — Résistant');t('opt_ex','🔴 Expert — Impitoyable');
+  t('opt_tr','🎓 Entraînement — Conseils live');t('opt_im','🎭 Immersif — Débrief uniquement');
+  t('opt_sel','— Choisir un profil —');t('opt_custom','✏️ Autre — Je décris');
 }
-
 function applyEN(){
-  document.getElementById('footer_about').textContent='ℹ️ About';
-  document.getElementById('footer_contact').textContent='✉️ Contact';
-  document.getElementById('footer_soutien').textContent='❤️ Support';
-  document.getElementById('footer_bug').textContent='🐛 Report a bug';
-  document.getElementById('aboutBack').textContent='← Back';
-  document.getElementById('bugBack').textContent='← Back';
-  document.getElementById('soutienBack').textContent='← Back';
-  document.getElementById('btn_back').textContent='← Language';
-  document.getElementById('sec_who').textContent='Who are you facing?';
-  document.getElementById('sec_ctx').textContent='Context & Stakes';
-  document.getElementById('sec_set').textContent='Session Settings';
-  document.getElementById('lbl_opponent').textContent='Opponent profile';
-  document.getElementById('lbl_obstacles').textContent='Opponent\'s obstacles & objections';
-  document.getElementById('lbl_gender').textContent='Opponent gender';
-  document.getElementById('lbl_diff').textContent='Difficulty';
-  document.getElementById('lbl_mode').textContent='Mode';
-  document.getElementById('btn_start').textContent='⚔️ Enter the Negotiation';
-  document.getElementById('btn_end').textContent='🏁 End & Debrief';
-  document.getElementById('sendBtn').textContent='Send ↵';
+  const t=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  t('footer_about','ℹ️ About');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Support');t('footer_bug','🐛 Report a bug');
+  t('aboutBack','← Back');t('bugBack','← Back');t('soutienBack','← Back');t('btn_back','← Language');
+  t('sec_who','Who are you facing?');t('sec_ctx','Context & Stakes');t('sec_set','Session Settings');
+  t('lbl_opponent','Opponent profile');t('lbl_obstacles','Opponent\'s obstacles & objections');
+  t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');
+  t('btn_start','⚔️ Enter the Negotiation');t('btn_end','🏁 End & Debrief');t('sendBtn','Send ↵');
   document.getElementById('userInput').placeholder='Your move…';
-  document.getElementById('lbl_tension').textContent='Tension';
-  document.getElementById('lbl_progress').textContent='Progress';
-  document.getElementById('lbl_resist').textContent='Resistance';
-  document.getElementById('lbl_techniques').textContent='Techniques detected';
-  document.getElementById('lbl_session').textContent='Session';
+  t('lbl_tension','Tension');t('lbl_progress','Progress');t('lbl_resist','Resistance');
+  t('lbl_techniques','Techniques detected');t('lbl_session','Session');
   document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'He',elle:'She',iel:'They'}[c.dataset.g]||c.dataset.g;});
+  t('opt_jr','🟢 Junior — Cooperative');t('opt_sr','🟡 Senior — Resistant');t('opt_ex','🔴 Expert — Ruthless');
+  t('opt_tr','🎓 Training — Live hints');t('opt_im','🎭 Immersive — Debrief only');
+  t('opt_sel','— Select a profile —');t('opt_custom','✏️ Other — I\'ll describe');
   document.getElementById('og_pro').label='💼 Professional';
   document.getElementById('og_sales').label='🤝 Sales & Commercial';
   document.getElementById('og_perso').label='🏠 Personal';
   document.getElementById('og_stakes').label='⚖️ High Stakes';
   document.getElementById('og_mgmt').label='👥 Management';
-  const EN=[['Acheteur B2B — Responsable achats','B2B Buyer — Procurement Manager'],['Acheteur B2B — DAF / Directeur financier','B2B Buyer — CFO / Finance Director'],['Acheteur B2B — Décideur technique','B2B Buyer — Technical Decision Maker'],["Comité d'achats (multi-décideurs)",'Purchasing Committee'],['Responsable RH / Recruteur','HR Manager / Recruiter'],['Head of Talent / Talent Partner','Head of Talent / Talent Partner'],['Fondateur de startup (recrutement)','Startup Founder (hiring)'],['Manager direct — augmentation / promotion','Direct Manager — raise / promotion'],['Dirigeant / Manager N+2','Executive / Skip-level Manager'],['Membre du conseil / Investisseur','Board Member / Investor'],['Fournisseur / Prestataire (vous achetez)','Vendor / Supplier (you are buying)'],['Freelance / Sous-traitant (vous recrutez)','Freelancer / Contractor (you are hiring)'],['Co-fondateur / Associé','Co-founder / Associate'],['Conseil juridique / Avocat adverse','Legal Counsel / Opposing Lawyer'],['Banquier / Chargé de crédit','Banker / Credit Officer'],['Client mécontent — Demande de remboursement','Unhappy Client — Refund Request'],['Client churné — Négociation de rétention','Churning Client — Retention Negotiation'],['Client — Objection prix / Demande de remise','Client — Price Objection / Discount'],['Client — Renouvellement de contrat','Client — Contract Renewal'],['Partenaire stratégique — Accord commun','Strategic Partner — Joint Deal'],['Distributeur / Revendeur','Distributor / Reseller'],['Concurrent — M&A / Partenariat','Competitor — M&A / Partnership'],['Client agressif — Plainte publique','Angry Customer — Public Complaint'],['Conjoint(e) / Partenaire — Décision majeure','Spouse / Partner — Major Decision'],['Propriétaire — Négociation de loyer','Landlord — Rent Negotiation'],['Agent immobilier — Achat immobilier','Real Estate Agent — Property Purchase'],['Concessionnaire automobile','Car Dealer'],["Prestataire — Entrepreneur / Artisan",'Service Provider — Contractor'],["Compagnie d'assurance",'Insurance Company'],['Conseiller bancaire — Finances personnelles','Bank Advisor — Personal Finance'],['Parent / Membre de la famille','Parent / Family Member'],['Voisin — Litige / Accord','Neighbor — Dispute'],['Ami — Argent ou service','Friend — Money or Favor'],['Douanes / Administration','Customs / Administration'],['Administration fiscale','Tax Authority'],['Délégué syndical','Union Representative'],['Médiateur / Arbitre','Mediator / Arbitrator'],['Négociation de crise (otage / conflit)','Crisis Negotiation'],['Fonctionnaire / Officiel gouvernemental','Government Official'],['Collaborateur direct — Problème de performance','Direct Report — Performance Issue'],["Collaborateur direct — Demande d'augmentation",'Direct Report — Raise Request'],["Membre de l'équipe — Résolution de conflit",'Team Member — Conflict Resolution'],['Collègue — Conflit de ressources / projet','Colleague — Resource Conflict'],['Partie prenante transverse','Cross-functional Stakeholder'],['Consultant externe — Litige de périmètre','External Consultant — Scope Dispute']];
-  Array.from(document.getElementById('opponentType').options).forEach(opt=>{const p=EN.find(x=>x[0]===opt.value);if(p){opt.text=p[1];opt.value=p[1];}});
-  document.getElementById('opt_sel').textContent='— Select a profile —';
-  document.getElementById('opt_custom').textContent='✏️ Other — I\'ll describe';
-  document.getElementById('opt_jr').textContent='🟢 Junior — Cooperative';
-  document.getElementById('opt_sr').textContent='🟡 Senior — Resistant';
-  document.getElementById('opt_ex').textContent='🔴 Expert — Ruthless';
-  document.getElementById('opt_tr').textContent='🎓 Training — Live hints';
-  document.getElementById('opt_im').textContent='🎭 Immersive — Debrief only';
-  document.getElementById('bug_title').textContent='🐛 Report a bug';
-  document.getElementById('bug_intro').textContent='Something not working? Describe it below.';
-  document.getElementById('bug_email_lbl').innerHTML='Your email <span style="color:var(--danger)">*</span>';
-  document.getElementById('bugEmail').placeholder='your@email.com';
-  document.getElementById('bug_type_lbl').textContent='Type of issue';
-  document.getElementById('bug_opt_sel').textContent='— Select —';
-  document.getElementById('bug_opt1').textContent='Technical error (crash / error message)';
-  document.getElementById('bug_opt2').textContent='AI opponent not playing its role';
-  document.getElementById('bug_opt3').textContent='Display / interface issue';
-  document.getElementById('bug_opt4').textContent='Wrong language';
-  document.getElementById('bug_opt5').textContent='Incomplete or incoherent debrief';
-  document.getElementById('bug_opt6').textContent='Other';
-  document.getElementById('bug_desc_lbl').textContent='Describe what happened';
-  document.getElementById('bugDesc').placeholder='e.g. I selected Customs officer but the AI acted like it was the player…';
-  document.getElementById('bug_when_lbl').textContent='When did it happen? (optional)';
-  document.getElementById('bugWhen').placeholder='e.g. during the negotiation, at turn 3…';
-  document.getElementById('bug_submit').textContent='Send report →';
-  document.getElementById('about_h1').textContent='The project';
-  document.getElementById('about_p1').textContent='Because negotiation is a skill. And the best way to practice is to fail in private before failing in public.';
-  document.getElementById('about_h2').textContent='Who is it for?';
-  document.getElementById('about_p2').textContent='For you. Whether you want a raise, land a job, negotiate with law enforcement, or convince your partner to name your child SonGoku.';
-  document.getElementById('about_h3').textContent='How it works';
-  document.getElementById('about_step1_title').textContent='1. You prep your ground';
-  document.getElementById('about_step1').textContent='Describe your situation — who you\'re facing, what you want, what could go wrong. The more specific you are, the tougher the opponent.';
-  document.getElementById('about_step2_title').textContent='2. You step into the arena';
-  document.getElementById('about_step2').textContent='The AI generates a unique opponent with their own personality, hidden weaknesses and dirty habits. They won\'t give anything up easily. Your move.';
-  document.getElementById('about_step3_title').textContent='3. You take the hit (or not)';
-  document.getElementById('about_step3').textContent='At the end, a coach breaks it all down — what you did well, what you botched, and how to do better next time. No sugarcoating.';
-  document.getElementById('about_h4').textContent='Made by';
-  document.getElementById('about_p4').textContent='Made by myself, for you all.';
-  document.getElementById('about_linkedin').textContent='Find me on LinkedIn';
-  document.getElementById('about_h5').textContent='Version';
-  document.getElementById('about_free').textContent='Free project';
-  document.getElementById('about_powered').textContent='Powered by';
-  document.getElementById('about_deployed').textContent='Deployed on';
-  document.getElementById('soutien_title').textContent='❤️ Support the project';
-  document.getElementById('soutien_h1').textContent='Why support?';
-  document.getElementById('soutien_p1').textContent='Killer Instinct is a free project, no ads, no tracking. It runs on AI that has a cost. If the game helped you negotiate better, a small contribution keeps it alive.';
-  document.getElementById('soutien_h2').textContent='What it funds';
-  document.getElementById('soutien_p2').textContent='Server and API costs so everyone can play for free. Development of new features.';
-  document.getElementById('soutien_h3').textContent='How to contribute';
-  document.getElementById('soutien_p3').textContent='Click the button below. Every contribution, however small, makes a real difference.';
-  document.getElementById('soutien_btn_txt').textContent='Support Killer Instinct';
-  document.getElementById('soutien_h4').textContent='Thank you';
-  document.getElementById('soutien_p4').textContent='Whether you contribute or not, thank you for playing and sharing the game. That already means a lot.';
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
-// ── AI ────────────────────────────────────────────────────────────
+// ── AI CALL ───────────────────────────────────────────────────────
 async function ai(msgs,sys,max=600){
-  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})});
+  const r=await fetch('/.netlify/functions/gemini',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})
+  });
   const d=await r.json();
   if(!r.ok) throw new Error(d.error||d.message||'Erreur API');
   return d.text;
@@ -751,76 +585,77 @@ async function ai(msgs,sys,max=600){
 
 function pickChar(){
   if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
-  if(S.gender==='il') return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
+  if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
   return CHARS_N[Math.floor(Math.random()*CHARS_N.length)];
 }
 
 // ── START ─────────────────────────────────────────────────────────
 async function startSession(){
-  const oType=document.getElementById('opponentType').value;
   const fr=S.lang==='fr';
+  const oType=document.getElementById('opponentType').value;
   if(!oType){alert(fr?'Choisis un profil adversaire.':'Please select an opponent profile.');return;}
   S.opponent=oType==='custom'?document.getElementById('customOpponent').value:oType;
   S.context=document.getElementById('contextText').value||'Non précisé';
   S.obstacles=document.getElementById('obstaclesText').value||'Aucun';
   S.difficulty=document.getElementById('difficulty').value;
   S.feedbackMode=document.getElementById('feedbackMode').value;
-  S.messages=[];S.detectedTechs=new Set();
+
+  // Full state reset
+  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
   S.sitcomChar=pickChar();
-  showLoading();
+
+  showLoading(fr);
 
   const lang=fr?'French':'English';
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
-  const classEx=fr?'ex: Tacticien de Fer, Courtier de l\'Ombre':'e.g. Iron Tactician, Shadow Broker';
 
   try{
+    // Generate persona JSON
     const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text in ${lang}. SHORT fields (max 15 words each):
-{"emoji":"1 emoji","class":"2-word RPG class (${classEx})","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":0-100,"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT resisting the player. The PLAYER wants: '${S.context}'. Your opening must reflect YOUR opposing position against this goal. In ${lang}."}
+{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":0-100,"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. The PLAYER wants: '${S.context}'. Your opening must express YOUR RESISTANCE to this goal. In ${lang}."}
 Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. No TV references.`}],
     'Return ONLY raw JSON. No markdown. No backticks. No explanation.',700);
 
     let p;
     try{p=JSON.parse(raw.trim());}
-    catch(e1){
-      const match=raw.match(/\{[\s\S]*/);
-      if(match){
-        let partial=match[0];
-        partial=partial.replace(/,\s*$/,'').replace(/"\s*$/,'"').replace(/:\s*$/,':""');
-        let opens=0,arr=0;
-        for(const c of partial){if(c==='{')opens++;else if(c==='}')opens--;else if(c==='[')arr++;else if(c===']')arr--;}
-        while(arr>0){partial+='"]';arr--;}while(opens>0){partial+='}';opens--;}
-        try{p=JSON.parse(partial);}catch(e2){throw new Error('JSON invalide');}
-      }else{throw new Error('Réponse invalide');}
+    catch{
+      const m=raw.match(/\{[\s\S]*/);
+      if(m){
+        let s=m[0].replace(/,\s*$/,'');
+        let o=0,a=0;
+        for(const c of s){if(c==='{')o++;else if(c==='}')o--;else if(c==='[')a++;else if(c===']')a--;}
+        while(a>0){s+='"]';a--;}while(o>0){s+='}';o--;}
+        p=JSON.parse(s);
+      }else throw new Error('JSON invalide');
     }
 
     S.persona=p;
     populateCard(p,lvlLabel,starsMap[S.difficulty]);
     S.systemPrompt=buildSys(p,lang);
 
-    // Hidden primer to establish player/opponent dynamic
-    const primer=fr
-      ?`Bonjour, je voudrais aborder le sujet suivant : ${S.context}`
-      :`Hi, I'd like to discuss the following: ${S.context}`;
-    S.messages.push({role:'user',content:primer});
+    // Hidden primer — not shown in chat UI, not saved to transcript
+    S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:p.openingLine});
 
+    // Navigate to game
     goTo('game');hideLoading();
     document.getElementById('gameTitle').textContent=`vs ${S.sitcomChar}`;
     const pill=document.getElementById('modePill');
     const isTr=S.feedbackMode==='training';
     pill.textContent=fr?(isTr?'ENTRAÎNEMENT':'IMMERSIF'):(isTr?'TRAINING':'IMMERSIVE');
     pill.className='mode-pill '+(isTr?'training':'immersive');
-    document.getElementById('sendBtn').textContent=fr?'Envoyer ↵':'Send ↵';
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     addMsg('ai',p.openingLine);
+
   }catch(e){
     hideLoading();
-    alert(S.lang==='fr'?'Erreur lors du chargement. Réessaie.':'Loading error. Please try again.');
+    alert(fr?'Erreur lors du chargement. Réessaie.':'Loading error. Please try again.');
     console.error(e);
+    return;
   }
   document.getElementById('userInput').focus();
 }
@@ -858,21 +693,20 @@ ROLE ASSIGNMENT — CRITICAL:
 - THE PLAYER is the person writing to you. They want: "${S.context}"
 - YOUR JOB is to RESIST, PUSH BACK, and NEGOTIATE AGAINST the player's goal.
 - You must NEVER adopt the player's goal as your own position.
-- The player's goal is what YOU are trying to prevent or limit.
+- OBSTACLES TO USE: ${S.obstacles}
 
-OBSTACLES TO USE AGAINST THE PLAYER (starting base — add your own too): ${S.obstacles}
 ARCHETYPE: ${p.class} — ${p.lore}
-HIDDEN CONSTRAINT (never reveal): ${p.secret}
+HIDDEN CONSTRAINT (never reveal directly): ${p.secret}
 DIFFICULTY: ${S.difficulty}
 ${gLine}
 
 Respond in ${lang}. Stay fully in character. Vary tactics each turn.
-If player concedes → push harder. If strong anchor → resist.
+If player concedes → push harder. If strong anchor → resist firmly.
 Use: anchoring, flinching, false deadlines, higher authority, silence, reframing.
-Never repeat same objection twice.
-${S.difficulty==='Junior'?'Be cooperative, persuadable.':S.difficulty==='Senior'?'Be resistant, require real persuasion, occasional concessions.':'Be aggressive, introduce surprise constraints, rarely concede.'}
+Never repeat the same objection twice in a row.
+${S.difficulty==='Junior'?'Be cooperative and gradually persuadable.':S.difficulty==='Senior'?'Be resistant — require real persuasion before making concessions.':'Be aggressive — introduce surprise constraints, barely ever concede, use pressure tactics.'}
 2–5 sentences per response. Realistic, not theatrical.
-If total deadlock or deal clearly reached: write a natural closing line as your character explaining why you are ending the negotiation, then add [FIN_NEGO] at the very end.`;
+If total deadlock or deal clearly reached: write a natural closing line as your character, then add [FIN_NEGO] at the very end.`;
 }
 
 // ── MESSAGES ──────────────────────────────────────────────────────
@@ -890,12 +724,16 @@ function addMsg(type,text,extra=''){
   const tx=document.createElement('div');tx.textContent=text;d.appendChild(tx);
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
-function showTyping(){const m=document.getElementById('messages');const t=document.createElement('div');t.className='typing';t.id='tyEl';t.innerHTML='<span></span><span></span><span></span>';m.appendChild(t);m.scrollTop=m.scrollHeight;}
+function showTyping(){
+  const m=document.getElementById('messages'),t=document.createElement('div');
+  t.className='typing';t.id='tyEl';t.innerHTML='<span></span><span></span><span></span>';
+  m.appendChild(t);m.scrollTop=m.scrollHeight;
+}
 function removeTyping(){const t=document.getElementById('tyEl');if(t)t.remove();}
 
 // ── SEND ──────────────────────────────────────────────────────────
 async function sendMessage(){
-  if(S.sessionEnded) return;
+  if(S.sessionEnded)return;
   const inp=document.getElementById('userInput');
   const text=inp.value.trim();if(!text)return;
   inp.value='';inp.style.height='';
@@ -905,7 +743,7 @@ async function sendMessage(){
   S.turn++;updateTurnDisplay();
   showTyping();
   try{
-    const reply=await ai(S.messages.slice(-24),S.systemPrompt,380);
+    const reply=await ai(S.messages.slice(-24),S.systemPrompt,400);
     removeTyping();
     const hasEnd=reply.includes('[FIN_NEGO]');
     const clean=reply.replace('[FIN_NEGO]','').trim();
@@ -934,15 +772,11 @@ function endNaturally(aiCut){
   document.getElementById('userInput').disabled=true;
   const fr=S.lang==='fr';
   const m=document.getElementById('messages');
-  const d=document.createElement('div');
-  d.className='msg end-msg';
-  const label=document.createElement('div');
-  label.className='msg-label';
+  const d=document.createElement('div');d.className='msg end-msg';
+  const label=document.createElement('div');label.className='msg-label';
   label.textContent=aiCut?(fr?'FIN DE NÉGOCIATION':'END OF NEGOTIATION'):(fr?'FIN DE SESSION':'SESSION OVER');
   const txt=document.createElement('div');
-  txt.textContent=aiCut
-    ?(fr?'L\'adversaire a mis fin à la négociation.':'The opponent ended the negotiation.')
-    :(fr?'15 tours atteints.':'15 turns reached.');
+  txt.textContent=aiCut?(fr?'L\'adversaire a mis fin à la négociation.':'The opponent ended the negotiation.'):(fr?'15 tours atteints.':'15 turns reached.');
   txt.style.marginBottom='.8rem';
   const btn=document.createElement('button');
   btn.textContent=fr?'Voir le débrief →':'See debrief →';
@@ -972,7 +806,7 @@ function updateMeters(user,aiReply){
 // ── TECHNIQUES ────────────────────────────────────────────────────
 function detectTechs(msg){
   Object.entries(TECHS).forEach(([name,data])=>{
-    if(!data||!data.rx) return;
+    if(!data?.rx)return;
     if(data.rx.test(msg.trim())&&!S.detectedTechs.has(name)){
       S.detectedTechs.add(name);
       const empty=document.getElementById('techEmpty');if(empty)empty.remove();
@@ -989,10 +823,8 @@ async function genFeedback(msg){
   const prompt=fr
     ?`En 1 phrase simple et claire en français, dis au négociateur ce qu'il vient de bien faire ou ce qu'il aurait pu faire mieux. Langage accessible, pas de jargon. Commence par un emoji. Message : "${msg}"`
     :`In 1 simple sentence in English, tell the negotiator what they just did well or could have done better. Plain language, no jargon. Start with emoji. Message: "${msg}"`;
-  try{
-    const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach. Plain language only.',100);
-    addMsg('feedback',fb);
-  }catch(e){}
+  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach. Plain language only.',100);addMsg('feedback',fb);}
+  catch{}
 }
 
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
@@ -1002,73 +834,115 @@ function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrol
 async function endSession(auto=false){
   if(!auto&&S.messages.length<4){
     const fr=S.lang==='fr';
-    if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?')) return;
+    if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?'))return;
   }
   S.sessionEnded=true;
   document.getElementById('sendBtn').disabled=true;
   document.getElementById('userInput').disabled=true;
 
-  // Save transcript BEFORE clearing history
-  const sessionTranscript=S.messages
-    .slice(2) // skip hidden primer (user + assistant)
+  // ── SNAPSHOT: save transcript BEFORE clearing messages ──
+  // Skip the hidden primer (indices 0 and 1 = first user + first assistant)
+  const transcript=S.messages
+    .slice(2)
     .map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`)
     .join('\n');
 
-  // Clear history immediately — next session starts fresh
+  // Clear conversation history immediately so next session is fresh
   S.messages=[];
 
   goTo('debrief');
   const fr=S.lang==='fr';
   document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
   const lang=fr?'French':'English';
-
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
 
+  if(!transcript.trim()){
+    document.getElementById('debriefContent').innerHTML=`
+      <div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div>
+      <div class="debrief-actions">
+        <button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button>
+      </div>`;
+    return;
+  }
+
   const prompt=fr
-    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide, sans markdown.
-Règles : cite des moments précis de la conversation, langage simple et direct, pas de jargon, 1 seul conseil actionnable.
-Score strict : 0-30 aucune technique, concessions sans rien obtenir / 31-50 pas de structure, facilement déstabilisé / 51-70 tient sa position, quelques bons réflexes / 71-85 techniques maîtrisées, obtient des concessions / 86-100 adversaire mis en difficulté, résultat obtenu.
-Techniques détectées pendant la session : ${detectedList}
-{"score":0-100,"verdict":"1 phrase qui résume cette négo précise","strengths":["ce qui a bien marché dans CETTE négo, avec exemple concret","2ème point si pertinent"],"mistakes":["ce qui a raté dans CETTE négo, avec exemple concret","2ème point si pertinent"],"keyMoment":"le tournant décisif de cette négo — ce moment précis où tout a basculé","advice":"1 seul conseil concret à appliquer dès la prochaine négo"}
-Transcript:\n${sessionTranscript}`
-    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY in valid JSON, no markdown.
-Rules: cite specific moments from the conversation, plain language, no jargon, 1 single actionable tip.
-Strict score: 0-30 no technique, concessions without getting anything back / 31-50 no structure, easily destabilized / 51-70 holds position, some good instincts / 71-85 techniques used, gets concessions / 86-100 opponent challenged, result achieved.
-Techniques detected during session: ${detectedList}
-{"score":0-100,"verdict":"1 sentence summarizing THIS specific negotiation","strengths":["what worked in THIS negotiation, with concrete example","2nd point if relevant"],"mistakes":["what failed in THIS negotiation, with concrete example","2nd point if relevant"],"keyMoment":"the decisive turning point of this negotiation — the exact moment everything shifted","advice":"1 single concrete tip to apply in the next negotiation"}
-Transcript:\n${sessionTranscript}`;
+    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown, sans backticks, sans texte avant ou après.
+Score strict : 0-30 aucune technique, concessions gratuites / 31-50 pas de structure / 51-70 tient sa position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
+Techniques détectées : ${detectedList}
+Format JSON exact (tous les champs obligatoires) :
+{"score":42,"verdict":"1 phrase résumant cette négo","strengths":["point fort 1 avec exemple","point fort 2 si pertinent"],"mistakes":["erreur 1 avec exemple","erreur 2 si pertinent"],"keyMoment":"le tournant décisif de cette négo","advice":"1 seul conseil concret pour la prochaine fois"}
+Transcript:\n${transcript}`
+    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY with valid JSON — no markdown, no backticks, no text before or after.
+Strict score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
+Techniques detected: ${detectedList}
+Exact JSON format (all fields required):
+{"score":42,"verdict":"1 sentence summarizing this negotiation","strengths":["strength 1 with example","strength 2 if relevant"],"mistakes":["mistake 1 with example","mistake 2 if relevant"],"keyMoment":"the decisive turning point of this negotiation","advice":"1 single concrete tip for next time"}
+Transcript:\n${transcript}`;
 
   try{
-    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',500);
-    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    console.log('DEBRIEF JSON:', JSON.stringify(parsed));
-    // Ensure all fields exist
-    parsed.score=parsed.score||0;
-    parsed.verdict=parsed.verdict||'—';
-    parsed.strengths=Array.isArray(parsed.strengths)?parsed.strengths:[];
-    parsed.mistakes=Array.isArray(parsed.mistakes)?parsed.mistakes:[];
-    parsed.keyMoment=parsed.keyMoment||null;
-    parsed.advice=parsed.advice||null;
-    console.log('strengths:', parsed.strengths, 'mistakes:', parsed.mistakes);
-    renderDebrief(parsed,fr);
+    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. Absolutely no markdown, no explanation, no text before or after.',600);
+    const cleaned=raw.replace(/```json|```/g,'').trim();
+    const d=JSON.parse(cleaned);
+
+    // Normalize — ensure all fields exist and are correct types
+    d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
+    d.verdict=typeof d.verdict==='string'?d.verdict:'—';
+    d.strengths=Array.isArray(d.strengths)?d.strengths.filter(Boolean):[];
+    d.mistakes=Array.isArray(d.mistakes)?d.mistakes.filter(Boolean):[];
+    d.keyMoment=typeof d.keyMoment==='string'?d.keyMoment:null;
+    d.advice=typeof d.advice==='string'?d.advice:null;
+
+    renderDebrief(d,fr);
   }catch(e){
-    document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;
+    document.getElementById('debriefContent').innerHTML=`
+      <div style="padding:2rem;text-align:center;color:var(--danger);">
+        <p style="margin-bottom:1rem;">Erreur lors du débrief : ${e.message}</p>
+        <button class="btn-ghost" onclick="newScenario()">${fr?'Retour au setup':'Back to setup'}</button>
+      </div>`;
   }
 }
 
 function renderDebrief(d,fr){
   const sc=d.score>=70?'var(--success)':d.score>=40?'var(--accent)':'var(--danger)';
+
+  const strengthsHTML=d.strengths.length
+    ?d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join('')
+    :`<div class="moment">${fr?'Aucun point fort identifié.':'No strengths identified.'}</div>`;
+
+  const mistakesHTML=d.mistakes.length
+    ?d.mistakes.map(s=>`<div class="moment bad">✗ ${s}</div>`).join('')
+    :`<div class="moment">${fr?'Aucune erreur majeure.':'No major mistakes.'}</div>`;
+
+  const keyMomentHTML=d.keyMoment
+    ?`<div class="moment">${d.keyMoment}</div>`
+    :`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant identifié.':'No turning point identified.'}</div>`;
+
+  const adviceHTML=d.advice
+    ?`<p>${d.advice}</p>`
+    :`<p style="color:var(--text-dim);font-style:italic">${fr?'Aucun conseil spécifique.':'No specific advice.'}</p>`;
+
   document.getElementById('debriefContent').innerHTML=`
     <div class="score-hero">
       <div class="score-num" style="color:${sc}">${d.score}</div>
       <div class="score-label">${fr?'Score de négociation':'Negotiation Score'} /100</div>
       <p style="color:var(--text-soft);margin-top:.75rem;font-size:.95rem;line-height:1.65">${d.verdict}</p>
     </div>
-    <div class="debrief-section"><h3>${fr?'Points forts':'Strengths'}</h3>${d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join('')}</div>
-    <div class="debrief-section"><h3>${fr?'Erreurs':'Mistakes'}</h3>${d.mistakes.map(s=>`<div class="moment bad">✗ ${s}</div>`).join('')}</div>
-    <div class="debrief-section"><h3>${fr?'Moments clés':'Key Moments'}</h3>${d.keyMoments.map(m=>`<div class="moment ${m.type}">${m.type==='good'?'↑':'↓'} ${m.description}</div>`).join('')}</div>
-    <div class="debrief-section"><h3>Techniques</h3><p>${d.techniquesSummary}</p></div>
-    <div class="debrief-section"><h3>${fr?'Pour progresser':'To improve'}</h3><p>${d.improvement}</p></div>
+    <div class="debrief-section">
+      <h3>${fr?'Points forts':'Strengths'}</h3>
+      ${strengthsHTML}
+    </div>
+    <div class="debrief-section">
+      <h3>${fr?'Erreurs':'Mistakes'}</h3>
+      ${mistakesHTML}
+    </div>
+    <div class="debrief-section">
+      <h3>${fr?'Moment clé':'Key Moment'}</h3>
+      ${keyMomentHTML}
+    </div>
+    <div class="debrief-section">
+      <h3>${fr?'Pour progresser':'To improve'}</h3>
+      ${adviceHTML}
+    </div>
     <div class="debrief-actions">
       <button class="btn-primary" onclick="restartSession()">${fr?'Rejouer':'Play Again'}</button>
       <button class="btn-ghost" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button>
@@ -1076,30 +950,44 @@ function renderDebrief(d,fr){
 }
 
 // ── RESTART / NEW SCENARIO ────────────────────────────────────────
-function resetState(){
-  S.messages=[];S.detectedTechs=new Set();
-  S.tension=30;S.progress=10;S.resist=60;
-  S.turn=0;S.sessionEnded=false;
-  S.sitcomChar=null;S.persona=null;
+function resetUI(){
   document.getElementById('messages').innerHTML='';
   document.getElementById('userInput').disabled=false;
+  document.getElementById('userInput').value='';
   document.getElementById('sendBtn').disabled=false;
   const fr=S.lang==='fr';
   document.getElementById('techList').innerHTML=`<div class="tech-empty" id="techEmpty">${fr?'Aucune technique détectée…':'No technique detected yet…'}</div>`;
-  ['tension','progress','resist'].forEach(k=>{
-    document.getElementById(k+'Bar').style.width=k==='tension'?'30%':k==='progress'?'10%':'60%';
-    document.getElementById(k+'Val').textContent=k==='tension'?'30%':k==='progress'?'10%':'60%';
+  [['tension','30%','#e74c3c'],['progress','10%','#27ae60'],['resist','60%','#9b59b6']].forEach(([k,w,c])=>{
+    document.getElementById(k+'Bar').style.width=w;
+    document.getElementById(k+'Bar').style.background=c;
+    document.getElementById(k+'Val').textContent=w;
   });
+  document.getElementById('rpgAvatar').innerHTML='🎭<div class="lv">JUNIOR</div>';
+  document.getElementById('rpgName').textContent='—';
+  document.getElementById('rpgClass').textContent='—';
+  document.getElementById('ccTL').textContent='LV 1';
+  document.getElementById('ccTR').textContent='—';
+  document.getElementById('rpgTags').innerHTML='';
+  document.getElementById('rpgLore').textContent='—';
 }
 
 function restartSession(){
-  resetState();
-  startSession(); // same setup, fresh session
+  // Keep same setup params, reset everything else
+  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
+  S.tension=30;S.progress=10;S.resist=60;
+  S.turn=0;S.sessionEnded=false;
+  resetUI();
+  startSession();
 }
 
 function newScenario(){
-  resetState();
-  goTo('setup'); // back to setup
+  // Back to setup with full reset
+  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
+  S.tension=30;S.progress=10;S.resist=60;
+  S.turn=0;S.sessionEnded=false;
+  S.sitcomChar=null;S.persona=null;
+  resetUI();
+  goTo('setup');
 }
 
 // ── BUG REPORT ────────────────────────────────────────────────────
@@ -1114,17 +1002,18 @@ async function submitBug(){
   const btn=document.getElementById('bug_submit');
   btn.textContent=fr?'Envoi en cours…':'Sending…';btn.disabled=true;
   try{
-    const r=await fetch('https://formspree.io/f/mbdqznaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})});
+    const r=await fetch('https://formspree.io/f/mbdqznaz',{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
+    });
     const d=await r.json();
     if(d.ok){
-      document.getElementById('bugDesc').value='';
-      document.getElementById('bugWhen').value='';
+      ['bugDesc','bugWhen','bugEmail'].forEach(id=>document.getElementById(id).value='');
       document.getElementById('bugType').value='';
-      document.getElementById('bugEmail').value='';
       btn.textContent=fr?'✅ Rapport envoyé !':'✅ Report sent!';
       setTimeout(()=>{btn.textContent=fr?'Envoyer le rapport →':'Send report →';btn.disabled=false;},3000);
-    }else{throw new Error('Formspree error');}
-  }catch(e){
+    }else throw new Error('Formspree error');
+  }catch{
     btn.textContent=fr?'Envoyer le rapport →':'Send report →';
     btn.disabled=false;
     alert(fr?'Erreur lors de l\'envoi. Réessaie.':'Error sending. Please try again.');
