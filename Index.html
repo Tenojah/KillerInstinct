@@ -1042,6 +1042,13 @@ Transcript:\n${sessionTranscript}`;
     const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. No markdown, no explanation, no text before or after the JSON.',500);
     const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
     console.log('DEBRIEF JSON:', JSON.stringify(parsed));
+    // Ensure all fields exist
+    parsed.score=parsed.score||0;
+    parsed.verdict=parsed.verdict||'—';
+    parsed.strengths=Array.isArray(parsed.strengths)?parsed.strengths:[];
+    parsed.mistakes=Array.isArray(parsed.mistakes)?parsed.mistakes:[];
+    parsed.keyMoment=parsed.keyMoment||null;
+    parsed.advice=parsed.advice||null;
     renderDebrief(parsed,fr);
   }catch(e){
     document.getElementById('debriefContent').innerHTML=`<p style="color:var(--danger)">Erreur : ${e.message}</p>`;
