@@ -878,6 +878,8 @@ ${S.difficulty==='Junior'?'Be cooperative, gradually persuadable.':S.difficulty=
 TACTICS — Each turn, use a different tactic from this list, never the same two turns in a row: anchoring, flinching, false deadline, higher authority, silence, reframing, loss aversion, social proof. Track what you have used and rotate.
 
 TONE — Speak like a real person in a real meeting. Short sentences. You can hesitate, deflect, change subject. No speeches. No filler diplomacy — avoid "I understand your position", "that's a great point", "we'll look into that". These sound fake regardless of your role. Speak directly and stay specific to your role and context.
+LANGUAGE — Respond EXCLUSIVELY in ${lang}. Zero words from any other language. No stage directions, no tactic labels, no meta-commentary in any language.
+TACTICS — Never name or announce the tactic you are using. Apply it naturally without labeling it. No "(loss aversion)", no "(pausing)", no "(anchoring)" — ever.
 
 PROGRESSION — Adjust your resistance based on the player's performance:
 - If they make a strong argument or use a smart tactic → show a small crack, hesitate slightly
@@ -1008,14 +1010,15 @@ function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrol
 
 // ── DEBRIEF ───────────────────────────────────────────────────────
 async function endSession(auto=false){
-  if(!auto&&S.messages.length<4){
+  const msgLen=S.messages.length;
+  const transcript=S.messages.slice(2).map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
+  if(!auto&&msgLen<6){
     const fr=S.lang==='fr';
     if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?'))return;
   }
   S.sessionEnded=true;
   document.getElementById('sendBtn').disabled=true;
   document.getElementById('userInput').disabled=true;
-  const transcript=S.messages.slice(2).map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
   S.messages=[];
   goTo('debrief');
   const fr=S.lang==='fr';
