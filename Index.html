@@ -6,7 +6,7 @@
 <title>Killer Instinct</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0F0F14;--surface:#1A1A24;--surface2:#22222F;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8A9A;--text-soft:#C8C4BC;--danger:#C0392B;--success:#27AE60;--border:#2A2A3A;--gold1:#FFD700;--gold2:#D4A853;--gold3:#8B6914;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
+:root{--bg:#0F0F14;--surface:#1A1A22;--surface2:#1C1B27;--surface3:#22202E;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8070;--text-soft:#C8C4BC;--text-muted:#6A6458;--text-faint:#4A4458;--danger:#C0392B;--success:#27AE60;--border:#2A2836;--border-gold:#6A5428;--gold1:#FFD700;--gold2:#C4A060;--gold3:#8B6914;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
 .screen{display:none;min-height:100vh;}
@@ -45,45 +45,70 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .form-group select option{background:var(--surface2);}
 .form-group select:focus,.form-group textarea:focus,.form-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .form-group textarea{resize:vertical;min-height:76px;line-height:1.6;}
+.field-footer{display:flex;justify-content:space-between;align-items:flex-start;margin-top:.35rem;gap:1rem;}
+.field-hint{font-size:.72rem;color:var(--text-dim);line-height:1.55;font-style:italic;flex:1;}
+.word-count{font-size:.68rem;font-family:var(--font-hero);letter-spacing:.04em;white-space:nowrap;padding-top:.05rem;}
+.word-count.ok{color:var(--text-dim);}.word-count.warn{color:var(--accent);}.word-count.over{color:var(--danger);}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:.9rem;}
 .gender-chips{display:flex;gap:.6rem;}
 .gchip{padding:.5rem 1.2rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text-dim);font-family:var(--font);font-size:.88rem;font-weight:700;border-radius:20px;cursor:pointer;transition:all .18s;}
 .gchip.active{border-color:var(--accent);color:var(--accent);background:rgba(212,168,83,.1);}
 .gchip:hover:not(.active){border-color:var(--text-dim);color:var(--text);}
+.bdf-wrap{margin-bottom:1rem;}
+.bdf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
+.bdf-label-main{font-size:.78rem;font-weight:800;color:var(--text-soft);letter-spacing:.03em;}
+.bdf-pill{font-family:var(--font-hero);font-size:.72rem;font-weight:700;padding:.2rem .65rem;border-radius:10px;border:1px solid;letter-spacing:.06em;text-transform:uppercase;transition:all .3s;}
+.bdf-slider-row{display:flex;align-items:center;gap:.75rem;}
+.bdf-slider{flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;transition:background .3s;}
+.bdf-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);transition:background .3s;}
+.bdf-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);}
+.bdf-val{font-family:var(--font-hero);font-size:.75rem;color:var(--text-dim);width:28px;text-align:right;}
+.bdf-paliers{display:flex;justify-content:space-between;margin-top:.3rem;padding:0 1px;}
+.bdf-palier{font-size:.58rem;color:var(--text-dim);opacity:.5;font-family:var(--font-hero);letter-spacing:.04em;text-transform:uppercase;}
 .btn-start{width:100%;margin-top:.8rem;padding:1rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s;}
 .btn-start:hover{background:#E8BC6A;transform:translateY(-2px);}
+
+/* ── GAME ── */
 #game{flex-direction:row;height:100vh;overflow:hidden;}
 .game-sidebar{width:300px;min-width:300px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
-.rpg-card{margin:.85rem;border-radius:8px;overflow:hidden;position:relative;background:linear-gradient(160deg,#1C1408 0%,#0F0A02 55%,#1A1204 100%);border:2px solid var(--gold3);box-shadow:0 0 0 1px #0F0F14,0 4px 20px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,200,50,.08);}
-.rpg-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 15%,rgba(255,200,50,.05) 0%,transparent 55%);pointer-events:none;}
-.rpg-top{padding:.9rem;display:flex;gap:.8rem;align-items:flex-start;position:relative;}
-.rpg-corner{position:absolute;font-size:.58rem;font-family:var(--font-hero);letter-spacing:.08em;color:var(--gold3);text-transform:uppercase;}
-.rpg-corner.tl{top:.38rem;left:.55rem;}.rpg-corner.tr{top:.38rem;right:.55rem;}
-.rpg-avatar{width:60px;height:60px;border-radius:6px;border:2px solid var(--gold2);background:linear-gradient(135deg,#2A1A00,#1A1000);display:flex;align-items:center;justify-content:center;font-size:1.85rem;flex-shrink:0;position:relative;box-shadow:0 0 14px rgba(212,168,83,.18);}
-.rpg-avatar .lv{position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);background:var(--gold2);color:#0F0F14;font-size:.52rem;font-weight:900;padding:1px 6px;border-radius:8px;white-space:nowrap;font-family:var(--font-hero);letter-spacing:.06em;}
-.rpg-meta{flex:1;min-width:0;padding-top:.25rem;}
-.rpg-name{font-family:var(--font-hero);font-size:.98rem;font-weight:900;color:var(--gold1);text-shadow:0 0 10px rgba(255,215,0,.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-transform:uppercase;letter-spacing:.04em;}
-.rpg-class{font-size:.7rem;color:var(--accent);font-weight:700;margin-top:.15rem;text-transform:uppercase;letter-spacing:.07em;}
-.rpg-stars{font-size:.72rem;margin-top:.25rem;color:var(--gold2);}
-.rpg-divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold3),transparent);margin:.1rem .75rem;}
-.rpg-stats{padding:.55rem .8rem .65rem;display:grid;grid-template-columns:1fr 1fr;gap:.38rem .5rem;}
-.rstat{display:flex;flex-direction:column;gap:.18rem;}
-.rstat-head{display:flex;justify-content:space-between;}
-.rstat-name{font-size:.58rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;font-weight:700;}
-.rstat-val{font-size:.6rem;font-family:var(--font-hero);color:var(--gold2);}
-.rstat-bar{height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden;}
-.rstat-fill{height:100%;border-radius:2px;transition:width .7s cubic-bezier(.4,0,.2,1);}
-.rpg-tags{display:flex;flex-wrap:wrap;gap:.32rem;padding:.35rem .8rem .55rem;}
-.rpg-tag{font-size:.6rem;padding:.18rem .5rem;border-radius:10px;font-weight:700;border:1px solid;background:rgba(0,0,0,.3);letter-spacing:.04em;}
-.rpg-lore{padding:.45rem .8rem .8rem;border-top:1px solid rgba(212,168,83,.1);font-size:.73rem;color:var(--text-dim);font-style:italic;line-height:1.55;}
-.session-block{padding:.75rem 1rem;border-bottom:1px solid var(--border);}
-.block-title{font-family:var(--font-hero);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-dim);margin-bottom:.65rem;font-weight:700;}
-.meter-row{display:flex;align-items:center;gap:.45rem;margin-bottom:.45rem;}
-.meter-icon{font-size:.78rem;width:17px;flex-shrink:0;}
-.meter-lbl{font-size:.72rem;color:var(--text-soft);flex:1;font-weight:600;}
-.meter-track{flex:2;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
-.meter-fill2{height:100%;border-radius:3px;transition:width .5s;}
-.meter-pct{font-size:.63rem;font-family:var(--font-hero);color:var(--text-dim);width:26px;text-align:right;}
+
+/* RPG CARD — nouveau design */
+.rpg-card{margin:.85rem;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border-gold);}
+.rpg-card-header{position:relative;padding:1.2rem 1.4rem 0.8rem;background:var(--surface2);}
+.rpg-card-meta{position:absolute;top:12px;left:14px;font-size:9px;color:#5A5870;letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-hero);font-weight:700;}
+.rpg-card-stars{position:absolute;top:12px;right:14px;font-size:9px;color:#5A5870;}
+.rpg-card-identity{display:flex;align-items:center;gap:12px;padding-top:1.4rem;}
+.rpg-avatar-box{width:46px;height:46px;border-radius:10px;background:#24222E;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.rpg-name{font-family:var(--font-hero);font-size:17px;font-weight:700;color:var(--text);letter-spacing:.03em;text-transform:uppercase;line-height:1.1;}
+.rpg-class{font-size:10px;color:var(--text-muted);margin-top:2px;}
+.rpg-stats-list{padding:.9rem 1.2rem 0;display:flex;flex-direction:column;gap:7px;}
+.rpg-stat-row{display:flex;align-items:center;gap:7px;}
+.rpg-stat-icon{width:11px;height:11px;flex-shrink:0;opacity:.6;}
+.rpg-stat-name{font-size:10px;color:var(--text-dim);width:72px;flex-shrink:0;}
+.rpg-stat-name.blf{color:#8A6868;}
+.rpg-stat-track{flex:1;height:2px;background:var(--border);border-radius:1px;}
+.rpg-stat-fill{height:100%;border-radius:1px;background:var(--gold2);}
+.rpg-stat-fill.blf{background:#A06060;}
+.rpg-stat-val{font-size:10px;color:var(--text-muted);width:18px;text-align:right;}
+.rpg-tags{padding:.8rem 1.2rem .7rem;display:flex;gap:5px;flex-wrap:wrap;}
+.rpg-tag{font-size:9px;padding:2px 8px;border-radius:3px;background:var(--surface3);color:#6A6478;letter-spacing:.05em;text-transform:uppercase;font-family:var(--font-hero);font-weight:700;}
+.rpg-lore{padding:0 1.2rem 1.2rem;font-size:10px;color:#706A80;line-height:1.6;font-style:italic;}
+
+/* SESSION METERS — nouveau design */
+.session-block{padding:.85rem 1rem;border-bottom:1px solid var(--border);}
+.block-title{font-family:var(--font-hero);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:#5A5870;margin-bottom:.8rem;font-weight:700;}
+.meter-row-new{display:flex;align-items:center;gap:10px;}
+.meter-left{width:36px;text-align:right;flex-shrink:0;}
+.meter-num{font-family:var(--font-hero);font-size:18px;font-weight:700;line-height:1;}
+.meter-label-abbr{font-size:8px;color:#5A5870;text-transform:uppercase;letter-spacing:.06em;}
+.meter-right{flex:1;}
+.meter-status-row{display:flex;align-items:center;gap:4px;margin-bottom:4px;}
+.meter-emoji{font-size:10px;line-height:1;}
+.meter-status-txt{font-size:9px;color:var(--text-faint);}
+.meter-segments{display:flex;gap:2px;}
+.meter-seg{flex:1;height:4px;border-radius:1px;}
+.meter-sep{height:1px;background:#22202A;margin:8px 0;}
+
 .tech-block{padding:.75rem 1rem;flex:1;}
 .tech-list{display:flex;flex-direction:column;gap:.38rem;}
 .tech-item{display:flex;align-items:flex-start;gap:.5rem;padding:.45rem .65rem;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:5px;}
@@ -171,7 +196,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .loading-text{color:var(--accent);font-size:1.1rem;font-weight:900;font-family:var(--font-hero);letter-spacing:.12em;text-transform:uppercase;text-align:center;}
 .loading-sub{color:var(--text-dim);font-size:.78rem;font-style:italic;text-align:center;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-@media(max-width:700px){#game{flex-direction:column;}.game-sidebar{width:100%;min-width:unset;max-height:230px;}.row2{grid-template-columns:1fr;}}
+@media(max-width:700px){#game{flex-direction:column;}.game-sidebar{width:100%;min-width:unset;max-height:280px;}.row2{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
@@ -295,8 +320,22 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     </div>
     <div class="form-section">
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
-      <div class="form-group"><label id="lbl_context">Ton objectif</label><textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?"></textarea></div>
-      <div class="form-group"><label id="lbl_obstacles">Obstacles & objections de l'adversaire</label><textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px"></textarea></div>
+      <div class="form-group">
+        <label id="lbl_context">Ton objectif</label>
+        <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCount('contextText','contextCount',50)"></textarea>
+        <div class="field-footer">
+          <span class="field-hint" id="hint_context">Sois précis et concret — qui, quoi, quel montant, quel délai. Plus c'est clair, plus l'adversaire sera calibré.</span>
+          <span class="word-count ok" id="contextCount">0 / 50</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label id="lbl_obstacles">Obstacles & objections de l'adversaire</label>
+        <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCount('obstaclesText','obstaclesCount',50)"></textarea>
+        <div class="field-footer">
+          <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes. Ça rend l'adversaire plus réaliste et l'entraînement plus utile.</span>
+          <span class="word-count ok" id="obstaclesCount">0 / 50</span>
+        </div>
+      </div>
     </div>
     <div class="form-section">
       <div class="section-label" id="sec_set">Paramètres</div>
@@ -323,6 +362,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           </select>
         </div>
       </div>
+      <div class="bdf-wrap">
+        <div class="bdf-header">
+          <span class="bdf-label-main" id="lbl_bdf">Mauvaise foi de l'adversaire</span>
+          <span class="bdf-pill" id="bdfPill">—</span>
+        </div>
+        <div class="bdf-slider-row">
+          <input type="range" class="bdf-slider" id="bdfSlider" min="0" max="100" value="30" oninput="updateBdf(this.value)">
+          <span class="bdf-val" id="bdfVal">30</span>
+        </div>
+        <div class="bdf-paliers" id="bdfPaliers">
+          <span class="bdf-palier">Lorem</span>
+          <span class="bdf-palier">Ipsum</span>
+          <span class="bdf-palier">Dolor</span>
+          <span class="bdf-palier">Amet</span>
+          <span class="bdf-palier">Sit</span>
+        </div>
+      </div>
     </div>
     <button class="btn-start" onclick="startSession()" id="btn_start">⚔️ Entrer en négociation</button>
   </div>
@@ -331,42 +387,42 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <!-- GAME -->
 <div id="game" class="screen">
   <div class="game-sidebar">
+
+    <!-- RPG CARD — nouveau design -->
     <div class="rpg-card">
-      <div class="rpg-top">
-        <div class="rpg-corner tl" id="ccTL">LV 1</div>
-        <div class="rpg-corner tr" id="ccTR">—</div>
-        <div class="rpg-avatar" id="rpgAvatar">🎭<div class="lv" id="lvBadge">JUNIOR</div></div>
-        <div class="rpg-meta">
-          <div class="rpg-name" id="rpgName">—</div>
-          <div class="rpg-class" id="rpgClass">—</div>
-          <div class="rpg-stars" id="rpgStars">★★★☆☆</div>
+      <div class="rpg-card-header">
+        <div class="rpg-card-meta" id="ccTL">Senior · Ventes</div>
+        <div class="rpg-card-stars" id="rpgStars">★★★★☆</div>
+        <div class="rpg-card-identity">
+          <div class="rpg-avatar-box" id="rpgAvatar">🎭</div>
+          <div>
+            <div class="rpg-name" id="rpgName">—</div>
+            <div class="rpg-class" id="rpgClass">—</div>
+          </div>
         </div>
       </div>
-      <div class="rpg-divider"></div>
-      <div class="rpg-stats">
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">⚔ ATQ</span><span class="rstat-val" id="sv_atk">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_atk" style="width:0%;background:#e74c3c"></div></div></div>
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">🧠 INT</span><span class="rstat-val" id="sv_int">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_int" style="width:0%;background:#3498db"></div></div></div>
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">❤ EMO</span><span class="rstat-val" id="sv_emo">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_emo" style="width:0%;background:#e67e22"></div></div></div>
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">🌀 FLEX</span><span class="rstat-val" id="sv_flex">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_flex" style="width:0%;background:#2ecc71"></div></div></div>
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">🎭 BLF</span><span class="rstat-val" id="sv_blf">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_blf" style="width:0%;background:#9b59b6"></div></div></div>
-        <div class="rstat"><div class="rstat-head"><span class="rstat-name">🛡 DEF</span><span class="rstat-val" id="sv_def">—</span></div><div class="rstat-bar"><div class="rstat-fill" id="sb_def" style="width:0%;background:#1abc9c"></div></div></div>
+      <div class="rpg-stats-list" id="rpgStatsList">
+        <!-- généré dynamiquement -->
       </div>
-      <div class="rpg-divider"></div>
       <div class="rpg-tags" id="rpgTags"></div>
       <div class="rpg-lore" id="rpgLore">—</div>
     </div>
+
+    <!-- SESSION METERS — nouveau design -->
     <div class="session-block">
       <div class="block-title" id="lbl_session">Session</div>
-      <div class="meter-row"><span class="meter-icon">⚡</span><span class="meter-lbl" id="lbl_tension">Tension</span><div class="meter-track"><div class="meter-fill2" id="tensionBar" style="width:30%;background:#e74c3c"></div></div><span class="meter-pct" id="tensionVal">30%</span></div>
-      <div class="meter-row"><span class="meter-icon">📈</span><span class="meter-lbl" id="lbl_progress">Progression</span><div class="meter-track"><div class="meter-fill2" id="progressBar" style="width:10%;background:#27ae60"></div></div><span class="meter-pct" id="progressVal">10%</span></div>
-      <div class="meter-row"><span class="meter-icon">🛡</span><span class="meter-lbl" id="lbl_resist">Résistance</span><div class="meter-track"><div class="meter-fill2" id="resistBar" style="width:60%;background:#9b59b6"></div></div><span class="meter-pct" id="resistVal">60%</span></div>
+      <div id="metersContainer">
+        <!-- généré dynamiquement -->
+      </div>
     </div>
+
     <div class="tech-block">
       <div class="block-title" id="lbl_techniques">Techniques détectées</div>
       <div class="tech-list" id="techList"><div class="tech-empty" id="techEmpty">Aucune technique détectée…</div></div>
     </div>
     <div class="sidebar-end"><button class="btn-end" onclick="endSession()" id="btn_end">🏁 Terminer & Débrief</button></div>
   </div>
+
   <div class="game-main">
     <div class="game-header">
       <div class="gh-left">
@@ -425,16 +481,16 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       <div class="bug-form-group"><label id="bug_type_lbl">Type de problème</label>
         <select id="bugType">
           <option value="" id="bug_opt_sel">— Sélectionner —</option>
-          <option value="Erreur technique" id="bug_opt1">Erreur technique (crash / message d'erreur)</option>
+          <option value="Erreur technique" id="bug_opt1">Erreur technique</option>
           <option value="IA hors rôle" id="bug_opt2">L'adversaire IA ne joue pas son rôle</option>
-          <option value="Affichage" id="bug_opt3">Problème d'affichage / interface</option>
+          <option value="Affichage" id="bug_opt3">Problème d'affichage</option>
           <option value="Langue" id="bug_opt4">Langue incorrecte</option>
-          <option value="Débrief" id="bug_opt5">Débrief incomplet ou incohérent</option>
+          <option value="Débrief" id="bug_opt5">Débrief incomplet</option>
           <option value="Autre" id="bug_opt6">Autre</option>
         </select>
       </div>
-      <div class="bug-form-group"><label id="bug_desc_lbl">Décris ce qui s'est passé</label><textarea id="bugDesc" placeholder="Ex : j'ai sélectionné Douanier mais l'IA se comportait comme si elle était le joueur…"></textarea></div>
-      <div class="bug-form-group"><label id="bug_when_lbl">À quel moment ? (optionnel)</label><input type="text" id="bugWhen" placeholder="Ex : pendant la négociation, au tour 3…"/></div>
+      <div class="bug-form-group"><label id="bug_desc_lbl">Décris ce qui s'est passé</label><textarea id="bugDesc"></textarea></div>
+      <div class="bug-form-group"><label id="bug_when_lbl">À quel moment ? (optionnel)</label><input type="text" id="bugWhen"/></div>
       <button class="btn-start" onclick="submitBug()" id="bug_submit">Envoyer le rapport →</button>
     </div>
   </div>
@@ -447,14 +503,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
-      <div class="info-section"><h2 id="soutien_h1">Pourquoi soutenir ?</h2><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier, un petit coup de pouce permet de le garder en vie.</p></div>
-      <div class="info-section"><h2 id="soutien_h2">Ce que ça finance</h2><p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.</p></div>
+      <div class="info-section"><h2 id="soutien_h1">Pourquoi soutenir ?</h2><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût.</p></div>
+      <div class="info-section"><h2 id="soutien_h2">Ce que ça finance</h2><p id="soutien_p2">Les coûts serveur et API. Le développement de nouvelles fonctionnalités.</p></div>
       <div class="info-section">
         <h2 id="soutien_h3">Comment contribuer</h2>
-        <p id="soutien_p3">Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.</p>
+        <p id="soutien_p3">Clique sur le bouton ci-dessous.</p>
         <a href="PLACEHOLDER_URL" target="_blank" id="soutien_btn" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
       </div>
-      <div class="info-section" style="margin-bottom:0"><h2 id="soutien_h4">Merci</h2><p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p></div>
+      <div class="info-section" style="margin-bottom:0"><h2 id="soutien_h4">Merci</h2><p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer.</p></div>
     </div>
   </div>
 </div>
@@ -482,7 +538,6 @@ const TECHS={
   "Offre extrême":{icon:"🎯",color:"#c0392b",desc:"Ouvrir avec une position délibérément haute/basse pour avoir de la marge",rx:/(minimum|au moins|at least|pas moins de|no less than|maximum|au plus|at most)\s+\d+/i},
   "Appel à l'équité":{icon:"⚖️",color:"#2980b9",desc:"Invoquer ce qui est juste ou standard pour légitimer sa position",rx:/standard|usage|marché|industry|pratique courante|fair|équitable|norm|habituellement|généralement/i},
   "Autorité supérieure":{icon:"👔",color:"#8e44ad",desc:"Invoquer un tiers décisionnaire pour gagner du temps ou réduire la pression",rx:/manager|directeur|conseil|board|associé|mon patron|my boss|refer to|en référer|valider avec/i},
-  "Bonne\/mauvaise poire":{icon:"🎭",color:"#e67e22",desc:"Évoquer un tiers plus intransigeant pour se donner de la flexibilité",rx:/(mon associé|my partner|mon collègue|my colleague|mon manager|l'autre partie|the other side).*(jamais|never|won't|refusera|refuse)/i},
   "Le retrait":{icon:"🚶",color:"#c0392b",desc:"Menacer de quitter la négociation pour tester la flexibilité de l'adversaire",rx:/je pars|i('m | am )leaving|walk away|on arrête|let's stop|je laisse tomber|forget it|tant pis/i},
   "Fragmentation":{icon:"🧩",color:"#27ae60",desc:"Décomposer une grosse demande en petites concessions successives",rx:/(d'abord|first|pour commencer|to start|étape par étape|step by step|progressivement|gradually)/i},
   "Preuve sociale":{icon:"👥",color:"#2980b9",desc:"Normaliser sa position en invoquant ce que font les autres",rx:/(tous nos|all our|la plupart|most|d'autres|others|nos clients|our clients|en général|generally|standard practice)/i},
@@ -490,17 +545,136 @@ const TECHS={
   "Engagement progressif":{icon:"📈",color:"#f39c12",desc:"Obtenir des petits 'oui' successifs avant la grande demande",rx:/(on est d'accord sur|we agree on|vous confirmez|you confirm|c'est bien ça|that's correct|exact|exactly|tout à fait)/i},
 };
 
+// ── BDF PALIERS ───────────────────────────────────────────────────
+const BDF_PALIERS_FR=[
+  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)'},
+  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)'},
+  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)'},
+  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)'},
+  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)'},
+];
+const BDF_PALIERS_EN=[
+  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)'},
+  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)'},
+  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)'},
+  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)'},
+  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)'},
+];
+
+function getBdfPalier(val){
+  const p=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
+  return p.find(x=>val<=x.max)||p[p.length-1];
+}
+function updateBdf(val){
+  S.badFaith=parseInt(val);
+  document.getElementById('bdfVal').textContent=val;
+  const p=getBdfPalier(parseInt(val));
+  const pill=document.getElementById('bdfPill');
+  pill.textContent=p.label;pill.style.color=p.color;pill.style.borderColor=p.color;pill.style.background=p.bg;
+  const sl=document.getElementById('bdfSlider');
+  sl.style.background=`linear-gradient(to right,${p.color} 0%,${p.color} ${val}%,rgba(255,255,255,.1) ${val}%,rgba(255,255,255,.1) 100%)`;
+  sl.style.accentColor=p.color;
+}
+
+// ── METER STATUS LABELS ───────────────────────────────────────────
+function getTensionStatus(v,fr){
+  if(v<=30) return fr?'Calme':'Calm';
+  if(v<=60) return fr?'Montée':'Rising';
+  if(v<=80) return fr?'Sous pression':'Under pressure';
+  return fr?'Point de rupture':'Breaking point';
+}
+function getProgressStatus(v,fr){
+  if(v<=20) return fr?'Bloqué':'Blocked';
+  if(v<=40) return fr?'En cours':'In progress';
+  if(v<=65) return fr?'Avance':'Advancing';
+  return fr?'Accord proche':'Deal close';
+}
+function getResistStatus(v,fr){
+  if(v<=30) return fr?'Fissures':'Cracking';
+  if(v<=55) return fr?'Flexible':'Flexible';
+  if(v<=80) return fr?'Position ferme':'Firm position';
+  return fr?'Mur':'Wall';
+}
+
+// ── RENDER METERS ─────────────────────────────────────────────────
+function renderMeters(){
+  const fr=S.lang==='fr';
+  const meters=[
+    {key:'tension', emoji:'⚡', abbr:fr?'Tens.':'Tens.', color:'#A06060', val:S.tension, status:getTensionStatus(S.tension,fr)},
+    {key:'progress',emoji:'📈',abbr:fr?'Prog.':'Prog.',color:'#5A8A60',val:S.progress,status:getProgressStatus(S.progress,fr)},
+    {key:'resist',  emoji:'🔒',abbr:fr?'Rés.':'Res.', color:'#7A6AA0',val:S.resist,  status:getResistStatus(S.resist,fr)},
+  ];
+  const segs=10;
+  let html='';
+  meters.forEach((m,i)=>{
+    const filled=Math.round((m.val/100)*segs);
+    let segHtml='';
+    for(let s=0;s<segs;s++){
+      segHtml+=`<div style="flex:1;height:4px;border-radius:1px;background:${s<filled?m.color:'#2A2836'};"></div>`;
+    }
+    html+=`
+    <div class="meter-row-new">
+      <div class="meter-left">
+        <div class="meter-num" style="color:${m.color}">${m.val}</div>
+        <div class="meter-label-abbr">${m.abbr}</div>
+      </div>
+      <div class="meter-right">
+        <div class="meter-status-row">
+          <span class="meter-emoji">${m.emoji}</span>
+          <span class="meter-status-txt">${m.status}</span>
+        </div>
+        <div class="meter-segments">${segHtml}</div>
+      </div>
+    </div>
+    ${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
+  });
+  document.getElementById('metersContainer').innerHTML=html;
+}
+
+// ── RENDER RPG CARD STATS ─────────────────────────────────────────
+function renderCardStats(p){
+  const stats=[
+    {name:S.lang==='fr'?'Attaque':'Attack',    val:p.atk||50, blf:false,
+     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H7M10 2V5" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round"/><circle cx="2.5" cy="9.5" r="1" fill="#C4A060"/></svg>`},
+    {name:S.lang==='fr'?'Intel':'Intel',        val:p.int||50, blf:false,
+     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M6 1L4 6h3L5 11" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:S.lang==='fr'?'Mauvaise foi':'Bad faith', val:p.blf||50, blf:true,
+     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 5c0-2 1.5-3 4-3s4 1 4 3c0 3-2 5-4 5S2 8 2 5z" stroke="#A06060" stroke-width="1.2"/><path d="M4 5.5c.3-.3.7-.3 1 0M7 5.5c.3-.3.7-.3 1 0" stroke="#A06060" stroke-width="1" stroke-linecap="round"/><path d="M4.5 7.5c.4.3 1 .5 1.5.3" stroke="#A06060" stroke-width="1" stroke-linecap="round"/></svg>`},
+    {name:S.lang==='fr'?'Flexibilité':'Flexibility', val:p.flex||50, blf:false,
+     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 4h6M6 2l2 2-2 2M10 8H4M6 6l-2 2 2 2" stroke="#C4A060" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+  ];
+  let html='';
+  stats.forEach(s=>{
+    html+=`<div class="rpg-stat-row">
+      ${s.icon}
+      <span class="rpg-stat-name${s.blf?' blf':''}">${s.name}</span>
+      <div class="rpg-stat-track"><div class="rpg-stat-fill${s.blf?' blf':''}" style="width:${s.val}%"></div></div>
+      <span class="rpg-stat-val">${s.val}</span>
+    </div>`;
+  });
+  document.getElementById('rpgStatsList').innerHTML=html;
+}
+
+// ── WORD COUNT ────────────────────────────────────────────────────
+function countWords(str){return str.trim()===''?0:str.trim().split(/\s+/).length;}
+function updateCount(tid,cid,max){
+  const w=countWords(document.getElementById(tid).value);
+  const el=document.getElementById(cid);
+  el.textContent=`${w} / ${max}`;
+  el.className='word-count '+(w>max?'over':w>max*.8?'warn':'ok');
+}
+
 // ── STATE ─────────────────────────────────────────────────────────
 const S={
-  lang:'fr', gender:'il',
-  opponent:'', context:'', obstacles:'',
-  difficulty:'Senior', feedbackMode:'training',
-  persona:null, sitcomChar:null,
-  messages:[], systemPrompt:'',
+  lang:'fr',gender:'il',
+  opponent:'',context:'',obstacles:'',
+  difficulty:'Senior',feedbackMode:'training',
+  badFaith:30,
+  persona:null,sitcomChar:null,
+  messages:[],systemPrompt:'',
   detectedTechs:new Set(),
-  tension:30, progress:10, resist:60,
-  turn:0, maxTurns:15, sessionEnded:false,
-  // Transcript saved at debrief time (messages snapshot, excludes hidden primer)
+  tension:30,progress:10,resist:60,
+  turn:0,maxTurns:15,sessionEnded:false,
   savedTranscript:[]
 };
 
@@ -508,8 +682,8 @@ const S={
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  const footer=document.getElementById('globalFooter');
-  if(footer) footer.style.display=['landing','setup','about','bugreport','soutien'].includes(id)?'flex':'none';
+  const f=document.getElementById('globalFooter');
+  if(f) f.style.display=['landing','setup','about','bugreport','soutien'].includes(id)?'flex':'none';
 }
 function showLoading(fr){
   document.getElementById('overlayText').textContent=fr?'La négo va commencer…':'Negotiation is about to begin…';
@@ -527,6 +701,7 @@ function chooseLang(l){
     :'Master any negotiation. Sales, salary, conflict, contracts — train against an unpredictable AI opponent.';
   document.getElementById('landingBtn').textContent=fr?'Entrer dans la salle →':'Enter the Room →';
   fr?applyFR():applyEN();
+  updateBdf(S.badFaith);
   goTo('landing');
 }
 
@@ -535,27 +710,32 @@ function applyFR(){
   t('footer_about','ℹ️ À propos');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Soutenir');t('footer_bug','🐛 Bug');
   t('aboutBack','← Retour');t('bugBack','← Retour');t('soutienBack','← Retour');t('btn_back','← Langue');
   t('sec_who','À qui tu fais face ?');t('sec_ctx','Contexte & Enjeux');t('sec_set','Paramètres');
-  t('lbl_opponent','Profil adversaire');t('lbl_obstacles','Obstacles & objections de l\'adversaire');
-  t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');
+  t('lbl_opponent','Profil adversaire');t('lbl_context','Ton objectif');t('lbl_obstacles','Obstacles & objections de l\'adversaire');
+  t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');t('lbl_bdf','Mauvaise foi de l\'adversaire');
   t('btn_start','⚔️ Entrer en négociation');t('btn_end','🏁 Terminer & Débrief');t('sendBtn','Envoyer ↵');
   document.getElementById('userInput').placeholder='Ton coup…';
-  t('lbl_tension','Tension');t('lbl_progress','Progression');t('lbl_resist','Résistance');
   t('lbl_techniques','Techniques détectées');t('lbl_session','Session');
   document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'Il',elle:'Elle',iel:'Iel'}[c.dataset.g]||c.dataset.g;});
   t('opt_jr','🟢 Junior — Coopératif');t('opt_sr','🟡 Senior — Résistant');t('opt_ex','🔴 Expert — Impitoyable');
   t('opt_tr','🎓 Entraînement — Conseils live');t('opt_im','🎭 Immersif — Débrief uniquement');
   t('opt_sel','— Choisir un profil —');t('opt_custom','✏️ Autre — Je décris');
+  t('hint_context','Sois précis et concret — qui, quoi, quel montant, quel délai. Plus c\'est clair, plus l\'adversaire sera calibré.');
+  t('hint_obstacles','Liste les vraies résistances que tu anticipes. Ça rend l\'adversaire plus réaliste et l\'entraînement plus utile.');
+  document.getElementById('contextText').placeholder='Qu\'est-ce que tu veux obtenir ?';
+  document.getElementById('obstaclesText').placeholder='Budget, timing, autorité…';
+  const paliers=document.querySelectorAll('.bdf-palier');
+  BDF_PALIERS_FR.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
 }
+
 function applyEN(){
   const t=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
-  t('footer_about','ℹ️ About');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Support');t('footer_bug','🐛 Report a bug');
+  t('footer_about','ℹ️ About');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Support');t('footer_bug','🐛 Bug');
   t('aboutBack','← Back');t('bugBack','← Back');t('soutienBack','← Back');t('btn_back','← Language');
   t('sec_who','Who are you facing?');t('sec_ctx','Context & Stakes');t('sec_set','Session Settings');
-  t('lbl_opponent','Opponent profile');t('lbl_obstacles','Opponent\'s obstacles & objections');
-  t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');
+  t('lbl_opponent','Opponent profile');t('lbl_context','Your goal');t('lbl_obstacles','Opponent\'s obstacles & objections');
+  t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');t('lbl_bdf','Opponent bad faith level');
   t('btn_start','⚔️ Enter the Negotiation');t('btn_end','🏁 End & Debrief');t('sendBtn','Send ↵');
   document.getElementById('userInput').placeholder='Your move…';
-  t('lbl_tension','Tension');t('lbl_progress','Progress');t('lbl_resist','Resistance');
   t('lbl_techniques','Techniques detected');t('lbl_session','Session');
   document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'He',elle:'She',iel:'They'}[c.dataset.g]||c.dataset.g;});
   t('opt_jr','🟢 Junior — Cooperative');t('opt_sr','🟡 Senior — Resistant');t('opt_ex','🔴 Expert — Ruthless');
@@ -566,23 +746,24 @@ function applyEN(){
   document.getElementById('og_perso').label='🏠 Personal';
   document.getElementById('og_stakes').label='⚖️ High Stakes';
   document.getElementById('og_mgmt').label='👥 Management';
+  t('hint_context','Be specific — who, what, how much, by when. The clearer you are, the better calibrated your opponent will be.');
+  t('hint_obstacles','List the real objections you expect to face. This makes the opponent more realistic and the training more useful.');
+  document.getElementById('contextText').placeholder='What do you want to achieve?';
+  document.getElementById('obstaclesText').placeholder='Budget, timing, authority…';
+  const paliers=document.querySelectorAll('.bdf-palier');
+  BDF_PALIERS_EN.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
-// ── AI CALL ───────────────────────────────────────────────────────
+// ── AI ────────────────────────────────────────────────────────────
 async function ai(msgs,sys,max=600){
-  const r=await fetch('/.netlify/functions/gemini',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})
-  });
+  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})});
   const d=await r.json();
   if(!r.ok) throw new Error(d.error||d.message||'Erreur API');
   return d.text;
 }
-
 function pickChar(){
   if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
   if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
@@ -599,26 +780,21 @@ async function startSession(){
   S.obstacles=document.getElementById('obstaclesText').value||'Aucun';
   S.difficulty=document.getElementById('difficulty').value;
   S.feedbackMode=document.getElementById('feedbackMode').value;
-
-  // Full state reset
+  S.badFaith=parseInt(document.getElementById('bdfSlider').value);
   S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
   S.sitcomChar=pickChar();
-
   showLoading(fr);
-
   const lang=fr?'French':'English';
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
-
+  const bdfPalier=getBdfPalier(S.badFaith);
   try{
-    // Generate persona JSON
     const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text in ${lang}. SHORT fields (max 15 words each):
-{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":0-100,"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. The PLAYER wants: '${S.context}'. Your opening must express YOUR RESISTANCE to this goal. In ${lang}."}
-Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. No TV references.`}],
+{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. The PLAYER wants: '${S.context}'. Express YOUR RESISTANCE. In ${lang}."}
+Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Bad faith:${S.badFaith}/100. No TV references.`}],
     'Return ONLY raw JSON. No markdown. No backticks. No explanation.',700);
-
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
@@ -631,16 +807,14 @@ Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. No TV refe
         p=JSON.parse(s);
       }else throw new Error('JSON invalide');
     }
-
+    p.blf=S.badFaith;
     S.persona=p;
     populateCard(p,lvlLabel,starsMap[S.difficulty]);
-    S.systemPrompt=buildSys(p,lang);
-
-    // Hidden primer — not shown in chat UI, not saved to transcript
+    renderCardStats(p);
+    renderMeters();
+    S.systemPrompt=buildSys(p,lang,bdfPalier);
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:p.openingLine});
-
-    // Navigate to game
     goTo('game');hideLoading();
     document.getElementById('gameTitle').textContent=`vs ${S.sitcomChar}`;
     const pill=document.getElementById('modePill');
@@ -650,63 +824,69 @@ Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. No TV refe
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     addMsg('ai',p.openingLine);
-
   }catch(e){
     hideLoading();
     alert(fr?'Erreur lors du chargement. Réessaie.':'Loading error. Please try again.');
-    console.error(e);
-    return;
+    console.error(e);return;
   }
   document.getElementById('userInput').focus();
 }
 
 function populateCard(p,lv,stars){
-  document.getElementById('rpgAvatar').innerHTML=`${p.emoji||'🎭'}<div class="lv">${S.difficulty.toUpperCase()}</div>`;
-  document.getElementById('ccTL').textContent=lv;
-  document.getElementById('ccTR').textContent=p.class||'NÉGOCIATEUR';
-  document.getElementById('rpgName').textContent=S.sitcomChar;
-  document.getElementById('rpgClass').textContent=S.opponent;
+  document.getElementById('rpgAvatar').textContent=p.emoji||'🎭';
+  document.getElementById('ccTL').textContent=`${lv} · ${S.difficulty}`;
   document.getElementById('rpgStars').textContent=stars;
-  ['atk','int','emo','flex','blf','def'].forEach(k=>{
-    const b=document.getElementById('sb_'+k),v=document.getElementById('sv_'+k);
-    if(b)b.style.width=(p[k]||50)+'%';if(v)v.textContent=p[k]||'—';
-  });
+  document.getElementById('rpgName').textContent=S.sitcomChar;
+  document.getElementById('rpgClass').textContent=`${p.class||'—'} · ${S.opponent}`;
   const tags=document.getElementById('rpgTags');tags.innerHTML='';
-  const cols=['#e74c3c','#9b59b6','#2ecc71','#3498db'];
-  (p.typeTags||[]).forEach((tag,i)=>{
-    const s=document.createElement('span');s.className='rpg-tag';
-    const c=cols[i%cols.length];s.style.borderColor=c;s.style.color=c;s.textContent=tag;
-    tags.appendChild(s);
+  (p.typeTags||[]).forEach(tag=>{
+    const s=document.createElement('span');s.className='rpg-tag';s.textContent=tag;tags.appendChild(s);
   });
   document.getElementById('rpgLore').textContent=p.lore||'—';
 }
 
-function buildSys(p,lang){
+function buildSys(p,lang,bdfPalier){
   const fr=S.lang==='fr';
-  const gLine=fr
-    ?`Tu es désigné(e) par le pronom "${S.gender}".`
-    :`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
+  const gLine=fr?`Tu es désigné(e) par le pronom "${S.gender}".`:`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
+  const bdfLine=S.badFaith<=20
+    ?(fr?'Tu es de bonne foi — tu joues franc jeu, sans esquiver ni manipuler.':'You are acting in good faith — play it straight, no dodging or manipulation.')
+    :S.badFaith<=40
+    ?(fr?'Tu es neutre — tu défends tes intérêts sans pour autant tricher.':'You are neutral — defend your interests without cheating.')
+    :S.badFaith<=60
+    ?(fr?'Tu es opportuniste — tu peux déformer légèrement les faits, esquiver les questions gênantes.':'You are opportunistic — you may slightly twist facts and dodge uncomfortable questions.')
+    :S.badFaith<=80
+    ?(fr?'Tu es de mauvaise foi — tu retournes les arguments, tu minimises, tu changes de position sans l\'admettre.':'You are acting in bad faith — flip arguments, minimize, shift positions without admitting it.')
+    :(fr?'Tu es manipulateur — tu mens par omission, tu instrumentalises les émotions, tu uses de fausses concessions.':'You are manipulative — lie by omission, weaponize emotions, use fake concessions.');
   return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
 
-ROLE ASSIGNMENT — CRITICAL:
-- YOU are the OPPONENT. You have your own agenda, interests and constraints.
-- THE PLAYER is the person writing to you. They want: "${S.context}"
-- YOUR JOB is to RESIST, PUSH BACK, and NEGOTIATE AGAINST the player's goal.
-- You must NEVER adopt the player's goal as your own position.
+ROLE — CRITICAL:
+- YOU are the OPPONENT. The PLAYER wants: "${S.context}"
+- YOUR JOB is to RESIST and NEGOTIATE AGAINST the player's goal.
 - OBSTACLES TO USE: ${S.obstacles}
 
+BAD FAITH LEVEL: ${S.badFaith}/100 — ${bdfPalier.label}
+${bdfLine}
+
 ARCHETYPE: ${p.class} — ${p.lore}
-HIDDEN CONSTRAINT (never reveal directly): ${p.secret}
+HIDDEN CONSTRAINT: ${p.secret} — Never state this directly. Allude to it vaguely early on, hint more clearly if the player pushes, only confirm under real pressure in late turns.
 DIFFICULTY: ${S.difficulty}
 ${gLine}
 
-Respond in ${lang}. Stay fully in character. Vary tactics each turn.
-If player concedes → push harder. If strong anchor → resist firmly.
-Use: anchoring, flinching, false deadlines, higher authority, silence, reframing.
-Never repeat the same objection twice in a row.
-${S.difficulty==='Junior'?'Be cooperative and gradually persuadable.':S.difficulty==='Senior'?'Be resistant — require real persuasion before making concessions.':'Be aggressive — introduce surprise constraints, barely ever concede, use pressure tactics.'}
-2–5 sentences per response. Realistic, not theatrical.
-If total deadlock or deal clearly reached: write a natural closing line as your character, then add [FIN_NEGO] at the very end.`;
+Respond in ${lang}.
+${S.difficulty==='Junior'?'Be cooperative, gradually persuadable.':S.difficulty==='Senior'?'Be resistant, require real persuasion.':'Be aggressive, introduce surprise constraints, rarely concede.'}
+
+TACTICS — Each turn, use a different tactic from this list, never the same two turns in a row: anchoring, flinching, false deadline, higher authority, silence, reframing, loss aversion, social proof. Track what you have used and rotate.
+
+TONE — Speak like a real person in a real meeting. Short sentences. You can hesitate, deflect, change subject. No speeches. No filler diplomacy — avoid "I understand your position", "that's a great point", "we'll look into that". These sound fake regardless of your role. Speak directly and stay specific to your role and context.
+
+PROGRESSION — Adjust your resistance based on the player's performance:
+- If they make a strong argument or use a smart tactic → show a small crack, hesitate slightly
+- If they concede, repeat themselves or show weakness → harden your position, push further
+- If they go in circles → show impatience, hint you may walk away
+Never soften unless the player earns it. Never harden arbitrarily.
+
+2–4 sentences per response.
+If deadlock or deal reached: close naturally then add [FIN_NEGO].`;
 }
 
 // ── MESSAGES ──────────────────────────────────────────────────────
@@ -743,7 +923,7 @@ async function sendMessage(){
   S.turn++;updateTurnDisplay();
   showTyping();
   try{
-    const reply=await ai(S.messages.slice(-24),S.systemPrompt,400);
+    const reply=await ai(S.messages.slice(-20),S.systemPrompt,400);
     removeTyping();
     const hasEnd=reply.includes('[FIN_NEGO]');
     const clean=reply.replace('[FIN_NEGO]','').trim();
@@ -786,7 +966,7 @@ function endNaturally(aiCut){
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
 
-// ── METERS ────────────────────────────────────────────────────────
+// ── METERS UPDATE ─────────────────────────────────────────────────
 function updateMeters(user,aiReply){
   const hard=['non','jamais','impossible','hors de question','no','never','absolutely not','out of the question'];
   const soft=['difficile','compliqué','pas sûr','difficult','complicated','not sure'];
@@ -797,10 +977,7 @@ function updateMeters(user,aiReply){
   else{S.tension=Math.max(10,S.tension-6);S.resist=Math.max(20,S.resist-7);}
   if(concede.some(w=>user.toLowerCase().includes(w))) S.progress=Math.min(92,S.progress+10);
   if(goodTactic) S.progress=Math.min(92,S.progress+5);
-  ['tension','progress','resist'].forEach(k=>{
-    document.getElementById(k+'Bar').style.width=S[k]+'%';
-    document.getElementById(k+'Val').textContent=S[k]+'%';
-  });
+  renderMeters();
 }
 
 // ── TECHNIQUES ────────────────────────────────────────────────────
@@ -821,10 +998,9 @@ function detectTechs(msg){
 async function genFeedback(msg){
   const fr=S.lang==='fr';
   const prompt=fr
-    ?`En 1 phrase simple et claire en français, dis au négociateur ce qu'il vient de bien faire ou ce qu'il aurait pu faire mieux. Langage accessible, pas de jargon. Commence par un emoji. Message : "${msg}"`
-    :`In 1 simple sentence in English, tell the negotiator what they just did well or could have done better. Plain language, no jargon. Start with emoji. Message: "${msg}"`;
-  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach. Plain language only.',100);addMsg('feedback',fb);}
-  catch{}
+    ?`En 1 phrase simple en français, dis au négociateur ce qu'il vient de bien faire ou ce qu'il aurait pu faire mieux. Commence par un emoji. Message : "${msg}"`
+    :`In 1 simple sentence in English, tell the negotiator what they just did well or could have done better. Start with emoji. Message: "${msg}"`;
+  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach.',100);addMsg('feedback',fb);}catch{}
 }
 
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
@@ -839,117 +1015,65 @@ async function endSession(auto=false){
   S.sessionEnded=true;
   document.getElementById('sendBtn').disabled=true;
   document.getElementById('userInput').disabled=true;
-
-  // ── SNAPSHOT: save transcript BEFORE clearing messages ──
-  // Skip the hidden primer (indices 0 and 1 = first user + first assistant)
-  const transcript=S.messages
-    .slice(2)
-    .map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`)
-    .join('\n');
-
-  // Clear conversation history immediately so next session is fresh
+  const transcript=S.messages.slice(2).map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
   S.messages=[];
-
   goTo('debrief');
   const fr=S.lang==='fr';
   document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
-  const lang=fr?'French':'English';
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
-
   if(!transcript.trim()){
-    document.getElementById('debriefContent').innerHTML=`
-      <div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div>
-      <div class="debrief-actions">
-        <button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button>
-      </div>`;
+    document.getElementById('debriefContent').innerHTML=`<div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div><div class="debrief-actions"><button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button></div>`;
     return;
   }
-
   const prompt=fr
-    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown, sans backticks, sans texte avant ou après.
-Score strict : 0-30 aucune technique, concessions gratuites / 31-50 pas de structure / 51-70 tient sa position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
+    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown.
+Score : 0-30 aucune technique / 31-50 pas de structure / 51-70 tient sa position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
 Techniques détectées : ${detectedList}
-Format JSON exact (tous les champs obligatoires) :
-{"score":42,"verdict":"1 phrase résumant cette négo","strengths":["point fort 1 avec exemple","point fort 2 si pertinent"],"mistakes":["erreur 1 avec exemple","erreur 2 si pertinent"],"keyMoment":"le tournant décisif de cette négo","advice":"1 seul conseil concret pour la prochaine fois"}
+{"score":42,"verdict":"1 phrase","strengths":["point 1","point 2"],"mistakes":["erreur 1","erreur 2"],"keyMoment":"tournant décisif","advice":"1 conseil concret"}
 Transcript:\n${transcript}`
-    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY with valid JSON — no markdown, no backticks, no text before or after.
-Strict score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
+    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY with valid JSON, no markdown.
+Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
 Techniques detected: ${detectedList}
-Exact JSON format (all fields required):
-{"score":42,"verdict":"1 sentence summarizing this negotiation","strengths":["strength 1 with example","strength 2 if relevant"],"mistakes":["mistake 1 with example","mistake 2 if relevant"],"keyMoment":"the decisive turning point of this negotiation","advice":"1 single concrete tip for next time"}
+{"score":42,"verdict":"1 sentence","strengths":["strength 1","strength 2"],"mistakes":["mistake 1","mistake 2"],"keyMoment":"decisive turning point","advice":"1 concrete tip"}
 Transcript:\n${transcript}`;
-
   try{
-    const raw=await ai([{role:'user',content:prompt}],'You must respond with ONLY a valid JSON object. Absolutely no markdown, no explanation, no text before or after.',600);
-    const cleaned=raw.replace(/```json|```/g,'').trim();
-    const d=JSON.parse(cleaned);
-
-    // Normalize — ensure all fields exist and are correct types
+    const raw=await ai([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown, no text outside JSON.',600);
+    const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
     d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
     d.verdict=typeof d.verdict==='string'?d.verdict:'—';
     d.strengths=Array.isArray(d.strengths)?d.strengths.filter(Boolean):[];
     d.mistakes=Array.isArray(d.mistakes)?d.mistakes.filter(Boolean):[];
     d.keyMoment=typeof d.keyMoment==='string'?d.keyMoment:null;
     d.advice=typeof d.advice==='string'?d.advice:null;
-
     renderDebrief(d,fr);
   }catch(e){
-    document.getElementById('debriefContent').innerHTML=`
-      <div style="padding:2rem;text-align:center;color:var(--danger);">
-        <p style="margin-bottom:1rem;">Erreur lors du débrief : ${e.message}</p>
-        <button class="btn-ghost" onclick="newScenario()">${fr?'Retour au setup':'Back to setup'}</button>
-      </div>`;
+    document.getElementById('debriefContent').innerHTML=`<div style="padding:2rem;text-align:center;color:var(--danger);"><p style="margin-bottom:1rem;">Erreur : ${e.message}</p><button class="btn-ghost" onclick="newScenario()">${fr?'Retour au setup':'Back to setup'}</button></div>`;
   }
 }
 
 function renderDebrief(d,fr){
   const sc=d.score>=70?'var(--success)':d.score>=40?'var(--accent)':'var(--danger)';
-
-  const strengthsHTML=d.strengths.length
-    ?d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join('')
-    :`<div class="moment">${fr?'Aucun point fort identifié.':'No strengths identified.'}</div>`;
-
-  const mistakesHTML=d.mistakes.length
-    ?d.mistakes.map(s=>`<div class="moment bad">✗ ${s}</div>`).join('')
-    :`<div class="moment">${fr?'Aucune erreur majeure.':'No major mistakes.'}</div>`;
-
-  const keyMomentHTML=d.keyMoment
-    ?`<div class="moment">${d.keyMoment}</div>`
-    :`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant identifié.':'No turning point identified.'}</div>`;
-
-  const adviceHTML=d.advice
-    ?`<p>${d.advice}</p>`
-    :`<p style="color:var(--text-dim);font-style:italic">${fr?'Aucun conseil spécifique.':'No specific advice.'}</p>`;
-
+  const sHTML=d.strengths.length?d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join(''):`<div class="moment">${fr?'Aucun point fort identifié.':'No strengths identified.'}</div>`;
+  const mHTML=d.mistakes.length?d.mistakes.map(s=>`<div class="moment bad">✗ ${s}</div>`).join(''):`<div class="moment">${fr?'Aucune erreur majeure.':'No major mistakes.'}</div>`;
+  const kHTML=d.keyMoment?`<div class="moment">${d.keyMoment}</div>`:`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant identifié.':'No turning point identified.'}</div>`;
+  const aHTML=d.advice?`<p>${d.advice}</p>`:`<p style="color:var(--text-dim);font-style:italic">${fr?'Aucun conseil.':'No advice.'}</p>`;
   document.getElementById('debriefContent').innerHTML=`
     <div class="score-hero">
       <div class="score-num" style="color:${sc}">${d.score}</div>
       <div class="score-label">${fr?'Score de négociation':'Negotiation Score'} /100</div>
       <p style="color:var(--text-soft);margin-top:.75rem;font-size:.95rem;line-height:1.65">${d.verdict}</p>
     </div>
-    <div class="debrief-section">
-      <h3>${fr?'Points forts':'Strengths'}</h3>
-      ${strengthsHTML}
-    </div>
-    <div class="debrief-section">
-      <h3>${fr?'Erreurs':'Mistakes'}</h3>
-      ${mistakesHTML}
-    </div>
-    <div class="debrief-section">
-      <h3>${fr?'Moment clé':'Key Moment'}</h3>
-      ${keyMomentHTML}
-    </div>
-    <div class="debrief-section">
-      <h3>${fr?'Pour progresser':'To improve'}</h3>
-      ${adviceHTML}
-    </div>
+    <div class="debrief-section"><h3>${fr?'Points forts':'Strengths'}</h3>${sHTML}</div>
+    <div class="debrief-section"><h3>${fr?'Erreurs':'Mistakes'}</h3>${mHTML}</div>
+    <div class="debrief-section"><h3>${fr?'Moment clé':'Key Moment'}</h3>${kHTML}</div>
+    <div class="debrief-section"><h3>${fr?'Pour progresser':'To improve'}</h3>${aHTML}</div>
     <div class="debrief-actions">
       <button class="btn-primary" onclick="restartSession()">${fr?'Rejouer':'Play Again'}</button>
       <button class="btn-ghost" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button>
     </div>`;
 }
 
-// ── RESTART / NEW SCENARIO ────────────────────────────────────────
+// ── RESTART ───────────────────────────────────────────────────────
 function resetUI(){
   document.getElementById('messages').innerHTML='';
   document.getElementById('userInput').disabled=false;
@@ -957,70 +1081,51 @@ function resetUI(){
   document.getElementById('sendBtn').disabled=false;
   const fr=S.lang==='fr';
   document.getElementById('techList').innerHTML=`<div class="tech-empty" id="techEmpty">${fr?'Aucune technique détectée…':'No technique detected yet…'}</div>`;
-  [['tension','30%','#e74c3c'],['progress','10%','#27ae60'],['resist','60%','#9b59b6']].forEach(([k,w,c])=>{
-    document.getElementById(k+'Bar').style.width=w;
-    document.getElementById(k+'Bar').style.background=c;
-    document.getElementById(k+'Val').textContent=w;
-  });
-  document.getElementById('rpgAvatar').innerHTML='🎭<div class="lv">JUNIOR</div>';
+  document.getElementById('rpgStatsList').innerHTML='';
+  document.getElementById('rpgTags').innerHTML='';
+  document.getElementById('rpgAvatar').textContent='🎭';
   document.getElementById('rpgName').textContent='—';
   document.getElementById('rpgClass').textContent='—';
   document.getElementById('ccTL').textContent='LV 1';
-  document.getElementById('ccTR').textContent='—';
-  document.getElementById('rpgTags').innerHTML='';
+  document.getElementById('rpgStars').textContent='★★★☆☆';
   document.getElementById('rpgLore').textContent='—';
+  S.tension=30;S.progress=10;S.resist=60;
+  renderMeters();
 }
 
 function restartSession(){
-  // Keep same setup params, reset everything else
   S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
-  resetUI();
-  startSession();
+  resetUI();startSession();
 }
-
 function newScenario(){
-  // Back to setup with full reset
   S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
   S.sitcomChar=null;S.persona=null;
-  resetUI();
-  goTo('setup');
+  resetUI();goTo('setup');
 }
 
-// ── BUG REPORT ────────────────────────────────────────────────────
+// ── BUG ───────────────────────────────────────────────────────────
 async function submitBug(){
   const email=document.getElementById('bugEmail').value.trim();
-  const type=document.getElementById('bugType').value;
   const desc=document.getElementById('bugDesc').value.trim();
-  const when=document.getElementById('bugWhen').value.trim();
   const fr=S.lang==='fr';
-  if(!email){alert(fr?'Merci d\'entrer ton email.':'Please enter your email.');return;}
-  if(!desc){alert(fr?'Merci de décrire le problème.':'Please describe the issue.');return;}
+  if(!email||!desc){alert(fr?'Email et description requis.':'Email and description required.');return;}
   const btn=document.getElementById('bug_submit');
-  btn.textContent=fr?'Envoi en cours…':'Sending…';btn.disabled=true;
+  btn.textContent=fr?'Envoi…':'Sending…';btn.disabled=true;
   try{
-    const r=await fetch('https://formspree.io/f/mbdqznaz',{
-      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({email,type:type||'Non précisé',description:desc,moment:when||'Non précisé'})
-    });
+    const r=await fetch('https://formspree.io/f/mbdqznaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,type:document.getElementById('bugType').value||'—',description:desc,moment:document.getElementById('bugWhen').value||'—'})});
     const d=await r.json();
-    if(d.ok){
-      ['bugDesc','bugWhen','bugEmail'].forEach(id=>document.getElementById(id).value='');
-      document.getElementById('bugType').value='';
-      btn.textContent=fr?'✅ Rapport envoyé !':'✅ Report sent!';
-      setTimeout(()=>{btn.textContent=fr?'Envoyer le rapport →':'Send report →';btn.disabled=false;},3000);
-    }else throw new Error('Formspree error');
-  }catch{
-    btn.textContent=fr?'Envoyer le rapport →':'Send report →';
-    btn.disabled=false;
-    alert(fr?'Erreur lors de l\'envoi. Réessaie.':'Error sending. Please try again.');
-  }
+    if(d.ok){btn.textContent=fr?'✅ Envoyé !':'✅ Sent!';setTimeout(()=>{btn.textContent=fr?'Envoyer →':'Send →';btn.disabled=false;},3000);}
+    else throw new Error();
+  }catch{btn.textContent=fr?'Envoyer →':'Send →';btn.disabled=false;alert(fr?'Erreur. Réessaie.':'Error. Try again.');}
 }
 
 // ── INIT ──────────────────────────────────────────────────────────
+updateBdf(30);
+renderMeters();
 goTo('langscreen');
 </script>
 </body>
