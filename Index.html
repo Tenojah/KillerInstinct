@@ -322,19 +322,42 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
       <div class="form-group">
         <label id="lbl_context">Ton objectif</label>
-        <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCount('contextText','contextCount',50)"></textarea>
+        <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCharCount('contextText','contextCount',250)"></textarea>
         <div class="field-footer">
           <span class="field-hint" id="hint_context">Sois précis et concret — qui, quoi, quel montant, quel délai. Plus c'est clair, plus l'adversaire sera calibré.</span>
-          <span class="word-count ok" id="contextCount">0 / 50</span>
+          <span class="word-count ok" id="contextCount">0 / 250</span>
         </div>
       </div>
       <div class="form-group">
         <label id="lbl_obstacles">Obstacles & objections de l'adversaire</label>
-        <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCount('obstaclesText','obstaclesCount',50)"></textarea>
+        <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
         <div class="field-footer">
           <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes. Ça rend l'adversaire plus réaliste et l'entraînement plus utile.</span>
-          <span class="word-count ok" id="obstaclesCount">0 / 50</span>
+          <span class="word-count ok" id="obstaclesCount">0 / 250</span>
         </div>
+      </div>
+      <!-- JAUGE MAUVAISE FOI — Option C -->
+      <div class="bdf-wrap" style="background:#1A1A22;border-radius:10px;padding:1rem 1.2rem;border:1px solid #2A2836;margin-top:.4rem;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;">
+          <span class="bdf-label-main" id="lbl_bdf" style="font-size:11px;color:#8A8070;font-weight:700;letter-spacing:.04em;">Mauvaise foi de l'adversaire</span>
+          <span class="bdf-pill" id="bdfPill" style="font-size:11px;padding:3px 10px;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid;transition:all .3s;">—</span>
+        </div>
+        <!-- Slider avec gradient visuel -->
+        <div style="position:relative;height:4px;background:#2A2836;border-radius:2px;margin-bottom:8px;">
+          <div id="bdfTrackFill" style="height:100%;border-radius:2px;background:linear-gradient(to right,#27ae60,#f39c12,#e67e22);width:30%;transition:width .2s;"></div>
+          <div id="bdfThumb" style="position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#f39c12;border:2px solid #0F0F14;transition:left .2s,background .3s;pointer-events:none;"></div>
+          <input type="range" class="bdf-slider" id="bdfSlider" min="0" max="100" value="30" oninput="updateBdf(this.value)" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;">
+        </div>
+        <!-- Labels paliers -->
+        <div style="display:flex;justify-content:space-between;margin-bottom:.6rem;" id="bdfPaliersRow">
+          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Lorem</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Ipsum</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Dolor</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Amet</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Sit</span>
+        </div>
+        <!-- Description dynamique -->
+        <div id="bdfDesc" style="font-size:10px;color:#8A8070;font-style:italic;line-height:1.55;"></div>
       </div>
     </div>
     <div class="form-section">
@@ -362,23 +385,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           </select>
         </div>
       </div>
-      <div class="bdf-wrap">
-        <div class="bdf-header">
-          <span class="bdf-label-main" id="lbl_bdf">Mauvaise foi de l'adversaire</span>
-          <span class="bdf-pill" id="bdfPill">—</span>
-        </div>
-        <div class="bdf-slider-row">
-          <input type="range" class="bdf-slider" id="bdfSlider" min="0" max="100" value="30" oninput="updateBdf(this.value)">
-          <span class="bdf-val" id="bdfVal">30</span>
-        </div>
-        <div class="bdf-paliers" id="bdfPaliers">
-          <span class="bdf-palier">Lorem</span>
-          <span class="bdf-palier">Ipsum</span>
-          <span class="bdf-palier">Dolor</span>
-          <span class="bdf-palier">Amet</span>
-          <span class="bdf-palier">Sit</span>
-        </div>
-      </div>
+
     </div>
     <button class="btn-start" onclick="startSession()" id="btn_start">⚔️ Entrer en négociation</button>
   </div>
@@ -567,13 +574,36 @@ function getBdfPalier(val){
 }
 function updateBdf(val){
   S.badFaith=parseInt(val);
-  document.getElementById('bdfVal').textContent=val;
-  const p=getBdfPalier(parseInt(val));
+  const p=getBdfPalier(S.badFaith);
+
+  // Pill
   const pill=document.getElementById('bdfPill');
-  pill.textContent=p.label;pill.style.color=p.color;pill.style.borderColor=p.color;pill.style.background=p.bg;
-  const sl=document.getElementById('bdfSlider');
-  sl.style.background=`linear-gradient(to right,${p.color} 0%,${p.color} ${val}%,rgba(255,255,255,.1) ${val}%,rgba(255,255,255,.1) 100%)`;
-  sl.style.accentColor=p.color;
+  if(pill){pill.textContent=p.label;pill.style.color=p.color;pill.style.borderColor=p.color;pill.style.background=p.bg;}
+
+  // Track fill + thumb
+  const fill=document.getElementById('bdfTrackFill');
+  const thumb=document.getElementById('bdfThumb');
+  if(fill) fill.style.width=val+'%';
+  if(thumb){thumb.style.left=val+'%';thumb.style.background=p.color;}
+
+  // Palier labels — active en couleur, inactifs grisés
+  const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
+  const allPaliers=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
+  paliers.forEach((el,i)=>{
+    const isActive=S.badFaith<=allPaliers[i].max&&(i===0||S.badFaith>allPaliers[i-1].max);
+    el.style.color=isActive?allPaliers[i].color:'#F0EDE6';
+    el.textContent=allPaliers[i].label;
+  });
+
+  // Description dynamique
+  const desc=document.getElementById('bdfDesc');
+  if(desc){
+    const fr=S.lang==='fr';
+    const descs_fr=['Joue franc jeu. Pas de manipulation, pas d\'esquive.','Défend ses intérêts sans tricher.','Peut déformer légèrement les faits, esquiver les questions gênantes.','Retourne les arguments, minimise, change de position sans l\'admettre.','Ment par omission, instrumentalise les émotions, fausses concessions.'];
+    const descs_en=['Plays it straight. No manipulation, no dodging.','Defends interests without cheating.','May slightly twist facts and dodge uncomfortable questions.','Flips arguments, minimizes, shifts positions without admitting it.','Lies by omission, weaponizes emotions, uses fake concessions.'];
+    const idx=allPaliers.findIndex(x=>S.badFaith<=x.max);
+    desc.textContent=(fr?descs_fr:descs_en)[idx]||'';
+  }
 }
 
 // ── METER STATUS LABELS ───────────────────────────────────────────
@@ -656,12 +686,11 @@ function renderCardStats(p){
 }
 
 // ── WORD COUNT ────────────────────────────────────────────────────
-function countWords(str){return str.trim()===''?0:str.trim().split(/\s+/).length;}
-function updateCount(tid,cid,max){
-  const w=countWords(document.getElementById(tid).value);
+function updateCharCount(tid,cid,max){
+  const len=document.getElementById(tid).value.length;
   const el=document.getElementById(cid);
-  el.textContent=`${w} / ${max}`;
-  el.className='word-count '+(w>max?'over':w>max*.8?'warn':'ok');
+  el.textContent=`${len} / ${max}`;
+  el.className='word-count '+(len>=max?'over':len>max*.8?'warn':'ok');
 }
 
 // ── STATE ─────────────────────────────────────────────────────────
