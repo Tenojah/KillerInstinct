@@ -464,6 +464,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
             <option value="immersive" id="opt_im">🎭 Immersif — Débrief uniquement</option>
           </select>
         </div>
+
       </div>
     </div>
     <button class="btn-start" onclick="startSession()" id="btn_start">⚔️ Entrer en négociation</button>
@@ -1045,7 +1046,7 @@ Return ONLY this JSON — no markdown, no extra text:
 "tone":"how YOU speak in real life — vocabulary, sentence length, verbal tics, register",
 "emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
 "relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
-"openingLine":"YOUR very first spoken line, from YOUR side. You know what the player wants — respond from YOUR position, not theirs. 1-2 sentences in ${lang}. No meta-instructions."}`}],
+}`}],
     'Raw JSON only. No markdown. No backticks.',500,'low');
     let p;
     try{p=JSON.parse(raw.trim());}
@@ -1060,17 +1061,21 @@ Return ONLY this JSON — no markdown, no extra text:
     renderCardStats(p);
     renderMeters();
     S.systemPrompt=buildSys(p,lang);
+    // Generate openingLine using buildSys as system prompt — correct roles guaranteed
+    const olReply=await ai([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,120);
+    const openingLine=olReply.trim();
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
-    S.messages.push({role:'assistant',content:p.openingLine});
+    S.messages.push({role:'assistant',content:openingLine});
     goTo('game');hideLoading();
     document.getElementById('gameTitle').textContent=`vs ${S.sitcomChar}`;
+
     const pill=document.getElementById('modePill');
     const isTr=S.feedbackMode==='training';
     pill.textContent=fr?(isTr?'ENTRAÎNEMENT':'IMMERSIF'):(isTr?'TRAINING':'IMMERSIVE');
     pill.className='mode-pill '+(isTr?'training':'immersive');
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
-    addMsg('ai',p.openingLine);
+    addMsg('ai',openingLine);
   }catch(e){hideLoading();alert(fr?'Erreur. Réessaie.':'Error. Try again.');console.error(e);return;}
   document.getElementById('userInput').focus();
 }
@@ -1117,6 +1122,16 @@ BEHAVIOR:
 - Short sentences. Hesitate, deflect, change subject when under pressure.
 - Rotate tactics naturally: silence, reframing, loss aversion, higher authority, false deadline. Never label them.
 - Strong argument from player → show a crack. Player repeats/concedes → harden. Player circles → show impatience.
+
+READING THE PLAYER — React to HOW they speak, not just WHAT they say:
+- Irony or sarcasm → don't ignore it. Get annoyed, call it out, turn it back on them.
+- Flattery or charm → be suspicious, flattered, or unmoved depending on who you are.
+- Aggression or provocation → match it, shut down, or go cold — but never pretend it didn't happen.
+- Very short or evasive answer → read it as avoidance or pressure, react to the silence.
+- Humor → you can be caught off guard, laugh despite yourself, or use it to deflect.
+- Desperation or emotional plea → exploit it, soften slightly, or feel guilty — depending on your bad faith level.
+You are a real person. Real people notice tone. React to it.
+
 LANGUAGE — Respond EXCLUSIVELY in ${lang}. No stage directions. No meta-commentary.
 Only add [FIN_NEGO] if player explicitly accepts your terms OR you have said you are walking away and player did not respond.
 2–4 sentences per response.`;
@@ -1177,7 +1192,7 @@ async function sendMessage(){
     addMsg('ai',clean);
     updateMeters(text,clean);
     detectTechs(text);
-    if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text);
+    if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text,clean);
     if(hasEnd||S.turn>=S.maxTurns){endNaturally(hasEnd);return;}
   }catch(e){removeTyping();addMsg('system','Erreur : '+e.message);}
   document.getElementById('sendBtn').disabled=false;
@@ -1238,12 +1253,27 @@ function detectTechs(msg){
   });
 }
 
-async function genFeedback(msg){
+
+async function genFeedback(playerMsg, opponentReply){
   const fr=S.lang==='fr';
   const prompt=fr
-    ?`Coach en négociation. Joueur : posture "${S.posture}", objectif "${S.context}". Adversaire : "${S.opponent}". 1 phrase simple, commence par un emoji. Ne confonds pas les rôles. Message joueur : "${msg}"`
-    :`Negotiation coach. Player: stance "${S.posture}", goal "${S.context}". Opponent: "${S.opponent}". 1 simple sentence, start with emoji. Don't confuse roles. Player message: "${msg}"`;
-  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach.',120);addMsg('feedback',fb);}catch{}
+    ?`Tu es coach en négociation. Analyse CE QUE LE JOUEUR a dit et donne-lui 1 conseil tactique court.
+
+CONTEXTE :
+- Le joueur veut : "${S.context}" (posture : "${S.posture}")
+- L'adversaire (${S.opponent}) vient de dire : "${opponentReply}"
+- Le joueur a répondu : "${playerMsg}"
+
+Donne 1 conseil court au JOUEUR (pas à l'adversaire). Commence par un emoji. Max 1 phrase.`
+    :`You are a negotiation coach. Analyze WHAT THE PLAYER said and give them 1 short tactical tip.
+
+CONTEXT:
+- Player wants to: "${S.context}" (stance: "${S.posture}")
+- Opponent (${S.opponent}) just said: "${opponentReply}"
+- Player replied: "${playerMsg}"
+
+Give 1 short tip to THE PLAYER (not the opponent). Start with an emoji. Max 1 sentence.`;
+  try{const fb=await ai([{role:'user',content:prompt}],'You are a negotiation coach. Never confuse player and opponent roles.',150);addMsg('feedback',fb);}catch{}
 }
 
 // ── STT ───────────────────────────────────────────────────────────
