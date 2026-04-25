@@ -485,7 +485,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <div class="gh-meta">
           <span class="mode-pill training" id="modePill">ENTRAÎNEMENT</span>
           <span class="turn-pill" id="turnCounter">Tour 0 / 15</span>
-          <button class="btn-tts" id="ttsToggle" onclick="toggleTTS()" title="Activer la voix">🔇</button>
+
         </div>
       </div>
     </div>
@@ -932,7 +932,6 @@ async function startSession(){
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     addMsg('ai',p.openingLine);
-    speakText(p.openingLine);
   }catch(e){hideLoading();alert(fr?'Erreur. Réessaie.':'Error. Try again.');console.error(e);return;}
   document.getElementById('userInput').focus();
 }
@@ -1036,7 +1035,6 @@ async function sendMessage(){
     const clean=reply.replace('[FIN_NEGO]','').trim();
     S.messages.push({role:'assistant',content:clean});
     addMsg('ai',clean);
-    speakText(clean);
     updateMeters(text,clean);
     detectTechs(text);
     if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text);
