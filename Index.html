@@ -1099,9 +1099,9 @@ function detectTechs(msg){
 async function genFeedback(msg){
   const fr=S.lang==='fr';
   const prompt=fr
-    ?`En 1 phrase simple en français, dis au négociateur ce qu'il vient de bien faire ou ce qu'il aurait pu faire mieux. Commence par un emoji. Message : "${msg}"`
-    :`In 1 simple sentence in English, tell the negotiator what they just did well or could have done better. Start with emoji. Message: "${msg}"`;
-  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach.',100);addMsg('feedback',fb);}catch{}
+    ?`Tu es coach en négociation. Le joueur joue la posture : "${S.posture}" — son objectif : "${S.context}". L'adversaire joue : "${S.opponent}". En 1 phrase simple, dis au joueur ce qu'il vient de bien faire ou ce qu'il aurait pu mieux faire. Commence par un emoji. Ne confonds jamais les rôles — le joueur n'est PAS l'adversaire. Message du joueur : "${msg}"`
+    :`You are a negotiation coach. The player's stance is: "${S.posture}" — their goal: "${S.context}". The opponent plays: "${S.opponent}". In 1 simple sentence, tell the player what they just did well or could have done better. Start with an emoji. Never confuse the roles — the player is NOT the opponent. Player's message: "${msg}"`;
+  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach. Plain language only.',120);addMsg('feedback',fb);}catch{}
 }
 
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
@@ -1128,13 +1128,15 @@ async function endSession(auto=false){
     return;
   }
   const prompt=fr
-    ?`Tu es un coach en négociation. Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown.
+    ?`Tu es un coach en négociation. Le joueur joue la posture : "${S.posture}" — son objectif : "${S.context}". L'adversaire joue : "${S.opponent}". Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown.
 Score : 0-30 aucune technique / 31-50 pas de structure / 51-70 tient sa position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
+Ne confonds jamais les rôles — le joueur n'est PAS l'adversaire.
 Techniques détectées : ${detectedList}
 {"score":42,"verdict":"1 phrase","strengths":["point 1","point 2"],"mistakes":["erreur 1","erreur 2"],"keyMoment":"tournant décisif","advice":"1 conseil concret"}
 Transcript:\n${transcript}`
-    :`You are a negotiation coach. Analyze only this transcript. Respond ONLY with valid JSON, no markdown.
+    :`You are a negotiation coach. The player's stance is: "${S.posture}" — their goal: "${S.context}". The opponent plays: "${S.opponent}". Analyze only this transcript. Respond ONLY with valid JSON, no markdown.
 Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
+Never confuse the roles — the player is NOT the opponent.
 Techniques detected: ${detectedList}
 {"score":42,"verdict":"1 sentence","strengths":["strength 1","strength 2"],"mistakes":["mistake 1","mistake 2"],"keyMoment":"decisive turning point","advice":"1 concrete tip"}
 Transcript:\n${transcript}`;
