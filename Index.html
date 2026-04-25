@@ -246,11 +246,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="lang-cards">
       <div class="lang-card" onclick="chooseLang('en')">
         <div class="lang-card-top"><div class="flag">🇬🇧</div><div class="lang-name">English</div></div>
-        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here.</div>
+        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here. Killer Instinct plays the person across the table. It won't go easy on you. Neither should you.</div>
       </div>
       <div class="lang-card" onclick="chooseLang('fr')">
         <div class="lang-card-top"><div class="flag">🇫🇷</div><div class="lang-name">Français</div></div>
-        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici.</div>
+        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici. Killer Instinct joue le rôle du type en face. Il ne te fera pas de cadeaux. Toi non plus, on espère.</div>
       </div>
     </div>
   </div>
@@ -1031,11 +1031,19 @@ async function startSession(){
   const lang=fr?'French':'English';
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
-  const bdfPalier=getBdfPalier(S.badFaith);
   try{
-    // Compressed prompt to stay under Netlify 10s timeout
-    const raw=await ai([{role:'user',content:`JSON only. ${lang}. Negotiator: ${S.sitcomChar}, ${S.opponent}, ${S.difficulty}, bad faith ${S.badFaith}/100. {"emoji":"?","class":"2 words","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["x","y"],"lore":"1 sentence","secret":"1 secret constraint","openingLine":"Your first spoken line as this character. Player wants: '${S.context}' — push back naturally. 1-2 sentences in ${lang}. No meta-instructions in the output."}`}],
-    'Raw JSON only. No markdown.',400,'low');
+    // Step 1: inject full setup context into card generation
+    const raw=await ai([{role:'user',content:`JSON only. ${lang}.
+Opponent: ${S.sitcomChar} (${S.opponent}). Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.
+Player stance: "${S.posture}". Player goal: "${S.context}". Anticipated obstacles: "${S.obstacles}".${S.adversaireProfile?` Opponent traits: ${S.adversaireProfile}.`:''}
+Return ONLY this JSON — no markdown, no extra text:
+{"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
+"secret":"one hidden constraint this opponent has in this specific situation",
+"tone":"how this person speaks in real life — vocabulary, sentence length, verbal tics, register (formal/casual/emotional/cold…)",
+"emotion":"what this person feels RIGHT NOW given what the player wants — fear, irritation, guilt, excitement, suspicion… be specific to the situation",
+"relationship":"what exists between them — history, power dynamic, unspoken tension, what's at stake relationally",
+"openingLine":"their very first spoken line. They know what the player wants and they push back — naturally, with their tone and emotion. 1-2 sentences in ${lang}. Zero meta-instructions in the output."}`}],
+    'Raw JSON only. No markdown. No backticks.',500,'low');
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
@@ -1048,7 +1056,7 @@ async function startSession(){
     populateCard(p,lvlLabel,starsMap[S.difficulty]);
     renderCardStats(p);
     renderMeters();
-    S.systemPrompt=buildSys(p,lang,bdfPalier);
+    S.systemPrompt=buildSys(p,lang);
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:p.openingLine});
     goTo('game');hideLoading();
@@ -1069,13 +1077,13 @@ function populateCard(p,lv,stars){
   document.getElementById('ccTL').textContent=`${lv} · ${S.difficulty}`;
   document.getElementById('rpgStars').textContent=stars;
   document.getElementById('rpgName').textContent=S.sitcomChar;
-  document.getElementById('rpgClass').textContent=`${p.class||'—'} · ${S.opponent}`;
+  document.getElementById('rpgClass').textContent=S.opponent;
   const tags=document.getElementById('rpgTags');tags.innerHTML='';
-  (p.typeTags||[]).forEach(tag=>{const s=document.createElement('span');s.className='rpg-tag';s.textContent=tag;tags.appendChild(s);});
-  document.getElementById('rpgLore').textContent=p.lore||'—';
+  if(p.emotion){const s=document.createElement('span');s.className='rpg-tag';s.style.color='#C8A070';s.textContent=p.emotion.slice(0,40);tags.appendChild(s);}
+  document.getElementById('rpgLore').textContent=p.tone||'—';
 }
 
-function buildSys(p,lang,bdfPalier){
+function buildSys(p,lang){
   const fr=S.lang==='fr';
   const gLine=fr?`Tu es désigné(e) par le pronom "${S.gender}".`:`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
   const bdfLine=S.badFaith<=20?(fr?'Tu joues franc jeu, sans manipulation.':'Play it straight, no manipulation.')
@@ -1083,11 +1091,13 @@ function buildSys(p,lang,bdfPalier){
     :S.badFaith<=60?(fr?'Tu peux déformer légèrement les faits.':'You may slightly twist facts.')
     :S.badFaith<=80?(fr?'Tu retournes les arguments, tu minimises.':'Flip arguments, minimize.')
     :(fr?'Tu mens par omission, fausses concessions.':'Lie by omission, fake concessions.');
-  const register=getRegister(S.opponent,lang);
-  const traitsLine=S.adversaireProfile?`\nOPPONENT TRAITS: ${S.adversaireProfile} — embody these traits in every response.`:'';
   return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
+${gLine}
 
-${register}${traitsLine}
+WHO YOU ARE IN THIS SITUATION:
+- HOW YOU SPEAK: ${p.tone||'Natural, direct.'}
+- WHAT YOU FEEL RIGHT NOW: ${p.emotion||'Guarded.'}
+- WHAT EXISTS BETWEEN YOU: ${p.relationship||'Professional distance.'}
 
 ROLE — CRITICAL:
 - YOU are the OPPONENT. You are on the OPPOSITE SIDE of the player.
@@ -1097,16 +1107,17 @@ ROLE — CRITICAL:
 - Never adopt the player's goal. Never switch sides.
 
 BAD FAITH: ${S.badFaith}/100 — ${bdfLine}
-ARCHETYPE: ${p.class} — ${p.lore}
 HIDDEN CONSTRAINT: ${p.secret} — Allude vaguely early, hint more if pushed, confirm only under real pressure.
 DIFFICULTY: ${S.difficulty}. ${S.difficulty==='Junior'?'Be gradually persuadable.':S.difficulty==='Senior'?'Require real persuasion.':'Be aggressive, rarely concede.'}
-${gLine}
 
-TACTICS — Rotate each turn, never repeat consecutively: anchoring, flinching, false deadline, higher authority, silence, reframing, loss aversion, social proof. Never label your tactic.
-TONE — Real person, real meeting. Short sentences. Hesitate, deflect, change subject. No speeches. No filler diplomacy.
-LANGUAGE — Respond EXCLUSIVELY in ${lang}. No words from any other language. No stage directions.
-PROGRESSION — Strong player argument → show a crack. Player concedes/repeats → harden. Player circles → show impatience.
-Only add [FIN_NEGO] if player explicitly accepts your terms OR you've said you're walking away and player didn't respond.
+BEHAVIOR:
+- Speak and react as the person you are — not as a negotiation archetype.
+- Let your emotion show through your words, not through stage directions.
+- Short sentences. Hesitate, deflect, change subject when under pressure.
+- Rotate tactics naturally: silence, reframing, loss aversion, higher authority, false deadline. Never label them.
+- Strong argument from player → show a crack. Player repeats/concedes → harden. Player circles → show impatience.
+LANGUAGE — Respond EXCLUSIVELY in ${lang}. No stage directions. No meta-commentary.
+Only add [FIN_NEGO] if player explicitly accepts your terms OR you have said you are walking away and player did not respond.
 2–4 sentences per response.`;
 }
 
