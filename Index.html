@@ -906,7 +906,7 @@ async function startSession(){
   const bdfPalier=getBdfPalier(S.badFaith);
   try{
     // Compressed prompt to stay under Netlify 10s timeout
-    const raw=await ai([{role:'user',content:`JSON only. ${lang}. Negotiator: ${S.sitcomChar}, ${S.opponent}, ${S.difficulty}, bad faith ${S.badFaith}/100. {"emoji":"?","class":"2 words","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["x","y"],"lore":"1 sentence","secret":"1 secret constraint","openingLine":"Resist: '${S.context}'. 1-2 sentences in ${lang}."}`}],
+    const raw=await ai([{role:'user',content:`JSON only. ${lang}. Negotiator: ${S.sitcomChar}, ${S.opponent}, ${S.difficulty}, bad faith ${S.badFaith}/100. {"emoji":"?","class":"2 words","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["x","y"],"lore":"1 sentence","secret":"1 secret constraint","openingLine":"Your first spoken line as this character. Player wants: '${S.context}' — push back naturally. 1-2 sentences in ${lang}. No meta-instructions in the output."}`}],
     'Raw JSON only. No markdown.',400,'low');
     let p;
     try{p=JSON.parse(raw.trim());}
@@ -932,6 +932,7 @@ async function startSession(){
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     addMsg('ai',p.openingLine);
+    speakText(p.openingLine);
   }catch(e){hideLoading();alert(fr?'Erreur. Réessaie.':'Error. Try again.');console.error(e);return;}
   document.getElementById('userInput').focus();
 }
@@ -1035,6 +1036,7 @@ async function sendMessage(){
     const clean=reply.replace('[FIN_NEGO]','').trim();
     S.messages.push({role:'assistant',content:clean});
     addMsg('ai',clean);
+    speakText(clean);
     updateMeters(text,clean);
     detectTechs(text);
     if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text);
