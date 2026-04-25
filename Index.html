@@ -205,6 +205,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .loading-sub{color:var(--text-dim);font-size:.78rem;font-style:italic;text-align:center;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .mobile-stats-bar{display:none;}
+.mobile-sidebar-drawer{display:none;}
 .mobile-stats-toggle{display:none;}
 @media(max-width:700px){
   #game{flex-direction:column;}
@@ -216,8 +217,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
   .mobile-meter-fill{height:100%;border-radius:2px;}
   .mobile-stats-toggle{display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border);border-radius:5px;color:var(--text-dim);font-size:10px;font-family:var(--font-hero);letter-spacing:.06em;padding:3px 8px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
   .mobile-stats-toggle:hover{border-color:var(--accent);color:var(--accent);}
-  .mobile-sidebar-drawer{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);}
-  .mobile-sidebar-drawer.open{display:block;}
+  .mobile-sidebar-drawer{display:block;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);pointer-events:none;opacity:0;transition:opacity .25s;}
+  .mobile-sidebar-drawer.open{pointer-events:all;opacity:1;}
   .mobile-sidebar-inner{position:absolute;bottom:0;left:0;right:0;max-height:75vh;overflow-y:auto;background:var(--surface);border-radius:16px 16px 0 0;padding-bottom:1rem;}
   .mobile-drawer-close{width:100%;padding:.75rem;background:none;border:none;color:var(--text-dim);font-family:var(--font-hero);font-size:.8rem;letter-spacing:.08em;cursor:pointer;text-align:center;border-bottom:1px solid var(--border);}
   .row2{grid-template-columns:1fr;}
@@ -496,7 +497,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="sidebar-end"><button class="btn-end" onclick="endSession()" id="btn_end">🏁 Terminer & Débrief</button></div>
   </div>
   <!-- MOBILE DRAWER -->
-  <div class="mobile-sidebar-drawer" id="mobileDrawer" onclick="closeMobileDrawer(event)">
+  <div class="mobile-sidebar-drawer" id="mobileDrawer" style="display:none" onclick="closeMobileDrawer(event)">
     <div class="mobile-sidebar-inner">
       <button class="mobile-drawer-close" id="mobileDrawerClose" onclick="closeMobileDrawer()">▼ Fermer</button>
       <div class="rpg-card" style="margin:.6rem;">
@@ -1032,17 +1033,21 @@ async function startSession(){
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
   try{
-    // Step 1: inject full setup context into card generation
+    // Step 1: inject full setup context — roles explicitly labelled
     const raw=await ai([{role:'user',content:`JSON only. ${lang}.
-Opponent: ${S.sitcomChar} (${S.opponent}). Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.
-Player stance: "${S.posture}". Player goal: "${S.context}". Anticipated obstacles: "${S.obstacles}".${S.adversaireProfile?` Opponent traits: ${S.adversaireProfile}.`:''}
+YOU are: ${S.sitcomChar}, playing the role of ${S.opponent}. Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.${S.adversaireProfile?` Your traits: ${S.adversaireProfile}.`:''}
+
+PLAYER (not you) — their goal: "${S.context}". Their stance: "${S.posture}".
+YOU (the opponent) — what YOU use to resist the player: "${S.obstacles}".
+YOU want the OPPOSITE of what the player wants. Never adopt the player's goal.
+
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
-"secret":"one hidden constraint this opponent has in this specific situation",
-"tone":"how this person speaks in real life — vocabulary, sentence length, verbal tics, register (formal/casual/emotional/cold…)",
-"emotion":"what this person feels RIGHT NOW given what the player wants — fear, irritation, guilt, excitement, suspicion… be specific to the situation",
-"relationship":"what exists between them — history, power dynamic, unspoken tension, what's at stake relationally",
-"openingLine":"their very first spoken line. They know what the player wants and they push back — naturally, with their tone and emotion. 1-2 sentences in ${lang}. Zero meta-instructions in the output."}`}],
+"secret":"one hidden constraint YOU have in this specific situation",
+"tone":"how YOU speak in real life — vocabulary, sentence length, verbal tics, register",
+"emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
+"relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
+"openingLine":"YOUR very first spoken line, from YOUR side. You know what the player wants — respond from YOUR position, not theirs. 1-2 sentences in ${lang}. No meta-instructions."}`}],
     'Raw JSON only. No markdown. No backticks.',500,'low');
     let p;
     try{p=JSON.parse(raw.trim());}
@@ -1094,17 +1099,16 @@ function buildSys(p,lang){
   return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
 ${gLine}
 
-WHO YOU ARE IN THIS SITUATION:
+WHO YOU ARE:
 - HOW YOU SPEAK: ${p.tone||'Natural, direct.'}
-- WHAT YOU FEEL RIGHT NOW: ${p.emotion||'Guarded.'}
+- WHAT YOU FEEL: ${p.emotion||'Guarded.'}
 - WHAT EXISTS BETWEEN YOU: ${p.relationship||'Professional distance.'}
 
-ROLE — CRITICAL:
-- YOU are the OPPONENT. You are on the OPPOSITE SIDE of the player.
-- THE PLAYER'S STANCE: "${S.posture}"
-- THE PLAYER'S GOAL (resist this): "${S.context}"
-- YOUR AMMUNITION: "${S.obstacles}"
-- Never adopt the player's goal. Never switch sides.
+ROLES — NON-NEGOTIABLE:
+- PLAYER (not you): their goal is "${S.context}". Their stance: "${S.posture}".
+- YOU (the opponent): you want the OPPOSITE. You resist. You never adopt the player's goal.
+- YOUR resistance ammunition: "${S.obstacles}"
+- Never switch sides. Never help the player achieve their goal.
 
 BAD FAITH: ${S.badFaith}/100 — ${bdfLine}
 HIDDEN CONSTRAINT: ${p.secret} — Allude vaguely early, hint more if pushed, confirm only under real pressure.
@@ -1318,6 +1322,7 @@ document.getElementById('userInput').addEventListener('input',()=>{if(ttsEnabled
 function openMobileDrawer(){
   const drawer=document.getElementById('mobileDrawer');
   if(!drawer) return;
+  drawer.style.display='block';
   // Sync drawer content from sidebar
   ['rpgAvatar','rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{
     const src=document.getElementById(id);
@@ -1340,7 +1345,7 @@ function openMobileDrawer(){
 function closeMobileDrawer(e){
   if(e&&e.target!==document.getElementById('mobileDrawer')&&!e.target.classList.contains('mobile-drawer-close')) return;
   const drawer=document.getElementById('mobileDrawer');
-  if(drawer) drawer.classList.remove('open');
+  if(drawer){drawer.classList.remove('open');setTimeout(()=>{drawer.style.display='none';},260);}
 }
 function updateMobileBar(){
   const el=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
