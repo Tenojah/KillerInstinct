@@ -478,7 +478,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <div class="rpg-card-meta" id="ccTL">Senior</div>
         <div class="rpg-card-stars" id="rpgStars">★★★★☆</div>
         <div class="rpg-card-identity">
-          <div class="rpg-avatar-box" id="rpgAvatar">🎭</div>
           <div><div class="rpg-name" id="rpgName">—</div><div class="rpg-class" id="rpgClass">—</div></div>
         </div>
       </div>
@@ -505,7 +504,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <div class="rpg-card-meta" id="ccTL2"></div>
           <div class="rpg-card-stars" id="rpgStars2"></div>
           <div class="rpg-card-identity">
-            <div class="rpg-avatar-box" id="rpgAvatar2">🎭</div>
             <div><div class="rpg-name" id="rpgName2">—</div><div class="rpg-class" id="rpgClass2">—</div></div>
           </div>
         </div>
@@ -1037,9 +1035,9 @@ async function startSession(){
     const raw=await ai([{role:'user',content:`JSON only. ${lang}.
 YOU are: ${S.sitcomChar}, playing the role of ${S.opponent}. Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.${S.adversaireProfile?` Your traits: ${S.adversaireProfile}.`:''}
 
-PLAYER (not you) — their goal: "${S.context}". Their stance: "${S.posture}".
-YOU (the opponent) — what YOU use to resist the player: "${S.obstacles}".
-YOU want the OPPOSITE of what the player wants. Never adopt the player's goal.
+THE PLAYER (human, not you) wants to: "${S.context}". Their stance: "${S.posture}".
+YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
+The player's goal is what you must resist. Your goal is what you fight for.
 
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
@@ -1078,7 +1076,6 @@ Return ONLY this JSON — no markdown, no extra text:
 }
 
 function populateCard(p,lv,stars){
-  document.getElementById('rpgAvatar').textContent=p.emoji||'🎭';
   document.getElementById('ccTL').textContent=`${lv} · ${S.difficulty}`;
   document.getElementById('rpgStars').textContent=stars;
   document.getElementById('rpgName').textContent=S.sitcomChar;
@@ -1105,9 +1102,9 @@ WHO YOU ARE:
 - WHAT EXISTS BETWEEN YOU: ${p.relationship||'Professional distance.'}
 
 ROLES — NON-NEGOTIABLE:
-- PLAYER (not you): their goal is "${S.context}". Their stance: "${S.posture}".
-- YOU (the opponent): you want the OPPOSITE. You resist. You never adopt the player's goal.
-- YOUR resistance ammunition: "${S.obstacles}"
+- THE PLAYER (human) wants to: "${S.context}". Their stance: "${S.posture}".
+- YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
+- Fight for your goal. Resist the player's goal. Never switch sides.
 - Never switch sides. Never help the player achieve their goal.
 
 BAD FAITH: ${S.badFaith}/100 — ${bdfLine}
@@ -1438,7 +1435,6 @@ function resetUI(){
   document.getElementById('techList').innerHTML=`<div class="tech-empty" id="techEmpty">${fr?'Aucune technique détectée…':'No technique detected yet…'}</div>`;
   document.getElementById('rpgStatsList').innerHTML='';
   document.getElementById('rpgTags').innerHTML='';
-  document.getElementById('rpgAvatar').textContent='🎭';
   document.getElementById('rpgName').textContent='—';
   document.getElementById('rpgClass').textContent='—';
   document.getElementById('ccTL').textContent='LV 1';
