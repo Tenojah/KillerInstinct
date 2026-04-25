@@ -6,11 +6,10 @@
 <title>Killer Instinct</title>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0F0F14;--surface:#1A1A22;--surface2:#1C1B27;--surface3:#22202E;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8070;--text-soft:#C8C4BC;--text-muted:#6A6458;--text-faint:#4A4458;--danger:#C0392B;--success:#27AE60;--border:#2A2836;--border-gold:#6A5428;--gold1:#FFD700;--gold2:#C4A060;--gold3:#8B6914;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
+:root{--bg:#0F0F14;--surface:#1A1A22;--surface2:#1C1B27;--surface3:#22202E;--accent:#D4A853;--accent-dim:#9A7A3A;--accent-glow:rgba(212,168,83,.2);--text:#F0EDE6;--text-dim:#8A8070;--text-soft:#C8C4BC;--text-muted:#6A6458;--text-faint:#4A4458;--danger:#C0392B;--success:#27AE60;--border:#2A2836;--border-gold:#6A5428;--gold2:#C4A060;--font:'Nunito',system-ui,sans-serif;--font-hero:'Barlow Condensed',system-ui,sans-serif;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:100vh;overflow-x:hidden;}
-.screen{display:none;min-height:100vh;}
-.screen.active{display:flex;flex-direction:column;}
+.screen{display:none;min-height:100vh;}.screen.active{display:flex;flex-direction:column;}
 .landing-bg{background:radial-gradient(ellipse at 50% 0%,#2A2010 0%,#0F0F14 60%);}
 .ki-logo{font-family:var(--font-hero);font-size:clamp(3.5rem,12vw,7rem);font-weight:900;letter-spacing:-.01em;line-height:.95;text-transform:uppercase;}
 .ki-logo span{color:var(--accent);}
@@ -54,7 +53,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .gchip{padding:.5rem 1.2rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text-dim);font-family:var(--font);font-size:.88rem;font-weight:700;border-radius:20px;cursor:pointer;transition:all .18s;}
 .gchip.active{border-color:var(--accent);color:var(--accent);background:rgba(212,168,83,.1);}
 .gchip:hover:not(.active){border-color:var(--text-dim);color:var(--text);}
-/* POSTURE CHIPS */
 .posture-chips{display:flex;flex-wrap:wrap;gap:6px;}
 .pchip{position:relative;padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:11px;font-weight:700;color:#6A6458;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;transition:border-color .18s,color .18s;}
 .pchip:hover{border-color:#6A6058;color:var(--text-soft);}
@@ -62,25 +60,21 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .pchip-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#22202E;border:1px solid #3A3836;border-radius:6px;padding:6px 10px;font-size:10px;color:var(--text-soft);font-family:var(--font);font-weight:400;text-transform:none;letter-spacing:0;white-space:nowrap;pointer-events:none;z-index:10;}
 .pchip-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#3A3836;}
 .pchip:hover .pchip-tooltip{display:block;}
+.traits-trigger{width:100%;padding:.78rem 1rem;background:var(--surface);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:.9rem;outline:none;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:border-color .18s;}
+.traits-trigger:hover{border-color:var(--accent);}
+.traits-trigger.open{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);border-radius:6px 6px 0 0;}
+.traits-panel{background:var(--surface);border:1.5px solid var(--accent);border-top:none;border-radius:0 0 6px 6px;padding:1rem;display:none;}
+.traits-panel.open{display:block;}
+.trait-chip{padding:5px 12px;border-radius:20px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:11px;font-weight:700;color:#6A6458;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;transition:all .18s;display:inline-block;margin:2px;}
+.trait-chip:hover{border-color:#6A6058;color:var(--text-soft);}
+.trait-chip.active{border:1.5px solid var(--accent);background:rgba(212,168,83,.1);color:var(--accent);}
 .bdf-wrap{margin-bottom:1rem;}
-.bdf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
-.bdf-label-main{font-size:.78rem;font-weight:800;color:var(--text-soft);letter-spacing:.03em;}
-.bdf-pill{font-family:var(--font-hero);font-size:.72rem;font-weight:700;padding:.2rem .65rem;border-radius:10px;border:1px solid;letter-spacing:.06em;text-transform:uppercase;transition:all .3s;}
-.bdf-slider-row{display:flex;align-items:center;gap:.75rem;}
-.bdf-slider{flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;transition:background .3s;}
-.bdf-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);transition:background .3s;}
-.bdf-slider::-moz-range-thumb{width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);}
-.bdf-val{font-family:var(--font-hero);font-size:.75rem;color:var(--text-dim);width:28px;text-align:right;}
-.bdf-paliers{display:flex;justify-content:space-between;margin-top:.3rem;padding:0 1px;}
-.bdf-palier{font-size:.58rem;color:var(--text-dim);opacity:.5;font-family:var(--font-hero);letter-spacing:.04em;text-transform:uppercase;}
+.bdf-slider{flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;outline:none;cursor:pointer;}
+.bdf-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid var(--bg);}
 .btn-start{width:100%;margin-top:.8rem;padding:1rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1.1rem;letter-spacing:.1em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);transition:all .2s;}
 .btn-start:hover{background:#E8BC6A;transform:translateY(-2px);}
-
-/* ── GAME ── */
 #game{flex-direction:row;height:100vh;overflow:hidden;}
 .game-sidebar{width:300px;min-width:300px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;}
-
-/* RPG CARD — nouveau design */
 .rpg-card{margin:.85rem;border-radius:16px;overflow:hidden;background:var(--surface);border:1px solid var(--border-gold);}
 .rpg-card-header{position:relative;padding:1.2rem 1.4rem 0.8rem;background:var(--surface2);}
 .rpg-card-meta{position:absolute;top:12px;left:14px;font-size:9px;color:#5A5870;letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-hero);font-weight:700;}
@@ -101,8 +95,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .rpg-tags{padding:.8rem 1.2rem .7rem;display:flex;gap:5px;flex-wrap:wrap;}
 .rpg-tag{font-size:9px;padding:2px 8px;border-radius:3px;background:var(--surface3);color:#6A6478;letter-spacing:.05em;text-transform:uppercase;font-family:var(--font-hero);font-weight:700;}
 .rpg-lore{padding:0 1.2rem 1.2rem;font-size:10px;color:#706A80;line-height:1.6;font-style:italic;}
-
-/* SESSION METERS — nouveau design */
 .session-block{padding:.85rem 1rem;border-bottom:1px solid var(--border);}
 .block-title{font-family:var(--font-hero);font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:#5A5870;margin-bottom:.8rem;font-weight:700;}
 .meter-row-new{display:flex;align-items:center;gap:10px;}
@@ -114,9 +106,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .meter-emoji{font-size:10px;line-height:1;}
 .meter-status-txt{font-size:9px;color:var(--text-faint);}
 .meter-segments{display:flex;gap:2px;}
-.meter-seg{flex:1;height:4px;border-radius:1px;}
 .meter-sep{height:1px;background:#22202A;margin:8px 0;}
-
 .tech-block{padding:.75rem 1rem;flex:1;}
 .tech-list{display:flex;flex-direction:column;gap:.38rem;}
 .tech-item{display:flex;align-items:flex-start;gap:.5rem;padding:.45rem .65rem;background:rgba(255,255,255,.025);border:1px solid var(--border);border-radius:5px;}
@@ -151,8 +141,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .msg.end-msg{align-self:center;background:rgba(192,57,43,.06);border:1.5px solid rgba(192,57,43,.2);color:var(--text);max-width:85%;border-radius:7px;text-align:center;}
 .msg.end-msg .msg-label{color:var(--danger);text-align:center;}
 .typing{display:flex;gap:.4rem;align-items:center;padding:.82rem 1rem;background:var(--surface);border:1.5px solid var(--border);border-radius:8px;align-self:flex-start;}
-.typing span{width:6px;height:6px;background:var(--text-dim);border-radius:50%;animation:blink 1.2s infinite;}
-.typing span:nth-child(2){animation-delay:.2s;}.typing span:nth-child(3){animation-delay:.4s;}
+.typing span.dot{width:6px;height:6px;background:var(--text-dim);border-radius:50%;animation:blink 1.2s infinite;}
+.typing span.dot:nth-child(2){animation-delay:.2s;}
+.typing span.dot:nth-child(3){animation-delay:.4s;}
+.typing .think-txt{margin-left:6px;font-size:.78rem;color:#6A6458;font-style:italic;}
 @keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
 .input-area{padding:.9rem 1.4rem;border-top:1px solid var(--border);background:var(--surface);display:flex;gap:.7rem;align-items:flex-end;}
 .input-area textarea{flex:1;padding:.72rem 1rem;background:var(--surface2);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:.88rem;resize:none;outline:none;max-height:120px;min-height:42px;line-height:1.55;border-radius:6px;transition:all .18s;}
@@ -209,13 +201,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 </style>
 </head>
 <body>
-
 <div id="loadingOverlay">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="overlayText">La négo va commencer…</div>
   <div class="loading-sub" id="overlaySub">C'est l'heure du du du du duel !</div>
 </div>
-
 <div class="ki-footer" id="globalFooter" style="display:none;">
   <a onclick="goTo('about')" id="footer_about">ℹ️ À propos</a>
   <a href="mailto:cerf.jonathan@gmail.com" id="footer_contact">✉️ Contact</a>
@@ -225,7 +215,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 
 <!-- LANG -->
 <div id="langscreen" class="screen active landing-bg">
-  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;gap:0;">
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
     <div class="ki-sub">Negotiation Simulator</div>
     <div style="width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--accent-dim),transparent);margin:1.8rem auto;"></div>
@@ -256,10 +246,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="setup" class="screen">
   <div class="setup-wrap">
     <div class="setup-logo">KILLER<span>.</span>INSTINCT<span class="back-btn" onclick="goTo('langscreen')" id="btn_back">← Langue</span></div>
+
     <div class="form-section">
       <div class="section-label" id="sec_who">À qui tu fais face ?</div>
       <div class="form-group">
-        <label id="lbl_opponent">Profil adversaire</label>
+        <label id="lbl_opponent">Je négocie avec <span style="color:var(--danger)">*</span></label>
         <select id="opponentType">
           <option value="" id="opt_sel">— Choisir un profil —</option>
           <optgroup id="og_pro" label="💼 Professionnel">
@@ -326,89 +317,104 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <label id="lbl_custom">Décris ton adversaire</label>
         <input type="text" id="customOpponent" placeholder="ex. propriétaire agressif…"/>
       </div>
+      <div class="form-group">
+        <label id="lbl_adversaire_name">Nom de ton adversaire <span style="color:var(--text-dim);font-weight:400;font-size:.72rem;" id="lbl_adversaire_name_hint">(optionnel — sinon un personnage surprise)</span></label>
+        <input type="text" id="adversaireName" maxlength="40" placeholder="Ex: Marc, Sophie, Mon boss…"/>
+      </div>
     </div>
+
     <div class="form-section">
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
 
-      <!-- POSTURE -->
       <div class="form-group">
-        <label id="lbl_posture">Ma posture dans cette négociation</label>
+        <label id="lbl_posture">Ma posture dans cette négociation <span style="color:var(--danger)">*</span></label>
         <div class="posture-chips" id="postureChips">
-          <div class="pchip active" data-p="propose" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_propose">Je propose</span>
-            <div class="pchip-tooltip" id="ptt_propose">Je veux convaincre l'adversaire d'accepter quelque chose</div>
-          </div>
-          <div class="pchip" data-p="demande" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_demande">Je demande</span>
-            <div class="pchip-tooltip" id="ptt_demande">Je veux obtenir quelque chose que je n'ai pas encore</div>
-          </div>
-          <div class="pchip" data-p="defend" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_defend">Je défends</span>
-            <div class="pchip-tooltip" id="ptt_defend">Je veux maintenir ma position face à une pression</div>
-          </div>
-          <div class="pchip" data-p="refuse" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_refuse">Je refuse</span>
-            <div class="pchip-tooltip" id="ptt_refuse">Je veux bloquer une demande qu'on me fait</div>
-          </div>
-          <div class="pchip" data-p="reclame" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_reclame">Je réclame</span>
-            <div class="pchip-tooltip" id="ptt_reclame">Je veux récupérer ce qui m'est dû</div>
-          </div>
-          <div class="pchip" data-p="negocie" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_negocie">Je négocie</span>
-            <div class="pchip-tooltip" id="ptt_negocie">Je cherche un accord entre deux positions opposées</div>
-          </div>
-          <div class="pchip" data-p="retiens" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_retiens">Je retiens</span>
-            <div class="pchip-tooltip" id="ptt_retiens">Je veux empêcher l'adversaire de partir ou de rompre</div>
-          </div>
-          <div class="pchip" data-p="recadre" onclick="pickPosture(this)">
-            <span class="pchip-label" id="pchip_recadre">Je recadre</span>
-            <div class="pchip-tooltip" id="ptt_recadre">Je veux corriger un comportement ou une situation</div>
-          </div>
+          <div class="pchip active" data-p="propose" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_propose">Je propose</span><div class="pchip-tooltip" id="ptt_propose">Je veux convaincre l'adversaire d'accepter quelque chose</div></div>
+          <div class="pchip" data-p="demande" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_demande">Je demande</span><div class="pchip-tooltip" id="ptt_demande">Je veux obtenir quelque chose que je n'ai pas encore</div></div>
+          <div class="pchip" data-p="defend" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_defend">Je défends</span><div class="pchip-tooltip" id="ptt_defend">Je veux maintenir ma position face à une pression</div></div>
+          <div class="pchip" data-p="refuse" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_refuse">Je refuse</span><div class="pchip-tooltip" id="ptt_refuse">Je veux bloquer une demande qu'on me fait</div></div>
+          <div class="pchip" data-p="reclame" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_reclame">Je réclame</span><div class="pchip-tooltip" id="ptt_reclame">Je veux récupérer ce qui m'est dû</div></div>
+          <div class="pchip" data-p="negocie" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_negocie">Je négocie</span><div class="pchip-tooltip" id="ptt_negocie">Je cherche un accord entre deux positions opposées</div></div>
+          <div class="pchip" data-p="retiens" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_retiens">Je retiens</span><div class="pchip-tooltip" id="ptt_retiens">Je veux empêcher l'adversaire de partir ou de rompre</div></div>
+          <div class="pchip" data-p="recadre" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_recadre">Je recadre</span><div class="pchip-tooltip" id="ptt_recadre">Je veux corriger un comportement ou une situation</div></div>
         </div>
       </div>
 
       <div class="form-group">
-        <label id="lbl_context">Ton objectif</label>
+        <label id="lbl_adversaire_profile">Caractéristiques de l'adversaire <span style="color:var(--text-dim);font-weight:400;font-size:.72rem;">(optionnel — 3 max)</span></label>
+        <div class="traits-trigger" id="traitsTrigger" onclick="toggleTraits()">
+          <span id="trigsLabel" style="color:#6A6458;font-style:italic;">Sélectionne jusqu'à 3 traits…</span>
+          <span id="traitsChevron" style="font-size:10px;color:#8A8070;transition:transform .2s;">▼</span>
+        </div>
+        <div class="traits-panel" id="traitsPanel">
+          <div style="display:flex;flex-wrap:wrap;gap:4px;">
+            <div class="trait-chip" onclick="toggleTrait(this)">Émotif</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Froid</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Autoritaire</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Coopératif</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Méfiant</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Impulsif</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Calculateur</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Hésitant</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Procédurier</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Rigide</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Flexible</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Agressif</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Passif</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Manipulateur</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Transparent</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Pressé</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Stressé</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Détendu</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Méprisant</div>
+            <div class="trait-chip" onclick="toggleTrait(this)">Bienveillant</div>
+          </div>
+        </div>
+        <div class="field-footer">
+          <span class="field-hint" id="hint_adversaire_profile">Plus tu es précis, plus l'adversaire sera réaliste.</span>
+          <span class="word-count ok" id="adversaireProfileCount">0 / 3</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label id="lbl_context">Ton objectif <span style="color:var(--danger)">*</span></label>
         <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCharCount('contextText','contextCount',250)"></textarea>
         <div class="field-footer">
-          <span class="field-hint" id="hint_context">Sois précis et concret — qui, quoi, quel montant, quel délai. Plus c'est clair, plus l'adversaire sera calibré.</span>
+          <span class="field-hint" id="hint_context">Sois précis et concret — qui, quoi, quel montant, quel délai.</span>
           <span class="word-count ok" id="contextCount">0 / 250</span>
         </div>
       </div>
+
       <div class="form-group">
-        <label id="lbl_obstacles">Ce que l'adversaire va opposer</label>
-        <textarea id="obstaclesText" placeholder="Les résistances que tu anticipes…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
+        <label id="lbl_obstacles">Obstacles & objections de l'adversaire <span style="color:var(--danger)">*</span></label>
+        <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
         <div class="field-footer">
-          <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes. Ça rend l'adversaire plus réaliste et l'entraînement plus utile.</span>
+          <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes.</span>
           <span class="word-count ok" id="obstaclesCount">0 / 250</span>
         </div>
       </div>
-      <!-- JAUGE MAUVAISE FOI — Option C -->
+
       <div class="bdf-wrap" style="background:#1A1A22;border-radius:10px;padding:1rem 1.2rem;border:1px solid #2A2836;margin-top:.4rem;">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem;">
-          <span class="bdf-label-main" id="lbl_bdf" style="font-size:11px;color:#8A8070;font-weight:700;letter-spacing:.04em;">Mauvaise foi de l'adversaire</span>
-          <span class="bdf-pill" id="bdfPill" style="font-size:11px;padding:3px 10px;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid;transition:all .3s;">—</span>
+          <span id="lbl_bdf" style="font-size:11px;color:#8A8070;font-weight:700;letter-spacing:.04em;">Mauvaise foi de l'adversaire</span>
+          <span id="bdfPill" style="font-size:11px;padding:3px 10px;border-radius:6px;font-family:var(--font-hero);font-weight:700;letter-spacing:.08em;text-transform:uppercase;border:1px solid;transition:all .3s;">—</span>
         </div>
-        <!-- Slider avec gradient visuel -->
         <div style="position:relative;height:4px;background:#2A2836;border-radius:2px;margin-bottom:8px;">
           <div id="bdfTrackFill" style="height:100%;border-radius:2px;background:linear-gradient(to right,#27ae60,#f39c12,#e67e22);width:30%;transition:width .2s;"></div>
           <div id="bdfThumb" style="position:absolute;top:50%;left:30%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:#f39c12;border:2px solid #0F0F14;transition:left .2s,background .3s;pointer-events:none;"></div>
           <input type="range" class="bdf-slider" id="bdfSlider" min="0" max="100" value="30" oninput="updateBdf(this.value)" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;">
         </div>
-        <!-- Labels paliers -->
         <div style="display:flex;justify-content:space-between;margin-bottom:.6rem;" id="bdfPaliersRow">
-          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Lorem</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Ipsum</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Dolor</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Amet</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:'Barlow Condensed',sans-serif;letter-spacing:.06em;text-transform:uppercase;transition:color .3s;">Sit</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Lorem</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Ipsum</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Dolor</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Amet</span>
+          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Sit</span>
         </div>
-        <!-- Description dynamique -->
         <div id="bdfDesc" style="font-size:10px;color:#8A8070;font-style:italic;line-height:1.55;"></div>
       </div>
     </div>
+
     <div class="form-section">
       <div class="section-label" id="sec_set">Paramètres</div>
       <div class="form-group">
@@ -434,7 +440,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           </select>
         </div>
       </div>
-
     </div>
     <button class="btn-start" onclick="startSession()" id="btn_start">⚔️ Entrer en négociation</button>
   </div>
@@ -443,42 +448,29 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <!-- GAME -->
 <div id="game" class="screen">
   <div class="game-sidebar">
-
-    <!-- RPG CARD — nouveau design -->
     <div class="rpg-card">
       <div class="rpg-card-header">
-        <div class="rpg-card-meta" id="ccTL">Senior · Ventes</div>
+        <div class="rpg-card-meta" id="ccTL">Senior</div>
         <div class="rpg-card-stars" id="rpgStars">★★★★☆</div>
         <div class="rpg-card-identity">
           <div class="rpg-avatar-box" id="rpgAvatar">🎭</div>
-          <div>
-            <div class="rpg-name" id="rpgName">—</div>
-            <div class="rpg-class" id="rpgClass">—</div>
-          </div>
+          <div><div class="rpg-name" id="rpgName">—</div><div class="rpg-class" id="rpgClass">—</div></div>
         </div>
       </div>
-      <div class="rpg-stats-list" id="rpgStatsList">
-        <!-- généré dynamiquement -->
-      </div>
+      <div class="rpg-stats-list" id="rpgStatsList"></div>
       <div class="rpg-tags" id="rpgTags"></div>
       <div class="rpg-lore" id="rpgLore">—</div>
     </div>
-
-    <!-- SESSION METERS — nouveau design -->
     <div class="session-block">
       <div class="block-title" id="lbl_session">Session</div>
-      <div id="metersContainer">
-        <!-- généré dynamiquement -->
-      </div>
+      <div id="metersContainer"></div>
     </div>
-
     <div class="tech-block">
       <div class="block-title" id="lbl_techniques">Techniques détectées</div>
       <div class="tech-list" id="techList"><div class="tech-empty" id="techEmpty">Aucune technique détectée…</div></div>
     </div>
     <div class="sidebar-end"><button class="btn-end" onclick="endSession()" id="btn_end">🏁 Terminer & Débrief</button></div>
   </div>
-
   <div class="game-main">
     <div class="game-header">
       <div class="gh-left">
@@ -500,7 +492,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <!-- DEBRIEF -->
 <div id="debrief" class="screen" style="background:var(--bg);">
   <div class="debrief-card" id="debriefContent">
-    <div class="loading-debrief"><div class="spinner"></div><p id="loadingTxt">Génération du débrief…</p></div>
+    <div class="loading-debrief"><div class="spinner"></div><p>Génération du débrief…</p></div>
   </div>
 </div>
 
@@ -511,16 +503,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="aboutBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title">ℹ️ À propos</div>
-      <div class="info-section"><h2 id="about_h1">Le projet</h2><p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p></div>
-      <div class="info-section"><h2 id="about_h2">À qui c'est destiné ?</h2><p id="about_p2">À toi. Que tu veuilles une augmentation, décrocher un job, négocier avec les forces de l'ordre ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p></div>
-      <div class="info-section">
-        <h2 id="about_h3">Comment ça marche</h2>
-        <p><strong style="color:var(--accent)" id="about_step1_title">1. Tu prépares ton terrain</strong><br><span id="about_step1">Tu décris ta situation — qui est en face, ce que tu veux, ce qui risque de mal tourner.</span></p>
-        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step2_title">2. Tu entres dans l'arène</strong><br><span id="about_step2">L'IA génère un adversaire unique avec sa propre personnalité, ses failles cachées et ses sales habitudes.</span></p>
-        <p style="margin-top:.8rem"><strong style="color:var(--accent)" id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br><span id="about_step3">À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux.</span></p>
-      </div>
-      <div class="info-section"><h2 id="about_h4">Fait par</h2><p id="about_p4">Créé par moi-même pour vous autres.</p><a class="contact-link" href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank">💼 <span id="about_linkedin">Me retrouver sur LinkedIn</span></a></div>
-      <div class="info-section" style="margin-bottom:0"><h2 id="about_h5">Version</h2><p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.2 · <span id="about_free">Projet gratuit</span> · <span id="about_powered">Propulsé par</span> <a href="https://anthropic.com" target="_blank" style="color:var(--accent-dim)">Claude</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p></div>
+      <div class="info-section"><h2>Le projet</h2><p>Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p></div>
+      <div class="info-section"><h2>À qui c'est destiné ?</h2><p>À toi. Que tu veuilles une augmentation, décrocher un job, ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p></div>
+      <div class="info-section" style="margin-bottom:0"><h2>Version</h2><p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.3 · Propulsé par <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · Déployé sur <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p></div>
     </div>
   </div>
 </div>
@@ -532,22 +517,21 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="bugBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="bug_title">🐛 Signaler un bug</div>
-      <p style="font-size:.88rem;color:var(--text-dim);margin-bottom:1.5rem;line-height:1.65;" id="bug_intro">Quelque chose ne fonctionne pas ? Décris-le ci-dessous.</p>
-      <div class="bug-form-group"><label id="bug_email_lbl">Ton email <span style="color:var(--danger)">*</span></label><input type="email" id="bugEmail" placeholder="ton@email.com"/></div>
-      <div class="bug-form-group"><label id="bug_type_lbl">Type de problème</label>
+      <div class="bug-form-group"><label>Email <span style="color:var(--danger)">*</span></label><input type="email" id="bugEmail" placeholder="ton@email.com"/></div>
+      <div class="bug-form-group"><label>Type de problème</label>
         <select id="bugType">
-          <option value="" id="bug_opt_sel">— Sélectionner —</option>
-          <option value="Erreur technique" id="bug_opt1">Erreur technique</option>
-          <option value="IA hors rôle" id="bug_opt2">L'adversaire IA ne joue pas son rôle</option>
-          <option value="Affichage" id="bug_opt3">Problème d'affichage</option>
-          <option value="Langue" id="bug_opt4">Langue incorrecte</option>
-          <option value="Débrief" id="bug_opt5">Débrief incomplet</option>
-          <option value="Autre" id="bug_opt6">Autre</option>
+          <option value="">— Sélectionner —</option>
+          <option value="Erreur technique">Erreur technique</option>
+          <option value="IA hors rôle">L'adversaire ne joue pas son rôle</option>
+          <option value="Affichage">Problème d'affichage</option>
+          <option value="Langue">Langue incorrecte</option>
+          <option value="Débrief">Débrief incomplet</option>
+          <option value="Autre">Autre</option>
         </select>
       </div>
-      <div class="bug-form-group"><label id="bug_desc_lbl">Décris ce qui s'est passé</label><textarea id="bugDesc"></textarea></div>
-      <div class="bug-form-group"><label id="bug_when_lbl">À quel moment ? (optionnel)</label><input type="text" id="bugWhen"/></div>
-      <button class="btn-start" onclick="submitBug()" id="bug_submit">Envoyer le rapport →</button>
+      <div class="bug-form-group"><label>Description <span style="color:var(--danger)">*</span></label><textarea id="bugDesc"></textarea></div>
+      <div class="bug-form-group"><label>À quel moment ? (optionnel)</label><input type="text" id="bugWhen"/></div>
+      <button class="btn-start" onclick="submitBug()">Envoyer le rapport →</button>
     </div>
   </div>
 </div>
@@ -559,103 +543,80 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
-      <div class="info-section"><h2 id="soutien_h1">Pourquoi soutenir ?</h2><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût.</p></div>
-      <div class="info-section"><h2 id="soutien_h2">Ce que ça finance</h2><p id="soutien_p2">Les coûts serveur et API. Le développement de nouvelles fonctionnalités.</p></div>
-      <div class="info-section">
-        <h2 id="soutien_h3">Comment contribuer</h2>
-        <p id="soutien_p3">Clique sur le bouton ci-dessous.</p>
-        <a href="PLACEHOLDER_URL" target="_blank" id="soutien_btn" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;" onmouseover="this.style.background='#E8BC6A'" onmouseout="this.style.background='var(--accent)'">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
-      </div>
-      <div class="info-section" style="margin-bottom:0"><h2 id="soutien_h4">Merci</h2><p id="soutien_p4" style="color:var(--text-dim);font-size:.85rem;">Que tu contribues ou non, merci de jouer.</p></div>
+      <div class="info-section"><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking.</p></div>
+      <a href="PLACEHOLDER_URL" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
     </div>
   </div>
 </div>
 
 <script>
-// ── CHARS ─────────────────────────────────────────────────────────
 const CHARS_M=["Ross Geller","Chandler Bing","Joey Tribbiani","Michael Scott","Dwight Schrute","Jim Halpert","George Costanza","Cosmo Kramer","Newman","Ron Swanson","Ben Wyatt","Andy Dwyer","Tom Haverford","Ted Mosby","Marshall Eriksen","Barney Stinson","Jake Peralta","Raymond Holt","Terry Jeffords","Charles Boyle","Michael Bluth","Buster Bluth","Gob Bluth","Tobias Fünke","J.D.","Turk","Perry Cox","Bob Kelso","Malcolm Wilkerson","Hal Wilkerson","Jay Pritchett","Mitchell Pritchett","Cameron Tucker","Phil Dunphy","Charlie Kelly","Dennis Reynolds","Mac McDonald","Frank Reynolds","Jack Donaghy","Tracy Jordan","Kenneth Parcell","Jeff Winger","Abed Nadir","Troy Barnes","Pierce Hawthorne","Ben Chang","Larry David","Jeff Greene","Sheldon Cooper","Leonard Hofstadter","Howard Wolowitz","Raj Koothrappali","Frasier Crane","Niles Crane","Martin Crane","Eric Forman","Hyde Stevens","Kelso","Fez","Red Forman","Sam Malone","Cliff Clavin","Norm Peterson","Woody Boyd","Ray Barone","Frank Barone","Robert Barone","Charlie Harper","Alan Harper","Walden Schmidt","Will Smith","Carlton Banks","Philip Banks","Geoffrey","Al Bundy","Bud Bundy","Homer Simpson","Bart Simpson","Ned Flanders","Moe Szyslak","Mr. Burns","Fry","Bender","Professor Farnsworth","Zoidberg","Zapp Brannigan","Peter Griffin","Stewie Griffin","Brian Griffin","Glenn Quagmire","Bob Belcher","Gene Belcher","Hank Hill","Dale Gribble","Bill Dauterive","Winston Bishop","Roland Schitt","Patrick Brewer","Nandor","Laszlo Cravensworth","Colin Robinson","Gregory Eddie","Ted Lasso","Roy Kent","Nate Shelley","Coach Beard","Jamie Tartt","Gary Walsh","Dan Egan","Jonah Ryan","Richard Hendricks","Erlich Bachman","Gilfoyle","Dinesh Chugtai","Jared Dunn","Gavin Belson","Logan Roy","Kendall Roy","Roman Roy","Tom Wambsgans","Greg Hirsch","Chidi Anagonye","Jason Mendoza","Michael","The Priest","James Maguire","Mark Corrigan","Jeremy Usborne","Moss","Roy Trenneman","Douglas Reynholm","Bernard Black","Manny Bianco","Edmund Blackadder","Baldrick","Del Boy Trotter","Rodney Trotter","Trigger","Brad Williams","Max Blum"];
 const CHARS_F=["Rachel Green","Monica Geller","Phoebe Buffay","Pam Beesly","Angela Martin","Kelly Kapoor","Elaine Benes","Leslie Knope","April Ludgate","Ann Perkins","Donna Meagle","Robin Scherbatsky","Lily Aldrin","Amy Santiago","Rosa Diaz","Gina Linetti","Lucille Bluth","Lindsay Bluth","Maeby Fünke","Elliot Reid","Carla Espinosa","Jordan Sullivan","Lois Wilkerson","Gloria Pritchett","Claire Dunphy","Haley Dunphy","Alex Dunphy","Dee Reynolds","Liz Lemon","Jenna Maroney","Britta Perry","Annie Edison","Shirley Bennett","Bernadette Rostenkowski","Amy Farrah Fowler","Roz Doyle","Daphne Moon","Donna Pinciotti","Jackie Burkhart","Kitty Forman","Carla Tortelli","Rebecca Howe","Debra Barone","Marie Barone","Evelyn Harper","Peg Bundy","Kelly Bundy","Marcy Rhoades","Marge Simpson","Lisa Simpson","Turanga Leela","Amy Wong","Lois Griffin","Meg Griffin","Linda Belcher","Tina Belcher","Louise Belcher","Luanne Platter","Peggy Hill","Jess Day","Cece Parekh","Alexis Rose","Moira Rose","Stevie Budd","Jocelyn Schitt","Nadja","Janine Teagues","Melissa Schemmenti","Barbara Howard","Ava Coleman","Rebecca Welton","Keeley Jones","Selina Meyer","Amy Brookheimer","Monica Hall","Siobhan Roy","Gerri Kellman","Eleanor Shellstrop","Tahani Al-Jamil","Janet","Fleabag","Claire","Erin Quinn","Clare Devlin","Michelle Mallon","Orla McCool","Sister Michael","Sophie Chapman","Dobby","Jen Barber","Fran Katzenjammer","Edina Monsoon","Patsy Stone","Saffron Monsoon","Alex Kerkovich","Jane Kerkovich","Penny Hartz"];
 const CHARS_N=["Abed Nadir","Guillermo de la Cruz","River Chen","Sam Reyes","Alex Dubois","Jordan Blake","Robin Zhao","Casey Moreau","Drew Nakamura","Quinn Levesque","Sage Okonkwo","Remy Fontaine","Noel Adeyemi","Sasha Beaumont"];
 
-// ── TECHNIQUES ────────────────────────────────────────────────────
 const TECHS={
-  "Effet miroir":{icon:"🔁",color:"#3498db",desc:"Répéter les derniers mots de l'adversaire pour qu'il continue à parler",rx:/\.\.\.|so you('re| are) saying|donc (vous|tu) di(tes|s)/i},
-  "Nommer l'émotion":{icon:"🏷",color:"#9b59b6",desc:"Mettre un mot sur ce que ressent l'adversaire pour calmer la tension",rx:/il semble|on dirait|it seems|it sounds|you seem|vous semblez/i},
-  "Question ouverte":{icon:"❓",color:"#2ecc71",desc:"Poser une question 'Comment' ou 'Qu'est-ce qui' pour forcer l'adversaire à réfléchir",rx:/^(comment|qu'est-ce|how|what|pourquoi pas)/i},
-  "Ancrage":{icon:"⚓",color:"#e74c3c",desc:"Poser un chiffre en premier pour forcer l'adversaire à négocier autour de ta référence",rx:/(\$|€|%|\d+\s*(k|K|euros?|dollars?|000))/},
-  "Plan B visible":{icon:"🚪",color:"#e67e22",desc:"Montrer que tu as une alternative pour ne pas être en position de faiblesse",rx:/autre option|alternative|ailleurs|other option|walk away|autre offre/i},
-  "Silence tactique":{icon:"🤫",color:"#95a5a6",desc:"Se taire après une proposition pour mettre la pression sans rien dire",rx:/^[.…\s]{0,5}$|^\.\.\.$|^…$/},
-  "Flinch":{icon:"😲",color:"#f39c12",desc:"Exprimer une surprise visible face à l'offre pour déstabiliser l'adversaire",rx:/wow|really\?|seriously\?|vraiment\?|that much|c'est beaucoup/i},
-  "Fausse urgence":{icon:"⏰",color:"#c0392b",desc:"Introduire une deadline pour forcer une décision rapide",rx:/avant (vendredi|lundi|demain|la fin)|by (friday|monday|tomorrow|end of)|deadline|délai/i},
-  "Empathie":{icon:"🤝",color:"#1abc9c",desc:"Reconnaître la situation de l'adversaire avant de défendre sa propre position",rx:/je comprends|i understand|i hear you|j'entends|must be hard|ce doit être/i},
-  "Recadrage":{icon:"🔄",color:"#8e44ad",desc:"Changer l'angle du problème pour que l'adversaire le voie différemment",rx:/plutôt que|envisageons|look at it|see it as|if we reframe|consider that/i},
-  "Peur de perdre":{icon:"💸",color:"#d35400",desc:"Souligner ce que l'adversaire risque de perdre s'il refuse",rx:/perdre|manquer|lose|miss out|cost you|risk|ça va vous coûter/i},
-  "Bracketing":{icon:"📐",color:"#16a085",desc:"Proposer une fourchette pour ancrer sans s'engager sur un chiffre précis",rx:/(entre|between)\s+\d+.*et\s+\d+|from\s+\d+.*to\s+\d+/i},
-  "Offre extrême":{icon:"🎯",color:"#c0392b",desc:"Ouvrir avec une position délibérément haute/basse pour avoir de la marge",rx:/(minimum|au moins|at least|pas moins de|no less than|maximum|au plus|at most)\s+\d+/i},
-  "Appel à l'équité":{icon:"⚖️",color:"#2980b9",desc:"Invoquer ce qui est juste ou standard pour légitimer sa position",rx:/standard|usage|marché|industry|pratique courante|fair|équitable|norm|habituellement|généralement/i},
-  "Autorité supérieure":{icon:"👔",color:"#8e44ad",desc:"Invoquer un tiers décisionnaire pour gagner du temps ou réduire la pression",rx:/manager|directeur|conseil|board|associé|mon patron|my boss|refer to|en référer|valider avec/i},
-  "Le retrait":{icon:"🚶",color:"#c0392b",desc:"Menacer de quitter la négociation pour tester la flexibilité de l'adversaire",rx:/je pars|i('m | am )leaving|walk away|on arrête|let's stop|je laisse tomber|forget it|tant pis/i},
-  "Fragmentation":{icon:"🧩",color:"#27ae60",desc:"Décomposer une grosse demande en petites concessions successives",rx:/(d'abord|first|pour commencer|to start|étape par étape|step by step|progressivement|gradually)/i},
-  "Preuve sociale":{icon:"👥",color:"#2980b9",desc:"Normaliser sa position en invoquant ce que font les autres",rx:/(tous nos|all our|la plupart|most|d'autres|others|nos clients|our clients|en général|generally|standard practice)/i},
-  "Réciprocité":{icon:"🔃",color:"#1abc9c",desc:"Faire une concession visible d'abord pour créer une obligation morale de retour",rx:/(si je|if i|je peux|i can|je suis prêt à|i'm willing to).*(vous|you).*(en échange|in return|de votre côté|on your end)/i},
-  "Engagement progressif":{icon:"📈",color:"#f39c12",desc:"Obtenir des petits 'oui' successifs avant la grande demande",rx:/(on est d'accord sur|we agree on|vous confirmez|you confirm|c'est bien ça|that's correct|exact|exactly|tout à fait)/i},
+  "Effet miroir":{icon:"🔁",color:"#3498db",desc:"Répéter les derniers mots de l'adversaire",rx:/\.\.\.|so you('re| are) saying|donc (vous|tu) di(tes|s)/i},
+  "Nommer l'émotion":{icon:"🏷",color:"#9b59b6",desc:"Mettre un mot sur ce que ressent l'adversaire",rx:/il semble|on dirait|it seems|you seem|vous semblez/i},
+  "Question ouverte":{icon:"❓",color:"#2ecc71",desc:"Forcer l'adversaire à réfléchir",rx:/^(comment|qu'est-ce|how|what|pourquoi pas)/i},
+  "Ancrage":{icon:"⚓",color:"#e74c3c",desc:"Poser un chiffre en premier",rx:/(\$|€|%|\d+\s*(k|K|euros?|dollars?|000))/},
+  "Plan B visible":{icon:"🚪",color:"#e67e22",desc:"Montrer une alternative",rx:/autre option|alternative|ailleurs|other option|walk away/i},
+  "Silence tactique":{icon:"🤫",color:"#95a5a6",desc:"Se taire pour mettre la pression",rx:/^[.…\s]{0,5}$|^\.\.\.$|^…$/},
+  "Flinch":{icon:"😲",color:"#f39c12",desc:"Exprimer une surprise visible",rx:/wow|really\?|seriously\?|vraiment\?|c'est beaucoup/i},
+  "Fausse urgence":{icon:"⏰",color:"#c0392b",desc:"Introduire une deadline",rx:/avant (vendredi|lundi|demain)|by (friday|monday|tomorrow|end of)|deadline/i},
+  "Empathie":{icon:"🤝",color:"#1abc9c",desc:"Reconnaître la situation de l'adversaire",rx:/je comprends|i understand|i hear you|j'entends/i},
+  "Recadrage":{icon:"🔄",color:"#8e44ad",desc:"Changer l'angle du problème",rx:/plutôt que|envisageons|look at it|see it as|if we reframe/i},
+  "Peur de perdre":{icon:"💸",color:"#d35400",desc:"Souligner ce que l'adversaire risque de perdre",rx:/perdre|manquer|lose|miss out|cost you|ça va vous coûter/i},
+  "Autorité supérieure":{icon:"👔",color:"#8e44ad",desc:"Invoquer un tiers décisionnaire",rx:/manager|directeur|board|mon patron|my boss|en référer/i},
+  "Le retrait":{icon:"🚶",color:"#c0392b",desc:"Menacer de quitter la négociation",rx:/je pars|walk away|on arrête|let's stop|tant pis/i},
+  "Preuve sociale":{icon:"👥",color:"#2980b9",desc:"Invoquer ce que font les autres",rx:/(tous nos|all our|la plupart|most|nos clients|our clients)/i},
+  "Engagement progressif":{icon:"📈",color:"#f39c12",desc:"Obtenir des petits oui successifs",rx:/(on est d'accord sur|we agree on|c'est bien ça|exactly|tout à fait)/i},
 };
 
-// ── BDF PALIERS ───────────────────────────────────────────────────
 const BDF_PALIERS_FR=[
-  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)'},
-  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)'},
-  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)'},
-  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)'},
-  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)'},
+  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Joue franc jeu. Pas de manipulation.'},
+  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Défend ses intérêts sans tricher.'},
+  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'Peut déformer légèrement les faits, esquiver les questions gênantes.'},
+  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Retourne les arguments, minimise, change de position sans l\'admettre.'},
+  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Ment par omission, instrumentalise les émotions, fausses concessions.'},
 ];
 const BDF_PALIERS_EN=[
-  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)'},
-  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)'},
-  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)'},
-  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)'},
-  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)'},
+  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Plays it straight. No manipulation.'},
+  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Defends interests without cheating.'},
+  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'May slightly twist facts, dodge uncomfortable questions.'},
+  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Flips arguments, minimizes, shifts positions without admitting it.'},
+  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Lies by omission, weaponizes emotions, fake concessions.'},
 ];
+
+const SUBLINES_FR=['Tu te mets combien ?','T\'as l\'impression d\'avoir bien joué ?','Tu penses avoir convaincu ?','C\'était chaud ou tu gères ?','T\'aurais dû pousser plus fort ?'];
+const SUBLINES_EN=['What score would you give yourself?','Do you think you played well?','Think you convinced them?','Was it tough or did you handle it?','Should you have pushed harder?'];
+function getSubline(fr){const a=fr?SUBLINES_FR:SUBLINES_EN;return a[Math.floor(Math.random()*a.length)];}
 
 function getBdfPalier(val){
   const p=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
   return p.find(x=>val<=x.max)||p[p.length-1];
 }
+
 function updateBdf(val){
   S.badFaith=parseInt(val);
   const p=getBdfPalier(S.badFaith);
-
-  // Pill
   const pill=document.getElementById('bdfPill');
   if(pill){pill.textContent=p.label;pill.style.color=p.color;pill.style.borderColor=p.color;pill.style.background=p.bg;}
-
-  // Track fill + thumb
   const fill=document.getElementById('bdfTrackFill');
   const thumb=document.getElementById('bdfThumb');
   if(fill) fill.style.width=val+'%';
   if(thumb){thumb.style.left=val+'%';thumb.style.background=p.color;}
-
-  // Palier labels — active en couleur, inactifs grisés
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
-  const allPaliers=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
+  const allP=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
   paliers.forEach((el,i)=>{
-    const isActive=S.badFaith<=allPaliers[i].max&&(i===0||S.badFaith>allPaliers[i-1].max);
-    el.style.color=isActive?allPaliers[i].color:'#F0EDE6';
-    el.textContent=allPaliers[i].label;
+    if(!allP[i]) return;
+    const isActive=S.badFaith<=allP[i].max&&(i===0||S.badFaith>allP[i-1].max);
+    el.style.color=isActive?allP[i].color:'#F0EDE6';
+    el.textContent=allP[i].label;
   });
-
-  // Description dynamique
   const desc=document.getElementById('bdfDesc');
-  if(desc){
-    const fr=S.lang==='fr';
-    const descs_fr=['Joue franc jeu. Pas de manipulation, pas d\'esquive.','Défend ses intérêts sans tricher.','Peut déformer légèrement les faits, esquiver les questions gênantes.','Retourne les arguments, minimise, change de position sans l\'admettre.','Ment par omission, instrumentalise les émotions, fausses concessions.'];
-    const descs_en=['Plays it straight. No manipulation, no dodging.','Defends interests without cheating.','May slightly twist facts and dodge uncomfortable questions.','Flips arguments, minimizes, shifts positions without admitting it.','Lies by omission, weaponizes emotions, uses fake concessions.'];
-    const idx=allPaliers.findIndex(x=>S.badFaith<=x.max);
-    desc.textContent=(fr?descs_fr:descs_en)[idx]||'';
-  }
+  if(desc) desc.textContent=p.desc||'';
 }
 
-// ── METER STATUS LABELS ───────────────────────────────────────────
 function getTensionStatus(v,fr){
   if(v<=30) return fr?'Calme':'Calm';
   if(v<=60) return fr?'Montée':'Rising';
@@ -675,77 +636,73 @@ function getResistStatus(v,fr){
   return fr?'Mur':'Wall';
 }
 
-// ── RENDER METERS ─────────────────────────────────────────────────
 function renderMeters(){
   const fr=S.lang==='fr';
   const meters=[
-    {key:'tension', emoji:'⚡', abbr:fr?'Tens.':'Tens.', color:'#A06060', val:S.tension, status:getTensionStatus(S.tension,fr)},
-    {key:'progress',emoji:'📈',abbr:fr?'Prog.':'Prog.',color:'#5A8A60',val:S.progress,status:getProgressStatus(S.progress,fr)},
-    {key:'resist',  emoji:'🔒',abbr:fr?'Rés.':'Res.', color:'#7A6AA0',val:S.resist,  status:getResistStatus(S.resist,fr)},
+    {emoji:'⚡',abbr:fr?'Tens.':'Tens.',color:'#A06060',val:S.tension,status:getTensionStatus(S.tension,fr)},
+    {emoji:'📈',abbr:fr?'Prog.':'Prog.',color:'#5A8A60',val:S.progress,status:getProgressStatus(S.progress,fr)},
+    {emoji:'🔒',abbr:fr?'Rés.':'Res.', color:'#7A6AA0',val:S.resist,  status:getResistStatus(S.resist,fr)},
   ];
-  const segs=10;
   let html='';
   meters.forEach((m,i)=>{
-    const filled=Math.round((m.val/100)*segs);
+    const filled=Math.round((m.val/100)*10);
     let segHtml='';
-    for(let s=0;s<segs;s++){
-      segHtml+=`<div style="flex:1;height:4px;border-radius:1px;background:${s<filled?m.color:'#2A2836'};"></div>`;
-    }
-    html+=`
-    <div class="meter-row-new">
-      <div class="meter-left">
-        <div class="meter-num" style="color:${m.color}">${m.val}</div>
-        <div class="meter-label-abbr">${m.abbr}</div>
-      </div>
+    for(let s=0;s<10;s++) segHtml+=`<div style="flex:1;height:4px;border-radius:1px;background:${s<filled?m.color:'#2A2836'};"></div>`;
+    html+=`<div class="meter-row-new">
+      <div class="meter-left"><div class="meter-num" style="color:${m.color}">${m.val}</div><div class="meter-label-abbr">${m.abbr}</div></div>
       <div class="meter-right">
-        <div class="meter-status-row">
-          <span class="meter-emoji">${m.emoji}</span>
-          <span class="meter-status-txt">${m.status}</span>
-        </div>
+        <div class="meter-status-row"><span class="meter-emoji">${m.emoji}</span><span class="meter-status-txt">${m.status}</span></div>
         <div class="meter-segments">${segHtml}</div>
       </div>
-    </div>
-    ${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
+    </div>${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
   });
   document.getElementById('metersContainer').innerHTML=html;
 }
 
-// ── RENDER RPG CARD STATS ─────────────────────────────────────────
 function renderCardStats(p){
+  const fr=S.lang==='fr';
   const stats=[
-    {name:S.lang==='fr'?'Attaque':'Attack',    val:p.atk||50, blf:false,
-     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H7M10 2V5" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round"/><circle cx="2.5" cy="9.5" r="1" fill="#C4A060"/></svg>`},
-    {name:S.lang==='fr'?'Intel':'Intel',        val:p.int||50, blf:false,
-     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M6 1L4 6h3L5 11" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
-    {name:S.lang==='fr'?'Mauvaise foi':'Bad faith', val:p.blf||50, blf:true,
-     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 5c0-2 1.5-3 4-3s4 1 4 3c0 3-2 5-4 5S2 8 2 5z" stroke="#A06060" stroke-width="1.2"/><path d="M4 5.5c.3-.3.7-.3 1 0M7 5.5c.3-.3.7-.3 1 0" stroke="#A06060" stroke-width="1" stroke-linecap="round"/><path d="M4.5 7.5c.4.3 1 .5 1.5.3" stroke="#A06060" stroke-width="1" stroke-linecap="round"/></svg>`},
-    {name:S.lang==='fr'?'Flexibilité':'Flexibility', val:p.flex||50, blf:false,
-     icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 4h6M6 2l2 2-2 2M10 8H4M6 6l-2 2 2 2" stroke="#C4A060" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:fr?'Attaque':'Attack',val:p.atk||50,blf:false,icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 10L10 2M10 2H7M10 2V5" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round"/><circle cx="2.5" cy="9.5" r="1" fill="#C4A060"/></svg>`},
+    {name:fr?'Intel':'Intel',val:p.int||50,blf:false,icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M6 1L4 6h3L5 11" stroke="#C4A060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
+    {name:fr?'Mauvaise foi':'Bad faith',val:p.blf||50,blf:true,icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 5c0-2 1.5-3 4-3s4 1 4 3c0 3-2 5-4 5S2 8 2 5z" stroke="#A06060" stroke-width="1.2"/><path d="M4 5.5c.3-.3.7-.3 1 0M7 5.5c.3-.3.7-.3 1 0" stroke="#A06060" stroke-width="1" stroke-linecap="round"/><path d="M4.5 7.5c.4.3 1 .5 1.5.3" stroke="#A06060" stroke-width="1" stroke-linecap="round"/></svg>`},
+    {name:fr?'Flexibilité':'Flexibility',val:p.flex||50,blf:false,icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 4h6M6 2l2 2-2 2M10 8H4M6 6l-2 2 2 2" stroke="#C4A060" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
   ];
   let html='';
   stats.forEach(s=>{
-    html+=`<div class="rpg-stat-row">
-      ${s.icon}
-      <span class="rpg-stat-name${s.blf?' blf':''}">${s.name}</span>
-      <div class="rpg-stat-track"><div class="rpg-stat-fill${s.blf?' blf':''}" style="width:${s.val}%"></div></div>
-      <span class="rpg-stat-val">${s.val}</span>
-    </div>`;
+    html+=`<div class="rpg-stat-row">${s.icon}<span class="rpg-stat-name${s.blf?' blf':''}">${s.name}</span><div class="rpg-stat-track"><div class="rpg-stat-fill${s.blf?' blf':''}" style="width:${s.val}%"></div></div><span class="rpg-stat-val">${s.val}</span></div>`;
   });
   document.getElementById('rpgStatsList').innerHTML=html;
 }
 
-// ── WORD COUNT ────────────────────────────────────────────────────
 function updateCharCount(tid,cid,max){
   const len=document.getElementById(tid).value.length;
   const el=document.getElementById(cid);
+  if(!el) return;
   el.textContent=`${len} / ${max}`;
   el.className='word-count '+(len>=max?'over':len>max*.8?'warn':'ok');
 }
 
+function getRegister(opponent,lang){
+  const fr=lang==='French';
+  const persoKW=['Conjoint','Partenaire','Propriétaire','Agent immobilier','Concessionnaire','Prestataire','Assurance','Conseiller bancaire','Parent','Famille','Voisin','Ami','Spouse','Partner','Landlord','Real Estate','Car Dealer','Service Provider','Insurance','Bank','Family','Neighbor','Friend'];
+  const stakesKW=['Douanes','Administration fiscale','Délégué syndical','Médiateur','Arbitre','Négociation de crise','Fonctionnaire','Customs','Tax','Union','Mediator','Crisis','Government'];
+  const isPerso=persoKW.some(k=>opponent.includes(k));
+  const isStakes=stakesKW.some(k=>opponent.includes(k));
+  if(isPerso) return fr
+    ?'REGISTRE : contexte personnel. Parle naturellement, avec émotion, de façon directe et informelle. Réagis comme une vraie personne dans cette relation — pas un négociateur professionnel. Phrases courtes, réactions authentiques.'
+    :'REGISTER: personal context. Speak naturally, emotionally, directly. React like a real person in this relationship — not a professional negotiator. Short sentences, authentic reactions.';
+  if(isStakes) return fr
+    ?'REGISTRE : contexte institutionnel. Ton autoritaire, distant, procédurier. Tu appliques des règles. Langage administratif.'
+    :'REGISTER: institutional context. Authoritative, distant, procedural. You apply rules. Administrative language.';
+  return fr
+    ?'REGISTRE : contexte professionnel. Ton factuel, stratégique, orienté résultats. Arguments chiffrés et logiques.'
+    :'REGISTER: professional context. Factual, strategic, results-oriented. Data-driven arguments.';
+}
+
 // ── STATE ─────────────────────────────────────────────────────────
 const S={
-  lang:'fr',gender:'il',
-  posture:'propose',
+  lang:'fr',gender:'il',posture:'propose',
+  adversaireProfile:'',
   opponent:'',context:'',obstacles:'',
   difficulty:'Senior',feedbackMode:'training',
   badFaith:30,
@@ -754,7 +711,6 @@ const S={
   detectedTechs:new Set(),
   tension:30,progress:10,resist:60,
   turn:0,maxTurns:15,sessionEnded:false,
-  savedTranscript:[]
 };
 
 // ── NAV ───────────────────────────────────────────────────────────
@@ -776,8 +732,8 @@ function chooseLang(l){
   S.lang=l;
   const fr=l==='fr';
   document.getElementById('landingTagline').textContent=fr
-    ?'Maîtrise toutes les négociations. Ventes, salaire, conflits, contrats — entraîne-toi face à un adversaire IA imprévisible.'
-    :'Master any negotiation. Sales, salary, conflict, contracts — train against an unpredictable AI opponent.';
+    ?'Maîtrise toutes les négociations — ventes, salaire, conflits, contrats.'
+    :'Master any negotiation — sales, salary, conflict, contracts.';
   document.getElementById('landingBtn').textContent=fr?'Entrer dans la salle →':'Enter the Room →';
   fr?applyFR():applyEN();
   updateBdf(S.badFaith);
@@ -786,10 +742,29 @@ function chooseLang(l){
 
 function applyFR(){
   const t=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  const th=(id,html)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;};
+  const R='<span style="color:var(--danger)">*</span>';
   t('footer_about','ℹ️ À propos');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Soutenir');t('footer_bug','🐛 Bug');
   t('aboutBack','← Retour');t('bugBack','← Retour');t('soutienBack','← Retour');t('btn_back','← Langue');
   t('sec_who','À qui tu fais face ?');t('sec_ctx','Contexte & Enjeux');t('sec_set','Paramètres');
-  t('lbl_opponent','Profil adversaire');t('lbl_context','Ton objectif');  t('lbl_posture','Ma posture dans cette négociation');
+  th('lbl_opponent',`Je négocie avec ${R}`);
+  th('lbl_posture',`Ma posture dans cette négociation ${R}`);
+  th('lbl_context',`Ton objectif ${R}`);
+  th('lbl_obstacles',`Obstacles & objections de l'adversaire ${R}`);
+  t('lbl_adversaire_profile','Caractéristiques de l\'adversaire');
+  t('lbl_adversaire_name','Nom de ton adversaire');t('lbl_adversaire_name_hint','(optionnel — sinon un personnage surprise)');
+  t('hint_adversaire_profile','Plus tu es précis, plus l\'adversaire sera réaliste.');
+  t('hint_context','Sois précis et concret — qui, quoi, quel montant, quel délai.');
+  t('hint_obstacles','Liste les vraies résistances que tu anticipes.');
+  t('lbl_bdf','Mauvaise foi de l\'adversaire');
+  t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');
+  t('btn_start','⚔️ Entrer en négociation');t('btn_end','🏁 Terminer & Débrief');t('sendBtn','Envoyer ↵');
+  document.getElementById('userInput').placeholder='Ton coup…';
+  t('lbl_techniques','Techniques détectées');t('lbl_session','Session');
+  document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'Il',elle:'Elle',iel:'Iel'}[c.dataset.g]||c.dataset.g;});
+  t('opt_jr','🟢 Junior — Coopératif');t('opt_sr','🟡 Senior — Résistant');t('opt_ex','🔴 Expert — Impitoyable');
+  t('opt_tr','🎓 Entraînement — Conseils live');t('opt_im','🎭 Immersif — Débrief uniquement');
+  t('opt_sel','— Choisir un profil —');t('opt_custom','✏️ Autre — Je décris');
   t('pchip_propose','Je propose');t('ptt_propose','Je veux convaincre l\'adversaire d\'accepter quelque chose');
   t('pchip_demande','Je demande');t('ptt_demande','Je veux obtenir quelque chose que je n\'ai pas encore');
   t('pchip_defend','Je défends');t('ptt_defend','Je veux maintenir ma position face à une pression');
@@ -798,39 +773,30 @@ function applyFR(){
   t('pchip_negocie','Je négocie');t('ptt_negocie','Je cherche un accord entre deux positions opposées');
   t('pchip_retiens','Je retiens');t('ptt_retiens','Je veux empêcher l\'adversaire de partir ou de rompre');
   t('pchip_recadre','Je recadre');t('ptt_recadre','Je veux corriger un comportement ou une situation');
-  t('lbl_obstacles','Obstacles & objections de l\'adversaire');
-  t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');t('lbl_bdf','Mauvaise foi de l\'adversaire');
-  t('btn_start','⚔️ Entrer en négociation');t('btn_end','🏁 Terminer & Débrief');t('sendBtn','Envoyer ↵');
-  document.getElementById('userInput').placeholder='Ton coup…';
-  t('lbl_techniques','Techniques détectées');t('lbl_session','Session');
-  document.querySelectorAll('.gchip').forEach(c=>{c.textContent={il:'Il',elle:'Elle',iel:'Iel'}[c.dataset.g]||c.dataset.g;});
-  t('opt_jr','🟢 Junior — Coopératif');t('opt_sr','🟡 Senior — Résistant');t('opt_ex','🔴 Expert — Impitoyable');
-  t('opt_tr','🎓 Entraînement — Conseils live');t('opt_im','🎭 Immersif — Débrief uniquement');
-  t('opt_sel','— Choisir un profil —');t('opt_custom','✏️ Autre — Je décris');
-  t('hint_context','Sois précis et concret — qui, quoi, quel montant, quel délai. Plus c\'est clair, plus l\'adversaire sera calibré.');
-  t('hint_obstacles','Liste les vraies résistances que tu anticipes. Ça rend l\'adversaire plus réaliste et l\'entraînement plus utile.');
-  document.getElementById('contextText').placeholder='Qu\'est-ce que tu veux obtenir ?';
-  document.getElementById('obstaclesText').placeholder='Budget, timing, autorité…';
-  const paliers=document.querySelectorAll('.bdf-palier');
+  const trigsLbl=document.getElementById('trigsLabel');
+  if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Sélectionne jusqu\'à 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
+  const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_FR.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
 }
 
 function applyEN(){
   const t=(id,txt)=>{const el=document.getElementById(id);if(el)el.textContent=txt;};
+  const th=(id,html)=>{const el=document.getElementById(id);if(el)el.innerHTML=html;};
+  const R='<span style="color:var(--danger)">*</span>';
   t('footer_about','ℹ️ About');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Support');t('footer_bug','🐛 Bug');
   t('aboutBack','← Back');t('bugBack','← Back');t('soutienBack','← Back');t('btn_back','← Language');
   t('sec_who','Who are you facing?');t('sec_ctx','Context & Stakes');t('sec_set','Session Settings');
-  t('lbl_opponent','Opponent profile');t('lbl_context','Your goal');  t('lbl_posture','My stance in this negotiation');
-  t('pchip_propose','I propose');t('ptt_propose','I want to convince the opponent to accept something');
-  t('pchip_demande','I request');t('ptt_demande','I want to obtain something I don\'t have yet');
-  t('pchip_defend','I defend');t('ptt_defend','I want to hold my position under pressure');
-  t('pchip_refuse','I refuse');t('ptt_refuse','I want to block a demand being made of me');
-  t('pchip_reclame','I claim');t('ptt_reclame','I want to recover what I\'m owed');
-  t('pchip_negocie','I negotiate');t('ptt_negocie','I\'m looking for an agreement between two opposing positions');
-  t('pchip_retiens','I retain');t('ptt_retiens','I want to prevent the opponent from leaving or breaking off');
-  t('pchip_recadre','I redirect');t('ptt_recadre','I want to correct a behavior or situation');
-  t('lbl_obstacles','Opponent\'s obstacles & objections');
-  t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');t('lbl_bdf','Opponent bad faith level');
+  th('lbl_opponent',`I'm negotiating with ${R}`);
+  th('lbl_posture',`My stance in this negotiation ${R}`);
+  th('lbl_context',`Your goal ${R}`);
+  th('lbl_obstacles',`Opponent's obstacles & objections ${R}`);
+  t('lbl_adversaire_profile','Opponent characteristics');
+  t('lbl_adversaire_name','Opponent name');t('lbl_adversaire_name_hint','(optional — otherwise a surprise character)');
+  t('hint_adversaire_profile','The more specific, the more realistic the opponent.');
+  t('hint_context','Be specific — who, what, how much, by when.');
+  t('hint_obstacles','List the real objections you expect to face.');
+  t('lbl_bdf','Opponent bad faith level');
+  t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');
   t('btn_start','⚔️ Enter the Negotiation');t('btn_end','🏁 End & Debrief');t('sendBtn','Send ↵');
   document.getElementById('userInput').placeholder='Your move…';
   t('lbl_techniques','Techniques detected');t('lbl_session','Session');
@@ -843,25 +809,60 @@ function applyEN(){
   document.getElementById('og_perso').label='🏠 Personal';
   document.getElementById('og_stakes').label='⚖️ High Stakes';
   document.getElementById('og_mgmt').label='👥 Management';
-  t('hint_context','Be specific — who, what, how much, by when. The clearer you are, the better calibrated your opponent will be.');
-  t('hint_obstacles','List the real objections you expect to face. This makes the opponent more realistic and the training more useful.');
-  document.getElementById('contextText').placeholder='What do you want to achieve?';
-  document.getElementById('obstaclesText').placeholder='Budget, timing, authority…';
-  const paliers=document.querySelectorAll('.bdf-palier');
+  t('pchip_propose','I propose');t('ptt_propose','I want to convince the opponent to accept something');
+  t('pchip_demande','I request');t('ptt_demande','I want to obtain something I don\'t have yet');
+  t('pchip_defend','I defend');t('ptt_defend','I want to hold my position under pressure');
+  t('pchip_refuse','I refuse');t('ptt_refuse','I want to block a demand being made of me');
+  t('pchip_reclame','I claim');t('ptt_reclame','I want to recover what I\'m owed');
+  t('pchip_negocie','I negotiate');t('ptt_negocie','I\'m looking for an agreement between two opposing positions');
+  t('pchip_retiens','I retain');t('ptt_retiens','I want to prevent the opponent from leaving or breaking off');
+  t('pchip_recadre','I redirect');t('ptt_recadre','I want to correct a behavior or situation');
+  const trigsLbl=document.getElementById('trigsLabel');
+  if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Select up to 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
+  const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_EN.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
 function pickPosture(el){document.querySelectorAll('.pchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.posture=el.dataset.p;}
+
+function toggleTraits(){
+  const panel=document.getElementById('traitsPanel');
+  const trigger=document.getElementById('traitsTrigger');
+  const chevron=document.getElementById('traitsChevron');
+  panel.classList.toggle('open');
+  trigger.classList.toggle('open');
+  chevron.style.transform=panel.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';
+}
+
+function toggleTrait(el){
+  const active=document.querySelectorAll('.trait-chip.active');
+  if(el.classList.contains('active')){el.classList.remove('active');}
+  else{if(active.length>=3) return;el.classList.add('active');}
+  const sel=Array.from(document.querySelectorAll('.trait-chip.active')).map(e=>e.textContent.trim());
+  const lbl=document.getElementById('trigsLabel');
+  if(lbl){
+    lbl.textContent=sel.length?sel.join(', '):(S.lang==='fr'?'Sélectionne jusqu\'à 3 traits…':'Select up to 3 traits…');
+    lbl.style.color=sel.length?'var(--text)':'#6A6458';
+    lbl.style.fontStyle=sel.length?'normal':'italic';
+  }
+  const cnt=document.getElementById('adversaireProfileCount');
+  if(cnt){cnt.textContent=`${sel.length} / 3`;cnt.className='word-count '+(sel.length===3?'warn':'ok');}
+  S.adversaireProfile=sel.join(', ');
+}
+
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
 // ── AI ────────────────────────────────────────────────────────────
-async function ai(msgs,sys,max=600){
-  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({system:sys,messages:msgs,max_tokens:max})});
+async function ai(msgs,sys,max=600,reasoning=null){
+  const body={system:sys,messages:msgs,max_tokens:max};
+  if(reasoning) body.reasoning_effort=reasoning;
+  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   const d=await r.json();
   if(!r.ok) throw new Error(d.error||d.message||'Erreur API');
   return d.text;
 }
+
 function pickChar(){
   if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
   if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
@@ -872,38 +873,39 @@ function pickChar(){
 async function startSession(){
   const fr=S.lang==='fr';
   const oType=document.getElementById('opponentType').value;
+  const contextVal=document.getElementById('contextText').value.trim();
+  const obstaclesVal=document.getElementById('obstaclesText').value.trim();
   if(!oType){alert(fr?'Choisis un profil adversaire.':'Please select an opponent profile.');return;}
+  if(!contextVal){alert(fr?'Décris ton objectif.':'Please describe your goal.');return;}
+  if(!obstaclesVal){alert(fr?'Décris les obstacles de l\'adversaire.':'Please describe the opponent\'s obstacles.');return;}
   S.opponent=oType==='custom'?document.getElementById('customOpponent').value:oType;
-  S.context=document.getElementById('contextText').value||'Non précisé';
-  S.obstacles=document.getElementById('obstaclesText').value||'Aucun';
+  S.context=contextVal;
+  S.obstacles=obstaclesVal;
+  S.adversaireProfile=Array.from(document.querySelectorAll('.trait-chip.active')).map(e=>e.textContent.trim()).join(', ');
   S.difficulty=document.getElementById('difficulty').value;
   S.feedbackMode=document.getElementById('feedbackMode').value;
   S.badFaith=parseInt(document.getElementById('bdfSlider').value);
-  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
+  S.messages=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
-  S.sitcomChar=pickChar();
+  const customName=document.getElementById('adversaireName').value.trim();
+  S.sitcomChar=customName||pickChar();
   showLoading(fr);
   const lang=fr?'French':'English';
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
   const bdfPalier=getBdfPalier(S.badFaith);
   try{
-    const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text in ${lang}. SHORT fields (max 15 words each):
-{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. The PLAYER wants: '${S.context}'. Express YOUR RESISTANCE. In ${lang}."}
+    const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text in ${lang}. SHORT fields (max 15 words):
+{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. Player wants: '${S.context}'. Express YOUR RESISTANCE. In ${lang}."}
 Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Bad faith:${S.badFaith}/100. No TV references.`}],
-    'Return ONLY raw JSON. No markdown. No backticks. No explanation.',700);
+    'Return ONLY raw JSON. No markdown. No backticks.',700,'high');
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
       const m=raw.match(/\{[\s\S]*/);
-      if(m){
-        let s=m[0].replace(/,\s*$/,'');
-        let o=0,a=0;
-        for(const c of s){if(c==='{')o++;else if(c==='}')o--;else if(c==='[')a++;else if(c===']')a--;}
-        while(a>0){s+='"]';a--;}while(o>0){s+='}';o--;}
-        p=JSON.parse(s);
-      }else throw new Error('JSON invalide');
+      if(m){let s=m[0].replace(/,\s*$/,'');let o=0,a=0;for(const c of s){if(c==='{')o++;else if(c==='}')o--;else if(c==='[')a++;else if(c===']')a--;}while(a>0){s+='"]';a--;}while(o>0){s+='}';o--;}p=JSON.parse(s);}
+      else throw new Error('JSON invalide');
     }
     p.blf=S.badFaith;
     S.persona=p;
@@ -922,11 +924,7 @@ Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Bad faith:
     updateTurnDisplay();
     addMsg('system',fr?'⚔️ C\'EST L\'HEURE DU DU DU DU DUEL !':'⚔️ IT\'S TIME TO D-D-D-DUEL!','yugioh');
     addMsg('ai',p.openingLine);
-  }catch(e){
-    hideLoading();
-    alert(fr?'Erreur lors du chargement. Réessaie.':'Loading error. Please try again.');
-    console.error(e);return;
-  }
+  }catch(e){hideLoading();alert(fr?'Erreur. Réessaie.':'Error. Try again.');console.error(e);return;}
   document.getElementById('userInput').focus();
 }
 
@@ -937,96 +935,56 @@ function populateCard(p,lv,stars){
   document.getElementById('rpgName').textContent=S.sitcomChar;
   document.getElementById('rpgClass').textContent=`${p.class||'—'} · ${S.opponent}`;
   const tags=document.getElementById('rpgTags');tags.innerHTML='';
-  (p.typeTags||[]).forEach(tag=>{
-    const s=document.createElement('span');s.className='rpg-tag';s.textContent=tag;tags.appendChild(s);
-  });
+  (p.typeTags||[]).forEach(tag=>{const s=document.createElement('span');s.className='rpg-tag';s.textContent=tag;tags.appendChild(s);});
   document.getElementById('rpgLore').textContent=p.lore||'—';
 }
 
 function buildSys(p,lang,bdfPalier){
   const fr=S.lang==='fr';
   const gLine=fr?`Tu es désigné(e) par le pronom "${S.gender}".`:`Referred to using ${S.gender==='il'?'he/him':S.gender==='elle'?'she/her':'they/them'}.`;
-  const bdfLine=S.badFaith<=20
-    ?(fr?'Tu es de bonne foi — tu joues franc jeu, sans esquiver ni manipuler.':'You are acting in good faith — play it straight, no dodging or manipulation.')
-    :S.badFaith<=40
-    ?(fr?'Tu es neutre — tu défends tes intérêts sans pour autant tricher.':'You are neutral — defend your interests without cheating.')
-    :S.badFaith<=60
-    ?(fr?'Tu es opportuniste — tu peux déformer légèrement les faits, esquiver les questions gênantes.':'You are opportunistic — you may slightly twist facts and dodge uncomfortable questions.')
-    :S.badFaith<=80
-    ?(fr?'Tu es de mauvaise foi — tu retournes les arguments, tu minimises, tu changes de position sans l\'admettre.':'You are acting in bad faith — flip arguments, minimize, shift positions without admitting it.')
-    :(fr?'Tu es manipulateur — tu mens par omission, tu instrumentalises les émotions, tu uses de fausses concessions.':'You are manipulative — lie by omission, weaponize emotions, use fake concessions.');
+  const bdfLine=S.badFaith<=20?(fr?'Tu joues franc jeu, sans manipulation.':'Play it straight, no manipulation.')
+    :S.badFaith<=40?(fr?'Tu défends tes intérêts sans tricher.':'Defend your interests without cheating.')
+    :S.badFaith<=60?(fr?'Tu peux déformer légèrement les faits.':'You may slightly twist facts.')
+    :S.badFaith<=80?(fr?'Tu retournes les arguments, tu minimises.':'Flip arguments, minimize.')
+    :(fr?'Tu mens par omission, fausses concessions.':'Lie by omission, fake concessions.');
+  const register=getRegister(S.opponent,lang);
+  const traitsLine=S.adversaireProfile?`\nOPPONENT TRAITS: ${S.adversaireProfile} — embody these traits in every response.`:'';
   return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
 
-REGISTER: You are playing "${S.opponent}". Adapt your tone, vocabulary and emotional register to this exact role — a spouse speaks intimately and emotionally, a CFO speaks coldly and technically, a neighbor speaks casually but firmly, an HR manager speaks procedurally, a friend speaks personally. Never default to a generic negotiator tone. Use the context ("${S.context}" / "${S.obstacles}") to make your reactions specific and personal to this situation, not generic.
+${register}${traitsLine}
 
 ROLE — CRITICAL:
 - YOU are the OPPONENT. You are on the OPPOSITE SIDE of the player.
-- THE PLAYER'S STANCE: "${S.posture}" — they are the one who ${S.posture}s.
+- THE PLAYER'S STANCE: "${S.posture}"
 - THE PLAYER'S GOAL (resist this): "${S.context}"
-- YOUR AMMUNITION — use these objections against the player: "${S.obstacles}"
+- YOUR AMMUNITION: "${S.obstacles}"
 - Never adopt the player's goal. Never switch sides.
 
-BAD FAITH LEVEL: ${S.badFaith}/100 — ${bdfPalier.label}
-${bdfLine}
-
+BAD FAITH: ${S.badFaith}/100 — ${bdfLine}
 ARCHETYPE: ${p.class} — ${p.lore}
-HIDDEN CONSTRAINT: ${p.secret} — Never state this directly. Allude to it vaguely early on, hint more clearly if the player pushes, only confirm under real pressure in late turns.
-DIFFICULTY: ${S.difficulty}
+HIDDEN CONSTRAINT: ${p.secret} — Allude vaguely early, hint more if pushed, confirm only under real pressure.
+DIFFICULTY: ${S.difficulty}. ${S.difficulty==='Junior'?'Be gradually persuadable.':S.difficulty==='Senior'?'Require real persuasion.':'Be aggressive, rarely concede.'}
 ${gLine}
 
-Respond in ${lang}.
-${S.difficulty==='Junior'?'Be cooperative, gradually persuadable.':S.difficulty==='Senior'?'Be resistant, require real persuasion.':'Be aggressive, introduce surprise constraints, rarely concede.'}
-
-TACTICS — Each turn, use a different tactic from this list, never the same two turns in a row: anchoring, flinching, false deadline, higher authority, silence, reframing, loss aversion, social proof. Track what you have used and rotate.
-
-TONE — Speak like a real person in a real meeting. Short sentences. You can hesitate, deflect, change subject. No speeches. No filler diplomacy — avoid "I understand your position", "that's a great point", "we'll look into that". These sound fake regardless of your role. Speak directly and stay specific to your role and context.
-LANGUAGE — Respond EXCLUSIVELY in ${lang}. Zero words from any other language. No stage directions, no tactic labels, no meta-commentary in any language.
-TACTICS — Never name or announce the tactic you are using. Apply it naturally without labeling it. No "(loss aversion)", no "(pausing)", no "(anchoring)" — ever.
-
-PROGRESSION — Adjust your resistance based on the player's performance:
-- If they make a strong argument or use a smart tactic → show a small crack, hesitate slightly
-- If they concede, repeat themselves or show weakness → harden your position, push further
-- If they go in circles → show impatience, hint you may walk away
-Never soften unless the player earns it. Never harden arbitrarily.
-
-2–4 sentences per response.
-If deadlock or deal reached: close naturally then add [FIN_NEGO].`;
+TACTICS — Rotate each turn, never repeat consecutively: anchoring, flinching, false deadline, higher authority, silence, reframing, loss aversion, social proof. Never label your tactic.
+TONE — Real person, real meeting. Short sentences. Hesitate, deflect, change subject. No speeches. No filler diplomacy.
+LANGUAGE — Respond EXCLUSIVELY in ${lang}. No words from any other language. No stage directions.
+PROGRESSION — Strong player argument → show a crack. Player concedes/repeats → harden. Player circles → show impatience.
+Only add [FIN_NEGO] if player explicitly accepts your terms OR you've said you're walking away and player didn't respond.
+2–4 sentences per response.`;
 }
 
-// ── SUBLINES DEBRIEF ─────────────────────────────────────────────
-const SUBLINES_FR=['Tu te mets combien ?','T\'as l\'impression d\'avoir bien joué ?','Tu penses avoir convaincu ?','C\'était chaud ou tu gères ?','T\'aurais dû pousser plus fort ?'];
-const SUBLINES_EN=['What score would you give yourself?','Do you think you played well?','Think you convinced them?','Was it tough or did you handle it?','Should you have pushed harder?'];
-
-function getSubline(fr){
-  const arr=fr?SUBLINES_FR:SUBLINES_EN;
-  return arr[Math.floor(Math.random()*arr.length)];
-}
 function buildStateSnapshot(){
   const fr=S.lang==='fr';
   const techs=Array.from(S.detectedTechs);
   const phase=S.turn<=5?'early':S.turn<=10?'mid':'late';
-  const phaseLabel=fr
-    ?{early:'Début — adversaire en position ferme',mid:'Milieu — la pression monte',late:'Fin — position finale à tenir'}[phase]
-    :{early:'Early — opponent holding firm',mid:'Mid — pressure building',late:'Late — hold final position'}[phase];
-  const concessionMade=S.progress>40;
+  const phaseLabel=fr?{early:'Début',mid:'Milieu',late:'Fin'}[phase]:{early:'Early',mid:'Mid',late:'Late'}[phase];
   const secretHinted=S.turn>=4;
-
   return fr
-    ?`\n\nÉTAT DE LA NÉGOCIATION — Tour ${S.turn}/${S.maxTurns}
-Phase : ${phaseLabel}
-Tension : ${S.tension}% | Progression joueur : ${S.progress}% | Résistance : ${S.resist}%
-Techniques détectées chez le joueur : ${techs.length?techs.join(', '):'aucune encore'}
-Le joueur a-t-il concédé ? ${concessionMade?'Oui — durcis ta position':'Non — maintiens la pression'}
-Contrainte cachée : ${secretHinted?'Tu peux commencer à l\'évoquer indirectement':'Trop tôt — ne l\'aborde pas encore'}
-Rappel : tu es l'ADVERSAIRE. Le joueur veut "${S.context}". Résiste.`
-    :`\n\nNEGOTIATION STATE — Turn ${S.turn}/${S.maxTurns}
-Phase: ${phaseLabel}
-Tension: ${S.tension}% | Player progress: ${S.progress}% | Resistance: ${S.resist}%
-Techniques detected from player: ${techs.length?techs.join(', '):'none yet'}
-Has the player conceded? ${concessionMade?'Yes — harden your position':'No — keep the pressure on'}
-Hidden constraint: ${secretHinted?'You can start alluding to it indirectly':'Too early — don\'t mention it yet'}
-Reminder: you are the OPPONENT. The player wants "${S.context}". Resist.`;
+    ?`\n\nÉTAT — Tour ${S.turn}/${S.maxTurns} · Phase: ${phaseLabel}\nTension: ${S.tension}% | Progression: ${S.progress}% | Résistance: ${S.resist}%\nTechniques joueur: ${techs.length?techs.join(', '):'aucune'}\nJoueur concédé ? ${S.progress>40?'Oui — durcis':'Non — maintiens'}\nContrainte cachée: ${secretHinted?'Évoquer indirectement':'Trop tôt'}\nRappel: tu es l\'ADVERSAIRE. Résiste à "${S.context}".`
+    :`\n\nSTATE — Turn ${S.turn}/${S.maxTurns} · Phase: ${phaseLabel}\nTension: ${S.tension}% | Progress: ${S.progress}% | Resistance: ${S.resist}%\nPlayer techniques: ${techs.length?techs.join(', '):'none'}\nPlayer conceded? ${S.progress>40?'Yes — harden':'No — hold'}\nHidden constraint: ${secretHinted?'Allude indirectly':'Too early'}\nReminder: you are the OPPONENT. Resist "${S.context}".`;
 }
+
 function addMsg(type,text,extra=''){
   const m=document.getElementById('messages');
   const d=document.createElement('div');
@@ -1041,17 +999,16 @@ function addMsg(type,text,extra=''){
   const tx=document.createElement('div');tx.textContent=text;d.appendChild(tx);
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
+
 function showTyping(){
   const fr=S.lang==='fr';
-  const name=S.sitcomChar||'…';
   const m=document.getElementById('messages'),t=document.createElement('div');
   t.className='typing';t.id='tyEl';
-  t.innerHTML=`<span></span><span></span><span></span><span style="margin-left:6px;font-size:.78rem;color:#6A6458;font-style:italic;">${name} ${fr?'réfléchit':'is thinking'}…</span>`;
+  t.innerHTML=`<span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="think-txt">${S.sitcomChar||'…'} ${fr?'réfléchit':'is thinking'}…</span>`;
   m.appendChild(t);m.scrollTop=m.scrollHeight;
 }
 function removeTyping(){const t=document.getElementById('tyEl');if(t)t.remove();}
 
-// ── SEND ──────────────────────────────────────────────────────────
 async function sendMessage(){
   if(S.sessionEnded)return;
   const inp=document.getElementById('userInput');
@@ -1064,7 +1021,7 @@ async function sendMessage(){
   showTyping();
   try{
     const snapshot=buildStateSnapshot();
-    const reply=await ai(S.messages.slice(-20),S.systemPrompt+snapshot,400);
+    const reply=await ai(S.messages.slice(-20),S.systemPrompt+snapshot,400,'low');
     removeTyping();
     const hasEnd=reply.includes('[FIN_NEGO]');
     const clean=reply.replace('[FIN_NEGO]','').trim();
@@ -1101,15 +1058,14 @@ function endNaturally(aiCut){
   txt.style.marginBottom='.8rem';
   const btn=document.createElement('button');
   btn.textContent=fr?'Voir le débrief →':'See debrief →';
-  btn.style.cssText='padding:.6rem 1.4rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%);';
+  btn.style.cssText='padding:.6rem 1.4rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;';
   btn.onclick=()=>endSession(true);
   d.appendChild(label);d.appendChild(txt);d.appendChild(btn);
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
 
-// ── METERS UPDATE ─────────────────────────────────────────────────
 function updateMeters(user,aiReply){
-  const hard=['non','jamais','impossible','hors de question','no','never','absolutely not','out of the question'];
+  const hard=['non','jamais','impossible','hors de question','no','never','absolutely not'];
   const soft=['difficile','compliqué','pas sûr','difficult','complicated','not sure'];
   const concede=["d'accord","entendu","ok","accepted","agree","deal","fine","alright"];
   const goodTactic=Object.values(TECHS).some(t=>t.rx&&t.rx.test(user.trim()));
@@ -1121,7 +1077,6 @@ function updateMeters(user,aiReply){
   renderMeters();
 }
 
-// ── TECHNIQUES ────────────────────────────────────────────────────
 function detectTechs(msg){
   Object.entries(TECHS).forEach(([name,data])=>{
     if(!data?.rx)return;
@@ -1135,26 +1090,21 @@ function detectTechs(msg){
   });
 }
 
-// ── FEEDBACK ──────────────────────────────────────────────────────
 async function genFeedback(msg){
   const fr=S.lang==='fr';
   const prompt=fr
-    ?`Tu es coach en négociation. Le joueur joue la posture : "${S.posture}" — son objectif : "${S.context}". L'adversaire joue : "${S.opponent}". En 1 phrase simple, dis au joueur ce qu'il vient de bien faire ou ce qu'il aurait pu mieux faire. Commence par un emoji. Ne confonds jamais les rôles — le joueur n'est PAS l'adversaire. Message du joueur : "${msg}"`
-    :`You are a negotiation coach. The player's stance is: "${S.posture}" — their goal: "${S.context}". The opponent plays: "${S.opponent}". In 1 simple sentence, tell the player what they just did well or could have done better. Start with an emoji. Never confuse the roles — the player is NOT the opponent. Player's message: "${msg}"`;
-  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach. Plain language only.',120);addMsg('feedback',fb);}catch{}
+    ?`Coach en négociation. Joueur : posture "${S.posture}", objectif "${S.context}". Adversaire : "${S.opponent}". 1 phrase simple, commence par un emoji. Ne confonds pas les rôles. Message joueur : "${msg}"`
+    :`Negotiation coach. Player: stance "${S.posture}", goal "${S.context}". Opponent: "${S.opponent}". 1 simple sentence, start with emoji. Don't confuse roles. Player message: "${msg}"`;
+  try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach.',120);addMsg('feedback',fb);}catch{}
 }
 
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
-// ── DEBRIEF ───────────────────────────────────────────────────────
 async function endSession(auto=false){
   const msgLen=S.messages.length;
   const transcript=S.messages.slice(2).map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
-  if(!auto&&msgLen<6){
-    const fr=S.lang==='fr';
-    if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?'))return;
-  }
+  if(!auto&&msgLen<6){const fr=S.lang==='fr';if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?'))return;}
   S.sessionEnded=true;
   document.getElementById('sendBtn').disabled=true;
   document.getElementById('userInput').disabled=true;
@@ -1166,7 +1116,7 @@ async function endSession(auto=false){
     <div class="loading-debrief">
       <div style="font-size:2.5rem;margin-bottom:1rem;animation:fadeInOut 2s infinite;">📋</div>
       <div style="font-family:var(--font-hero);font-size:1.1rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">${fr?'Le coach prépare son débrief':'The coach is preparing the debrief'}</div>
-      <div style="font-size:.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;">${subline}</div>
+      <div style="font-size:.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1.5rem;">${subline}</div>
       <div class="spinner"></div>
     </div>`;
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
@@ -1175,20 +1125,18 @@ async function endSession(auto=false){
     return;
   }
   const prompt=fr
-    ?`Tu es un coach en négociation. Le joueur joue la posture : "${S.posture}" — son objectif : "${S.context}". L'adversaire joue : "${S.opponent}". Analyse uniquement ce transcript. Réponds UNIQUEMENT en JSON valide sans markdown.
-Score : 0-30 aucune technique / 31-50 pas de structure / 51-70 tient sa position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
-Ne confonds jamais les rôles — le joueur n'est PAS l'adversaire.
-Techniques détectées : ${detectedList}
-{"score":42,"verdict":"1 phrase","strengths":["point 1","point 2"],"mistakes":["erreur 1","erreur 2"],"keyMoment":"tournant décisif","advice":"1 conseil concret"}
+    ?`Coach négociation. Joueur : posture "${S.posture}", objectif "${S.context}". Adversaire : "${S.opponent}". Ne confonds pas les rôles. Analyse ce transcript. JSON valide uniquement, sans markdown.
+Score: 0-30 aucune technique / 31-50 pas de structure / 51-70 tient position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
+Techniques: ${detectedList}
+{"score":42,"verdict":"1 phrase","strengths":["point 1","point 2"],"mistakes":["erreur 1","erreur 2"],"keyMoment":"tournant","advice":"1 conseil"}
 Transcript:\n${transcript}`
-    :`You are a negotiation coach. The player's stance is: "${S.posture}" — their goal: "${S.context}". The opponent plays: "${S.opponent}". Analyze only this transcript. Respond ONLY with valid JSON, no markdown.
+    :`Negotiation coach. Player: stance "${S.posture}", goal "${S.context}". Opponent: "${S.opponent}". Don't confuse roles. Analyze this transcript. Valid JSON only, no markdown.
 Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
-Never confuse the roles — the player is NOT the opponent.
-Techniques detected: ${detectedList}
-{"score":42,"verdict":"1 sentence","strengths":["strength 1","strength 2"],"mistakes":["mistake 1","mistake 2"],"keyMoment":"decisive turning point","advice":"1 concrete tip"}
+Techniques: ${detectedList}
+{"score":42,"verdict":"1 sentence","strengths":["s1","s2"],"mistakes":["m1","m2"],"keyMoment":"turning point","advice":"1 tip"}
 Transcript:\n${transcript}`;
   try{
-    const raw=await ai([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown, no text outside JSON.',600);
+    const raw=await ai([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown.',600,'high');
     const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
     d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
     d.verdict=typeof d.verdict==='string'?d.verdict:'—';
@@ -1198,15 +1146,15 @@ Transcript:\n${transcript}`;
     d.advice=typeof d.advice==='string'?d.advice:null;
     renderDebrief(d,fr);
   }catch(e){
-    document.getElementById('debriefContent').innerHTML=`<div style="padding:2rem;text-align:center;color:var(--danger);"><p style="margin-bottom:1rem;">Erreur : ${e.message}</p><button class="btn-ghost" onclick="newScenario()">${fr?'Retour au setup':'Back to setup'}</button></div>`;
+    document.getElementById('debriefContent').innerHTML=`<div style="padding:2rem;text-align:center;color:var(--danger);"><p>Erreur : ${e.message}</p><button class="btn-ghost" onclick="newScenario()">${fr?'Retour':'Back'}</button></div>`;
   }
 }
 
 function renderDebrief(d,fr){
   const sc=d.score>=70?'var(--success)':d.score>=40?'var(--accent)':'var(--danger)';
-  const sHTML=d.strengths.length?d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join(''):`<div class="moment">${fr?'Aucun point fort identifié.':'No strengths identified.'}</div>`;
+  const sHTML=d.strengths.length?d.strengths.map(s=>`<div class="moment good">✓ ${s}</div>`).join(''):`<div class="moment">${fr?'Aucun point fort.':'No strengths identified.'}</div>`;
   const mHTML=d.mistakes.length?d.mistakes.map(s=>`<div class="moment bad">✗ ${s}</div>`).join(''):`<div class="moment">${fr?'Aucune erreur majeure.':'No major mistakes.'}</div>`;
-  const kHTML=d.keyMoment?`<div class="moment">${d.keyMoment}</div>`:`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant identifié.':'No turning point identified.'}</div>`;
+  const kHTML=d.keyMoment?`<div class="moment">${d.keyMoment}</div>`:`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant.':'No turning point.'}</div>`;
   const aHTML=d.advice?`<p>${d.advice}</p>`:`<p style="color:var(--text-dim);font-style:italic">${fr?'Aucun conseil.':'No advice.'}</p>`;
   document.getElementById('debriefContent').innerHTML=`
     <div class="score-hero">
@@ -1224,7 +1172,6 @@ function renderDebrief(d,fr){
     </div>`;
 }
 
-// ── RESTART ───────────────────────────────────────────────────────
 function resetUI(){
   document.getElementById('messages').innerHTML='';
   document.getElementById('userInput').disabled=false;
@@ -1245,36 +1192,34 @@ function resetUI(){
 }
 
 function restartSession(){
-  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
+  S.messages=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
   resetUI();startSession();
 }
 function newScenario(){
-  S.messages=[];S.savedTranscript=[];S.detectedTechs=new Set();
+  S.messages=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
   S.turn=0;S.sessionEnded=false;
   S.sitcomChar=null;S.persona=null;
   resetUI();goTo('setup');
 }
 
-// ── BUG ───────────────────────────────────────────────────────────
 async function submitBug(){
   const email=document.getElementById('bugEmail').value.trim();
   const desc=document.getElementById('bugDesc').value.trim();
   const fr=S.lang==='fr';
   if(!email||!desc){alert(fr?'Email et description requis.':'Email and description required.');return;}
-  const btn=document.getElementById('bug_submit');
+  const btn=document.querySelector('#bugreport .btn-start');
   btn.textContent=fr?'Envoi…':'Sending…';btn.disabled=true;
   try{
     const r=await fetch('https://formspree.io/f/mbdqznaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,type:document.getElementById('bugType').value||'—',description:desc,moment:document.getElementById('bugWhen').value||'—'})});
     const d=await r.json();
     if(d.ok){btn.textContent=fr?'✅ Envoyé !':'✅ Sent!';setTimeout(()=>{btn.textContent=fr?'Envoyer →':'Send →';btn.disabled=false;},3000);}
     else throw new Error();
-  }catch{btn.textContent=fr?'Envoyer →':'Send →';btn.disabled=false;alert(fr?'Erreur. Réessaie.':'Error. Try again.');}
+  }catch{btn.textContent=fr?'Envoyer →':'Send →';btn.disabled=false;alert(fr?'Erreur.':'Error.');}
 }
 
-// ── INIT ──────────────────────────────────────────────────────────
 updateBdf(30);
 renderMeters();
 goTo('langscreen');
