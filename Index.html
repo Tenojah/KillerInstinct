@@ -54,6 +54,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .gchip{padding:.5rem 1.2rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text-dim);font-family:var(--font);font-size:.88rem;font-weight:700;border-radius:20px;cursor:pointer;transition:all .18s;}
 .gchip.active{border-color:var(--accent);color:var(--accent);background:rgba(212,168,83,.1);}
 .gchip:hover:not(.active){border-color:var(--text-dim);color:var(--text);}
+/* POSTURE CHIPS */
+.posture-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.pchip{position:relative;padding:6px 14px;border-radius:6px;border:1px solid var(--border);background:transparent;cursor:pointer;font-size:11px;font-weight:700;color:#6A6458;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;transition:border-color .18s,color .18s;}
+.pchip:hover{border-color:#6A6058;color:var(--text-soft);}
+.pchip.active{border:1.5px solid var(--accent);background:rgba(212,168,83,.1);color:var(--accent);}
+.pchip-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:#22202E;border:1px solid #3A3836;border-radius:6px;padding:6px 10px;font-size:10px;color:var(--text-soft);font-family:var(--font);font-weight:400;text-transform:none;letter-spacing:0;white-space:nowrap;pointer-events:none;z-index:10;}
+.pchip-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:#3A3836;}
+.pchip:hover .pchip-tooltip{display:block;}
 .bdf-wrap{margin-bottom:1rem;}
 .bdf-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;}
 .bdf-label-main{font-size:.78rem;font-weight:800;color:var(--text-soft);letter-spacing:.03em;}
@@ -320,6 +328,46 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     </div>
     <div class="form-section">
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
+
+      <!-- POSTURE -->
+      <div class="form-group">
+        <label id="lbl_posture">Ma posture dans cette négociation</label>
+        <div class="posture-chips" id="postureChips">
+          <div class="pchip active" data-p="propose" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_propose">Je propose</span>
+            <div class="pchip-tooltip" id="ptt_propose">Je veux convaincre l'adversaire d'accepter quelque chose</div>
+          </div>
+          <div class="pchip" data-p="demande" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_demande">Je demande</span>
+            <div class="pchip-tooltip" id="ptt_demande">Je veux obtenir quelque chose que je n'ai pas encore</div>
+          </div>
+          <div class="pchip" data-p="defend" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_defend">Je défends</span>
+            <div class="pchip-tooltip" id="ptt_defend">Je veux maintenir ma position face à une pression</div>
+          </div>
+          <div class="pchip" data-p="refuse" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_refuse">Je refuse</span>
+            <div class="pchip-tooltip" id="ptt_refuse">Je veux bloquer une demande qu'on me fait</div>
+          </div>
+          <div class="pchip" data-p="reclame" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_reclame">Je réclame</span>
+            <div class="pchip-tooltip" id="ptt_reclame">Je veux récupérer ce qui m'est dû</div>
+          </div>
+          <div class="pchip" data-p="negocie" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_negocie">Je négocie</span>
+            <div class="pchip-tooltip" id="ptt_negocie">Je cherche un accord entre deux positions opposées</div>
+          </div>
+          <div class="pchip" data-p="retiens" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_retiens">Je retiens</span>
+            <div class="pchip-tooltip" id="ptt_retiens">Je veux empêcher l'adversaire de partir ou de rompre</div>
+          </div>
+          <div class="pchip" data-p="recadre" onclick="pickPosture(this)">
+            <span class="pchip-label" id="pchip_recadre">Je recadre</span>
+            <div class="pchip-tooltip" id="ptt_recadre">Je veux corriger un comportement ou une situation</div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group">
         <label id="lbl_context">Ton objectif</label>
         <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCharCount('contextText','contextCount',250)"></textarea>
@@ -329,8 +377,8 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         </div>
       </div>
       <div class="form-group">
-        <label id="lbl_obstacles">Obstacles & objections de l'adversaire</label>
-        <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
+        <label id="lbl_obstacles">Ce que l'adversaire va opposer</label>
+        <textarea id="obstaclesText" placeholder="Les résistances que tu anticipes…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
         <div class="field-footer">
           <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes. Ça rend l'adversaire plus réaliste et l'entraînement plus utile.</span>
           <span class="word-count ok" id="obstaclesCount">0 / 250</span>
@@ -696,6 +744,7 @@ function updateCharCount(tid,cid,max){
 // ── STATE ─────────────────────────────────────────────────────────
 const S={
   lang:'fr',gender:'il',
+  posture:'propose',
   opponent:'',context:'',obstacles:'',
   difficulty:'Senior',feedbackMode:'training',
   badFaith:30,
@@ -739,7 +788,16 @@ function applyFR(){
   t('footer_about','ℹ️ À propos');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Soutenir');t('footer_bug','🐛 Bug');
   t('aboutBack','← Retour');t('bugBack','← Retour');t('soutienBack','← Retour');t('btn_back','← Langue');
   t('sec_who','À qui tu fais face ?');t('sec_ctx','Contexte & Enjeux');t('sec_set','Paramètres');
-  t('lbl_opponent','Profil adversaire');t('lbl_context','Ton objectif');t('lbl_obstacles','Obstacles & objections de l\'adversaire');
+  t('lbl_opponent','Profil adversaire');t('lbl_context','Ton objectif');  t('lbl_posture','Ma posture dans cette négociation');
+  t('pchip_propose','Je propose');t('ptt_propose','Je veux convaincre l\'adversaire d\'accepter quelque chose');
+  t('pchip_demande','Je demande');t('ptt_demande','Je veux obtenir quelque chose que je n\'ai pas encore');
+  t('pchip_defend','Je défends');t('ptt_defend','Je veux maintenir ma position face à une pression');
+  t('pchip_refuse','Je refuse');t('ptt_refuse','Je veux bloquer une demande qu\'on me fait');
+  t('pchip_reclame','Je réclame');t('ptt_reclame','Je veux récupérer ce qui m\'est dû');
+  t('pchip_negocie','Je négocie');t('ptt_negocie','Je cherche un accord entre deux positions opposées');
+  t('pchip_retiens','Je retiens');t('ptt_retiens','Je veux empêcher l\'adversaire de partir ou de rompre');
+  t('pchip_recadre','Je recadre');t('ptt_recadre','Je veux corriger un comportement ou une situation');
+  t('lbl_obstacles','Obstacles & objections de l\'adversaire');
   t('lbl_gender','Genre de l\'adversaire');t('lbl_diff','Difficulté');t('lbl_mode','Mode');t('lbl_bdf','Mauvaise foi de l\'adversaire');
   t('btn_start','⚔️ Entrer en négociation');t('btn_end','🏁 Terminer & Débrief');t('sendBtn','Envoyer ↵');
   document.getElementById('userInput').placeholder='Ton coup…';
@@ -761,7 +819,16 @@ function applyEN(){
   t('footer_about','ℹ️ About');t('footer_contact','✉️ Contact');t('footer_soutien','❤️ Support');t('footer_bug','🐛 Bug');
   t('aboutBack','← Back');t('bugBack','← Back');t('soutienBack','← Back');t('btn_back','← Language');
   t('sec_who','Who are you facing?');t('sec_ctx','Context & Stakes');t('sec_set','Session Settings');
-  t('lbl_opponent','Opponent profile');t('lbl_context','Your goal');t('lbl_obstacles','Opponent\'s obstacles & objections');
+  t('lbl_opponent','Opponent profile');t('lbl_context','Your goal');  t('lbl_posture','My stance in this negotiation');
+  t('pchip_propose','I propose');t('ptt_propose','I want to convince the opponent to accept something');
+  t('pchip_demande','I request');t('ptt_demande','I want to obtain something I don\'t have yet');
+  t('pchip_defend','I defend');t('ptt_defend','I want to hold my position under pressure');
+  t('pchip_refuse','I refuse');t('ptt_refuse','I want to block a demand being made of me');
+  t('pchip_reclame','I claim');t('ptt_reclame','I want to recover what I\'m owed');
+  t('pchip_negocie','I negotiate');t('ptt_negocie','I\'m looking for an agreement between two opposing positions');
+  t('pchip_retiens','I retain');t('ptt_retiens','I want to prevent the opponent from leaving or breaking off');
+  t('pchip_recadre','I redirect');t('ptt_recadre','I want to correct a behavior or situation');
+  t('lbl_obstacles','Opponent\'s obstacles & objections');
   t('lbl_gender','Opponent gender');t('lbl_diff','Difficulty');t('lbl_mode','Mode');t('lbl_bdf','Opponent bad faith level');
   t('btn_start','⚔️ Enter the Negotiation');t('btn_end','🏁 End & Debrief');t('sendBtn','Send ↵');
   document.getElementById('userInput').placeholder='Your move…';
@@ -784,6 +851,7 @@ function applyEN(){
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
+function pickPosture(el){document.querySelectorAll('.pchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.posture=el.dataset.p;}
 document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
 
 // ── AI ────────────────────────────────────────────────────────────
@@ -889,9 +957,11 @@ function buildSys(p,lang,bdfPalier){
   return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
 
 ROLE — CRITICAL:
-- YOU are the OPPONENT. The PLAYER wants: "${S.context}"
-- YOUR JOB is to RESIST and NEGOTIATE AGAINST the player's goal.
-- OBSTACLES TO USE: ${S.obstacles}
+- YOU are the OPPONENT. You are on the OPPOSITE SIDE of the player.
+- THE PLAYER'S STANCE: "${S.posture}" — they are the one who ${S.posture}s.
+- THE PLAYER'S GOAL (resist this): "${S.context}"
+- YOUR AMMUNITION — use these objections against the player: "${S.obstacles}"
+- Never adopt the player's goal. Never switch sides.
 
 BAD FAITH LEVEL: ${S.badFaith}/100 — ${bdfPalier.label}
 ${bdfLine}
