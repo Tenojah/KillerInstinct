@@ -990,7 +990,33 @@ Never soften unless the player earns it. Never harden arbitrarily.
 If deadlock or deal reached: close naturally then add [FIN_NEGO].`;
 }
 
-// ── MESSAGES ──────────────────────────────────────────────────────
+// ── SESSION STATE SUMMARY ─────────────────────────────────────────
+function buildStateSnapshot(){
+  const fr=S.lang==='fr';
+  const techs=Array.from(S.detectedTechs);
+  const phase=S.turn<=5?'early':S.turn<=10?'mid':'late';
+  const phaseLabel=fr
+    ?{early:'Début — adversaire en position ferme',mid:'Milieu — la pression monte',late:'Fin — position finale à tenir'}[phase]
+    :{early:'Early — opponent holding firm',mid:'Mid — pressure building',late:'Late — hold final position'}[phase];
+  const concessionMade=S.progress>40;
+  const secretHinted=S.turn>=4;
+
+  return fr
+    ?`\n\nÉTAT DE LA NÉGOCIATION — Tour ${S.turn}/${S.maxTurns}
+Phase : ${phaseLabel}
+Tension : ${S.tension}% | Progression joueur : ${S.progress}% | Résistance : ${S.resist}%
+Techniques détectées chez le joueur : ${techs.length?techs.join(', '):'aucune encore'}
+Le joueur a-t-il concédé ? ${concessionMade?'Oui — durcis ta position':'Non — maintiens la pression'}
+Contrainte cachée : ${secretHinted?'Tu peux commencer à l\'évoquer indirectement':'Trop tôt — ne l\'aborde pas encore'}
+Rappel : tu es l'ADVERSAIRE. Le joueur veut "${S.context}". Résiste.`
+    :`\n\nNEGOTIATION STATE — Turn ${S.turn}/${S.maxTurns}
+Phase: ${phaseLabel}
+Tension: ${S.tension}% | Player progress: ${S.progress}% | Resistance: ${S.resist}%
+Techniques detected from player: ${techs.length?techs.join(', '):'none yet'}
+Has the player conceded? ${concessionMade?'Yes — harden your position':'No — keep the pressure on'}
+Hidden constraint: ${secretHinted?'You can start alluding to it indirectly':'Too early — don\'t mention it yet'}
+Reminder: you are the OPPONENT. The player wants "${S.context}". Resist.`;
+}
 function addMsg(type,text,extra=''){
   const m=document.getElementById('messages');
   const d=document.createElement('div');
@@ -1024,7 +1050,8 @@ async function sendMessage(){
   S.turn++;updateTurnDisplay();
   showTyping();
   try{
-    const reply=await ai(S.messages.slice(-20),S.systemPrompt,400);
+    const snapshot=buildStateSnapshot();
+    const reply=await ai(S.messages.slice(-20),S.systemPrompt+snapshot,400);
     removeTyping();
     const hasEnd=reply.includes('[FIN_NEGO]');
     const clean=reply.replace('[FIN_NEGO]','').trim();
