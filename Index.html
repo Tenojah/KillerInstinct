@@ -173,6 +173,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .loading-debrief{text-align:center;padding:3rem;color:var(--text-dim);}
 .spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 1rem;}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeInOut{0%,100%{opacity:.4}50%{opacity:1}}
 .debrief-actions{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;}
 .btn-primary{padding:.82rem 1.8rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;border:none;cursor:pointer;clip-path:polygon(8px 0%,100% 0%,calc(100% - 8px) 100%,0% 100%);transition:all .2s;}
 .btn-primary:hover{background:#E8BC6A;transform:translateY(-2px);}
@@ -992,7 +993,14 @@ Never soften unless the player earns it. Never harden arbitrarily.
 If deadlock or deal reached: close naturally then add [FIN_NEGO].`;
 }
 
-// ── SESSION STATE SUMMARY ─────────────────────────────────────────
+// ── SUBLINES DEBRIEF ─────────────────────────────────────────────
+const SUBLINES_FR=['Tu te mets combien ?','T\'as l\'impression d\'avoir bien joué ?','Tu penses avoir convaincu ?','C\'était chaud ou tu gères ?','T\'aurais dû pousser plus fort ?'];
+const SUBLINES_EN=['What score would you give yourself?','Do you think you played well?','Think you convinced them?','Was it tough or did you handle it?','Should you have pushed harder?'];
+
+function getSubline(fr){
+  const arr=fr?SUBLINES_FR:SUBLINES_EN;
+  return arr[Math.floor(Math.random()*arr.length)];
+}
 function buildStateSnapshot(){
   const fr=S.lang==='fr';
   const techs=Array.from(S.detectedTechs);
@@ -1034,8 +1042,11 @@ function addMsg(type,text,extra=''){
   m.appendChild(d);m.scrollTop=m.scrollHeight;
 }
 function showTyping(){
+  const fr=S.lang==='fr';
+  const name=S.sitcomChar||'…';
   const m=document.getElementById('messages'),t=document.createElement('div');
-  t.className='typing';t.id='tyEl';t.innerHTML='<span></span><span></span><span></span>';
+  t.className='typing';t.id='tyEl';
+  t.innerHTML=`<span></span><span></span><span></span><span style="margin-left:6px;font-size:.78rem;color:#6A6458;font-style:italic;">${name} ${fr?'réfléchit':'is thinking'}…</span>`;
   m.appendChild(t);m.scrollTop=m.scrollHeight;
 }
 function removeTyping(){const t=document.getElementById('tyEl');if(t)t.remove();}
@@ -1150,7 +1161,14 @@ async function endSession(auto=false){
   S.messages=[];
   goTo('debrief');
   const fr=S.lang==='fr';
-  document.getElementById('loadingTxt').textContent=fr?'Génération du débrief…':'Generating debrief…';
+  const subline=getSubline(fr);
+  document.getElementById('debriefContent').innerHTML=`
+    <div class="loading-debrief">
+      <div style="font-size:2.5rem;margin-bottom:1rem;animation:fadeInOut 2s infinite;">📋</div>
+      <div style="font-family:var(--font-hero);font-size:1.1rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">${fr?'Le coach prépare son débrief':'The coach is preparing the debrief'}</div>
+      <div style="font-size:.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1rem;">${subline}</div>
+      <div class="spinner"></div>
+    </div>`;
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
   if(!transcript.trim()){
     document.getElementById('debriefContent').innerHTML=`<div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div><div class="debrief-actions"><button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button></div>`;
