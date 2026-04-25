@@ -905,11 +905,9 @@ async function startSession(){
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
   const bdfPalier=getBdfPalier(S.badFaith);
   try{
-    // FIX 1: reasoning 'high' -> 'low' to avoid Netlify 504 timeout
-    const raw=await ai([{role:'user',content:`Generate a negotiation RPG character card. Return ONLY valid JSON. ALL text in ${lang}. SHORT fields (max 15 words):
-{"emoji":"1 emoji","class":"2-word RPG class","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["tag1","tag2"],"lore":"1-2 short sentences","secret":"1 short sentence","openingLine":"Your FIRST LINE as the OPPONENT. Player wants: '${S.context}'. Express YOUR RESISTANCE. In ${lang}."}
-Name:${S.sitcomChar}. Role:${S.opponent}. Difficulty:${S.difficulty}. Bad faith:${S.badFaith}/100. No TV references.`}],
-    'Return ONLY raw JSON. No markdown. No backticks.',700,'low');
+    // Compressed prompt to stay under Netlify 10s timeout
+    const raw=await ai([{role:'user',content:`JSON only. ${lang}. Negotiator: ${S.sitcomChar}, ${S.opponent}, ${S.difficulty}, bad faith ${S.badFaith}/100. {"emoji":"?","class":"2 words","atk":0-100,"int":0-100,"emo":0-100,"flex":0-100,"blf":${S.badFaith},"def":0-100,"typeTags":["x","y"],"lore":"1 sentence","secret":"1 secret constraint","openingLine":"Resist: '${S.context}'. 1-2 sentences in ${lang}."}`}],
+    'Raw JSON only. No markdown.',400,'low');
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
