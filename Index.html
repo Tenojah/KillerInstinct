@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator</div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V109</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -1000,6 +1000,32 @@ async function ai(msgs,sys,max=600,reasoning=null){
   return d.text;
 }
 
+async function aiStream(msgs,sys,max=400,onChunk,onDone){
+  const body={system:sys,messages:msgs,max_tokens:max,stream:true};
+  const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  if(!r.ok){const d=await r.json();throw new Error(d.error||'Stream error');}
+  const reader=r.body.getReader();
+  const decoder=new TextDecoder();
+  let full='';
+  while(true){
+    const{done,value}=await reader.read();
+    if(done) break;
+    const chunk=decoder.decode(value,{stream:true});
+    const lines=chunk.split('\n');
+    for(const line of lines){
+      if(!line.startsWith('data:')) continue;
+      const data=line.slice(5).trim();
+      if(data==='[DONE]') break;
+      try{
+        const json=JSON.parse(data);
+        const delta=json.choices?.[0]?.delta?.content||'';
+        if(delta){full+=delta;onChunk(delta);}
+      }catch{}
+    }
+  }
+  onDone(full);
+}
+
 function pickChar(){
   if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
   if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
@@ -1184,19 +1210,39 @@ async function sendMessage(){
   showTyping();
   try{
     const snapshot=buildStateSnapshot();
-    const reply=await ai(S.messages.slice(-20),S.systemPrompt+snapshot,400,'low');
-    removeTyping();
-    const hasEnd=reply.includes('[FIN_NEGO]');
-    const clean=reply.replace('[FIN_NEGO]','').trim();
-    S.messages.push({role:'assistant',content:clean});
-    addMsg('ai',clean);
-    updateMeters(text,clean);
-    detectTechs(text);
-    if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text,clean);
-    if(hasEnd||S.turn>=S.maxTurns){endNaturally(hasEnd);return;}
-  }catch(e){removeTyping();addMsg('system','Erreur : '+e.message);}
-  document.getElementById('sendBtn').disabled=false;
-  document.getElementById('userInput').focus();
+    // Create empty AI message bubble for streaming
+    const m=document.getElementById('messages');
+    const msgEl=document.createElement('div');
+    msgEl.className='msg ai';
+    const lbl=document.createElement('div');lbl.className='msg-label';lbl.textContent=S.sitcomChar||'Opp';
+    const txt=document.createElement('div');txt.id='streamingTxt';
+    msgEl.appendChild(lbl);msgEl.appendChild(txt);
+    await aiStream(
+      S.messages.slice(-20),
+      S.systemPrompt+snapshot,
+      400,
+      (delta)=>{
+        // First chunk — remove typing indicator and show bubble
+        const tyEl=document.getElementById('tyEl');
+        if(tyEl){tyEl.remove();m.appendChild(msgEl);}
+        txt.textContent+=delta;
+        m.scrollTop=m.scrollHeight;
+      },
+      (full)=>{
+        const hasEnd=full.includes('[FIN_NEGO]');
+        const clean=full.replace('[FIN_NEGO]','').trim();
+        txt.textContent=clean;
+        txt.id='';
+        S.messages.push({role:'assistant',content:clean});
+        updateMeters(text,clean);
+        detectTechs(text);
+        if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text,clean);
+        if(hasEnd||S.turn>=S.maxTurns){endNaturally(hasEnd);return;}
+        document.getElementById('sendBtn').disabled=false;
+        document.getElementById('userInput').focus();
+      }
+    );
+  }catch(e){removeTyping();addMsg('system','Erreur : '+e.message);document.getElementById('sendBtn').disabled=false;}
 }
 
 function updateTurnDisplay(){
