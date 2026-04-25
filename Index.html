@@ -150,7 +150,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .input-area textarea{flex:1;padding:.72rem 1rem;background:var(--surface2);border:1.5px solid var(--border);color:var(--text);font-family:var(--font);font-size:.88rem;resize:none;outline:none;max-height:120px;min-height:42px;line-height:1.55;border-radius:6px;transition:all .18s;}
 .input-area textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .input-area textarea:disabled{opacity:.4;cursor:not-allowed;}
-.btn-send{padding:.72rem 1.2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.9rem;letter-spacing:.08em;border:none;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;white-space:nowrap;}
+.btn-mic{padding:.72rem .9rem;background:var(--surface2);border:1.5px solid var(--border);color:var(--text-dim);font-size:1rem;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;flex-shrink:0;}
+.btn-mic:hover{border-color:var(--accent);color:var(--accent);}
+.btn-mic.listening{border-color:#e74c3c;color:#e74c3c;background:rgba(231,76,60,.1);animation:pulse-mic .8s infinite;}
+@keyframes pulse-mic{0%,100%{opacity:1}50%{opacity:.5}}
+.btn-tts{background:none;border:none;cursor:pointer;font-size:1rem;padding:.2rem .4rem;border-radius:4px;transition:all .18s;color:var(--text-dim);}
+.btn-tts:hover{color:var(--accent);}
+.btn-tts.active{color:var(--accent);}color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.9rem;letter-spacing:.08em;border:none;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;white-space:nowrap;}
 .btn-send:hover{background:#E8BC6A;}.btn-send:disabled{opacity:.4;cursor:not-allowed;}
 #debrief{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;}
 .debrief-card{background:var(--surface);border:1px solid var(--border);padding:2.5rem;max-width:680px;width:100%;border-radius:10px;margin:auto;}
@@ -478,11 +484,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <div class="gh-meta">
           <span class="mode-pill training" id="modePill">ENTRAÎNEMENT</span>
           <span class="turn-pill" id="turnCounter">Tour 0 / 15</span>
+          <button class="btn-tts" id="ttsToggle" onclick="toggleTTS()" title="Activer la voix">🔇</button>
         </div>
       </div>
     </div>
     <div class="messages" id="messages"></div>
     <div class="input-area">
+      <button class="btn-mic" id="micBtn" onclick="toggleMic()" title="Dictée vocale">🎤</button>
       <textarea id="userInput" placeholder="Ton coup…" rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
       <button class="btn-send" id="sendBtn" onclick="sendMessage()">Envoyer ↵</button>
     </div>
@@ -1097,6 +1105,77 @@ async function genFeedback(msg){
     :`Negotiation coach. Player: stance "${S.posture}", goal "${S.context}". Opponent: "${S.opponent}". 1 simple sentence, start with emoji. Don't confuse roles. Player message: "${msg}"`;
   try{const fb=await ai([{role:'user',content:prompt}],'Friendly negotiation coach.',120);addMsg('feedback',fb);}catch{}
 }
+
+// ── STT ───────────────────────────────────────────────────────────
+let recognition=null;
+let isListening=false;
+
+function toggleMic(){
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
+    alert(S.lang==='fr'?'La dictée vocale n\'est pas supportée par ce navigateur.':'Speech recognition is not supported by this browser.');return;
+  }
+  if(isListening){recognition.stop();return;}
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  recognition=new SR();
+  recognition.lang=S.lang==='fr'?'fr-FR':'en-US';
+  recognition.continuous=false;
+  recognition.interimResults=false;
+  recognition.onstart=()=>{isListening=true;document.getElementById('micBtn').classList.add('listening');document.getElementById('micBtn').textContent='⏹';};
+  recognition.onresult=(e)=>{
+    const txt=e.results[0][0].transcript;
+    const inp=document.getElementById('userInput');
+    inp.value=(inp.value?inp.value+' ':'')+txt;
+    autoResize(inp);inp.focus();
+  };
+  recognition.onend=()=>{isListening=false;const btn=document.getElementById('micBtn');btn.classList.remove('listening');btn.textContent='🎤';};
+  recognition.onerror=()=>{isListening=false;const btn=document.getElementById('micBtn');btn.classList.remove('listening');btn.textContent='🎤';};
+  recognition.start();
+}
+
+// ── TTS ───────────────────────────────────────────────────────────
+let ttsEnabled=false;
+let ttsVoice=null;
+
+function toggleTTS(){
+  ttsEnabled=!ttsEnabled;
+  const btn=document.getElementById('ttsToggle');
+  btn.textContent=ttsEnabled?'🔊':'🔇';
+  btn.classList.toggle('active',ttsEnabled);
+  if(!ttsEnabled) window.speechSynthesis.cancel();
+}
+
+function loadBestVoice(){
+  const voices=window.speechSynthesis.getVoices();
+  if(!voices.length) return;
+  const lang=S.lang==='fr'?'fr':'en';
+  const gender=S.gender;
+  const feminine=['female','femme','feminine','fiona','amélie','audrey','alice','karen','samantha','victoria','moira','veena'];
+  const masculine=['male','homme','masculine','thomas','daniel','alex','fred','oliver','george','rishi'];
+  const filtered=voices.filter(v=>v.lang.startsWith(lang));
+  if(!filtered.length){ttsVoice=voices[0];return;}
+  if(gender==='elle'){
+    ttsVoice=filtered.find(v=>feminine.some(f=>v.name.toLowerCase().includes(f)))||filtered[0];
+  } else if(gender==='il'){
+    ttsVoice=filtered.find(v=>masculine.some(m=>v.name.toLowerCase().includes(m)))||filtered[0];
+  } else {
+    ttsVoice=filtered[Math.floor(filtered.length/2)]||filtered[0];
+  }
+}
+
+function speakText(text){
+  if(!ttsEnabled||!text) return;
+  window.speechSynthesis.cancel();
+  loadBestVoice();
+  const utt=new SpeechSynthesisUtterance(text);
+  utt.voice=ttsVoice;
+  utt.lang=S.lang==='fr'?'fr-FR':'en-US';
+  utt.rate=0.95;
+  utt.pitch=S.gender==='elle'?1.1:S.gender==='il'?0.9:1.0;
+  window.speechSynthesis.speak(utt);
+}
+
+// Stopper TTS quand le joueur tape
+document.getElementById('userInput').addEventListener('input',()=>{if(ttsEnabled) window.speechSynthesis.cancel();});
 
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
