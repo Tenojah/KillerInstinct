@@ -1,14 +1,15 @@
 export default async (req) => {
-  const { system, messages, max_tokens = 600, reasoning_effort = null } = await req.json();
-
+  const { system, messages, max_tokens = 600, reasoning_effort = null, stream = false } = await req.json();
+  
   const body = {
     model: "openai/gpt-oss-120b:free",
     max_tokens,
+    stream,
     messages: system
       ? [{ role: "system", content: system }, ...messages]
       : messages
   };
-
+  
   if (reasoning_effort) {
     body.reasoning = { effort: reasoning_effort };
   }
@@ -22,8 +23,23 @@ export default async (req) => {
     body: JSON.stringify(body)
   });
 
+  if (!response.ok) {
+    const err = await response.json();
+    return Response.json({ error: err.error?.message || "API error" }, { status: 500 });
+  }
+
+  if (stream) {
+    return new Response(response.body, {
+      headers: {
+        "Content-Type": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive",
+        "Access-Control-Allow-Origin": "*"
+      }
+    });
+  }
+
   const data = await response.json();
-  if (!response.ok) throw new Error(data.error?.message || "API error");
   return Response.json({ text: data.choices[0].message.content });
 };
 
