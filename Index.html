@@ -204,7 +204,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .loading-text{color:var(--accent);font-size:1.1rem;font-weight:900;font-family:var(--font-hero);letter-spacing:.12em;text-transform:uppercase;text-align:center;}
 .loading-sub{color:var(--text-dim);font-size:.78rem;font-style:italic;text-align:center;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
-@media(max-width:700px){#game{flex-direction:column;}.game-sidebar{width:100%;min-width:unset;max-height:280px;}.row2{grid-template-columns:1fr;}}
+.mobile-stats-bar{display:none;}
+.mobile-stats-toggle{display:none;}
+@media(max-width:700px){
+  #game{flex-direction:column;}
+  .game-sidebar{display:none;}
+  .mobile-stats-bar{display:flex;align-items:center;gap:8px;padding:6px 14px;background:var(--surface);border-bottom:1px solid var(--border);flex-wrap:nowrap;}
+  .mobile-meter{display:flex;align-items:center;gap:4px;flex:1;}
+  .mobile-meter-val{font-family:var(--font-hero);font-size:12px;font-weight:700;white-space:nowrap;}
+  .mobile-meter-bar{flex:1;height:3px;background:#2A2836;border-radius:2px;overflow:hidden;}
+  .mobile-meter-fill{height:100%;border-radius:2px;}
+  .mobile-stats-toggle{display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border);border-radius:5px;color:var(--text-dim);font-size:10px;font-family:var(--font-hero);letter-spacing:.06em;padding:3px 8px;cursor:pointer;white-space:nowrap;flex-shrink:0;}
+  .mobile-stats-toggle:hover{border-color:var(--accent);color:var(--accent);}
+  .mobile-sidebar-drawer{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.7);}
+  .mobile-sidebar-drawer.open{display:block;}
+  .mobile-sidebar-inner{position:absolute;bottom:0;left:0;right:0;max-height:75vh;overflow-y:auto;background:var(--surface);border-radius:16px 16px 0 0;padding-bottom:1rem;}
+  .mobile-drawer-close{width:100%;padding:.75rem;background:none;border:none;color:var(--text-dim);font-family:var(--font-hero);font-size:.8rem;letter-spacing:.08em;cursor:pointer;text-align:center;border-bottom:1px solid var(--border);}
+  .row2{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -229,11 +246,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="lang-cards">
       <div class="lang-card" onclick="chooseLang('en')">
         <div class="lang-card-top"><div class="flag">🇬🇧</div><div class="lang-name">English</div></div>
-        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku?.</div>
+        <div class="lang-pitch">Got a negotiation coming up? A job interview? A raise to ask for? Want to convince your partner to name your child SonGoku? Practice here.</div>
       </div>
       <div class="lang-card" onclick="chooseLang('fr')">
         <div class="lang-card-top"><div class="flag">🇫🇷</div><div class="lang-name">Français</div></div>
-        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ?</div>
+        <div class="lang-pitch">T'as une négo qui s'annonce ? Un entretien ? Une augmentation à demander ? Tu veux convaincre ton conjoint d'appeler votre enfant SonGoku ? Entraîne-toi ici.</div>
       </div>
     </div>
   </div>
@@ -478,6 +495,30 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     </div>
     <div class="sidebar-end"><button class="btn-end" onclick="endSession()" id="btn_end">🏁 Terminer & Débrief</button></div>
   </div>
+  <!-- MOBILE DRAWER -->
+  <div class="mobile-sidebar-drawer" id="mobileDrawer" onclick="closeMobileDrawer(event)">
+    <div class="mobile-sidebar-inner">
+      <button class="mobile-drawer-close" id="mobileDrawerClose" onclick="closeMobileDrawer()">▼ Fermer</button>
+      <div class="rpg-card" style="margin:.6rem;">
+        <div class="rpg-card-header">
+          <div class="rpg-card-meta" id="ccTL2"></div>
+          <div class="rpg-card-stars" id="rpgStars2"></div>
+          <div class="rpg-card-identity">
+            <div class="rpg-avatar-box" id="rpgAvatar2">🎭</div>
+            <div><div class="rpg-name" id="rpgName2">—</div><div class="rpg-class" id="rpgClass2">—</div></div>
+          </div>
+        </div>
+        <div class="rpg-stats-list" id="rpgStatsList2"></div>
+        <div class="rpg-tags" id="rpgTags2"></div>
+        <div class="rpg-lore" id="rpgLore2">—</div>
+      </div>
+      <div style="padding:.75rem 1rem;">
+        <div class="block-title" id="lbl_techniques2">Techniques détectées</div>
+        <div class="tech-list" id="techList2"><div class="tech-empty">Aucune technique détectée…</div></div>
+      </div>
+      <div style="padding:.5rem 1rem;"><button class="btn-end" style="width:100%" onclick="closeMobileDrawer();endSession();" id="btn_end2">🏁 Terminer & Débrief</button></div>
+    </div>
+  </div>
   <div class="game-main">
     <div class="game-header">
       <div class="gh-left">
@@ -485,9 +526,24 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <div class="gh-meta">
           <span class="mode-pill training" id="modePill">ENTRAÎNEMENT</span>
           <span class="turn-pill" id="turnCounter">Tour 0 / 15</span>
-
         </div>
       </div>
+    </div>
+    <!-- MOBILE STATS BAR -->
+    <div class="mobile-stats-bar" id="mobileStatsBar">
+      <div class="mobile-meter">
+        <span class="mobile-meter-val" id="mob_tens" style="color:#A06060;">⚡30</span>
+        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_tens_fill" style="width:30%;background:#A06060;"></div></div>
+      </div>
+      <div class="mobile-meter">
+        <span class="mobile-meter-val" id="mob_prog" style="color:#5A8A60;">📈10</span>
+        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_prog_fill" style="width:10%;background:#5A8A60;"></div></div>
+      </div>
+      <div class="mobile-meter">
+        <span class="mobile-meter-val" id="mob_res" style="color:#7A6AA0;">🔒60</span>
+        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_res_fill" style="width:60%;background:#7A6AA0;"></div></div>
+      </div>
+      <button class="mobile-stats-toggle" id="mobileStatsBtn" onclick="openMobileDrawer()">Fiche ▲</button>
     </div>
     <div class="messages" id="messages"></div>
     <div class="input-area">
@@ -511,10 +567,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-logo">KILLER<span>.</span>INSTINCT</div>
     <div class="info-back" id="aboutBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
-      <div class="info-title">ℹ️ À propos</div>
-      <div class="info-section"><h2>Le projet</h2><p>Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p></div>
-      <div class="info-section"><h2>À qui c'est destiné ?</h2><p>À toi. Que tu veuilles une augmentation, décrocher un job, ou convaincre ton conjoint d'appeler votre enfant SonGoku.</p></div>
-      <div class="info-section" style="margin-bottom:0"><h2>Version</h2><p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.3 · Propulsé par <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · Déployé sur <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p></div>
+      <div class="info-title" id="about_title">ℹ️ À propos</div>
+      <div class="info-section">
+        <h2 id="about_h1">Le projet</h2>
+        <p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="about_h2">Comment ça marche ?</h2>
+        <p id="about_step1"><strong id="about_step1_title">1. Tu choisis ton adversaire</strong><br>Recruteur, client, manager, propriétaire, partenaire… et tu définis le contexte de ta négociation.</p>
+        <p id="about_step2" style="margin-top:.6rem;"><strong id="about_step2_title">2. L'IA joue le rôle</strong><br>L'adversaire IA résiste, esquive, manipule. Il ne lâchera rien facilement. À toi de jouer.</p>
+        <p id="about_step3" style="margin-top:.6rem;"><strong id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br>À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux. Sans te ménager.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="about_h4">Fait par</h2>
+        <p id="about_p4">Créé par moi-même pour vous autres.</p>
+        <a href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank" class="contact-link" id="about_linkedin">Me retrouver sur LinkedIn →</a>
+      </div>
+      <div class="info-section" style="margin-bottom:0">
+        <h2 id="about_h5">Version</h2>
+        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.3 · <span id="about_powered">Propulsé par</span> <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
+      </div>
     </div>
   </div>
 </div>
@@ -527,20 +599,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-card">
       <div class="info-title" id="bug_title">🐛 Signaler un bug</div>
       <div class="bug-form-group"><label>Email <span style="color:var(--danger)">*</span></label><input type="email" id="bugEmail" placeholder="ton@email.com"/></div>
-      <div class="bug-form-group"><label>Type de problème</label>
+      <div class="bug-form-group"><label id="bug_lbl_type">Type de problème</label>
         <select id="bugType">
-          <option value="">— Sélectionner —</option>
-          <option value="Erreur technique">Erreur technique</option>
-          <option value="IA hors rôle">L'adversaire ne joue pas son rôle</option>
-          <option value="Affichage">Problème d'affichage</option>
-          <option value="Langue">Langue incorrecte</option>
-          <option value="Débrief">Débrief incomplet</option>
-          <option value="Autre">Autre</option>
+          <option value="" id="bug_opt_sel">— Sélectionner —</option>
+          <option value="Erreur technique" id="bug_opt_1">Erreur technique</option>
+          <option value="IA hors rôle" id="bug_opt_2">L'adversaire ne joue pas son rôle</option>
+          <option value="Affichage" id="bug_opt_3">Problème d'affichage</option>
+          <option value="Langue" id="bug_opt_4">Langue incorrecte</option>
+          <option value="Débrief" id="bug_opt_5">Débrief incomplet</option>
+          <option value="Autre" id="bug_opt_6">Autre</option>
         </select>
       </div>
-      <div class="bug-form-group"><label>Description <span style="color:var(--danger)">*</span></label><textarea id="bugDesc"></textarea></div>
-      <div class="bug-form-group"><label>À quel moment ? (optionnel)</label><input type="text" id="bugWhen"/></div>
-      <button class="btn-start" onclick="submitBug()">Envoyer le rapport →</button>
+      <div class="bug-form-group"><label id="bug_lbl_desc">Description <span style="color:var(--danger)">*</span></label><textarea id="bugDesc"></textarea></div>
+      <div class="bug-form-group"><label id="bug_lbl_when">À quel moment ? (optionnel)</label><input type="text" id="bugWhen"/></div>
+      <button class="btn-start" id="bug_btn_send" onclick="submitBug()">Envoyer le rapport →</button>
     </div>
   </div>
 </div>
@@ -552,8 +624,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
-      <div class="info-section"><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking.</p></div>
-      <a href="PLACEHOLDER_URL" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:1.2rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
+      <div class="info-section">
+        <h2 id="soutien_h1">Pourquoi soutenir ?</h2>
+        <p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="soutien_h2">Ce que ça finance</h2>
+        <p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.</p>
+      </div>
+      <div class="info-section">
+        <h2 id="soutien_h3">Comment contribuer</h2>
+        <p id="soutien_p3">Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.</p>
+      </div>
+      <a href="PLACEHOLDER_URL" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:.8rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
+      <div class="info-section" style="margin-top:1.5rem;margin-bottom:0">
+        <h2 id="soutien_h4">Merci</h2>
+        <p id="soutien_p4">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -666,6 +753,7 @@ function renderMeters(){
     </div>${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
   });
   document.getElementById('metersContainer').innerHTML=html;
+  updateMobileBar();
 }
 
 function renderCardStats(p){
@@ -786,6 +874,26 @@ function applyFR(){
   if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Sélectionne jusqu\'à 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_FR.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
+  t('about_title','ℹ\u0041 À propos');t('about_h1','Le projet');
+  t('about_p1','Parce que négocier ça s\'apprend. Et la meilleure façon de s\'entraîner, c\'est de se planter en privé avant de se planter en public.');
+  t('about_h2','Comment ça marche ?');
+  t('about_step1_title','1. Tu choisis ton adversaire');t('about_step2_title','2. L\'IA joue le rôle');t('about_step3_title','3. Tu prends ta claque (ou pas)');
+  t('about_h4','Fait par');t('about_p4','Créé par moi-même pour vous autres.');t('about_linkedin','Me retrouver sur LinkedIn →');
+  t('about_h5','Version');t('about_powered','Propulsé par');t('about_deployed','Déployé sur');
+  t('soutien_title','❤️ Soutenir le projet');t('soutien_h1','Pourquoi soutenir ?');
+  t('soutien_p1','Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t\'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie.');
+  t('soutien_h2','Ce que ça finance');t('soutien_p2','Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.');
+  t('soutien_h3','Comment contribuer');t('soutien_p3','Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.');
+  t('soutien_btn_txt','Je soutiens Killer Instinct');
+  t('soutien_h4','Merci');t('soutien_p4','Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C\'est déjà énorme.');
+  t('bug_title','🐛 Signaler un bug');
+  t('bug_lbl_type','Type de problème');t('bug_opt_sel','— Sélectionner —');
+  t('bug_opt_1','Erreur technique');t('bug_opt_2','L\'adversaire ne joue pas son rôle');
+  t('bug_opt_3','Problème d\'affichage');t('bug_opt_4','Langue incorrecte');
+  t('bug_opt_5','Débrief incomplet');t('bug_opt_6','Autre');
+  t('bug_lbl_desc','Description');t('bug_lbl_when','À quel moment ? (optionnel)');
+  t('bug_btn_send','Envoyer le rapport →');
+  t('mobileDrawerClose','▼ Fermer');t('mobileStatsBtn','Fiche ▲');
 }
 
 function applyEN(){
@@ -830,6 +938,26 @@ function applyEN(){
   if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Select up to 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_EN.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
+  t('about_title','ℹ️ About');t('about_h1','The project');
+  t('about_p1','Because negotiation is a skill. And the best way to train is to fail in private before you fail in public.');
+  t('about_h2','How does it work?');
+  t('about_step1_title','1. You choose your opponent');t('about_step2_title','2. The AI plays the role');t('about_step3_title','3. You take the hit (or not)');
+  t('about_h4','Made by');t('about_p4','Built by me, for you lot.');t('about_linkedin','Find me on LinkedIn →');
+  t('about_h5','Version');t('about_powered','Powered by');t('about_deployed','Deployed on');
+  t('soutien_title','❤️ Support the project');t('soutien_h1','Why support?');
+  t('soutien_p1','Killer Instinct is free, no ads, no tracking. It runs on AI that costs money. If the game helped you negotiate better — a raise, a contract, a tough situation — a small contribution keeps it alive.');
+  t('soutien_h2','What it funds');t('soutien_p2','Server and API costs so everyone can play for free. Development of new features.');
+  t('soutien_h3','How to contribute');t('soutien_p3','Click the button below. Every contribution, even small, makes a real difference.');
+  t('soutien_btn_txt','Support Killer Instinct');
+  t('soutien_h4','Thank you');t('soutien_p4','Whether you contribute or not, thank you for playing and sharing the game. That already means a lot.');
+  t('bug_title','🐛 Report a bug');
+  t('bug_lbl_type','Issue type');t('bug_opt_sel','— Select —');
+  t('bug_opt_1','Technical error');t('bug_opt_2','AI out of character');
+  t('bug_opt_3','Display issue');t('bug_opt_4','Wrong language');
+  t('bug_opt_5','Incomplete debrief');t('bug_opt_6','Other');
+  t('bug_lbl_desc','Description');t('bug_lbl_when','When did it happen? (optional)');
+  t('bug_btn_send','Send report →');
+  t('mobileDrawerClose','▼ Close');t('mobileStatsBtn','Details ▲');
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
@@ -1176,6 +1304,40 @@ function speakText(text){
 
 document.getElementById('userInput').addEventListener('input',()=>{if(ttsEnabled) window.speechSynthesis.cancel();});
 
+function openMobileDrawer(){
+  const drawer=document.getElementById('mobileDrawer');
+  if(!drawer) return;
+  // Sync drawer content from sidebar
+  ['rpgAvatar','rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{
+    const src=document.getElementById(id);
+    const dst=document.getElementById(id+'2');
+    if(src&&dst) dst.innerHTML=src.innerHTML;
+  });
+  ['rpgStatsList','rpgTags'].forEach(id=>{
+    const src=document.getElementById(id);
+    const dst=document.getElementById(id+'2');
+    if(src&&dst) dst.innerHTML=src.innerHTML;
+  });
+  const techSrc=document.getElementById('techList');
+  const techDst=document.getElementById('techList2');
+  if(techSrc&&techDst) techDst.innerHTML=techSrc.innerHTML;
+  const btn2=document.getElementById('btn_end2');
+  const btn1=document.getElementById('btn_end');
+  if(btn2&&btn1) btn2.textContent=btn1.textContent;
+  drawer.classList.add('open');
+}
+function closeMobileDrawer(e){
+  if(e&&e.target!==document.getElementById('mobileDrawer')&&!e.target.classList.contains('mobile-drawer-close')) return;
+  const drawer=document.getElementById('mobileDrawer');
+  if(drawer) drawer.classList.remove('open');
+}
+function updateMobileBar(){
+  const el=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
+  const fill=(id,pct)=>{const e=document.getElementById(id);if(e)e.style.width=pct+'%';};
+  el('mob_tens','⚡'+S.tension);fill('mob_tens_fill',S.tension);
+  el('mob_prog','📈'+S.progress);fill('mob_prog_fill',S.progress);
+  el('mob_res','🔒'+S.resist);fill('mob_res_fill',S.resist);
+}
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
