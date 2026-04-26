@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V122</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V109</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -1083,7 +1083,7 @@ Return ONLY this JSON — no markdown, no extra text:
 "emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
 "relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
 }`}],
-    'Raw JSON only. No markdown. No backticks.',500,'medium');
+    'Raw JSON only. No markdown. No backticks.',1500,'medium');
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
@@ -1098,7 +1098,7 @@ Return ONLY this JSON — no markdown, no extra text:
     renderMeters();
     S.systemPrompt=buildSys(p,lang);
     // Generate openingLine using buildSys as system prompt — correct roles guaranteed
-    const olReply=await aiBg([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,250,'medium');
+    const olReply=await aiBg([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,600,'medium');
     const openingLine=(olReply||'...').trim();
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:openingLine});
@@ -1482,7 +1482,7 @@ Techniques: ${detectedList}
 Transcript:\n${transcript}`;
   try{
     // FIX 2: reasoning 'high' -> 'medium' to avoid Netlify 504 timeout on debrief
-    const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown.',600,'high');
+    const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown.',1200,'high');
     const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
     d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
     d.verdict=typeof d.verdict==='string'?d.verdict:'—';
