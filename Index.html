@@ -1539,7 +1539,7 @@ Techniques: ${detectedList}
 Transcript:\n${transcript}`;
   try{
     // FIX 2: reasoning 'high' -> 'medium' to avoid Netlify 504 timeout on debrief
-    const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown.',1200,'high');
+    const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown. No text before or after the JSON.',800,'low');
     const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
     d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
     d.verdict=typeof d.verdict==='string'?d.verdict:'—';
