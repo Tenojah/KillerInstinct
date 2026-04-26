@@ -2,7 +2,7 @@ export default async (req) => {
   const { system, messages, max_tokens = 600 } = await req.json();
   
   const body = {
-    model: "anthropic/claude-haiku-3-5-20241022",
+    model: "anthropic/claude-3.5-haiku",
     max_tokens,
     messages: system
       ? [{ role: "system", content: system }, ...messages]
