@@ -198,11 +198,20 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .bug-form-group select option{background:var(--surface2);}
 .bug-form-group select:focus,.bug-form-group input:focus,.bug-form-group textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow);}
 .bug-form-group textarea{resize:vertical;min-height:110px;line-height:1.6;}
-#loadingOverlay{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:100;gap:.9rem;}
+#loadingOverlay{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;z-index:100;padding:2rem;}
 #loadingOverlay.active{display:flex;}
-.loading-spinner{width:44px;height:44px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;}
-.loading-text{color:var(--accent);font-size:1.1rem;font-weight:900;font-family:var(--font-hero);letter-spacing:.12em;text-transform:uppercase;text-align:center;}
-.loading-sub{color:var(--text-dim);font-size:.78rem;font-style:italic;text-align:center;}
+.lo-card{background:#0F0F14;border-radius:16px;border:1px solid #2A2836;padding:3rem 2.5rem;display:flex;flex-direction:column;align-items:center;gap:1.4rem;min-width:280px;max-width:340px;}
+.lo-title{font-family:var(--font-hero);font-size:1.6rem;font-weight:900;color:var(--text);letter-spacing:.06em;text-transform:uppercase;line-height:1;text-align:center;}
+.lo-sub{font-size:9px;color:#6A6458;letter-spacing:.18em;text-transform:uppercase;}
+.lo-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,#6A5428,transparent);}
+.lo-phases{display:flex;flex-direction:column;gap:8px;width:100%;}
+.lo-phase{font-size:10px;color:#4A4458;display:flex;align-items:center;gap:8px;letter-spacing:.04em;transition:color .3s;}
+.lo-phase.active{color:var(--accent);}
+.lo-phase.done{color:#5A8A60;}
+.lo-phase-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.lo-phase-line{flex:1;height:1px;background:currentColor;opacity:.25;}
+.lo-duel{font-family:var(--font-hero);font-size:1rem;font-weight:900;color:var(--accent);letter-spacing:.12em;text-transform:uppercase;text-align:center;animation:flickerLo 1.5s ease-in-out infinite;}
+@keyframes flickerLo{0%,100%{opacity:.5}50%{opacity:1}}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
 .mobile-stats-bar{display:none;}
 .mobile-sidebar-drawer{display:none;}
@@ -227,9 +236,22 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 </head>
 <body>
 <div id="loadingOverlay">
-  <div class="loading-spinner"></div>
-  <div class="loading-text" id="overlayText">La négo va commencer…</div>
-  <div class="loading-sub" id="overlaySub">C'est l'heure du du du du duel !</div>
+  <div class="lo-card">
+    <div style="text-align:center;">
+      <div class="lo-title" id="loTitle1">La salle</div>
+      <div class="lo-title" id="loTitle2">se prépare</div>
+      <div class="lo-sub">Killer Instinct</div>
+    </div>
+    <div class="lo-divider"></div>
+    <div class="lo-phases">
+      <div class="lo-phase done" id="loPhase1"><div class="lo-phase-dot"></div><span id="loP1txt">Contexte analysé</span><div class="lo-phase-line"></div></div>
+      <div class="lo-phase done" id="loPhase2"><div class="lo-phase-dot"></div><span id="loP2txt">Profil généré</span><div class="lo-phase-line"></div></div>
+      <div class="lo-phase active" id="loPhase3"><div class="lo-phase-dot"></div><span id="loP3txt">Adversaire en place…</span><div class="lo-phase-line"></div></div>
+      <div class="lo-phase" id="loPhase4"><div class="lo-phase-dot"></div><span id="loP4txt">Prêt à négocier</span><div class="lo-phase-line"></div></div>
+    </div>
+    <div class="lo-divider"></div>
+    <div class="lo-duel" id="loDuel">⚔️ C'est l'heure du du du du duel !</div>
+  </div>
 </div>
 <div class="ki-footer" id="globalFooter" style="display:none;">
   <a onclick="goTo('about')" id="footer_about">ℹ️ À propos</a>
@@ -261,7 +283,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">Và</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V109</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -818,8 +840,29 @@ function goTo(id){
   if(f) f.style.display=['landing','setup','about','bugreport','soutien'].includes(id)?'flex':'none';
 }
 function showLoading(fr){
-  document.getElementById('overlayText').textContent=fr?'La négo va commencer…':'Negotiation is about to begin…';
-  document.getElementById('overlaySub').textContent=fr?'C\'est l\'heure du du du du duel !':'It\'s time to d-d-d-duel!';
+  const t=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
+  t('loTitle1',fr?'La salle':'Getting');
+  t('loTitle2',fr?'se prépare':'ready');
+  t('loP1txt',fr?'Contexte analysé':'Context analyzed');
+  t('loP2txt',fr?'Profil généré':'Profile generated');
+  t('loP3txt',fr?'Adversaire en place…':'Opponent loading…');
+  t('loP4txt',fr?'Prêt à négocier':'Ready to negotiate');
+  t('loDuel',fr?'⚔️ C\'est l\'heure du du du du duel !':'⚔️ It\'s time to d-d-d-duel!');
+  // Animate phases
+  ['loPhase1','loPhase2','loPhase3','loPhase4'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){el.className='lo-phase';};
+  });
+  document.getElementById('loPhase1').classList.add('done');
+  document.getElementById('loPhase2').classList.add('active');
+  setTimeout(()=>{
+    document.getElementById('loPhase2').classList.replace('active','done');
+    document.getElementById('loPhase3').classList.add('active');
+  },1500);
+  setTimeout(()=>{
+    document.getElementById('loPhase3').classList.replace('active','done');
+    document.getElementById('loPhase4').classList.add('active');
+  },3000);
   document.getElementById('loadingOverlay').classList.add('active');
 }
 function hideLoading(){document.getElementById('loadingOverlay').classList.remove('active');}
