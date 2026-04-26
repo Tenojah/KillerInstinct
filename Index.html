@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V109</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V231</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -1079,7 +1079,7 @@ STRICT RULE: Only use facts explicitly provided below. Never invent history, pas
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
 "secret":"one hidden constraint YOU have in this specific situation",
-"tone":"how YOU speak in real life given your relationship with the player — if friends/family/neighbors: informal, emotional, personal vocabulary NOT professional jargon. If professional: factual, role-appropriate register.",
+"tone":"DESCRIPTION ONLY (not a quote). Describe in 1 sentence how this person speaks: their register (informal/formal), vocabulary, sentence length, verbal habits. Example: 'speaks casually, uses slang, short sentences, interrupts himself'. NO direct speech. NO promises or invented facts.",
 "emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
 "relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
 }`}],
@@ -1154,9 +1154,12 @@ DIFFICULTY: ${S.difficulty}. ${S.difficulty==='Junior'?'Be gradually persuadable
 
 BEHAVIOR:
 - Speak and react as the person you are — not as a negotiation archetype.
+- Your tone and register come from WHO YOU ARE, not from negotiation theory.
+- If you are a friend/family/neighbor: speak like one. "j'suis dans la merde", "allez stp", "tu me fais ça ?". Never corporate language.
+- If you are a professional: factual, controlled, role-appropriate. No slang.
 - Let your emotion show through your words, not through stage directions.
 - Short sentences. Hesitate, deflect, change subject when under pressure.
-- Rotate tactics naturally: silence, reframing, loss aversion, higher authority, false deadline. Never label them.
+- Use tactics that fit YOUR register — a friend uses guilt and emotional pressure, not "loss aversion". A manager uses authority and process, not begging.
 - Strong argument from player → show a crack. Player repeats/concedes → harden. Player circles → show impatience.
 
 READING THE PLAYER — React to HOW they speak, not just WHAT they say:
