@@ -2,7 +2,7 @@ export default async (req) => {
   const { system, messages, max_tokens = 600, reasoning_effort = null, stream = false } = await req.json();
   
   const body = {
-    model: "openai/gpt-oss-120b:free",
+    model: "openai/gpt-oss-120b",
     max_tokens,
     stream,
     messages: system
