@@ -1535,14 +1535,22 @@ async function endSession(auto=false){
     return;
   }
   const prompt=fr
-    ?`Coach négociation. Joueur : posture "${S.posture}", objectif "${S.context}". Adversaire : "${S.opponent}". Ne confonds pas les rôles. Analyse ce transcript. JSON valide uniquement, sans markdown.
+    ?`Coach négociation. ATTENTION AUX RÔLES :
+- LE JOUEUR est labellisé "JOUEUR" dans le transcript. C'est lui que tu analyses.
+- L'ADVERSAIRE est "${S.opponent}" (labellisé par son nom). Tu N'analyses PAS ses actions.
+- Posture du joueur : "${S.posture}". Objectif du joueur : "${S.context}".
+Analyse UNIQUEMENT ce que LE JOUEUR a fait — ses forces, ses erreurs, ses techniques. JSON valide uniquement, sans markdown.
 Score: 0-30 aucune technique / 31-50 pas de structure / 51-70 tient position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
-Techniques: ${detectedList}
+Techniques détectées chez le joueur: ${detectedList}
 {"score":0-100,"verdict":"une phrase résumant la négociation","strengths":["point fort spécifique tiré du transcript","..."],"mistakes":["erreur spécifique tirée du transcript","..."],"keyMoment":"l'échange le plus décisif de la négociation","advice":"un conseil concret et actionnable"}
 Transcript:\n${transcript}`
-    :`Negotiation coach. Player: stance "${S.posture}", goal "${S.context}". Opponent: "${S.opponent}". Don't confuse roles. Analyze this transcript. Valid JSON only, no markdown.
+    :`Negotiation coach. CRITICAL ROLE CLARITY:
+- THE PLAYER is labelled "JOUEUR" in the transcript. Analyze ONLY their moves.
+- THE OPPONENT is "${S.opponent}" (labelled by name). Do NOT analyze their actions.
+- Player stance: "${S.posture}". Player goal: "${S.context}".
+Analyze ONLY what THE PLAYER did — their strengths, mistakes, techniques. Valid JSON only, no markdown.
 Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
-Techniques: ${detectedList}
+Player techniques detected: ${detectedList}
 {"score":0-100,"verdict":"one sentence summarizing the negotiation","strengths":["specific strength from the transcript","..."],"mistakes":["specific mistake from the transcript","..."],"keyMoment":"the most decisive exchange in the negotiation","advice":"one concrete actionable tip"}
 Transcript:\n${transcript}`;
   try{
