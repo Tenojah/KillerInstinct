@@ -28,7 +28,8 @@ export default async (req) => {
   }
 
   const data = await response.json();
-  return Response.json({ text: data.choices[0].message.content });
+  const text = data.choices?.[0]?.message?.content || data.choices?.[0]?.message?.reasoning || null;
+  return Response.json({ text });
 };
 
 export const config = { 
