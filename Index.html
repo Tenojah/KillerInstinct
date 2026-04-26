@@ -997,7 +997,7 @@ async function ai(msgs,sys,max=600,reasoning=null){
   const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   const d=await r.json();
   if(!r.ok) throw new Error(d.error||d.message||'Erreur API');
-  return d.text;
+  return d.text||'';
 }
 
 async function aiStream(msgs,sys,max=400,onChunk,onDone){
@@ -1088,8 +1088,8 @@ Return ONLY this JSON — no markdown, no extra text:
     renderMeters();
     S.systemPrompt=buildSys(p,lang);
     // Generate openingLine using buildSys as system prompt — correct roles guaranteed
-    const olReply=await ai([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,120);
-    const openingLine=olReply.trim();
+    const olReply=await ai([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,150);
+    const openingLine=(olReply||'...').trim();
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:openingLine});
     goTo('game');hideLoading();
