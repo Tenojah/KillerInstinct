@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V116</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V120</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -1070,11 +1070,11 @@ STRICT RULE: Only use facts explicitly provided below. Never invent history, pas
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
 "secret":"one hidden constraint YOU have in this specific situation",
-"tone":"how YOU speak in real life — vocabulary, sentence length, verbal tics, register",
+"tone":"how YOU speak in real life given your relationship with the player — if friends/family/neighbors: informal, emotional, personal vocabulary NOT professional jargon. If professional: factual, role-appropriate register.",
 "emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
 "relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
 }`}],
-    'Raw JSON only. No markdown. No backticks.',500,'low');
+    'Raw JSON only. No markdown. No backticks.',500,'medium');
     let p;
     try{p=JSON.parse(raw.trim());}
     catch{
@@ -1089,7 +1089,7 @@ Return ONLY this JSON — no markdown, no extra text:
     renderMeters();
     S.systemPrompt=buildSys(p,lang);
     // Generate openingLine using buildSys as system prompt — correct roles guaranteed
-    const olReply=await ai([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,150,'low');
+    const olReply=await ai([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,150,'medium');
     const openingLine=(olReply||'...').trim();
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:openingLine});
