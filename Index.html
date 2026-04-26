@@ -261,7 +261,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V110</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V109</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -430,11 +430,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <input type="range" class="bdf-slider" id="bdfSlider" min="0" max="100" value="30" oninput="updateBdf(this.value)" style="position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;margin:0;">
         </div>
         <div style="display:flex;justify-content:space-between;margin-bottom:.6rem;" id="bdfPaliersRow">
-          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Lorem</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Ipsum</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Dolor</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Amet</span>
-          <span class="bdf-palier" style="font-size:9px;font-family:var(--font-hero);letter-spacing:.06em;text-transform:uppercase;color:#F0EDE6;">Sit</span>
+          <span class="bdf-palier" style="font-size:10px;font-family:var(--font-hero);letter-spacing:.04em;color:#F0EDE6;">Nouveau-Né 🐣</span>
+          <span class="bdf-palier" style="font-size:10px;font-family:var(--font-hero);letter-spacing:.04em;color:#F0EDE6;">Bisounours 🐻</span>
+          <span class="bdf-palier" style="font-size:10px;font-family:var(--font-hero);letter-spacing:.04em;color:#F0EDE6;">Bullshiter pro 💩</span>
+          <span class="bdf-palier" style="font-size:10px;font-family:var(--font-hero);letter-spacing:.04em;color:#F0EDE6;">Schopenhauer 📖</span>
+          <span class="bdf-palier" style="font-size:10px;font-family:var(--font-hero);letter-spacing:.04em;color:#F0EDE6;">Politique 🐍</span>
         </div>
         <div id="bdfDesc" style="font-size:10px;color:#8A8070;font-style:italic;line-height:1.55;"></div>
       </div>
@@ -669,18 +669,18 @@ const TECHS={
 };
 
 const BDF_PALIERS_FR=[
-  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Joue franc jeu. Pas de manipulation.'},
-  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Défend ses intérêts sans tricher.'},
-  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'Peut déformer légèrement les faits, esquiver les questions gênantes.'},
-  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Retourne les arguments, minimise, change de position sans l\'admettre.'},
-  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Ment par omission, instrumentalise les émotions, fausses concessions.'},
+  {max:20,label:'Nouveau-Né 🐣',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Joue franc jeu. Pas de manipulation.'},
+  {max:40,label:'Bisounours 🐻',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Défend ses intérêts sans tricher.'},
+  {max:60,label:'Bullshiter pro 💩',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'Peut déformer légèrement les faits, esquiver les questions gênantes.'},
+  {max:80,label:'Schopenhauer 📖',color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Retourne les arguments, minimise, change de position sans l\'admettre.'},
+  {max:100,label:'Politique 🐍',color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Ment par omission, instrumentalise les émotions, fausses concessions.'},
 ];
 const BDF_PALIERS_EN=[
-  {max:20,label:'Lorem',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Plays it straight. No manipulation.'},
-  {max:40,label:'Ipsum',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Defends interests without cheating.'},
-  {max:60,label:'Dolor',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'May slightly twist facts, dodge uncomfortable questions.'},
-  {max:80,label:'Amet', color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Flips arguments, minimizes, shifts positions without admitting it.'},
-  {max:100,label:'Sit', color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Lies by omission, weaponizes emotions, fake concessions.'},
+  {max:20,label:'Newborn 🐣',color:'#27ae60',bg:'rgba(39,174,96,.12)',desc:'Plays it straight. No manipulation.'},
+  {max:40,label:'Care Bear 🐻',color:'#f39c12',bg:'rgba(243,156,18,.12)',desc:'Defends interests without cheating.'},
+  {max:60,label:'Pro Bullshitter 💩',color:'#e67e22',bg:'rgba(230,126,34,.12)',desc:'May slightly twist facts, dodge uncomfortable questions.'},
+  {max:80,label:'Schopenhauer 📖',color:'#c0392b',bg:'rgba(192,57,43,.12)',desc:'Flips arguments, minimizes, shifts positions without admitting it.'},
+  {max:100,label:'Politician 🐍',color:'#9b59b6',bg:'rgba(155,89,182,.12)',desc:'Lies by omission, weaponizes emotions, fake concessions.'},
 ];
 
 const SUBLINES_FR=['Tu te mets combien ?','T\'as l\'impression d\'avoir bien joué ?','Tu penses avoir convaincu ?','C\'était chaud ou tu gères ?','T\'aurais dû pousser plus fort ?'];
