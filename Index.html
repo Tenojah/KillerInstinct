@@ -1330,7 +1330,9 @@ async function sendMessage(){
       },
       async(full)=>{
         const nonAscii=(full.match(/[^\u0000-\u00FF]/g)||[]).length;
-        const isCorrupt=full.length<5||nonAscii>full.length*0.15;
+        const hasLongGarbled=/[a-zA-Z]{18,}/.test(full);
+        const hasBrokenStage=/\*[a-z]{1,4}\*[a-z]|\*\*[a-z]+\*[^*]/.test(full);
+        const isCorrupt=full.length<5||nonAscii>full.length*0.15||hasLongGarbled||hasBrokenStage;
         let finalText=full;
         if(isCorrupt){
           txt.textContent='…';
