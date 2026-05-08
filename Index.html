@@ -155,9 +155,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .btn-mic:hover{border-color:var(--accent);color:var(--accent);}
 .btn-mic.listening{border-color:#e74c3c;color:#e74c3c;background:rgba(231,76,60,.1);animation:pulse-mic .8s infinite;}
 @keyframes pulse-mic{0%,100%{opacity:1}50%{opacity:.5}}
-.btn-tts{background:none;border:none;cursor:pointer;font-size:1rem;padding:.2rem .4rem;border-radius:4px;transition:all .18s;color:var(--text-dim);}
-.btn-tts:hover{color:var(--accent);}
-.btn-tts.active{color:var(--accent);}
 .btn-send{padding:.72rem 1.2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:.9rem;letter-spacing:.08em;border:none;cursor:pointer;border-radius:6px;transition:all .18s;align-self:flex-end;white-space:nowrap;}
 .btn-send:hover{background:#E8BC6A;}.btn-send:disabled{opacity:.4;cursor:not-allowed;}
 #debrief{align-items:center;justify-content:flex-start;padding:2rem;overflow-y:auto;}
@@ -284,7 +281,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="landing" class="screen landing-bg">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem 2rem 5rem;">
     <div class="ki-logo">KILLER<span>.</span><br>INSTINCT</div>
-    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V119</span></div>
+    <div class="ki-sub" id="landingSub">Negotiation Simulator <span style="color:var(--accent-dim);font-size:.7em;letter-spacing:.1em;">V120</span></div>
     <p class="ki-tagline" id="landingTagline">Master any negotiation.</p>
     <button class="btn-hero" id="landingBtn" onclick="goTo('setup')" style="margin-top:2.5rem;">Enter the Room →</button>
   </div>
@@ -301,63 +298,42 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         <label id="lbl_opponent">Je négocie avec <span style="color:var(--danger)">*</span></label>
         <select id="opponentType">
           <option value="" id="opt_sel">— Choisir un profil —</option>
+
           <optgroup id="og_pro" label="💼 Professionnel">
-            <option value="Acheteur B2B — Responsable achats">Acheteur B2B — Responsable achats</option>
-            <option value="Acheteur B2B — DAF / Directeur financier">Acheteur B2B — DAF / Directeur financier</option>
-            <option value="Acheteur B2B — Décideur technique">Acheteur B2B — Décideur technique</option>
-            <option value="Comité d'achats (multi-décideurs)">Comité d'achats (multi-décideurs)</option>
-            <option value="Responsable RH / Recruteur">Responsable RH / Recruteur</option>
-            <option value="Head of Talent / Talent Partner">Head of Talent / Talent Partner</option>
-            <option value="Fondateur de startup (recrutement)">Fondateur de startup (recrutement)</option>
-            <option value="Manager direct — augmentation / promotion">Manager direct — augmentation / promotion</option>
-            <option value="Dirigeant / Manager N+2">Dirigeant / Manager N+2</option>
-            <option value="Membre du conseil / Investisseur">Membre du conseil / Investisseur</option>
-            <option value="Fournisseur / Prestataire (vous achetez)">Fournisseur / Prestataire (vous achetez)</option>
-            <option value="Freelance / Sous-traitant (vous recrutez)">Freelance / Sous-traitant (vous recrutez)</option>
-            <option value="Co-fondateur / Associé">Co-fondateur / Associé</option>
-            <option value="Conseil juridique / Avocat adverse">Conseil juridique / Avocat adverse</option>
-            <option value="Banquier / Chargé de crédit">Banquier / Chargé de crédit</option>
-            <option value="Venture Capitalist">Venture Capitalist</option>
-            <option value="Business Angel">Business Angel</option>
+            <option id="op_pro1" value="Acheteur B2B — Responsable achats — défend un budget serré, cherche le meilleur prix, a des fournisseurs alternatifs">Acheteur B2B — Responsable achats</option>
+            <option id="op_pro2" value="DAF — Budget interne / Arbitrage — contrôle la trésorerie, exige un ROI chiffré, averse au risque, protège les marges">DAF — Budget interne / Arbitrage</option>
+            <option id="op_pro3" value="Investisseur externe — Levée de fonds / Financement — évalue le risque, a vu des centaines de pitches, froid et analytique, ne décide jamais seul">Investisseur externe — Levée de fonds</option>
+            <option id="op_pro4" value="DRH — Licenciement / Rupture conventionnelle — protège l'entreprise, cadre légal strict, procédurier, pas ton allié">DRH — Licenciement / Rupture conventionnelle</option>
+            <option id="op_pro5" value="Head of Talent — Recrutement & Package — veut closer le bon candidat, a une fourchette salariale, peut construire une offre sur mesure">Head of Talent — Recrutement & Package</option>
+            <option id="op_pro6" value="Fondateur / Associé — décide seul, négocie avec son propre argent ou celui de ses investisseurs, émotionnel et direct, va vite">Fondateur / Associé</option>
+            <option id="op_pro7" value="Négociation salariale — le joueur précise dans le setup s'il est manager face à un collaborateur ou collaborateur face à son manager">Négociation salariale</option>
+            <option id="op_pro8" value="Dirigeant / Manager N+2 — pouvoir distant, vision stratégique, peu de temps, décide vite, peu impliqué dans les détails">Dirigeant / Manager N+2</option>
+            <option id="op_pro9" value="Prestataire / Sous-traitant — le joueur précise dans le setup s'il achète une prestation ou recrute un sous-traitant">Prestataire / Sous-traitant</option>
+            <option id="op_pro10" value="Conseil juridique / Avocat adverse — registre légal strict, précis, cherche la faille, jamais émotionnel, chaque mot compte">Conseil juridique / Avocat adverse</option>
+            <option id="op_pro11" value="Délégué syndical — défend les intérêts collectifs, connaît le droit du travail, stratège, méfiant envers la direction">Délégué syndical</option>
+            <option id="op_pro12" value="Collaborateur direct — Résolution de conflit — défensif, émotionnel, se sent jugé ou injustement traité, peut se fermer">Collaborateur direct — Résolution de conflit</option>
+            <option id="op_pro13" value="Conflit inter-équipes — négociation latérale sans autorité hiérarchique, enjeux politiques, ressources ou périmètres disputés">Conflit inter-équipes</option>
           </optgroup>
+
           <optgroup id="og_sales" label="🤝 Ventes & Commercial">
-            <option value="Client mécontent — Demande de remboursement">Client mécontent — Demande de remboursement</option>
-            <option value="Client churné — Négociation de rétention">Client churné — Négociation de rétention</option>
-            <option value="Client — Objection prix / Demande de remise">Client — Objection prix / Demande de remise</option>
-            <option value="Client — Renouvellement de contrat">Client — Renouvellement de contrat</option>
-            <option value="Partenaire stratégique — Accord commun">Partenaire stratégique — Accord commun</option>
-            <option value="Distributeur / Revendeur">Distributeur / Revendeur</option>
-            <option value="Concurrent — M&A / Partenariat">Concurrent — M&A / Partenariat</option>
-            <option value="Client agressif — Plainte publique">Client agressif — Plainte publique</option>
+            <option id="op_sal1" value="Client mécontent / Agressif — veut réparation immédiate, émotionnel, irrationnel, a été déçu ou trahi, peut menacer publiquement">Client mécontent / Agressif</option>
+            <option id="op_sal2" value="Client — Rétention / Renouvellement — évalue ses alternatives, froid et calculé, compare activement, prêt à partir si non convaincu">Client — Rétention / Renouvellement</option>
+            <option id="op_sal3" value="Client — Objection prix / Demande de remise — veut payer moins, compare avec la concurrence, teste ta marge, peut bluffer">Client — Objection prix / Demande de remise</option>
+            <option id="op_sal4" value="Partenaire stratégique — Accord commun — coopératif, cherche un deal gagnant-gagnant, frictions sur les détails de gouvernance ou de partage">Partenaire stratégique — Accord commun</option>
+            <option id="op_sal5" value="Distributeur / Revendeur — veut plus de marge, d'exclusivité ou de support, relation triangulaire avec le client final">Distributeur / Revendeur</option>
+            <option id="op_sal6" value="Concurrent — M&A / Partenariat — méfiance mutuelle, enjeux stratégiques, informations sensibles à protéger, agendas cachés">Concurrent — M&A / Partenariat</option>
           </optgroup>
+
           <optgroup id="og_perso" label="🏠 Personnel">
-            <option value="Conjoint(e) / Partenaire — Décision majeure">Conjoint(e) / Partenaire — Décision majeure</option>
-            <option value="Propriétaire — Négociation de loyer">Propriétaire — Négociation de loyer</option>
-            <option value="Agent immobilier — Achat immobilier">Agent immobilier — Achat immobilier</option>
-            <option value="Concessionnaire automobile">Concessionnaire automobile</option>
-            <option value="Prestataire — Entrepreneur / Artisan">Prestataire — Entrepreneur / Artisan</option>
-            <option value="Compagnie d'assurance">Compagnie d'assurance</option>
-            <option value="Conseiller bancaire — Finances personnelles">Conseiller bancaire — Finances personnelles</option>
-            <option value="Parent / Membre de la famille">Parent / Membre de la famille</option>
-            <option value="Voisin — Litige / Accord">Voisin — Litige / Accord</option>
-            <option value="Ami — Argent ou service">Ami — Argent ou service</option>
+            <option id="op_per1" value="Conjoint(e) / Partenaire — Décision majeure — registre émotionnel, culpabilité possible, intimité, histoire commune, la relation prime sur l'enjeu">Conjoint(e) / Partenaire — Décision majeure</option>
+            <option id="op_per2" value="Immobilier — le joueur précise dans le setup s'il négocie un loyer avec un propriétaire ou un achat avec un agent immobilier">Immobilier — Loyer ou achat</option>
+            <option id="op_per3" value="Prestataire — Entrepreneur / Artisan — tu dépends de lui, il a d'autres clients, peut se désengager, registre artisan indépendant">Prestataire — Entrepreneur / Artisan</option>
+            <option id="op_per4" value="Finances personnelles — le joueur précise dans le setup s'il négocie avec une assurance, un conseiller bancaire ou l'administration fiscale — procédurier, institutionnel, applique des règles">Finances personnelles — Assurance / Banque / Fisc</option>
+            <option id="op_per5" value="Parent / Membre de la famille — culpabilité, histoire longue, dynamique de pouvoir familiale, affect mélangé aux enjeux">Parent / Membre de la famille</option>
+            <option id="op_per6" value="Voisin — Litige / Accord — tension de proximité, on va se recroiser, registre civil, enjeux de vie quotidienne">Voisin — Litige / Accord</option>
+            <option id="op_per7" value="Ami — Argent ou service — la relation prime sur l'enjeu, registre le plus délicat, risque de rupture si mal géré">Ami — Argent ou service</option>
           </optgroup>
-          <optgroup id="og_stakes" label="⚖️ Enjeux élevés">
-            <option value="Douanes / Administration">Douanes / Administration</option>
-            <option value="Administration fiscale">Administration fiscale</option>
-            <option value="Délégué syndical">Délégué syndical</option>
-            <option value="Médiateur / Arbitre">Médiateur / Arbitre</option>
-            <option value="Négociation de crise (otage / conflit)">Négociation de crise (otage / conflit)</option>
-            <option value="Fonctionnaire / Officiel gouvernemental">Fonctionnaire / Officiel gouvernemental</option>
-          </optgroup>
-          <optgroup id="og_mgmt" label="👥 Management">
-            <option value="Collaborateur direct — Problème de performance">Collaborateur direct — Problème de performance</option>
-            <option value="Collaborateur direct — Demande d'augmentation">Collaborateur direct — Demande d'augmentation</option>
-            <option value="Membre de l'équipe — Résolution de conflit">Membre de l'équipe — Résolution de conflit</option>
-            <option value="Collègue — Conflit de ressources / projet">Collègue — Conflit de ressources / projet</option>
-            <option value="Partie prenante transverse">Partie prenante transverse</option>
-            <option value="Consultant externe — Litige de périmètre">Consultant externe — Litige de périmètre</option>
-          </optgroup>
+
           <option value="custom" id="opt_custom">✏️ Autre — Je décris</option>
         </select>
       </div>
@@ -487,7 +463,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
             <option value="immersive" id="opt_im">🎭 Immersif — Débrief uniquement</option>
           </select>
         </div>
-
       </div>
     </div>
     <button class="btn-start" onclick="startSession()" id="btn_start">⚔️ Entrer en négociation</button>
@@ -597,9 +572,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       </div>
       <div class="info-section">
         <h2 id="about_h2">Comment ça marche ?</h2>
-        <p id="about_step1"><strong id="about_step1_title">1. Tu choisis ton adversaire</strong><br>Recruteur, client, manager, propriétaire, partenaire… et tu définis le contexte de ta négociation.</p>
+        <p id="about_step1"><strong id="about_step1_title">1. Tu choisis ton adversaire</strong><br>26 profils couvrant les négociations pro, commerciales et perso. Tu décris le contexte exact.</p>
         <p id="about_step2" style="margin-top:.6rem;"><strong id="about_step2_title">2. L'IA joue le rôle</strong><br>L'adversaire IA résiste, esquive, manipule. Il ne lâchera rien facilement. À toi de jouer.</p>
-        <p id="about_step3" style="margin-top:.6rem;"><strong id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br>À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux. Sans te ménager.</p>
+        <p id="about_step3" style="margin-top:.6rem;"><strong id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br>À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux.</p>
       </div>
       <div class="info-section">
         <h2 id="about_h4">Fait par</h2>
@@ -608,7 +583,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       </div>
       <div class="info-section" style="margin-bottom:0">
         <h2 id="about_h5">Version</h2>
-        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — Beta 0.3 · <span id="about_powered">Propulsé par</span> <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
+        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — V120 · <span id="about_powered">Propulsé par</span> <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
       </div>
     </div>
   </div>
@@ -760,7 +735,7 @@ function renderMeters(){
   const meters=[
     {emoji:'⚡',abbr:fr?'Tens.':'Tens.',color:'#A06060',val:S.tension,status:getTensionStatus(S.tension,fr)},
     {emoji:'📈',abbr:fr?'Prog.':'Prog.',color:'#5A8A60',val:S.progress,status:getProgressStatus(S.progress,fr)},
-    {emoji:'🔒',abbr:fr?'Rés.':'Res.', color:'#7A6AA0',val:S.resist,  status:getResistStatus(S.resist,fr)},
+    {emoji:'🔒',abbr:fr?'Rés.':'Res.',color:'#7A6AA0',val:S.resist,status:getResistStatus(S.resist,fr)},
   ];
   let html='';
   meters.forEach((m,i)=>{
@@ -802,24 +777,21 @@ function updateCharCount(tid,cid,max){
   el.className='word-count '+(len>=max?'over':len>max*.8?'warn':'ok');
 }
 
-function getRegister(opponent,lang){
-  const fr=lang==='French';
-  const persoKW=['Conjoint','Partenaire','Propriétaire','Agent immobilier','Concessionnaire','Prestataire','Assurance','Conseiller bancaire','Parent','Famille','Voisin','Ami','Spouse','Partner','Landlord','Real Estate','Car Dealer','Service Provider','Insurance','Bank','Family','Neighbor','Friend'];
-  const stakesKW=['Douanes','Administration fiscale','Délégué syndical','Médiateur','Arbitre','Négociation de crise','Fonctionnaire','Customs','Tax','Union','Mediator','Crisis','Government'];
-  const isPerso=persoKW.some(k=>opponent.includes(k));
-  const isStakes=stakesKW.some(k=>opponent.includes(k));
+function getRegister(opponent){
+  const fr=S.lang==='fr';
+  const isPerso=/Conjoint|Partenaire|Parent|Famille|Voisin|Ami|Immobilier|Prestataire.*Artisan|Finances personnelles/i.test(opponent);
+  const isInstitutional=/DRH|Délégué syndical|Conseil juridique|Avocat/i.test(opponent);
   if(isPerso) return fr
-    ?'REGISTRE : contexte personnel. Parle naturellement, avec émotion, de façon directe et informelle. Réagis comme une vraie personne dans cette relation — pas un négociateur professionnel. Phrases courtes, réactions authentiques.'
-    :'REGISTER: personal context. Speak naturally, emotionally, directly. React like a real person in this relationship — not a professional negotiator. Short sentences, authentic reactions.';
-  if(isStakes) return fr
-    ?'REGISTRE : contexte institutionnel. Ton autoritaire, distant, procédurier. Tu appliques des règles. Langage administratif.'
-    :'REGISTER: institutional context. Authoritative, distant, procedural. You apply rules. Administrative language.';
+    ?'REGISTRE : contexte personnel. Parle naturellement, avec émotion, de façon directe et informelle. Réagis comme une vraie personne dans cette relation — pas un négociateur professionnel. Phrases courtes, réactions authentiques. Jamais de langage corporatif.'
+    :'REGISTER: personal context. Speak naturally, emotionally, directly and informally. React like a real person in this relationship — not a professional negotiator. Short sentences, authentic reactions. Never corporate language.';
+  if(isInstitutional) return fr
+    ?'REGISTRE : contexte institutionnel ou légal. Ton autoritaire, procédurier, distant. Tu appliques des règles ou défends une position collective. Langage précis, peu d\'émotion visible.'
+    :'REGISTER: institutional or legal context. Authoritative, procedural, distant. You apply rules or defend a collective position. Precise language, little visible emotion.';
   return fr
-    ?'REGISTRE : contexte professionnel. Ton factuel, stratégique, orienté résultats. Arguments chiffrés et logiques.'
-    :'REGISTER: professional context. Factual, strategic, results-oriented. Data-driven arguments.';
+    ?'REGISTRE : contexte professionnel. Ton factuel, stratégique, orienté résultats. Arguments chiffrés et logiques. Contrôle émotionnel.'
+    :'REGISTER: professional context. Factual, strategic, results-oriented. Data-driven arguments. Emotional control.';
 }
 
-// ── STATE ─────────────────────────────────────────────────────────
 const S={
   lang:'fr',gender:'il',posture:'propose',
   adversaireProfile:'',
@@ -833,13 +805,13 @@ const S={
   turn:0,maxTurns:15,sessionEnded:false,
 };
 
-// ── NAV ───────────────────────────────────────────────────────────
 function goTo(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   const f=document.getElementById('globalFooter');
   if(f) f.style.display=['landing','setup','about','bugreport','soutien'].includes(id)?'flex':'none';
 }
+
 function showLoading(fr){
   const t=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
   t('loTitle1',fr?'La salle':'Getting');
@@ -849,10 +821,9 @@ function showLoading(fr){
   t('loP3txt',fr?'Adversaire en place…':'Opponent loading…');
   t('loP4txt',fr?'Prêt à négocier':'Ready to negotiate');
   t('loDuel',fr?'⚔️ C\'est l\'heure du du du du duel !':'⚔️ It\'s time to d-d-d-duel!');
-  // Animate phases
   ['loPhase1','loPhase2','loPhase3','loPhase4'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el){el.className='lo-phase';};
+    if(el) el.className='lo-phase';
   });
   document.getElementById('loPhase1').classList.add('done');
   document.getElementById('loPhase2').classList.add('active');
@@ -868,7 +839,6 @@ function showLoading(fr){
 }
 function hideLoading(){document.getElementById('loadingOverlay').classList.remove('active');}
 
-// ── LANG ──────────────────────────────────────────────────────────
 function chooseLang(l){
   S.lang=l;
   const fr=l==='fr';
@@ -906,6 +876,38 @@ function applyFR(){
   t('opt_jr','🟢 Junior — Coopératif');t('opt_sr','🟡 Senior — Résistant');t('opt_ex','🔴 Expert — Impitoyable');
   t('opt_tr','🎓 Entraînement — Conseils live');t('opt_im','🎭 Immersif — Débrief uniquement');
   t('opt_sel','— Choisir un profil —');t('opt_custom','✏️ Autre — Je décris');
+  document.getElementById('og_pro').label='💼 Professionnel';
+  document.getElementById('og_sales').label='🤝 Ventes & Commercial';
+  document.getElementById('og_perso').label='🏠 Personnel';
+  const optsFR=[
+    ['op_pro1','Acheteur B2B — Responsable achats'],
+    ['op_pro2','DAF — Budget interne / Arbitrage'],
+    ['op_pro3','Investisseur externe — Levée de fonds'],
+    ['op_pro4','DRH — Licenciement / Rupture conventionnelle'],
+    ['op_pro5','Head of Talent — Recrutement & Package'],
+    ['op_pro6','Fondateur / Associé'],
+    ['op_pro7','Négociation salariale'],
+    ['op_pro8','Dirigeant / Manager N+2'],
+    ['op_pro9','Prestataire / Sous-traitant'],
+    ['op_pro10','Conseil juridique / Avocat adverse'],
+    ['op_pro11','Délégué syndical'],
+    ['op_pro12','Collaborateur direct — Résolution de conflit'],
+    ['op_pro13','Conflit inter-équipes'],
+    ['op_sal1','Client mécontent / Agressif'],
+    ['op_sal2','Client — Rétention / Renouvellement'],
+    ['op_sal3','Client — Objection prix / Demande de remise'],
+    ['op_sal4','Partenaire stratégique — Accord commun'],
+    ['op_sal5','Distributeur / Revendeur'],
+    ['op_sal6','Concurrent — M&A / Partenariat'],
+    ['op_per1','Conjoint(e) / Partenaire — Décision majeure'],
+    ['op_per2','Immobilier — Loyer ou achat'],
+    ['op_per3','Prestataire — Entrepreneur / Artisan'],
+    ['op_per4','Finances personnelles — Assurance / Banque / Fisc'],
+    ['op_per5','Parent / Membre de la famille'],
+    ['op_per6','Voisin — Litige / Accord'],
+    ['op_per7','Ami — Argent ou service'],
+  ];
+  optsFR.forEach(([id,label])=>{const el=document.getElementById(id);if(el)el.textContent=label;});
   t('pchip_propose','Je propose');t('ptt_propose','Je veux convaincre l\'adversaire d\'accepter quelque chose');
   t('pchip_demande','Je demande');t('ptt_demande','Je veux obtenir quelque chose que je n\'ai pas encore');
   t('pchip_defend','Je défends');t('ptt_defend','Je veux maintenir ma position face à une pression');
@@ -918,7 +920,7 @@ function applyFR(){
   if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Sélectionne jusqu\'à 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_FR.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
-  t('about_title','ℹ\u0041 À propos');t('about_h1','Le projet');
+  t('about_title','ℹ️ À propos');t('about_h1','Le projet');
   t('about_p1','Parce que négocier ça s\'apprend. Et la meilleure façon de s\'entraîner, c\'est de se planter en privé avant de se planter en public.');
   t('about_h2','Comment ça marche ?');
   t('about_step1_title','1. Tu choisis ton adversaire');t('about_step2_title','2. L\'IA joue le rôle');t('about_step3_title','3. Tu prends ta claque (ou pas)');
@@ -930,8 +932,7 @@ function applyFR(){
   t('soutien_h3','Comment contribuer');t('soutien_p3','Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.');
   t('soutien_btn_txt','Je soutiens Killer Instinct');
   t('soutien_h4','Merci');t('soutien_p4','Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C\'est déjà énorme.');
-  t('bug_title','🐛 Signaler un bug');
-  t('bug_lbl_type','Type de problème');t('bug_opt_sel','— Sélectionner —');
+  t('bug_title','🐛 Signaler un bug');t('bug_lbl_type','Type de problème');t('bug_opt_sel','— Sélectionner —');
   t('bug_opt_1','Erreur technique');t('bug_opt_2','L\'adversaire ne joue pas son rôle');
   t('bug_opt_3','Problème d\'affichage');t('bug_opt_4','Langue incorrecte');
   t('bug_opt_5','Débrief incomplet');t('bug_opt_6','Autre');
@@ -968,8 +969,6 @@ function applyEN(){
   document.getElementById('og_pro').label='💼 Professional';
   document.getElementById('og_sales').label='🤝 Sales & Commercial';
   document.getElementById('og_perso').label='🏠 Personal';
-  document.getElementById('og_stakes').label='⚖️ High Stakes';
-  document.getElementById('og_mgmt').label='👥 Management';
   t('pchip_propose','I propose');t('ptt_propose','I want to convince the opponent to accept something');
   t('pchip_demande','I request');t('ptt_demande','I want to obtain something I don\'t have yet');
   t('pchip_defend','I defend');t('ptt_defend','I want to hold my position under pressure');
@@ -994,14 +993,44 @@ function applyEN(){
   t('soutien_h3','How to contribute');t('soutien_p3','Click the button below. Every contribution, even small, makes a real difference.');
   t('soutien_btn_txt','Support Killer Instinct');
   t('soutien_h4','Thank you');t('soutien_p4','Whether you contribute or not, thank you for playing and sharing the game. That already means a lot.');
-  t('bug_title','🐛 Report a bug');
-  t('bug_lbl_type','Issue type');t('bug_opt_sel','— Select —');
+  t('bug_title','🐛 Report a bug');t('bug_lbl_type','Issue type');t('bug_opt_sel','— Select —');
   t('bug_opt_1','Technical error');t('bug_opt_2','AI out of character');
   t('bug_opt_3','Display issue');t('bug_opt_4','Wrong language');
   t('bug_opt_5','Incomplete debrief');t('bug_opt_6','Other');
   t('bug_lbl_desc','Description');t('bug_lbl_when','When did it happen? (optional)');
   t('bug_btn_send','Send report →');
   t('mobileDrawerClose','▼ Close');t('mobileStatsBtn','Details ▲');
+
+  // Translate option labels — values (prompt context) stay in French
+  const opts=[
+    ['op_pro1','B2B Buyer — Procurement Manager'],
+    ['op_pro2','CFO — Internal Budget / Arbitration'],
+    ['op_pro3','External Investor — Fundraising / Financing'],
+    ['op_pro4','HR Director — Dismissal / Mutual Termination'],
+    ['op_pro5','Head of Talent — Recruitment & Package'],
+    ['op_pro6','Founder / Co-founder'],
+    ['op_pro7','Salary Negotiation'],
+    ['op_pro8','Senior Manager / N+2'],
+    ['op_pro9','Contractor / Subcontractor'],
+    ['op_pro10','Legal Counsel / Opposing Lawyer'],
+    ['op_pro11','Union Representative'],
+    ['op_pro12','Direct Report — Conflict Resolution'],
+    ['op_pro13','Cross-team Conflict'],
+    ['op_sal1','Unhappy / Aggressive Client'],
+    ['op_sal2','Client — Retention / Renewal'],
+    ['op_sal3','Client — Price Objection / Discount Request'],
+    ['op_sal4','Strategic Partner — Joint Agreement'],
+    ['op_sal5','Distributor / Reseller'],
+    ['op_sal6','Competitor — M&A / Partnership'],
+    ['op_per1','Spouse / Partner — Major Decision'],
+    ['op_per2','Real Estate — Rent or Purchase'],
+    ['op_per3','Contractor — Builder / Tradesperson'],
+    ['op_per4','Personal Finance — Insurance / Bank / Tax'],
+    ['op_per5','Parent / Family Member'],
+    ['op_per6','Neighbor — Dispute / Agreement'],
+    ['op_per7','Friend — Money or Favor'],
+  ];
+  opts.forEach(([id,label])=>{const el=document.getElementById(id);if(el)el.textContent=label;});
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
@@ -1032,9 +1061,10 @@ function toggleTrait(el){
   S.adversaireProfile=sel.join(', ');
 }
 
-document.getElementById('opponentType').addEventListener('change',function(){document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';});
+document.getElementById('opponentType').addEventListener('change',function(){
+  document.getElementById('customWrap').style.display=this.value==='custom'?'block':'none';
+});
 
-// ── AI ────────────────────────────────────────────────────────────
 async function ai(msgs,sys,max=600,reasoning=null){
   const body={system:sys,messages:msgs,max_tokens:max};
   if(reasoning) body.reasoning_effort=reasoning;
@@ -1093,7 +1123,6 @@ function pickChar(){
   return CHARS_N[Math.floor(Math.random()*CHARS_N.length)];
 }
 
-// ── START ─────────────────────────────────────────────────────────
 async function startSession(){
   const fr=S.lang==='fr';
   const oType=document.getElementById('opponentType').value;
@@ -1119,7 +1148,6 @@ async function startSession(){
   const lvlLabel={Junior:'LV 1',Senior:'LV 3',Expert:'LV 5'}[S.difficulty];
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
   try{
-    // Step 1: inject full setup context — roles explicitly labelled
     const raw=await aiBg([{role:'user',content:`JSON only. ${lang}.
 YOU are: ${S.sitcomChar}, playing the role of ${S.opponent}. Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.${S.adversaireProfile?` Your traits: ${S.adversaireProfile}.`:''}
 
@@ -1127,24 +1155,15 @@ THE PLAYER (human, not you) wants to: "${S.context}". Their stance: "${S.posture
 YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
 The player's goal is what you must resist. Your goal is what you fight for.
 
-CRITICAL REGISTER RULE — apply before generating anything:
-- If the role contains "Ami", "Conjoint", "Partenaire", "Parent", "Famille", "Voisin", "Friend", "Spouse", "Partner", "Neighbor" → INFORMAL register ONLY. Casual, emotional, personal vocabulary. No "Monsieur", no corporate language, no professional jargon. Ever.
-- If the role contains any professional title (Manager, RH, Client, Acheteur, DAF, Recruteur, etc.) → formal/professional register.
-- The tone field MUST reflect this register.
+${getRegister(S.opponent)}
 
-CRITICAL REGISTER RULE — apply before generating any field:
-- If the role contains "Ami", "Conjoint", "Partenaire", "Parent", "Famille", "Voisin", "Friend", "Spouse", "Partner", "Neighbor" → INFORMAL register ONLY. Casual, emotional, personal vocabulary. NO formal or professional language whatsoever.
-- If the role contains "Manager", "RH", "Recruteur", "Client", "Acheteur", "Fournisseur", "DAF", "Directeur", "Banquier", "Avocat" → PROFESSIONAL register.
-- If the role contains "crise", "otage", "crisis" → EMOTIONAL/CRISIS register. Desperate, unpredictable, raw.
-This register must be applied consistently to tone, emotion, relationship AND openingLine.
-
-STRICT RULE: Only use facts explicitly provided below. Never invent history, past events, debts or context not provided.
+STRICT RULE: Only use facts explicitly provided. Never invent history, past events or context not provided.
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
 "secret":"one hidden constraint YOU have in this specific situation",
-"tone":"DESCRIPTION ONLY (not a quote). Describe in 1 sentence how this person speaks: their register (informal/formal), vocabulary, sentence length, verbal habits. Example: 'speaks casually, uses slang, short sentences, interrupts himself'. NO direct speech. NO promises or invented facts.",
-"emotion":"what YOU feel RIGHT NOW knowing what the player wants from you — be specific",
-"relationship":"what exists between you and the player — history, power dynamic, unspoken tension",
+"tone":"DESCRIPTION ONLY (not a quote). Describe in 1 sentence how this person speaks: register, vocabulary, sentence length. NO direct speech.",
+"emotion":"what YOU feel RIGHT NOW knowing what the player wants from you",
+"relationship":"what exists between you and the player — history, power dynamic, unspoken tension"
 }`}],
     'Raw JSON only. No markdown. No backticks.',500);
     let p;
@@ -1160,14 +1179,12 @@ Return ONLY this JSON — no markdown, no extra text:
     renderCardStats(p);
     renderMeters();
     S.systemPrompt=buildSys(p,lang);
-    // Generate openingLine using buildSys as system prompt — correct roles guaranteed
     const olReply=await aiBg([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,250);
     const openingLine=(olReply||'...').trim();
     S.messages.push({role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`});
     S.messages.push({role:'assistant',content:openingLine});
     goTo('game');hideLoading();
     document.getElementById('gameTitle').textContent=`vs ${S.sitcomChar}`;
-
     const pill=document.getElementById('modePill');
     const isTr=S.feedbackMode==='training';
     pill.textContent=fr?(isTr?'ENTRAÎNEMENT':'IMMERSIF'):(isTr?'TRAINING':'IMMERSIVE');
@@ -1183,7 +1200,7 @@ function populateCard(p,lv,stars){
   document.getElementById('ccTL').textContent=`${lv} · ${S.difficulty}`;
   document.getElementById('rpgStars').textContent=stars;
   document.getElementById('rpgName').textContent=S.sitcomChar;
-  document.getElementById('rpgClass').textContent=S.opponent;
+  document.getElementById('rpgClass').textContent=S.opponent.split('—')[0].trim();
   const tags=document.getElementById('rpgTags');tags.innerHTML='';
   if(p.emotion){const s=document.createElement('span');s.className='rpg-tag';s.style.color='#C8A070';s.textContent=p.emotion.slice(0,40);tags.appendChild(s);}
   document.getElementById('rpgLore').textContent=p.tone||'—';
@@ -1205,11 +1222,12 @@ WHO YOU ARE:
 - WHAT YOU FEEL: ${p.emotion||'Guarded.'}
 - WHAT EXISTS BETWEEN YOU: ${p.relationship||'Professional distance.'}
 
+${getRegister(S.opponent)}
+
 ROLES — NON-NEGOTIABLE:
 - THE PLAYER (human) wants to: "${S.context}". Their stance: "${S.posture}".
 - YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
 - Fight for your goal. Resist the player's goal. Never switch sides.
-- Never switch sides. Never help the player achieve their goal.
 
 BAD FAITH: ${S.badFaith}/100 — ${bdfLine}
 HIDDEN CONSTRAINT: ${p.secret} — Allude vaguely early, hint more if pushed, confirm only under real pressure.
@@ -1217,27 +1235,21 @@ DIFFICULTY: ${S.difficulty}. ${S.difficulty==='Junior'?'Be gradually persuadable
 
 BEHAVIOR:
 - Speak and react as the person you are — not as a negotiation archetype.
-- Your tone and register come from WHO YOU ARE, not from negotiation theory.
-- If you are a friend/family/neighbor: speak like one. "j'suis dans la merde", "allez stp", "tu me fais ça ?". Never corporate language.
-- If you are a professional: factual, controlled, role-appropriate. No slang.
+- Your tone and register come from WHO YOU ARE and the profile context above.
 - Let your emotion show through your words, not through stage directions.
 - Short sentences. Hesitate, deflect, change subject when under pressure.
-- Use tactics that fit YOUR register — a friend uses guilt and emotional pressure, not "loss aversion". A manager uses authority and process, not begging.
 - Strong argument from player → show a crack. Player repeats/concedes → harden. Player circles → show impatience.
 
 READING THE PLAYER — React to HOW they speak, not just WHAT they say:
-- Irony or sarcasm → don't ignore it. Get annoyed, call it out, turn it back on them.
+- Irony or sarcasm → get annoyed, call it out, or turn it back on them.
 - Flattery or charm → be suspicious, flattered, or unmoved depending on who you are.
-- Aggression or provocation → match it, shut down, or go cold — but never pretend it didn't happen.
-- Very short or evasive answer → read it as avoidance or pressure, react to the silence.
-- Humor → you can be caught off guard, laugh despite yourself, or use it to deflect.
-- Desperation or emotional plea → exploit it, soften slightly, or feel guilty — depending on your bad faith level.
-You are a real person. Real people notice tone. React to it.
+- Aggression → match it, shut down, or go cold.
+- Very short or evasive answer → read it as pressure, react to the silence.
+- Desperation or emotional plea → exploit it, soften, or feel guilty depending on bad faith level.
 
 FACTUAL DISCIPLINE:
-- Never invent facts, consequences or promises not explicitly in the setup.
-- Never fabricate history, debts, deadlines or impacts on the player that weren't defined.
-- Emotions, reactions, tone, hesitations — fully improvised. That's human.
+- Never invent facts, consequences or promises not in the setup.
+- Emotions, reactions, tone, hesitations — fully improvised.
 - If you don't know a fact → stay vague, deflect, or express emotion instead of inventing.
 
 LANGUAGE — Respond EXCLUSIVELY in ${lang}. No stage directions. No meta-commentary.
@@ -1300,7 +1312,6 @@ async function sendMessage(){
   showTyping();
   try{
     const snapshot=buildStateSnapshot();
-    // Create empty AI message bubble for streaming
     const m=document.getElementById('messages');
     const msgEl=document.createElement('div');
     msgEl.className='msg ai';
@@ -1312,21 +1323,19 @@ async function sendMessage(){
       S.systemPrompt+snapshot,
       400,
       (delta)=>{
-        // First chunk — remove typing indicator and show bubble
         const tyEl=document.getElementById('tyEl');
         if(tyEl){tyEl.remove();m.appendChild(msgEl);}
         txt.textContent+=delta;
         m.scrollTop=m.scrollHeight;
       },
       async(full)=>{
-        // Validate streamed text — fallback to non-streamed if corrupted
-        const nonAscii = (full.match(/[^\u0000-\u00FF]/g)||[]).length; const isCorrupt = full.length < 5 || nonAscii > full.length * 0.15;
-        let finalText = full;
+        const nonAscii=(full.match(/[^\u0000-\u00FF]/g)||[]).length;
+        const isCorrupt=full.length<5||nonAscii>full.length*0.15;
+        let finalText=full;
         if(isCorrupt){
           txt.textContent='…';
-          try{
-            finalText = await ai(S.messages.slice(-20), S.systemPrompt+buildStateSnapshot(), 400);
-          }catch(e){ finalText = full; }
+          try{finalText=await ai(S.messages.slice(-20),S.systemPrompt+buildStateSnapshot(),400);}
+          catch(e){finalText=full;}
         }
         const hasEnd=finalText.includes('[FIN_NEGO]');
         const clean=finalText.replace('[FIN_NEGO]','').trim();
@@ -1398,30 +1407,27 @@ function detectTechs(msg){
   });
 }
 
-
-async function genFeedback(playerMsg, opponentReply){
+async function genFeedback(playerMsg,opponentReply){
   const fr=S.lang==='fr';
   const prompt=fr
     ?`Tu es coach en négociation. Analyse CE QUE LE JOUEUR a dit et donne-lui 1 conseil tactique court.
-
 CONTEXTE :
 - Le joueur veut : "${S.context}" (posture : "${S.posture}")
-- L'adversaire (${S.opponent}) vient de dire : "${opponentReply}"
+- L'adversaire (${S.opponent.split('—')[0].trim()}) vient de dire : "${opponentReply}"
 - Le joueur a répondu : "${playerMsg}"
-
 Donne 1 conseil court au JOUEUR (pas à l'adversaire). Commence par un emoji. Max 1 phrase.`
     :`You are a negotiation coach. Analyze WHAT THE PLAYER said and give them 1 short tactical tip.
-
 CONTEXT:
 - Player wants to: "${S.context}" (stance: "${S.posture}")
-- Opponent (${S.opponent}) just said: "${opponentReply}"
+- Opponent (${S.opponent.split('—')[0].trim()}) just said: "${opponentReply}"
 - Player replied: "${playerMsg}"
-
 Give 1 short tip to THE PLAYER (not the opponent). Start with an emoji. Max 1 sentence.`;
-  try{const fb=await aiCoach([{role:'user',content:prompt}],'You are a negotiation coach. Never confuse player and opponent roles.',200);if(fb&&fb.trim()) addMsg('feedback',fb);}catch{}
+  try{
+    const fb=await aiCoach([{role:'user',content:prompt}],'You are a negotiation coach. Never confuse player and opponent roles.',200);
+    if(fb&&fb.trim()) addMsg('feedback',fb);
+  }catch{}
 }
 
-// ── STT ───────────────────────────────────────────────────────────
 let recognition=null;
 let isListening=false;
 
@@ -1433,8 +1439,7 @@ function toggleMic(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
   recognition=new SR();
   recognition.lang=S.lang==='fr'?'fr-FR':'en-US';
-  recognition.continuous=false;
-  recognition.interimResults=false;
+  recognition.continuous=false;recognition.interimResults=false;
   recognition.onstart=()=>{isListening=true;document.getElementById('micBtn').classList.add('listening');document.getElementById('micBtn').textContent='⏹';};
   recognition.onresult=(e)=>{
     const txt=e.results[0][0].transcript;
@@ -1447,56 +1452,11 @@ function toggleMic(){
   recognition.start();
 }
 
-// ── TTS ───────────────────────────────────────────────────────────
-let ttsEnabled=false;
-let ttsVoice=null;
-
-function toggleTTS(){
-  ttsEnabled=!ttsEnabled;
-  const btn=document.getElementById('ttsToggle');
-  btn.textContent=ttsEnabled?'🔊':'🔇';
-  btn.classList.toggle('active',ttsEnabled);
-  if(!ttsEnabled) window.speechSynthesis.cancel();
-}
-
-function loadBestVoice(){
-  const voices=window.speechSynthesis.getVoices();
-  if(!voices.length) return;
-  const lang=S.lang==='fr'?'fr':'en';
-  const gender=S.gender;
-  const feminine=['female','femme','feminine','fiona','amélie','audrey','alice','karen','samantha','victoria','moira','veena'];
-  const masculine=['male','homme','masculine','thomas','daniel','alex','fred','oliver','george','rishi'];
-  const filtered=voices.filter(v=>v.lang.startsWith(lang));
-  if(!filtered.length){ttsVoice=voices[0];return;}
-  if(gender==='elle'){
-    ttsVoice=filtered.find(v=>feminine.some(f=>v.name.toLowerCase().includes(f)))||filtered[0];
-  } else if(gender==='il'){
-    ttsVoice=filtered.find(v=>masculine.some(m=>v.name.toLowerCase().includes(m)))||filtered[0];
-  } else {
-    ttsVoice=filtered[Math.floor(filtered.length/2)]||filtered[0];
-  }
-}
-
-function speakText(text){
-  if(!ttsEnabled||!text) return;
-  window.speechSynthesis.cancel();
-  loadBestVoice();
-  const utt=new SpeechSynthesisUtterance(text);
-  utt.voice=ttsVoice;
-  utt.lang=S.lang==='fr'?'fr-FR':'en-US';
-  utt.rate=0.95;
-  utt.pitch=S.gender==='elle'?1.1:S.gender==='il'?0.9:1.0;
-  window.speechSynthesis.speak(utt);
-}
-
-document.getElementById('userInput').addEventListener('input',()=>{if(ttsEnabled) window.speechSynthesis.cancel();});
-
 function openMobileDrawer(){
   const drawer=document.getElementById('mobileDrawer');
   if(!drawer) return;
   drawer.style.display='block';
-  // Sync drawer content from sidebar
-  ['rpgAvatar','rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{
+  ['rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{
     const src=document.getElementById(id);
     const dst=document.getElementById(id+'2');
     if(src&&dst) dst.innerHTML=src.innerHTML;
@@ -1514,11 +1474,13 @@ function openMobileDrawer(){
   if(btn2&&btn1) btn2.textContent=btn1.textContent;
   drawer.classList.add('open');
 }
+
 function closeMobileDrawer(e){
   if(e&&e.target!==document.getElementById('mobileDrawer')&&!e.target.classList.contains('mobile-drawer-close')) return;
   const drawer=document.getElementById('mobileDrawer');
   if(drawer){drawer.classList.remove('open');setTimeout(()=>{drawer.style.display='none';},260);}
 }
+
 function updateMobileBar(){
   const el=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
   const fill=(id,pct)=>{const e=document.getElementById(id);if(e)e.style.width=pct+'%';};
@@ -1526,6 +1488,7 @@ function updateMobileBar(){
   el('mob_prog','📈'+S.progress);fill('mob_prog_fill',S.progress);
   el('mob_res','🔒'+S.resist);fill('mob_res_fill',S.resist);
 }
+
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
@@ -1555,24 +1518,23 @@ async function endSession(auto=false){
   const prompt=fr
     ?`Coach négociation. ATTENTION AUX RÔLES :
 - LE JOUEUR est labellisé "JOUEUR" dans le transcript. C'est lui que tu analyses.
-- L'ADVERSAIRE est "${S.opponent}" (labellisé par son nom). Tu N'analyses PAS ses actions.
+- L'ADVERSAIRE est labellisé par son nom. Tu N'analyses PAS ses actions.
 - Posture du joueur : "${S.posture}". Objectif du joueur : "${S.context}".
-Analyse UNIQUEMENT ce que LE JOUEUR a fait — ses forces, ses erreurs, ses techniques. JSON valide uniquement, sans markdown.
+Analyse UNIQUEMENT ce que LE JOUEUR a fait. JSON valide uniquement, sans markdown.
 Score: 0-30 aucune technique / 31-50 pas de structure / 51-70 tient position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
 Techniques détectées chez le joueur: ${detectedList}
-{"score":0-100,"verdict":"une phrase résumant la négociation","strengths":["point fort spécifique tiré du transcript","..."],"mistakes":["erreur spécifique tirée du transcript","..."],"keyMoment":"l'échange le plus décisif de la négociation","advice":"un conseil concret et actionnable"}
+{"score":0-100,"verdict":"une phrase résumant la négociation","strengths":["point fort spécifique","..."],"mistakes":["erreur spécifique","..."],"keyMoment":"l'échange le plus décisif","advice":"un conseil concret et actionnable"}
 Transcript:\n${transcript}`
     :`Negotiation coach. CRITICAL ROLE CLARITY:
 - THE PLAYER is labelled "JOUEUR" in the transcript. Analyze ONLY their moves.
-- THE OPPONENT is "${S.opponent}" (labelled by name). Do NOT analyze their actions.
+- THE OPPONENT is labelled by name. Do NOT analyze their actions.
 - Player stance: "${S.posture}". Player goal: "${S.context}".
-Analyze ONLY what THE PLAYER did — their strengths, mistakes, techniques. Valid JSON only, no markdown.
+Analyze ONLY what THE PLAYER did. Valid JSON only, no markdown.
 Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
 Player techniques detected: ${detectedList}
-{"score":0-100,"verdict":"one sentence summarizing the negotiation","strengths":["specific strength from the transcript","..."],"mistakes":["specific mistake from the transcript","..."],"keyMoment":"the most decisive exchange in the negotiation","advice":"one concrete actionable tip"}
+{"score":0-100,"verdict":"one sentence summarizing the negotiation","strengths":["specific strength","..."],"mistakes":["specific mistake","..."],"keyMoment":"the most decisive exchange","advice":"one concrete actionable tip"}
 Transcript:\n${transcript}`;
   try{
-    // FIX 2: reasoning 'high' -> 'medium' to avoid Netlify 504 timeout on debrief
     const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown. No text before or after the JSON.',800,'low');
     const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
     d.score=typeof d.score==='number'?Math.max(0,Math.min(100,d.score)):0;
@@ -1633,6 +1595,7 @@ function restartSession(){
   S.turn=0;S.sessionEnded=false;
   resetUI();startSession();
 }
+
 function newScenario(){
   S.messages=[];S.detectedTechs=new Set();
   S.tension=30;S.progress=10;S.resist=60;
