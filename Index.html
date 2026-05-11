@@ -1149,7 +1149,8 @@ async function startSession(){
   const starsMap={Junior:'★★☆☆☆',Senior:'★★★★☆',Expert:'★★★★★'};
   try{
     const raw=await aiBg([{role:'user',content:`JSON only. ${lang}.
-YOU are: ${S.sitcomChar}, playing the role of ${S.opponent}. Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.${S.adversaireProfile?` Your traits: ${S.adversaireProfile}.`:''}
+YOU are playing the role of: ${S.opponent}. Difficulty: ${S.difficulty}. Bad faith: ${S.badFaith}/100.${S.adversaireProfile?` Your traits: ${S.adversaireProfile}.`:''}
+Display name for this session: ${S.sitcomChar}. This name is a label only — ignore all cultural associations, personality traits or behaviors linked to this name.
 
 THE PLAYER (human, not you) wants to: "${S.context}". Their stance: "${S.posture}".
 YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
@@ -1214,7 +1215,8 @@ function buildSys(p,lang){
     :S.badFaith<=60?(fr?'Tu peux déformer légèrement les faits.':'You may slightly twist facts.')
     :S.badFaith<=80?(fr?'Tu retournes les arguments, tu minimises.':'Flip arguments, minimize.')
     :(fr?'Tu mens par omission, fausses concessions.':'Lie by omission, fake concessions.');
-  return `You are ${S.sitcomChar}, playing the role of: ${S.opponent}.
+  return `You are playing the role of: ${S.opponent}.
+Display name for this session: ${S.sitcomChar}. This name is a label only — ignore all cultural associations, personality traits or behaviors linked to this name.
 ${gLine}
 
 WHO YOU ARE:
@@ -1331,8 +1333,9 @@ async function sendMessage(){
       async(full)=>{
         const nonAscii=(full.match(/[^\u0000-\u00FF]/g)||[]).length;
         const hasLongGarbled=/[a-zA-Z]{18,}/.test(full);
+        const hasBadTokens=/[bcdfghjklmnpqrstvwxz]{5,}/i.test(full);
         const hasBrokenStage=/\*[a-z]{1,4}\*[a-z]|\*\*[a-z]+\*[^*]/.test(full);
-        const isCorrupt=full.length<5||nonAscii>full.length*0.15||hasLongGarbled||hasBrokenStage;
+        const isCorrupt=full.length<5||nonAscii>full.length*0.15||hasLongGarbled||hasBadTokens||hasBrokenStage;
         let finalText=full;
         if(isCorrupt){
           txt.textContent='…';
