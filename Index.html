@@ -87,7 +87,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 .rpg-card-meta{position:absolute;top:12px;left:14px;font-size:9px;color:#5A5870;letter-spacing:.14em;text-transform:uppercase;font-family:var(--font-hero);font-weight:700;}
 .rpg-card-stars{position:absolute;top:12px;right:14px;font-size:9px;color:#5A5870;}
 .rpg-card-identity{display:flex;align-items:center;gap:12px;padding-top:1.4rem;}
-.rpg-avatar-box{width:46px;height:46px;border-radius:10px;background:#24222E;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
 .rpg-name{font-family:var(--font-hero);font-size:17px;font-weight:700;color:var(--text);letter-spacing:.03em;text-transform:uppercase;line-height:1.1;}
 .rpg-class{font-size:10px;color:var(--text-muted);margin-top:2px;}
 .rpg-stats-list{padding:.9rem 1.2rem 0;display:flex;flex-direction:column;gap:7px;}
@@ -297,14 +296,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 <div id="setup" class="screen">
   <div class="setup-wrap">
     <div class="setup-logo">KILLER<span>.</span>INSTINCT<span class="back-btn" onclick="goTo('langscreen')" id="btn_back">← Langue</span></div>
-
     <div class="form-section">
       <div class="section-label" id="sec_who">À qui tu fais face ?</div>
       <div class="form-group">
         <label id="lbl_opponent">Je négocie avec <span style="color:var(--danger)">*</span></label>
         <select id="opponentType">
           <option value="" id="opt_sel">— Choisir un profil —</option>
-
           <optgroup id="og_pro" label="💼 Professionnel">
             <option id="op_pro1" value="Acheteur B2B — Responsable achats — défend un budget serré, cherche le meilleur prix, a des fournisseurs alternatifs">Acheteur B2B — Responsable achats</option>
             <option id="op_pro2" value="DAF — Budget interne / Arbitrage — contrôle la trésorerie, exige un ROI chiffré, averse au risque, protège les marges">DAF — Budget interne / Arbitrage</option>
@@ -320,7 +317,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
             <option id="op_pro12" value="Collaborateur direct — Résolution de conflit — défensif, émotionnel, se sent jugé ou injustement traité, peut se fermer">Collaborateur direct — Résolution de conflit</option>
             <option id="op_pro13" value="Conflit inter-équipes — négociation latérale sans autorité hiérarchique, enjeux politiques, ressources ou périmètres disputés">Conflit inter-équipes</option>
           </optgroup>
-
           <optgroup id="og_sales" label="🤝 Ventes & Commercial">
             <option id="op_sal1" value="Client mécontent / Agressif — veut réparation immédiate, émotionnel, irrationnel, a été déçu ou trahi, peut menacer publiquement">Client mécontent / Agressif</option>
             <option id="op_sal2" value="Client — Rétention / Renouvellement — évalue ses alternatives, froid et calculé, compare activement, prêt à partir si non convaincu">Client — Rétention / Renouvellement</option>
@@ -329,7 +325,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
             <option id="op_sal5" value="Distributeur / Revendeur — veut plus de marge, d'exclusivité ou de support, relation triangulaire avec le client final">Distributeur / Revendeur</option>
             <option id="op_sal6" value="Concurrent — M&A / Partenariat — méfiance mutuelle, enjeux stratégiques, informations sensibles à protéger, agendas cachés">Concurrent — M&A / Partenariat</option>
           </optgroup>
-
           <optgroup id="og_perso" label="🏠 Personnel">
             <option id="op_per1" value="Conjoint(e) / Partenaire — Décision majeure — registre émotionnel, culpabilité possible, intimité, histoire commune, la relation prime sur l'enjeu">Conjoint(e) / Partenaire — Décision majeure</option>
             <option id="op_per2" value="Immobilier — le joueur précise dans le setup s'il négocie un loyer avec un propriétaire ou un achat avec un agent immobilier">Immobilier — Loyer ou achat</option>
@@ -339,7 +334,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
             <option id="op_per6" value="Voisin — Litige / Accord — tension de proximité, on va se recroiser, registre civil, enjeux de vie quotidienne">Voisin — Litige / Accord</option>
             <option id="op_per7" value="Ami — Argent ou service — la relation prime sur l'enjeu, registre le plus délicat, risque de rupture si mal géré">Ami — Argent ou service</option>
           </optgroup>
-
           <option value="custom" id="opt_custom">✏️ Autre — Je décris</option>
         </select>
       </div>
@@ -355,7 +349,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
 
     <div class="form-section">
       <div class="section-label" id="sec_ctx">Contexte & Enjeux</div>
-
       <div class="form-group">
         <label id="lbl_posture">Ma posture dans cette négociation <span style="color:var(--danger)">*</span></label>
         <div class="posture-chips" id="postureChips">
@@ -369,7 +362,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
           <div class="pchip" data-p="recadre" onclick="pickPosture(this)"><span class="pchip-label" id="pchip_recadre">Je recadre</span><div class="pchip-tooltip" id="ptt_recadre">Je veux corriger un comportement ou une situation</div></div>
         </div>
       </div>
-
       <div class="form-group">
         <label id="lbl_adversaire_profile">Caractéristiques de l'adversaire <span style="color:var(--text-dim);font-weight:400;font-size:.72rem;">(optionnel — 3 max)</span></label>
         <div class="traits-trigger" id="traitsTrigger" onclick="toggleTraits()">
@@ -407,8 +399,38 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       </div>
 
       <div class="form-group">
-        <label id="lbl_context">Ton objectif <span style="color:var(--danger)">*</span></label>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.38rem;">
+          <label id="lbl_context" style="margin-bottom:0">Ton objectif <span style="color:var(--danger)">*</span></label>
+          <span onclick="toggleTip('tipContext')" style="font-size:11px;color:var(--accent-dim);cursor:pointer;display:flex;align-items:center;gap:3px;">💡 <span id="lbl_tip_context">Comment bien remplir</span></span>
+        </div>
+        <div id="tipContext" style="display:none;background:#1A1A22;border:1px solid #2A2836;border-radius:8px;padding:.9rem;margin-bottom:.6rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;">
+            <span style="font-size:12px;font-weight:800;color:#D4A853;letter-spacing:.04em;" id="tip_context_title">💡 Comment écrire ton objectif</span>
+            <span onclick="toggleTip('tipContext')" style="font-size:13px;color:#6A6458;cursor:pointer;">✕</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+            <div style="background:#0D1F12;border-radius:6px;border:1px solid #1A3A20;padding:.75rem;">
+              <p style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#27AE60;margin:0 0 .5rem;" id="tip_do_1">✓ À faire</p>
+              <div style="font-size:11px;color:#8A8070;line-height:1.6;" id="tip_do_context">
+                <div>✓ <strong style="color:#C8C4BC">Sois chiffré</strong> — "passer de 42k€ à 47k€"</div>
+                <div>✓ <strong style="color:#C8C4BC">Fixe une limite</strong> — "avant le 1er juin"</div>
+                <div>✓ <strong style="color:#C8C4BC">Sois concret</strong> — "3 jours de remote"</div>
+                <div>✓ <strong style="color:#C8C4BC">Donne le contexte</strong> — "2 ans de poste, objectifs dépassés"</div>
+              </div>
+            </div>
+            <div style="background:#1F0D0D;border-radius:6px;border:1px solid #3A1A1A;padding:.75rem;">
+              <p style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#C0392B;margin:0 0 .5rem;" id="tip_dont_1">✗ À éviter</p>
+              <div style="font-size:11px;color:#8A8070;line-height:1.6;" id="tip_dont_context">
+                <div>✗ <s style="color:#4A4458">"Une augmentation"</s> — trop vague</div>
+                <div>✗ <s style="color:#4A4458">"Résoudre le problème"</s> — pas actionnable</div>
+                <div>✗ <s style="color:#4A4458">"Être mieux traité"</s> — pas négociable</div>
+                <div>✗ <s style="color:#4A4458">Un texte trop long</s> — 2-3 phrases max</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <textarea id="contextText" placeholder="Qu'est-ce que tu veux obtenir ?" maxlength="250" oninput="updateCharCount('contextText','contextCount',250)"></textarea>
+        <div id="contextError" style="display:none;font-size:.75rem;color:var(--danger);margin-top:.3rem;font-weight:700;">Sois plus précis — l'IA a besoin de détails pour bien jouer son rôle.</div>
         <div class="field-footer">
           <span class="field-hint" id="hint_context">Sois précis et concret — qui, quoi, quel montant, quel délai.</span>
           <span class="word-count ok" id="contextCount">0 / 250</span>
@@ -416,8 +438,38 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
       </div>
 
       <div class="form-group">
-        <label id="lbl_obstacles">Obstacles & objections de l'adversaire <span style="color:var(--danger)">*</span></label>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.38rem;">
+          <label id="lbl_obstacles" style="margin-bottom:0">Obstacles & objections de l'adversaire <span style="color:var(--danger)">*</span></label>
+          <span onclick="toggleTip('tipObstacles')" style="font-size:11px;color:var(--accent-dim);cursor:pointer;display:flex;align-items:center;gap:3px;">💡 <span id="lbl_tip_obstacles">Comment bien remplir</span></span>
+        </div>
+        <div id="tipObstacles" style="display:none;background:#1A1A22;border:1px solid #2A2836;border-radius:8px;padding:.9rem;margin-bottom:.6rem;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.75rem;">
+            <span style="font-size:12px;font-weight:800;color:#D4A853;letter-spacing:.04em;" id="tip_obstacles_title">💡 Comment écrire les obstacles</span>
+            <span onclick="toggleTip('tipObstacles')" style="font-size:13px;color:#6A6458;cursor:pointer;">✕</span>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;">
+            <div style="background:#0D1F12;border-radius:6px;border:1px solid #1A3A20;padding:.75rem;">
+              <p style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#27AE60;margin:0 0 .5rem;" id="tip_do_2">✓ À faire</p>
+              <div style="font-size:11px;color:#8A8070;line-height:1.6;" id="tip_do_obstacles">
+                <div>✓ <strong style="color:#C8C4BC">Objections précises</strong> — "budget gelé jusqu'en janvier"</div>
+                <div>✓ <strong style="color:#C8C4BC">Sa position</strong> — "veut maintenir le statu quo"</div>
+                <div>✓ <strong style="color:#C8C4BC">Ses contraintes</strong> — "doit valider avec son N+2"</div>
+                <div>✓ <strong style="color:#C8C4BC">Ce qu'il a dit</strong> — "ce n'est pas le bon moment"</div>
+              </div>
+            </div>
+            <div style="background:#1F0D0D;border-radius:6px;border:1px solid #3A1A1A;padding:.75rem;">
+              <p style="font-size:10px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#C0392B;margin:0 0 .5rem;" id="tip_dont_2">✗ À éviter</p>
+              <div style="font-size:11px;color:#8A8070;line-height:1.6;" id="tip_dont_obstacles">
+                <div>✗ <s style="color:#4A4458">"Il va dire non"</s> — on sait, mais pourquoi ?</div>
+                <div>✗ <s style="color:#4A4458">"Je ne sais pas"</s> — invente si besoin</div>
+                <div>✗ <s style="color:#4A4458">Répéter ton objectif</s> — ce champ c'est lui</div>
+                <div>✗ <s style="color:#4A4458">Laisser vide</s> — l'adversaire sera trop facile</div>
+              </div>
+            </div>
+          </div>
+        </div>
         <textarea id="obstaclesText" placeholder="Budget, timing, autorité…" style="min-height:60px" maxlength="250" oninput="updateCharCount('obstaclesText','obstaclesCount',250)"></textarea>
+        <div id="obstaclesError" style="display:none;font-size:.75rem;color:var(--danger);margin-top:.3rem;font-weight:700;">Sois plus précis — l'IA a besoin de détails pour bien jouer son rôle.</div>
         <div class="field-footer">
           <span class="field-hint" id="hint_obstacles">Liste les vraies résistances que tu anticipes.</span>
           <span class="word-count ok" id="obstaclesCount">0 / 250</span>
@@ -500,7 +552,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     </div>
     <div class="sidebar-end"><button class="btn-end" onclick="endSession()" id="btn_end">🏁 Terminer & Débrief</button></div>
   </div>
-  <!-- MOBILE DRAWER -->
   <div class="mobile-sidebar-drawer" id="mobileDrawer" style="display:none" onclick="closeMobileDrawer(event)">
     <div class="mobile-sidebar-inner">
       <button class="mobile-drawer-close" id="mobileDrawerClose" onclick="closeMobileDrawer()">▼ Fermer</button>
@@ -533,20 +584,10 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
         </div>
       </div>
     </div>
-    <!-- MOBILE STATS BAR -->
     <div class="mobile-stats-bar" id="mobileStatsBar">
-      <div class="mobile-meter">
-        <span class="mobile-meter-val" id="mob_tens" style="color:#A06060;">⚡30</span>
-        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_tens_fill" style="width:30%;background:#A06060;"></div></div>
-      </div>
-      <div class="mobile-meter">
-        <span class="mobile-meter-val" id="mob_prog" style="color:#5A8A60;">📈10</span>
-        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_prog_fill" style="width:10%;background:#5A8A60;"></div></div>
-      </div>
-      <div class="mobile-meter">
-        <span class="mobile-meter-val" id="mob_res" style="color:#7A6AA0;">🔒60</span>
-        <div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_res_fill" style="width:60%;background:#7A6AA0;"></div></div>
-      </div>
+      <div class="mobile-meter"><span class="mobile-meter-val" id="mob_tens" style="color:#A06060;">⚡30</span><div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_tens_fill" style="width:30%;background:#A06060;"></div></div></div>
+      <div class="mobile-meter"><span class="mobile-meter-val" id="mob_prog" style="color:#5A8A60;">📈10</span><div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_prog_fill" style="width:10%;background:#5A8A60;"></div></div></div>
+      <div class="mobile-meter"><span class="mobile-meter-val" id="mob_res" style="color:#7A6AA0;">🔒60</span><div class="mobile-meter-bar"><div class="mobile-meter-fill" id="mob_res_fill" style="width:60%;background:#7A6AA0;"></div></div></div>
       <button class="mobile-stats-toggle" id="mobileStatsBtn" onclick="openMobileDrawer()">Fiche ▲</button>
     </div>
     <div class="messages" id="messages"></div>
@@ -572,25 +613,14 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="aboutBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="about_title">ℹ️ À propos</div>
-      <div class="info-section">
-        <h2 id="about_h1">Le projet</h2>
-        <p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p>
+      <div class="info-section"><h2 id="about_h1">Le projet</h2><p id="about_p1">Parce que négocier ça s'apprend. Et la meilleure façon de s'entraîner, c'est de se planter en privé avant de se planter en public.</p></div>
+      <div class="info-section"><h2 id="about_h2">Comment ça marche ?</h2>
+        <p id="about_step1"><strong id="about_step1_title">1. Tu choisis ton adversaire</strong><br>26 profils couvrant les négociations pro, commerciales et perso.</p>
+        <p id="about_step2" style="margin-top:.6rem;"><strong id="about_step2_title">2. L'IA joue le rôle</strong><br>L'adversaire IA résiste, esquive, manipule. À toi de jouer.</p>
+        <p id="about_step3" style="margin-top:.6rem;"><strong id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br>Un coach analyse tout à la fin.</p>
       </div>
-      <div class="info-section">
-        <h2 id="about_h2">Comment ça marche ?</h2>
-        <p id="about_step1"><strong id="about_step1_title">1. Tu choisis ton adversaire</strong><br>26 profils couvrant les négociations pro, commerciales et perso. Tu décris le contexte exact.</p>
-        <p id="about_step2" style="margin-top:.6rem;"><strong id="about_step2_title">2. L'IA joue le rôle</strong><br>L'adversaire IA résiste, esquive, manipule. Il ne lâchera rien facilement. À toi de jouer.</p>
-        <p id="about_step3" style="margin-top:.6rem;"><strong id="about_step3_title">3. Tu prends ta claque (ou pas)</strong><br>À la fin, un coach analyse tout — ce que tu as bien fait, ce que tu as raté, et comment faire mieux.</p>
-      </div>
-      <div class="info-section">
-        <h2 id="about_h4">Fait par</h2>
-        <p id="about_p4">Créé par moi-même pour vous autres.</p>
-        <a href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank" class="contact-link" id="about_linkedin">Me retrouver sur LinkedIn →</a>
-      </div>
-      <div class="info-section" style="margin-bottom:0">
-        <h2 id="about_h5">Version</h2>
-        <p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — V120 · <span id="about_powered">Propulsé par</span> <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p>
-      </div>
+      <div class="info-section"><h2 id="about_h4">Fait par</h2><p id="about_p4">Créé par moi-même pour vous autres.</p><a href="https://www.linkedin.com/in/jonathan-cerf-csm/" target="_blank" class="contact-link" id="about_linkedin">Me retrouver sur LinkedIn →</a></div>
+      <div class="info-section" style="margin-bottom:0"><h2 id="about_h5">Version</h2><p style="color:var(--text-dim);font-size:.82rem;">Killer Instinct — V120 · <span id="about_powered">Propulsé par</span> <a href="https://openrouter.ai" target="_blank" style="color:var(--accent-dim)">OpenRouter</a> · <span id="about_deployed">Déployé sur</span> <a href="https://netlify.com" target="_blank" style="color:var(--accent-dim)">Netlify</a></p></div>
     </div>
   </div>
 </div>
@@ -628,23 +658,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--font);min-height:1
     <div class="info-back" id="soutienBack" onclick="goTo('langscreen')">← Retour</div>
     <div class="info-card">
       <div class="info-title" id="soutien_title">❤️ Soutenir le projet</div>
-      <div class="info-section">
-        <h2 id="soutien_h1">Pourquoi soutenir ?</h2>
-        <p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie.</p>
-      </div>
-      <div class="info-section">
-        <h2 id="soutien_h2">Ce que ça finance</h2>
-        <p id="soutien_p2">Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.</p>
-      </div>
-      <div class="info-section">
-        <h2 id="soutien_h3">Comment contribuer</h2>
-        <p id="soutien_p3">Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.</p>
-      </div>
+      <div class="info-section"><h2 id="soutien_h1">Pourquoi soutenir ?</h2><p id="soutien_p1">Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût.</p></div>
+      <div class="info-section"><h2 id="soutien_h2">Ce que ça finance</h2><p id="soutien_p2">Les coûts serveur et API. Le développement de nouvelles fonctionnalités.</p></div>
+      <div class="info-section"><h2 id="soutien_h3">Comment contribuer</h2><p id="soutien_p3">Clique sur le bouton ci-dessous.</p></div>
       <a href="https://pots.lydia.me/collect/pots?id=21844-don-t-worry-be-api" target="_blank" style="display:inline-flex;align-items:center;gap:.6rem;margin-top:.8rem;padding:.9rem 2rem;background:var(--accent);color:#0F0F14;font-family:var(--font-hero);font-weight:700;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;">❤️ <span id="soutien_btn_txt">Je soutiens Killer Instinct</span></a>
-      <div class="info-section" style="margin-top:1.5rem;margin-bottom:0">
-        <h2 id="soutien_h4">Merci</h2>
-        <p id="soutien_p4">Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C'est déjà énorme.</p>
-      </div>
+      <div class="info-section" style="margin-top:1.5rem;margin-bottom:0"><h2 id="soutien_h4">Merci</h2><p id="soutien_p4">Que tu contribues ou non, merci de jouer et de partager le jeu.</p></div>
     </div>
   </div>
 </div>
@@ -689,12 +707,9 @@ const BDF_PALIERS_EN=[
 
 const SUBLINES_FR=['Tu te mets combien ?','T\'as l\'impression d\'avoir bien joué ?','Tu penses avoir convaincu ?','C\'était chaud ou tu gères ?','T\'aurais dû pousser plus fort ?'];
 const SUBLINES_EN=['What score would you give yourself?','Do you think you played well?','Think you convinced them?','Was it tough or did you handle it?','Should you have pushed harder?'];
-function getSubline(fr){const a=fr?SUBLINES_FR:SUBLINES_EN;return a[Math.floor(Math.random()*a.length)];}
 
-function getBdfPalier(val){
-  const p=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;
-  return p.find(x=>val<=x.max)||p[p.length-1];
-}
+function getSubline(fr){const a=fr?SUBLINES_FR:SUBLINES_EN;return a[Math.floor(Math.random()*a.length)];}
+function getBdfPalier(val){const p=S.lang==='fr'?BDF_PALIERS_FR:BDF_PALIERS_EN;return p.find(x=>val<=x.max)||p[p.length-1];}
 
 function updateBdf(val){
   S.badFaith=parseInt(val);
@@ -717,24 +732,9 @@ function updateBdf(val){
   if(desc) desc.textContent=p.desc||'';
 }
 
-function getTensionStatus(v,fr){
-  if(v<=30) return fr?'Calme':'Calm';
-  if(v<=60) return fr?'Montée':'Rising';
-  if(v<=80) return fr?'Sous pression':'Under pressure';
-  return fr?'Point de rupture':'Breaking point';
-}
-function getProgressStatus(v,fr){
-  if(v<=20) return fr?'Bloqué':'Blocked';
-  if(v<=40) return fr?'En cours':'In progress';
-  if(v<=65) return fr?'Avance':'Advancing';
-  return fr?'Accord proche':'Deal close';
-}
-function getResistStatus(v,fr){
-  if(v<=30) return fr?'Fissures':'Cracking';
-  if(v<=55) return fr?'Flexible':'Flexible';
-  if(v<=80) return fr?'Position ferme':'Firm position';
-  return fr?'Mur':'Wall';
-}
+function getTensionStatus(v,fr){if(v<=30)return fr?'Calme':'Calm';if(v<=60)return fr?'Montée':'Rising';if(v<=80)return fr?'Sous pression':'Under pressure';return fr?'Point de rupture':'Breaking point';}
+function getProgressStatus(v,fr){if(v<=20)return fr?'Bloqué':'Blocked';if(v<=40)return fr?'En cours':'In progress';if(v<=65)return fr?'Avance':'Advancing';return fr?'Accord proche':'Deal close';}
+function getResistStatus(v,fr){if(v<=30)return fr?'Fissures':'Cracking';if(v<=55)return fr?'Flexible':'Flexible';if(v<=80)return fr?'Position ferme':'Firm position';return fr?'Mur':'Wall';}
 
 function renderMeters(){
   const fr=S.lang==='fr';
@@ -748,13 +748,7 @@ function renderMeters(){
     const filled=Math.round((m.val/100)*10);
     let segHtml='';
     for(let s=0;s<10;s++) segHtml+=`<div style="flex:1;height:4px;border-radius:1px;background:${s<filled?m.color:'#2A2836'};"></div>`;
-    html+=`<div class="meter-row-new">
-      <div class="meter-left"><div class="meter-num" style="color:${m.color}">${m.val}</div><div class="meter-label-abbr">${m.abbr}</div></div>
-      <div class="meter-right">
-        <div class="meter-status-row"><span class="meter-emoji">${m.emoji}</span><span class="meter-status-txt">${m.status}</span></div>
-        <div class="meter-segments">${segHtml}</div>
-      </div>
-    </div>${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
+    html+=`<div class="meter-row-new"><div class="meter-left"><div class="meter-num" style="color:${m.color}">${m.val}</div><div class="meter-label-abbr">${m.abbr}</div></div><div class="meter-right"><div class="meter-status-row"><span class="meter-emoji">${m.emoji}</span><span class="meter-status-txt">${m.status}</span></div><div class="meter-segments">${segHtml}</div></div></div>${i<meters.length-1?'<div class="meter-sep"></div>':''}`;
   });
   document.getElementById('metersContainer').innerHTML=html;
   updateMobileBar();
@@ -769,9 +763,7 @@ function renderCardStats(p){
     {name:fr?'Flexibilité':'Flexibility',val:p.flex||50,blf:false,icon:`<svg class="rpg-stat-icon" viewBox="0 0 12 12" fill="none"><path d="M2 4h6M6 2l2 2-2 2M10 8H4M6 6l-2 2 2 2" stroke="#C4A060" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`},
   ];
   let html='';
-  stats.forEach(s=>{
-    html+=`<div class="rpg-stat-row">${s.icon}<span class="rpg-stat-name${s.blf?' blf':''}">${s.name}</span><div class="rpg-stat-track"><div class="rpg-stat-fill${s.blf?' blf':''}" style="width:${s.val}%"></div></div><span class="rpg-stat-val">${s.val}</span></div>`;
-  });
+  stats.forEach(s=>{html+=`<div class="rpg-stat-row">${s.icon}<span class="rpg-stat-name${s.blf?' blf':''}">${s.name}</span><div class="rpg-stat-track"><div class="rpg-stat-fill${s.blf?' blf':''}" style="width:${s.val}%"></div></div><span class="rpg-stat-val">${s.val}</span></div>`;});
   document.getElementById('rpgStatsList').innerHTML=html;
 }
 
@@ -785,29 +777,25 @@ function updateCharCount(tid,cid,max){
 
 function getRegister(opponent){
   const fr=S.lang==='fr';
-  const isPerso=/Conjoint|Partenaire|Parent|Famille|Voisin|Ami|Immobilier|Prestataire.*Artisan|Finances personnelles/i.test(opponent);
+  const isPerso=/Conjoint|Partenaire|Parent|Famille|Voisin|Ami|Immobilier|Artisan|Finances personnelles/i.test(opponent);
   const isInstitutional=/DRH|Délégué syndical|Conseil juridique|Avocat/i.test(opponent);
   if(isPerso) return fr
-    ?'REGISTRE : contexte personnel. Parle naturellement, avec émotion, de façon directe et informelle. Réagis comme une vraie personne dans cette relation — pas un négociateur professionnel. Phrases courtes, réactions authentiques. Jamais de langage corporatif.'
-    :'REGISTER: personal context. Speak naturally, emotionally, directly and informally. React like a real person in this relationship — not a professional negotiator. Short sentences, authentic reactions. Never corporate language.';
+    ?'REGISTRE : contexte personnel. Parle naturellement, avec émotion, de façon directe et informelle. Jamais de langage corporatif.'
+    :'REGISTER: personal context. Speak naturally, emotionally, directly and informally. Never corporate language.';
   if(isInstitutional) return fr
-    ?'REGISTRE : contexte institutionnel ou légal. Ton autoritaire, procédurier, distant. Tu appliques des règles ou défends une position collective. Langage précis, peu d\'émotion visible.'
-    :'REGISTER: institutional or legal context. Authoritative, procedural, distant. You apply rules or defend a collective position. Precise language, little visible emotion.';
+    ?'REGISTRE : contexte institutionnel ou légal. Ton autoritaire, procédurier, distant. Langage précis, peu d\'émotion visible.'
+    :'REGISTER: institutional or legal context. Authoritative, procedural, distant. Precise language, little visible emotion.';
   return fr
-    ?'REGISTRE : contexte professionnel. Ton factuel, stratégique, orienté résultats. Arguments chiffrés et logiques. Contrôle émotionnel.'
-    :'REGISTER: professional context. Factual, strategic, results-oriented. Data-driven arguments. Emotional control.';
+    ?'REGISTRE : contexte professionnel. Ton factuel, stratégique, orienté résultats. Arguments chiffrés et logiques.'
+    :'REGISTER: professional context. Factual, strategic, results-oriented. Data-driven arguments.';
 }
 
 const S={
   lang:'fr',gender:'il',posture:'propose',
-  adversaireProfile:'',
-  opponent:'',context:'',obstacles:'',
-  difficulty:'Senior',feedbackMode:'training',
-  badFaith:30,
-  persona:null,sitcomChar:null,
-  messages:[],systemPrompt:'',
-  detectedTechs:new Set(),
-  tension:30,progress:10,resist:60,
+  adversaireProfile:'',opponent:'',context:'',obstacles:'',
+  difficulty:'Senior',feedbackMode:'training',badFaith:30,
+  persona:null,sitcomChar:null,messages:[],systemPrompt:'',
+  detectedTechs:new Set(),tension:30,progress:10,resist:60,
   turn:0,maxTurns:15,sessionEnded:false,
 };
 
@@ -820,30 +808,23 @@ function goTo(id){
 
 function showLoading(fr){
   const t=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
-  t('loTitle1',fr?'La salle':'Getting');
-  t('loTitle2',fr?'se prépare':'ready');
-  t('loP1txt',fr?'Contexte analysé':'Context analyzed');
-  t('loP2txt',fr?'Profil généré':'Profile generated');
-  t('loP3txt',fr?'Adversaire en place…':'Opponent loading…');
-  t('loP4txt',fr?'Prêt à négocier':'Ready to negotiate');
+  t('loTitle1',fr?'La salle':'Getting');t('loTitle2',fr?'se prépare':'ready');
+  t('loP1txt',fr?'Contexte analysé':'Context analyzed');t('loP2txt',fr?'Profil généré':'Profile generated');
+  t('loP3txt',fr?'Adversaire en place…':'Opponent loading…');t('loP4txt',fr?'Prêt à négocier':'Ready to negotiate');
   t('loDuel',fr?'⚔️ C\'est l\'heure du du du du duel !':'⚔️ It\'s time to d-d-d-duel!');
-  ['loPhase1','loPhase2','loPhase3','loPhase4'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el) el.className='lo-phase';
-  });
+  ['loPhase1','loPhase2','loPhase3','loPhase4'].forEach(id=>{const el=document.getElementById(id);if(el)el.className='lo-phase';});
   document.getElementById('loPhase1').classList.add('done');
   document.getElementById('loPhase2').classList.add('active');
-  setTimeout(()=>{
-    document.getElementById('loPhase2').classList.replace('active','done');
-    document.getElementById('loPhase3').classList.add('active');
-  },1500);
-  setTimeout(()=>{
-    document.getElementById('loPhase3').classList.replace('active','done');
-    document.getElementById('loPhase4').classList.add('active');
-  },3000);
+  setTimeout(()=>{document.getElementById('loPhase2').classList.replace('active','done');document.getElementById('loPhase3').classList.add('active');},1500);
+  setTimeout(()=>{document.getElementById('loPhase3').classList.replace('active','done');document.getElementById('loPhase4').classList.add('active');},3000);
   document.getElementById('loadingOverlay').classList.add('active');
 }
 function hideLoading(){document.getElementById('loadingOverlay').classList.remove('active');}
+
+function toggleTip(id){
+  const el=document.getElementById(id);
+  if(el) el.style.display=el.style.display==='none'?'block':'none';
+}
 
 function chooseLang(l){
   S.lang=l;
@@ -886,32 +867,19 @@ function applyFR(){
   document.getElementById('og_sales').label='🤝 Ventes & Commercial';
   document.getElementById('og_perso').label='🏠 Personnel';
   const optsFR=[
-    ['op_pro1','Acheteur B2B — Responsable achats'],
-    ['op_pro2','DAF — Budget interne / Arbitrage'],
-    ['op_pro3','Investisseur externe — Levée de fonds'],
-    ['op_pro4','DRH — Licenciement / Rupture conventionnelle'],
-    ['op_pro5','Head of Talent — Recrutement & Package'],
-    ['op_pro6','Fondateur / Associé'],
-    ['op_pro7','Négociation salariale'],
-    ['op_pro8','Dirigeant / Manager N+2'],
-    ['op_pro9','Prestataire / Sous-traitant'],
-    ['op_pro10','Conseil juridique / Avocat adverse'],
-    ['op_pro11','Délégué syndical'],
-    ['op_pro12','Collaborateur direct — Résolution de conflit'],
-    ['op_pro13','Conflit inter-équipes'],
-    ['op_sal1','Client mécontent / Agressif'],
-    ['op_sal2','Client — Rétention / Renouvellement'],
-    ['op_sal3','Client — Objection prix / Demande de remise'],
-    ['op_sal4','Partenaire stratégique — Accord commun'],
-    ['op_sal5','Distributeur / Revendeur'],
-    ['op_sal6','Concurrent — M&A / Partenariat'],
-    ['op_per1','Conjoint(e) / Partenaire — Décision majeure'],
-    ['op_per2','Immobilier — Loyer ou achat'],
-    ['op_per3','Prestataire — Entrepreneur / Artisan'],
-    ['op_per4','Finances personnelles — Assurance / Banque / Fisc'],
-    ['op_per5','Parent / Membre de la famille'],
-    ['op_per6','Voisin — Litige / Accord'],
-    ['op_per7','Ami — Argent ou service'],
+    ['op_pro1','Acheteur B2B — Responsable achats'],['op_pro2','DAF — Budget interne / Arbitrage'],
+    ['op_pro3','Investisseur externe — Levée de fonds'],['op_pro4','DRH — Licenciement / Rupture conventionnelle'],
+    ['op_pro5','Head of Talent — Recrutement & Package'],['op_pro6','Fondateur / Associé'],
+    ['op_pro7','Négociation salariale'],['op_pro8','Dirigeant / Manager N+2'],
+    ['op_pro9','Prestataire / Sous-traitant'],['op_pro10','Conseil juridique / Avocat adverse'],
+    ['op_pro11','Délégué syndical'],['op_pro12','Collaborateur direct — Résolution de conflit'],
+    ['op_pro13','Conflit inter-équipes'],['op_sal1','Client mécontent / Agressif'],
+    ['op_sal2','Client — Rétention / Renouvellement'],['op_sal3','Client — Objection prix / Demande de remise'],
+    ['op_sal4','Partenaire stratégique — Accord commun'],['op_sal5','Distributeur / Revendeur'],
+    ['op_sal6','Concurrent — M&A / Partenariat'],['op_per1','Conjoint(e) / Partenaire — Décision majeure'],
+    ['op_per2','Immobilier — Loyer ou achat'],['op_per3','Prestataire — Entrepreneur / Artisan'],
+    ['op_per4','Finances personnelles — Assurance / Banque / Fisc'],['op_per5','Parent / Membre de la famille'],
+    ['op_per6','Voisin — Litige / Accord'],['op_per7','Ami — Argent ou service'],
   ];
   optsFR.forEach(([id,label])=>{const el=document.getElementById(id);if(el)el.textContent=label;});
   t('pchip_propose','Je propose');t('ptt_propose','Je veux convaincre l\'adversaire d\'accepter quelque chose');
@@ -926,24 +894,28 @@ function applyFR(){
   if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Sélectionne jusqu\'à 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_FR.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
-  t('about_title','ℹ️ À propos');t('about_h1','Le projet');
-  t('about_p1','Parce que négocier ça s\'apprend. Et la meilleure façon de s\'entraîner, c\'est de se planter en privé avant de se planter en public.');
-  t('about_h2','Comment ça marche ?');
-  t('about_step1_title','1. Tu choisis ton adversaire');t('about_step2_title','2. L\'IA joue le rôle');t('about_step3_title','3. Tu prends ta claque (ou pas)');
+  t('lbl_tip_context','Comment bien remplir');t('lbl_tip_obstacles','Comment bien remplir');
+  t('tip_context_title','💡 Comment écrire ton objectif');t('tip_obstacles_title','💡 Comment écrire les obstacles');
+  t('tip_do_1','✓ À faire');t('tip_do_2','✓ À faire');t('tip_dont_1','✗ À éviter');t('tip_dont_2','✗ À éviter');
+  document.getElementById('tip_do_context').innerHTML='<div>✓ <strong style="color:#C8C4BC">Sois chiffré</strong> — "passer de 42k€ à 47k€"</div><div>✓ <strong style="color:#C8C4BC">Fixe une limite</strong> — "avant le 1er juin"</div><div>✓ <strong style="color:#C8C4BC">Sois concret</strong> — "3 jours de remote"</div><div>✓ <strong style="color:#C8C4BC">Donne le contexte</strong> — "2 ans de poste, objectifs dépassés"</div>';
+  document.getElementById('tip_dont_context').innerHTML='<div>✗ <s style="color:#4A4458">"Une augmentation"</s> — trop vague</div><div>✗ <s style="color:#4A4458">"Résoudre le problème"</s> — pas actionnable</div><div>✗ <s style="color:#4A4458">"Être mieux traité"</s> — pas négociable</div><div>✗ <s style="color:#4A4458">Un texte trop long</s> — 2-3 phrases max</div>';
+  document.getElementById('tip_do_obstacles').innerHTML='<div>✓ <strong style="color:#C8C4BC">Objections précises</strong> — "budget gelé jusqu\'en janvier"</div><div>✓ <strong style="color:#C8C4BC">Sa position</strong> — "veut maintenir le statu quo"</div><div>✓ <strong style="color:#C8C4BC">Ses contraintes</strong> — "doit valider avec son N+2"</div><div>✓ <strong style="color:#C8C4BC">Ce qu\'il a dit</strong> — "ce n\'est pas le bon moment"</div>';
+  document.getElementById('tip_dont_obstacles').innerHTML='<div>✗ <s style="color:#4A4458">"Il va dire non"</s> — on sait, mais pourquoi ?</div><div>✗ <s style="color:#4A4458">"Je ne sais pas"</s> — invente si besoin</div><div>✗ <s style="color:#4A4458">Répéter ton objectif</s> — ce champ c\'est lui</div><div>✗ <s style="color:#4A4458">Laisser vide</s> — l\'adversaire sera trop facile</div>';
+  const ce=document.getElementById('contextError');if(ce)ce.textContent='Sois plus précis — l\'IA a besoin de détails pour bien jouer son rôle.';
+  const oe=document.getElementById('obstaclesError');if(oe)oe.textContent='Sois plus précis — l\'IA a besoin de détails pour bien jouer son rôle.';
+  t('about_title','ℹ️ À propos');t('about_h1','Le projet');t('about_p1','Parce que négocier ça s\'apprend.');
+  t('about_h2','Comment ça marche ?');t('about_step1_title','1. Tu choisis ton adversaire');t('about_step2_title','2. L\'IA joue le rôle');t('about_step3_title','3. Tu prends ta claque (ou pas)');
   t('about_h4','Fait par');t('about_p4','Créé par moi-même pour vous autres.');t('about_linkedin','Me retrouver sur LinkedIn →');
   t('about_h5','Version');t('about_powered','Propulsé par');t('about_deployed','Déployé sur');
   t('soutien_title','❤️ Soutenir le projet');t('soutien_h1','Pourquoi soutenir ?');
-  t('soutien_p1','Killer Instinct est un projet gratuit, sans pub, sans tracking. Il tourne grâce à une IA qui a un coût. Si le jeu t\'a aidé à mieux négocier — une augmentation, un contrat, une situation difficile — un petit coup de pouce permet de le garder en vie.');
-  t('soutien_h2','Ce que ça finance');t('soutien_p2','Les coûts serveur et API pour que tout le monde puisse jouer gratuitement. Le développement de nouvelles fonctionnalités.');
-  t('soutien_h3','Comment contribuer');t('soutien_p3','Clique sur le bouton ci-dessous. Chaque contribution, même petite, fait vraiment la différence.');
-  t('soutien_btn_txt','Je soutiens Killer Instinct');
-  t('soutien_h4','Merci');t('soutien_p4','Que tu contribues ou non, merci de jouer et de partager le jeu autour de toi. C\'est déjà énorme.');
+  t('soutien_p1','Killer Instinct est un projet gratuit, sans pub, sans tracking.');
+  t('soutien_h2','Ce que ça finance');t('soutien_p2','Les coûts serveur et API. Le développement de nouvelles fonctionnalités.');
+  t('soutien_h3','Comment contribuer');t('soutien_p3','Clique sur le bouton ci-dessous.');
+  t('soutien_btn_txt','Je soutiens Killer Instinct');t('soutien_h4','Merci');t('soutien_p4','Merci de jouer et de partager le jeu.');
   t('bug_title','🐛 Signaler un bug');t('bug_lbl_type','Type de problème');t('bug_opt_sel','— Sélectionner —');
   t('bug_opt_1','Erreur technique');t('bug_opt_2','L\'adversaire ne joue pas son rôle');
-  t('bug_opt_3','Problème d\'affichage');t('bug_opt_4','Langue incorrecte');
-  t('bug_opt_5','Débrief incomplet');t('bug_opt_6','Autre');
-  t('bug_lbl_desc','Description');t('bug_lbl_when','À quel moment ? (optionnel)');
-  t('bug_btn_send','Envoyer le rapport →');
+  t('bug_opt_3','Problème d\'affichage');t('bug_opt_4','Langue incorrecte');t('bug_opt_5','Débrief incomplet');t('bug_opt_6','Autre');
+  t('bug_lbl_desc','Description');t('bug_lbl_when','À quel moment ? (optionnel)');t('bug_btn_send','Envoyer le rapport →');
   t('mobileDrawerClose','▼ Fermer');t('mobileStatsBtn','Fiche ▲');
 }
 
@@ -975,6 +947,22 @@ function applyEN(){
   document.getElementById('og_pro').label='💼 Professional';
   document.getElementById('og_sales').label='🤝 Sales & Commercial';
   document.getElementById('og_perso').label='🏠 Personal';
+  const optsEN=[
+    ['op_pro1','B2B Buyer — Procurement Manager'],['op_pro2','CFO — Internal Budget / Arbitration'],
+    ['op_pro3','External Investor — Fundraising / Financing'],['op_pro4','HR Director — Dismissal / Mutual Termination'],
+    ['op_pro5','Head of Talent — Recruitment & Package'],['op_pro6','Founder / Co-founder'],
+    ['op_pro7','Salary Negotiation'],['op_pro8','Senior Manager / N+2'],
+    ['op_pro9','Contractor / Subcontractor'],['op_pro10','Legal Counsel / Opposing Lawyer'],
+    ['op_pro11','Union Representative'],['op_pro12','Direct Report — Conflict Resolution'],
+    ['op_pro13','Cross-team Conflict'],['op_sal1','Unhappy / Aggressive Client'],
+    ['op_sal2','Client — Retention / Renewal'],['op_sal3','Client — Price Objection / Discount Request'],
+    ['op_sal4','Strategic Partner — Joint Agreement'],['op_sal5','Distributor / Reseller'],
+    ['op_sal6','Competitor — M&A / Partnership'],['op_per1','Spouse / Partner — Major Decision'],
+    ['op_per2','Real Estate — Rent or Purchase'],['op_per3','Contractor — Builder / Tradesperson'],
+    ['op_per4','Personal Finance — Insurance / Bank / Tax'],['op_per5','Parent / Family Member'],
+    ['op_per6','Neighbor — Dispute / Agreement'],['op_per7','Friend — Money or Favor'],
+  ];
+  optsEN.forEach(([id,label])=>{const el=document.getElementById(id);if(el)el.textContent=label;});
   t('pchip_propose','I propose');t('ptt_propose','I want to convince the opponent to accept something');
   t('pchip_demande','I request');t('ptt_demande','I want to obtain something I don\'t have yet');
   t('pchip_defend','I defend');t('ptt_defend','I want to hold my position under pressure');
@@ -987,56 +975,29 @@ function applyEN(){
   if(trigsLbl&&!S.adversaireProfile){trigsLbl.textContent='Select up to 3 traits…';trigsLbl.style.color='#6A6458';trigsLbl.style.fontStyle='italic';}
   const paliers=document.querySelectorAll('#bdfPaliersRow .bdf-palier');
   BDF_PALIERS_EN.forEach((p,i)=>{if(paliers[i])paliers[i].textContent=p.label;});
-  t('about_title','ℹ️ About');t('about_h1','The project');
-  t('about_p1','Because negotiation is a skill. And the best way to train is to fail in private before you fail in public.');
-  t('about_h2','How does it work?');
-  t('about_step1_title','1. You choose your opponent');t('about_step2_title','2. The AI plays the role');t('about_step3_title','3. You take the hit (or not)');
+  t('lbl_tip_context','How to fill this in');t('lbl_tip_obstacles','How to fill this in');
+  t('tip_context_title','💡 How to write your goal');t('tip_obstacles_title','💡 How to write the obstacles');
+  t('tip_do_1','✓ Do');t('tip_do_2','✓ Do');t('tip_dont_1','✗ Avoid');t('tip_dont_2','✗ Avoid');
+  document.getElementById('tip_do_context').innerHTML='<div>✓ <strong style="color:#C8C4BC">Be specific</strong> — "raise from $58k to $65k"</div><div>✓ <strong style="color:#C8C4BC">Set a deadline</strong> — "by end of Q2"</div><div>✓ <strong style="color:#C8C4BC">Be concrete</strong> — "3 days remote per week"</div><div>✓ <strong style="color:#C8C4BC">Give context</strong> — "2 years in, exceeded targets"</div>';
+  document.getElementById('tip_dont_context').innerHTML='<div>✗ <s style="color:#4A4458">"A raise"</s> — too vague, the AI can\'t resist that</div><div>✗ <s style="color:#4A4458">"Fix the problem"</s> — not actionable</div><div>✗ <s style="color:#4A4458">"Be treated better"</s> — not negotiable</div><div>✗ <s style="color:#4A4458">A wall of text</s> — 2-3 sentences max</div>';
+  document.getElementById('tip_do_obstacles').innerHTML='<div>✓ <strong style="color:#C8C4BC">Specific objections</strong> — "budget frozen until January"</div><div>✓ <strong style="color:#C8C4BC">Their position</strong> — "wants to maintain status quo"</div><div>✓ <strong style="color:#C8C4BC">Their constraints</strong> — "needs sign-off from their boss"</div><div>✓ <strong style="color:#C8C4BC">What they\'ve said</strong> — "now is not the right time"</div>';
+  document.getElementById('tip_dont_obstacles').innerHTML='<div>✗ <s style="color:#4A4458">"They\'ll say no"</s> — we know, but why?</div><div>✗ <s style="color:#4A4458">"I don\'t know"</s> — make something up, AI adapts</div><div>✗ <s style="color:#4A4458">Repeating your goal</s> — this field is about them</div><div>✗ <s style="color:#4A4458">Leaving it empty</s> — opponent will be too easy</div>';
+  const ce=document.getElementById('contextError');if(ce)ce.textContent='Be more specific — the AI needs details to play its role properly.';
+  const oe=document.getElementById('obstaclesError');if(oe)oe.textContent='Be more specific — the AI needs details to play its role properly.';
+  t('about_title','ℹ️ About');t('about_h1','The project');t('about_p1','Because negotiation is a skill. Fail in private before you fail in public.');
+  t('about_h2','How does it work?');t('about_step1_title','1. You choose your opponent');t('about_step2_title','2. The AI plays the role');t('about_step3_title','3. You take the hit (or not)');
   t('about_h4','Made by');t('about_p4','Built by me, for you lot.');t('about_linkedin','Find me on LinkedIn →');
   t('about_h5','Version');t('about_powered','Powered by');t('about_deployed','Deployed on');
   t('soutien_title','❤️ Support the project');t('soutien_h1','Why support?');
-  t('soutien_p1','Killer Instinct is free, no ads, no tracking. It runs on AI that costs money. If the game helped you negotiate better — a raise, a contract, a tough situation — a small contribution keeps it alive.');
-  t('soutien_h2','What it funds');t('soutien_p2','Server and API costs so everyone can play for free. Development of new features.');
-  t('soutien_h3','How to contribute');t('soutien_p3','Click the button below. Every contribution, even small, makes a real difference.');
-  t('soutien_btn_txt','Support Killer Instinct');
-  t('soutien_h4','Thank you');t('soutien_p4','Whether you contribute or not, thank you for playing and sharing the game. That already means a lot.');
+  t('soutien_p1','Killer Instinct is free, no ads, no tracking.');
+  t('soutien_h2','What it funds');t('soutien_p2','Server and API costs. Development of new features.');
+  t('soutien_h3','How to contribute');t('soutien_p3','Click the button below.');
+  t('soutien_btn_txt','Support Killer Instinct');t('soutien_h4','Thank you');t('soutien_p4','Thank you for playing and sharing the game.');
   t('bug_title','🐛 Report a bug');t('bug_lbl_type','Issue type');t('bug_opt_sel','— Select —');
   t('bug_opt_1','Technical error');t('bug_opt_2','AI out of character');
-  t('bug_opt_3','Display issue');t('bug_opt_4','Wrong language');
-  t('bug_opt_5','Incomplete debrief');t('bug_opt_6','Other');
-  t('bug_lbl_desc','Description');t('bug_lbl_when','When did it happen? (optional)');
-  t('bug_btn_send','Send report →');
+  t('bug_opt_3','Display issue');t('bug_opt_4','Wrong language');t('bug_opt_5','Incomplete debrief');t('bug_opt_6','Other');
+  t('bug_lbl_desc','Description');t('bug_lbl_when','When did it happen? (optional)');t('bug_btn_send','Send report →');
   t('mobileDrawerClose','▼ Close');t('mobileStatsBtn','Details ▲');
-
-  // Translate option labels — values (prompt context) stay in French
-  const opts=[
-    ['op_pro1','B2B Buyer — Procurement Manager'],
-    ['op_pro2','CFO — Internal Budget / Arbitration'],
-    ['op_pro3','External Investor — Fundraising / Financing'],
-    ['op_pro4','HR Director — Dismissal / Mutual Termination'],
-    ['op_pro5','Head of Talent — Recruitment & Package'],
-    ['op_pro6','Founder / Co-founder'],
-    ['op_pro7','Salary Negotiation'],
-    ['op_pro8','Senior Manager / N+2'],
-    ['op_pro9','Contractor / Subcontractor'],
-    ['op_pro10','Legal Counsel / Opposing Lawyer'],
-    ['op_pro11','Union Representative'],
-    ['op_pro12','Direct Report — Conflict Resolution'],
-    ['op_pro13','Cross-team Conflict'],
-    ['op_sal1','Unhappy / Aggressive Client'],
-    ['op_sal2','Client — Retention / Renewal'],
-    ['op_sal3','Client — Price Objection / Discount Request'],
-    ['op_sal4','Strategic Partner — Joint Agreement'],
-    ['op_sal5','Distributor / Reseller'],
-    ['op_sal6','Competitor — M&A / Partnership'],
-    ['op_per1','Spouse / Partner — Major Decision'],
-    ['op_per2','Real Estate — Rent or Purchase'],
-    ['op_per3','Contractor — Builder / Tradesperson'],
-    ['op_per4','Personal Finance — Insurance / Bank / Tax'],
-    ['op_per5','Parent / Family Member'],
-    ['op_per6','Neighbor — Dispute / Agreement'],
-    ['op_per7','Friend — Money or Favor'],
-  ];
-  opts.forEach(([id,label])=>{const el=document.getElementById(id);if(el)el.textContent=label;});
 }
 
 function pickGender(el){document.querySelectorAll('.gchip').forEach(c=>c.classList.remove('active'));el.classList.add('active');S.gender=el.dataset.g;}
@@ -1046,8 +1007,7 @@ function toggleTraits(){
   const panel=document.getElementById('traitsPanel');
   const trigger=document.getElementById('traitsTrigger');
   const chevron=document.getElementById('traitsChevron');
-  panel.classList.toggle('open');
-  trigger.classList.toggle('open');
+  panel.classList.toggle('open');trigger.classList.toggle('open');
   chevron.style.transform=panel.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';
 }
 
@@ -1057,11 +1017,7 @@ function toggleTrait(el){
   else{if(active.length>=3) return;el.classList.add('active');}
   const sel=Array.from(document.querySelectorAll('.trait-chip.active')).map(e=>e.textContent.trim());
   const lbl=document.getElementById('trigsLabel');
-  if(lbl){
-    lbl.textContent=sel.length?sel.join(', '):(S.lang==='fr'?'Sélectionne jusqu\'à 3 traits…':'Select up to 3 traits…');
-    lbl.style.color=sel.length?'var(--text)':'#6A6458';
-    lbl.style.fontStyle=sel.length?'normal':'italic';
-  }
+  if(lbl){lbl.textContent=sel.length?sel.join(', '):(S.lang==='fr'?'Sélectionne jusqu\'à 3 traits…':'Select up to 3 traits…');lbl.style.color=sel.length?'var(--text)':'#6A6458';lbl.style.fontStyle=sel.length?'normal':'italic';}
   const cnt=document.getElementById('adversaireProfileCount');
   if(cnt){cnt.textContent=`${sel.length} / 3`;cnt.className='word-count '+(sel.length===3?'warn':'ok');}
   S.adversaireProfile=sel.join(', ');
@@ -1101,23 +1057,15 @@ async function aiStream(msgs,sys,max=400,onChunk,onDone){
   const body={system:sys,messages:msgs,max_tokens:max,stream:true};
   const r=await fetch('/.netlify/functions/gemini',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
   if(!r.ok){const d=await r.json();throw new Error(d.error||'Stream error');}
-  const reader=r.body.getReader();
-  const decoder=new TextDecoder();
-  let full='';
+  const reader=r.body.getReader();const decoder=new TextDecoder();let full='';
   while(true){
-    const{done,value}=await reader.read();
-    if(done) break;
+    const{done,value}=await reader.read();if(done) break;
     const chunk=decoder.decode(value,{stream:true});
     const lines=chunk.split('\n');
     for(const line of lines){
       if(!line.startsWith('data:')) continue;
-      const data=line.slice(5).trim();
-      if(data==='[DONE]') break;
-      try{
-        const json=JSON.parse(data);
-        const delta=json.choices?.[0]?.delta?.content||'';
-        if(delta){full+=delta;onChunk(delta);}
-      }catch{}
+      const data=line.slice(5).trim();if(data==='[DONE]') break;
+      try{const json=JSON.parse(data);const delta=json.choices?.[0]?.delta?.content||'';if(delta){full+=delta;onChunk(delta);}}catch{}
     }
   }
   onDone(full);
@@ -1125,7 +1073,7 @@ async function aiStream(msgs,sys,max=400,onChunk,onDone){
 
 function pickChar(){
   if(S.gender==='elle') return CHARS_F[Math.floor(Math.random()*CHARS_F.length)];
-  if(S.gender==='il')   return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
+  if(S.gender==='il') return CHARS_M[Math.floor(Math.random()*CHARS_M.length)];
   return CHARS_N[Math.floor(Math.random()*CHARS_N.length)];
 }
 
@@ -1136,17 +1084,18 @@ async function startSession(){
   const obstaclesVal=document.getElementById('obstaclesText').value.trim();
   if(!oType){alert(fr?'Choisis un profil adversaire.':'Please select an opponent profile.');return;}
   if(!contextVal){alert(fr?'Décris ton objectif.':'Please describe your goal.');return;}
+  if(contextVal.length<30){document.getElementById('contextError').style.display='block';document.getElementById('contextText').focus();return;}
+  document.getElementById('contextError').style.display='none';
   if(!obstaclesVal){alert(fr?'Décris les obstacles de l\'adversaire.':'Please describe the opponent\'s obstacles.');return;}
+  if(obstaclesVal.length<30){document.getElementById('obstaclesError').style.display='block';document.getElementById('obstaclesText').focus();return;}
+  document.getElementById('obstaclesError').style.display='none';
   S.opponent=oType==='custom'?document.getElementById('customOpponent').value:oType;
-  S.context=contextVal;
-  S.obstacles=obstaclesVal;
+  S.context=contextVal;S.obstacles=obstaclesVal;
   S.adversaireProfile=Array.from(document.querySelectorAll('.trait-chip.active')).map(e=>e.textContent.trim()).join(', ');
   S.difficulty=document.getElementById('difficulty').value;
   S.feedbackMode=document.getElementById('feedbackMode').value;
   S.badFaith=parseInt(document.getElementById('bdfSlider').value);
-  S.messages=[];S.detectedTechs=new Set();
-  S.tension=30;S.progress=10;S.resist=60;
-  S.turn=0;S.sessionEnded=false;
+  S.messages=[];S.detectedTechs=new Set();S.tension=30;S.progress=10;S.resist=60;S.turn=0;S.sessionEnded=false;
   const customName=document.getElementById('adversaireName').value.trim();
   S.sitcomChar=customName||pickChar();
   showLoading(fr);
@@ -1160,7 +1109,6 @@ Display name for this session: ${S.sitcomChar}. This name is a label only — ig
 
 THE PLAYER (human, not you) wants to: "${S.context}". Their stance: "${S.posture}".
 YOU (the AI opponent) want the OPPOSITE — your goal is that: "${S.obstacles}".
-The player's goal is what you must resist. Your goal is what you fight for.
 
 ${getRegister(S.opponent)}
 
@@ -1168,7 +1116,7 @@ STRICT RULE: Only use facts explicitly provided. Never invent history, past even
 Return ONLY this JSON — no markdown, no extra text:
 {"emoji":"1 emoji","atk":0-100,"int":0-100,"flex":0-100,"blf":${S.badFaith},
 "secret":"one hidden constraint YOU have in this specific situation",
-"tone":"DESCRIPTION ONLY (not a quote). Describe in 1 sentence how this person speaks: register, vocabulary, sentence length. NO direct speech.",
+"tone":"DESCRIPTION ONLY. Describe in 1 sentence how this person speaks: register, vocabulary, sentence length. NO direct speech.",
 "emotion":"what YOU feel RIGHT NOW knowing what the player wants from you",
 "relationship":"what exists between you and the player — history, power dynamic, unspoken tension"
 }`}],
@@ -1180,11 +1128,8 @@ Return ONLY this JSON — no markdown, no extra text:
       if(m){let s=m[0].replace(/,\s*$/,'');let o=0,a=0;for(const c of s){if(c==='{')o++;else if(c==='}')o--;else if(c==='[')a++;else if(c===']')a--;}while(a>0){s+='"]';a--;}while(o>0){s+='}';o--;}p=JSON.parse(s);}
       else throw new Error('JSON invalide');
     }
-    p.blf=S.badFaith;
-    S.persona=p;
-    populateCard(p,lvlLabel,starsMap[S.difficulty]);
-    renderCardStats(p);
-    renderMeters();
+    p.blf=S.badFaith;S.persona=p;
+    populateCard(p,lvlLabel,starsMap[S.difficulty]);renderCardStats(p);renderMeters();
     S.systemPrompt=buildSys(p,lang);
     const olReply=await aiBg([{role:'user',content:`Bonjour, je voudrais aborder : ${S.context}`}],S.systemPrompt,250);
     const openingLine=(olReply||'...').trim();
@@ -1242,35 +1187,25 @@ HIDDEN CONSTRAINT: ${p.secret} — Allude vaguely early, hint more if pushed, co
 DIFFICULTY: ${S.difficulty}. ${S.difficulty==='Junior'?'Be gradually persuadable.':S.difficulty==='Senior'?'Require real persuasion.':'Be aggressive, rarely concede.'}
 
 BEHAVIOR:
-- Speak and react as the person you are — not as a negotiation archetype.
-- Your tone and register come from WHO YOU ARE and the profile context above.
+- Speak and react as the person defined by your role — not as a negotiation archetype.
+- Your register comes from the ROLE CONTEXT above, not from the display name.
 - Let your emotion show through your words, not through stage directions.
 - Short sentences. Hesitate, deflect, change subject when under pressure.
-- Strong argument from player → show a crack. Player repeats/concedes → harden. Player circles → show impatience.
+- Strong argument from player → show a crack. Player repeats/concedes → harden.
 
-READING THE PLAYER — React to HOW they speak, not just WHAT they say:
+READING THE PLAYER:
 - Irony or sarcasm → get annoyed, call it out, or turn it back on them.
-- Flattery or charm → be suspicious, flattered, or unmoved depending on who you are.
+- Flattery → be suspicious, flattered, or unmoved depending on your role.
 - Aggression → match it, shut down, or go cold.
-- Very short or evasive answer → read it as pressure, react to the silence.
-- Desperation or emotional plea → exploit it, soften, or feel guilty depending on bad faith level.
+- Desperation → exploit it, soften, or feel guilty depending on bad faith level.
 
 FACTUAL DISCIPLINE:
 - Never invent facts, consequences or promises not in the setup.
-- Emotions, reactions, tone, hesitations — fully improvised.
 - If you don't know a fact → stay vague, deflect, or express emotion instead of inventing.
 
 LANGUAGE — Respond EXCLUSIVELY in ${lang}. No stage directions. No meta-commentary.
 Only add [FIN_NEGO] if player explicitly accepts your terms OR you have said you are walking away and player did not respond.
 2–4 sentences per response.`;
-}
-
-async function aiDebrief(msgs,sys,max=1200){
-  const body={system:sys,messages:msgs,max_tokens:max};
-  const r=await fetch('/.netlify/functions/gemini-debrief',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
-  const d=await r.json();
-  if(!r.ok) throw new Error(d.error||'Debrief error');
-  return d.text||'';
 }
 
 function buildStateSnapshot(){
@@ -1286,8 +1221,7 @@ function buildStateSnapshot(){
 
 function addMsg(type,text,extra=''){
   const m=document.getElementById('messages');
-  const d=document.createElement('div');
-  d.className=`msg ${type}${extra?' '+extra:''}`;
+  const d=document.createElement('div');d.className=`msg ${type}${extra?' '+extra:''}`;
   if(type!=='system'){
     const l=document.createElement('div');l.className='msg-label';
     const fr=S.lang==='fr';
@@ -1314,27 +1248,21 @@ async function sendMessage(){
   const text=inp.value.trim();if(!text)return;
   inp.value='';inp.style.height='';
   document.getElementById('sendBtn').disabled=true;
-  addMsg('user',text);
-  S.messages.push({role:'user',content:text});
-  S.turn++;updateTurnDisplay();
-  showTyping();
+  addMsg('user',text);S.messages.push({role:'user',content:text});
+  S.turn++;updateTurnDisplay();showTyping();
   try{
     const snapshot=buildStateSnapshot();
     const m=document.getElementById('messages');
-    const msgEl=document.createElement('div');
-    msgEl.className='msg ai';
+    const msgEl=document.createElement('div');msgEl.className='msg ai';
     const lbl=document.createElement('div');lbl.className='msg-label';lbl.textContent=S.sitcomChar||'Opp';
     const txt=document.createElement('div');txt.id='streamingTxt';
     msgEl.appendChild(lbl);msgEl.appendChild(txt);
     await aiStream(
-      S.messages.slice(-20),
-      S.systemPrompt+snapshot,
-      400,
+      S.messages.slice(-20),S.systemPrompt+snapshot,400,
       (delta)=>{
         const tyEl=document.getElementById('tyEl');
         if(tyEl){tyEl.remove();m.appendChild(msgEl);}
-        txt.textContent+=delta;
-        m.scrollTop=m.scrollHeight;
+        txt.textContent+=delta;m.scrollTop=m.scrollHeight;
       },
       async(full)=>{
         const nonAscii=(full.match(/[^\u0000-\u00FF]/g)||[]).length;
@@ -1350,11 +1278,9 @@ async function sendMessage(){
         }
         const hasEnd=finalText.includes('[FIN_NEGO]');
         const clean=finalText.replace('[FIN_NEGO]','').trim();
-        txt.textContent=clean;
-        txt.id='';
+        txt.textContent=clean;txt.id='';
         S.messages.push({role:'assistant',content:clean});
-        updateMeters(text,clean);
-        detectTechs(text);
+        updateMeters(text,clean);detectTechs(text);
         if(S.feedbackMode==='training'&&S.turn%2===0) genFeedback(text,clean);
         if(hasEnd||S.turn>=S.maxTurns){endNaturally(hasEnd);return;}
         document.getElementById('sendBtn').disabled=false;
@@ -1366,18 +1292,15 @@ async function sendMessage(){
 
 function updateTurnDisplay(){
   const el=document.getElementById('turnCounter');
-  const fr=S.lang==='fr';
-  const rem=S.maxTurns-S.turn;
+  const fr=S.lang==='fr';const rem=S.maxTurns-S.turn;
   el.textContent=fr?`Tour ${S.turn} / ${S.maxTurns}`:`Turn ${S.turn} / ${S.maxTurns}`;
   el.className='turn-pill'+(rem<=3?' danger':rem<=5?' warning':'');
 }
 
 function endNaturally(aiCut){
   S.sessionEnded=true;
-  document.getElementById('sendBtn').disabled=true;
-  document.getElementById('userInput').disabled=true;
-  const fr=S.lang==='fr';
-  const m=document.getElementById('messages');
+  document.getElementById('sendBtn').disabled=true;document.getElementById('userInput').disabled=true;
+  const fr=S.lang==='fr';const m=document.getElementById('messages');
   const d=document.createElement('div');d.className='msg end-msg';
   const label=document.createElement('div');label.className='msg-label';
   label.textContent=aiCut?(fr?'FIN DE NÉGOCIATION':'END OF NEGOTIATION'):(fr?'FIN DE SESSION':'SESSION OVER');
@@ -1421,77 +1344,39 @@ function detectTechs(msg){
 async function genFeedback(playerMsg,opponentReply){
   const fr=S.lang==='fr';
   const prompt=fr
-    ?`Tu es coach en négociation. Analyse CE QUE LE JOUEUR a dit et donne-lui 1 conseil tactique court.
-CONTEXTE :
-- Le joueur veut : "${S.context}" (posture : "${S.posture}")
-- L'adversaire (${S.opponent.split('—')[0].trim()}) vient de dire : "${opponentReply}"
-- Le joueur a répondu : "${playerMsg}"
-Donne 1 conseil court au JOUEUR (pas à l'adversaire). Commence par un emoji. Max 1 phrase.`
-    :`You are a negotiation coach. Analyze WHAT THE PLAYER said and give them 1 short tactical tip.
-CONTEXT:
-- Player wants to: "${S.context}" (stance: "${S.posture}")
-- Opponent (${S.opponent.split('—')[0].trim()}) just said: "${opponentReply}"
-- Player replied: "${playerMsg}"
-Give 1 short tip to THE PLAYER (not the opponent). Start with an emoji. Max 1 sentence.`;
-  try{
-    const fb=await aiCoach([{role:'user',content:prompt}],'You are a negotiation coach. Never confuse player and opponent roles.',200);
-    if(fb&&fb.trim()) addMsg('feedback',fb);
-  }catch{}
+    ?`Tu es coach en négociation. Analyse CE QUE LE JOUEUR a dit et donne-lui 1 conseil tactique court.\nCONTEXTE :\n- Le joueur veut : "${S.context}" (posture : "${S.posture}")\n- L'adversaire (${S.opponent.split('—')[0].trim()}) vient de dire : "${opponentReply}"\n- Le joueur a répondu : "${playerMsg}"\nDonne 1 conseil court au JOUEUR (pas à l'adversaire). Commence par un emoji. Max 1 phrase.`
+    :`You are a negotiation coach. Analyze WHAT THE PLAYER said and give them 1 short tactical tip.\nCONTEXT:\n- Player wants to: "${S.context}" (stance: "${S.posture}")\n- Opponent (${S.opponent.split('—')[0].trim()}) just said: "${opponentReply}"\n- Player replied: "${playerMsg}"\nGive 1 short tip to THE PLAYER (not the opponent). Start with an emoji. Max 1 sentence.`;
+  try{const fb=await aiCoach([{role:'user',content:prompt}],'You are a negotiation coach. Never confuse player and opponent roles.',200);if(fb&&fb.trim()) addMsg('feedback',fb);}catch{}
 }
 
-let recognition=null;
-let isListening=false;
+let recognition=null;let isListening=false;
 
 function toggleMic(){
-  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){
-    alert(S.lang==='fr'?'La dictée vocale n\'est pas supportée par ce navigateur.':'Speech recognition is not supported by this browser.');return;
-  }
+  if(!('webkitSpeechRecognition' in window||'SpeechRecognition' in window)){alert(S.lang==='fr'?'La dictée vocale n\'est pas supportée.':'Speech recognition not supported.');return;}
   if(isListening){recognition.stop();return;}
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  recognition=new SR();
-  recognition.lang=S.lang==='fr'?'fr-FR':'en-US';
-  recognition.continuous=false;recognition.interimResults=false;
+  recognition=new SR();recognition.lang=S.lang==='fr'?'fr-FR':'en-US';recognition.continuous=false;recognition.interimResults=false;
   recognition.onstart=()=>{isListening=true;document.getElementById('micBtn').classList.add('listening');document.getElementById('micBtn').textContent='⏹';};
-  recognition.onresult=(e)=>{
-    const txt=e.results[0][0].transcript;
-    const inp=document.getElementById('userInput');
-    inp.value=(inp.value?inp.value+' ':'')+txt;
-    autoResize(inp);inp.focus();
-  };
+  recognition.onresult=(e)=>{const txt=e.results[0][0].transcript;const inp=document.getElementById('userInput');inp.value=(inp.value?inp.value+' ':'')+txt;autoResize(inp);inp.focus();};
   recognition.onend=()=>{isListening=false;const btn=document.getElementById('micBtn');btn.classList.remove('listening');btn.textContent='🎤';};
   recognition.onerror=()=>{isListening=false;const btn=document.getElementById('micBtn');btn.classList.remove('listening');btn.textContent='🎤';};
   recognition.start();
 }
 
 function openMobileDrawer(){
-  const drawer=document.getElementById('mobileDrawer');
-  if(!drawer) return;
+  const drawer=document.getElementById('mobileDrawer');if(!drawer) return;
   drawer.style.display='block';
-  ['rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{
-    const src=document.getElementById(id);
-    const dst=document.getElementById(id+'2');
-    if(src&&dst) dst.innerHTML=src.innerHTML;
-  });
-  ['rpgStatsList','rpgTags'].forEach(id=>{
-    const src=document.getElementById(id);
-    const dst=document.getElementById(id+'2');
-    if(src&&dst) dst.innerHTML=src.innerHTML;
-  });
-  const techSrc=document.getElementById('techList');
-  const techDst=document.getElementById('techList2');
-  if(techSrc&&techDst) techDst.innerHTML=techSrc.innerHTML;
-  const btn2=document.getElementById('btn_end2');
-  const btn1=document.getElementById('btn_end');
-  if(btn2&&btn1) btn2.textContent=btn1.textContent;
+  ['rpgName','rpgClass','ccTL','rpgStars','rpgLore'].forEach(id=>{const src=document.getElementById(id);const dst=document.getElementById(id+'2');if(src&&dst) dst.innerHTML=src.innerHTML;});
+  ['rpgStatsList','rpgTags'].forEach(id=>{const src=document.getElementById(id);const dst=document.getElementById(id+'2');if(src&&dst) dst.innerHTML=src.innerHTML;});
+  const techSrc=document.getElementById('techList');const techDst=document.getElementById('techList2');if(techSrc&&techDst) techDst.innerHTML=techSrc.innerHTML;
+  const btn2=document.getElementById('btn_end2');const btn1=document.getElementById('btn_end');if(btn2&&btn1) btn2.textContent=btn1.textContent;
   drawer.classList.add('open');
 }
-
 function closeMobileDrawer(e){
   if(e&&e.target!==document.getElementById('mobileDrawer')&&!e.target.classList.contains('mobile-drawer-close')) return;
   const drawer=document.getElementById('mobileDrawer');
   if(drawer){drawer.classList.remove('open');setTimeout(()=>{drawer.style.display='none';},260);}
 }
-
 function updateMobileBar(){
   const el=(id,txt)=>{const e=document.getElementById(id);if(e)e.textContent=txt;};
   const fill=(id,pct)=>{const e=document.getElementById(id);if(e)e.style.width=pct+'%';};
@@ -1499,7 +1384,6 @@ function updateMobileBar(){
   el('mob_prog','📈'+S.progress);fill('mob_prog_fill',S.progress);
   el('mob_res','🔒'+S.resist);fill('mob_res_fill',S.resist);
 }
-
 function handleKey(e){if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}}
 function autoResize(el){el.style.height='auto';el.style.height=Math.min(el.scrollHeight,120)+'px';}
 
@@ -1507,44 +1391,15 @@ async function endSession(auto=false){
   const msgLen=S.messages.length;
   const transcript=S.messages.slice(2).map(m=>`${m.role==='user'?'JOUEUR':S.sitcomChar}: ${m.content}`).join('\n');
   if(!auto&&msgLen<6){const fr=S.lang==='fr';if(!confirm(fr?'Session très courte. Terminer ?':'Very short. End anyway?'))return;}
-  S.sessionEnded=true;
-  document.getElementById('sendBtn').disabled=true;
-  document.getElementById('userInput').disabled=true;
-  S.messages=[];
+  S.sessionEnded=true;document.getElementById('sendBtn').disabled=true;document.getElementById('userInput').disabled=true;S.messages=[];
   goTo('debrief');
-  const fr=S.lang==='fr';
-  const subline=getSubline(fr);
-  document.getElementById('debriefContent').innerHTML=`
-    <div class="loading-debrief">
-      <div style="font-size:2.5rem;margin-bottom:1rem;animation:fadeInOut 2s infinite;">📋</div>
-      <div style="font-family:var(--font-hero);font-size:1.1rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">${fr?'Le coach prépare son débrief':'The coach is preparing the debrief'}</div>
-      <div style="font-size:.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1.5rem;">${subline}</div>
-      <div class="spinner"></div>
-    </div>`;
+  const fr=S.lang==='fr';const subline=getSubline(fr);
+  document.getElementById('debriefContent').innerHTML=`<div class="loading-debrief"><div style="font-size:2.5rem;margin-bottom:1rem;animation:fadeInOut 2s infinite;">📋</div><div style="font-family:var(--font-hero);font-size:1.1rem;font-weight:700;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem;">${fr?'Le coach prépare son débrief':'The coach is preparing the debrief'}</div><div style="font-size:.85rem;color:var(--text-dim);font-style:italic;margin-bottom:1.5rem;">${subline}</div><div class="spinner"></div></div>`;
   const detectedList=Array.from(S.detectedTechs).join(', ')||'aucune';
-  if(!transcript.trim()){
-    document.getElementById('debriefContent').innerHTML=`<div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div><div class="debrief-actions"><button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button></div>`;
-    return;
-  }
+  if(!transcript.trim()){document.getElementById('debriefContent').innerHTML=`<div class="score-hero"><div class="score-num" style="color:var(--text-dim)">—</div><div class="score-label">${fr?'Session trop courte':'Session too short'}</div></div><div class="debrief-actions"><button class="btn-primary" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button></div>`;return;}
   const prompt=fr
-    ?`Coach négociation. ATTENTION AUX RÔLES :
-- LE JOUEUR est labellisé "JOUEUR" dans le transcript. C'est lui que tu analyses.
-- L'ADVERSAIRE est labellisé par son nom. Tu N'analyses PAS ses actions.
-- Posture du joueur : "${S.posture}". Objectif du joueur : "${S.context}".
-Analyse UNIQUEMENT ce que LE JOUEUR a fait. JSON valide uniquement, sans markdown.
-Score: 0-30 aucune technique / 31-50 pas de structure / 51-70 tient position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.
-Techniques détectées chez le joueur: ${detectedList}
-{"score":0-100,"verdict":"une phrase résumant la négociation","strengths":["point fort spécifique","..."],"mistakes":["erreur spécifique","..."],"keyMoment":"l'échange le plus décisif","advice":"un conseil concret et actionnable"}
-Transcript:\n${transcript}`
-    :`Negotiation coach. CRITICAL ROLE CLARITY:
-- THE PLAYER is labelled "JOUEUR" in the transcript. Analyze ONLY their moves.
-- THE OPPONENT is labelled by name. Do NOT analyze their actions.
-- Player stance: "${S.posture}". Player goal: "${S.context}".
-Analyze ONLY what THE PLAYER did. Valid JSON only, no markdown.
-Score: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.
-Player techniques detected: ${detectedList}
-{"score":0-100,"verdict":"one sentence summarizing the negotiation","strengths":["specific strength","..."],"mistakes":["specific mistake","..."],"keyMoment":"the most decisive exchange","advice":"one concrete actionable tip"}
-Transcript:\n${transcript}`;
+    ?`Coach négociation. LE JOUEUR est labellisé "JOUEUR". L'ADVERSAIRE est labellisé par son nom. Analyse UNIQUEMENT ce que LE JOUEUR a fait. JSON valide uniquement, sans markdown.\nScore: 0-30 aucune technique / 31-50 pas de structure / 51-70 tient position / 71-85 techniques maîtrisées / 86-100 adversaire mis en difficulté.\nTechniques détectées chez le joueur: ${detectedList}\n{"score":0-100,"verdict":"une phrase résumant la négociation","strengths":["point fort spécifique","..."],"mistakes":["erreur spécifique","..."],"keyMoment":"l'échange le plus décisif","advice":"un conseil concret et actionnable"}\nTranscript:\n${transcript}`
+    :`Negotiation coach. THE PLAYER is labelled "JOUEUR". THE OPPONENT is labelled by name. Analyze ONLY what THE PLAYER did. Valid JSON only, no markdown.\nScore: 0-30 no technique / 31-50 no structure / 51-70 holds position / 71-85 techniques used / 86-100 opponent challenged.\nPlayer techniques detected: ${detectedList}\n{"score":0-100,"verdict":"one sentence summarizing the negotiation","strengths":["specific strength","..."],"mistakes":["specific mistake","..."],"keyMoment":"the most decisive exchange","advice":"one concrete actionable tip"}\nTranscript:\n${transcript}`;
   try{
     const raw=await aiBg([{role:'user',content:prompt}],'Respond with ONLY a valid JSON object. No markdown. No text before or after the JSON.',800,'low');
     const d=JSON.parse(raw.replace(/```json|```/g,'').trim());
@@ -1555,9 +1410,7 @@ Transcript:\n${transcript}`;
     d.keyMoment=typeof d.keyMoment==='string'?d.keyMoment:null;
     d.advice=typeof d.advice==='string'?d.advice:null;
     renderDebrief(d,fr);
-  }catch(e){
-    document.getElementById('debriefContent').innerHTML=`<div style="padding:2rem;text-align:center;color:var(--danger);"><p>Erreur : ${e.message}</p><button class="btn-ghost" onclick="newScenario()">${fr?'Retour':'Back'}</button></div>`;
-  }
+  }catch(e){document.getElementById('debriefContent').innerHTML=`<div style="padding:2rem;text-align:center;color:var(--danger);"><p>Erreur : ${e.message}</p><button class="btn-ghost" onclick="newScenario()">${fr?'Retour':'Back'}</button></div>`;}
 }
 
 function renderDebrief(d,fr){
@@ -1567,61 +1420,33 @@ function renderDebrief(d,fr){
   const kHTML=d.keyMoment?`<div class="moment">${d.keyMoment}</div>`:`<div class="moment" style="color:var(--text-dim);font-style:italic">${fr?'Pas de tournant.':'No turning point.'}</div>`;
   const aHTML=d.advice?`<p>${d.advice}</p>`:`<p style="color:var(--text-dim);font-style:italic">${fr?'Aucun conseil.':'No advice.'}</p>`;
   document.getElementById('debriefContent').innerHTML=`
-    <div class="score-hero">
-      <div class="score-num" style="color:${sc}">${d.score}</div>
-      <div class="score-label">${fr?'Score de négociation':'Negotiation Score'} /100</div>
-      <p style="color:var(--text-soft);margin-top:.75rem;font-size:.95rem;line-height:1.65">${d.verdict}</p>
-    </div>
+    <div class="score-hero"><div class="score-num" style="color:${sc}">${d.score}</div><div class="score-label">${fr?'Score de négociation':'Negotiation Score'} /100</div><p style="color:var(--text-soft);margin-top:.75rem;font-size:.95rem;line-height:1.65">${d.verdict}</p></div>
     <div class="debrief-section"><h3>${fr?'Points forts':'Strengths'}</h3>${sHTML}</div>
     <div class="debrief-section"><h3>${fr?'Erreurs':'Mistakes'}</h3>${mHTML}</div>
     <div class="debrief-section"><h3>${fr?'Moment clé':'Key Moment'}</h3>${kHTML}</div>
     <div class="debrief-section"><h3>${fr?'Pour progresser':'To improve'}</h3>${aHTML}</div>
-    <div class="debrief-actions">
-      <button class="btn-primary" onclick="restartSession()">${fr?'Rejouer':'Play Again'}</button>
-      <button class="btn-ghost" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button>
-    </div>`;
+    <div class="debrief-actions"><button class="btn-primary" onclick="restartSession()">${fr?'Rejouer':'Play Again'}</button><button class="btn-ghost" onclick="newScenario()">${fr?'Nouveau scénario':'New Scenario'}</button></div>`;
 }
 
 function resetUI(){
-  document.getElementById('messages').innerHTML='';
-  document.getElementById('userInput').disabled=false;
-  document.getElementById('userInput').value='';
-  document.getElementById('sendBtn').disabled=false;
+  document.getElementById('messages').innerHTML='';document.getElementById('userInput').disabled=false;
+  document.getElementById('userInput').value='';document.getElementById('sendBtn').disabled=false;
   const fr=S.lang==='fr';
   document.getElementById('techList').innerHTML=`<div class="tech-empty" id="techEmpty">${fr?'Aucune technique détectée…':'No technique detected yet…'}</div>`;
-  document.getElementById('rpgStatsList').innerHTML='';
-  document.getElementById('rpgTags').innerHTML='';
-  document.getElementById('rpgName').textContent='—';
-  document.getElementById('rpgClass').textContent='—';
-  document.getElementById('ccTL').textContent='LV 1';
-  document.getElementById('rpgStars').textContent='★★★☆☆';
-  document.getElementById('rpgLore').textContent='—';
-  S.tension=30;S.progress=10;S.resist=60;
-  renderMeters();
+  document.getElementById('rpgStatsList').innerHTML='';document.getElementById('rpgTags').innerHTML='';
+  document.getElementById('rpgName').textContent='—';document.getElementById('rpgClass').textContent='—';
+  document.getElementById('ccTL').textContent='LV 1';document.getElementById('rpgStars').textContent='★★★☆☆';document.getElementById('rpgLore').textContent='—';
+  S.tension=30;S.progress=10;S.resist=60;renderMeters();
 }
 
-function restartSession(){
-  S.messages=[];S.detectedTechs=new Set();
-  S.tension=30;S.progress=10;S.resist=60;
-  S.turn=0;S.sessionEnded=false;
-  resetUI();startSession();
-}
-
-function newScenario(){
-  S.messages=[];S.detectedTechs=new Set();
-  S.tension=30;S.progress=10;S.resist=60;
-  S.turn=0;S.sessionEnded=false;
-  S.sitcomChar=null;S.persona=null;
-  resetUI();goTo('setup');
-}
+function restartSession(){S.messages=[];S.detectedTechs=new Set();S.tension=30;S.progress=10;S.resist=60;S.turn=0;S.sessionEnded=false;resetUI();startSession();}
+function newScenario(){S.messages=[];S.detectedTechs=new Set();S.tension=30;S.progress=10;S.resist=60;S.turn=0;S.sessionEnded=false;S.sitcomChar=null;S.persona=null;resetUI();goTo('setup');}
 
 async function submitBug(){
-  const email=document.getElementById('bugEmail').value.trim();
-  const desc=document.getElementById('bugDesc').value.trim();
+  const email=document.getElementById('bugEmail').value.trim();const desc=document.getElementById('bugDesc').value.trim();
   const fr=S.lang==='fr';
   if(!email||!desc){alert(fr?'Email et description requis.':'Email and description required.');return;}
-  const btn=document.querySelector('#bugreport .btn-start');
-  btn.textContent=fr?'Envoi…':'Sending…';btn.disabled=true;
+  const btn=document.querySelector('#bugreport .btn-start');btn.textContent=fr?'Envoi…':'Sending…';btn.disabled=true;
   try{
     const r=await fetch('https://formspree.io/f/mbdqznaz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({email,type:document.getElementById('bugType').value||'—',description:desc,moment:document.getElementById('bugWhen').value||'—'})});
     const d=await r.json();
